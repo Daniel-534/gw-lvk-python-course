@@ -1356,7 +1356,7 @@ q  = np.where(mask_valid, M2 / M1, np.nan)
 
 # Duration of inspiral (Newtonian approximation)
 def inspiral_duration(m1, m2, f_lower=20.0):
-    """Newtonian chirp time from f_lower to ISCO."""
+    '''Newtonian chirp time from f_lower to ISCO.'''
     Mtot = m1 + m2
     eta_val = (m1 * m2) / Mtot**2
     # tau_0: leading-order chirp time (Peters 1964)
