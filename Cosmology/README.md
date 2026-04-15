@@ -7,12 +7,16 @@ Concept of bright and dark sirens. Luminosity distance $d_L$ from GW signals.
 The $d_L$ – $z$ relation and its role in measuring $H_0$. Review of key events:
 GW170817 (bright siren) and BBH dark sirens.
 
+[Lesson_01_Gravitational_Waves_as_Standard_Sirens.ipynb](https://colab.research.google.com/github/Daniel-534/gw-lvk-python-course/blob/main/Course/Lesson_01_Gravitational_Waves_as_Standard_Sirens.ipynb)
+
 ---
 
 ## Lesson 2 — Bayesian Inference Foundations with Bilby
 Bayes theorem applied to GW parameter estimation. Setting up priors, likelihoods,
 and posteriors in Bilby. Nested sampling with dynesty. Recovering $d_L$, $\iota$,
 and sky position from a simulated CBC signal.
+
+[Lesson_02_Bayesian_Inference_Foundations_with_Bilby.ipynb](https://colab.research.google.com/github/Daniel-534/gw-lvk-python-course/blob/main/Cosmology/Lesson_02_Bayesian_Inference_Foundations_with_Bilby.ipynb)
 
 ---
 
