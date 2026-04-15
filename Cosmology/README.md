@@ -4,7 +4,7 @@
 
 ## Class 1 — Gravitational Waves as Standard Sirens
 Concept of bright and dark sirens. Luminosity distance $d_L$ from GW signals.
-The $d_L$–$z$ relation and its role in measuring $H_0$. Review of key events:
+The $d_L$ – $z$ relation and its role in measuring $H_0$. Review of key events:
 GW170817 (bright siren) and BBH dark sirens.
 
 ---
