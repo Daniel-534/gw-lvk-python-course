@@ -11,3 +11,9 @@
 *.toc
 *.bcf
 *.run.xml
+
+bilby_pe_lesson2/
+*.pickle
+*.hdf5
+*.json
+*.png
