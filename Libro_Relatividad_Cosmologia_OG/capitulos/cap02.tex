@@ -1,0 +1,726 @@
+% ============================================================
+% Capítulo 2: Relatividad Especial
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Relatividad Especial: El Espacio-Tiempo de Minkowski}
+\label{cap:re}
+
+La relatividad especial es el punto de partida físico indispensable para comprender la relatividad general. En este capítulo se construye el espacio-tiempo plano de Minkowski desde los postulados de Einstein, se derivan las transformaciones de Lorentz y sus consecuencias cinemáticas, y se formula la mecánica relativista con el lenguaje tensorial desarrollado en el Capítulo~\ref{cap:algebra}. El dominio de esta base es imprescindible: las ecuaciones de campo de Einstein deben reproducir la relatividad especial en el límite de campo débil, y las ondas gravitacionales se propagan en el espacio-tiempo como perturbaciones que localmente ---en cualquier punto--- se pueden describir mediante el marco de Minkowski \cite{Carroll2004, Schutz2009, Misner1973}.
+
+% ===========================================================
+\section{Motivación histórica y los postulados de Einstein}
+% ===========================================================
+
+A finales del siglo~XIX, la física clásica descansaba sobre dos pilares aparentemente sólidos: la mecánica newtoniana, con su principio de relatividad galileano, y el electromagnetismo de Maxwell. Sin embargo, entre ellos surgió una contradicción fundamental.
+
+Las ecuaciones de Maxwell predicen que las ondas electromagnéticas se propagan con velocidad
+\[
+  c = \frac{1}{\sqrt{\varepsilon_0 \mu_0}} \approx 3{,}00 \times 10^8\ \si{m/s},
+\]
+pero no especifican respecto a qué marco de referencia. La hipótesis dominante era la existencia del \emph{éter luminífero}, un medio absoluto en reposo. El experimento de Michelson y Morley (1887) buscó medir el movimiento de la Tierra respecto al éter y obtuvo resultado nulo: la velocidad de la luz es la misma en todas las direcciones, con independencia del movimiento del observador \cite{Jackson1999}.
+
+Einstein (1905) resolvió la paradoja de raíz, abandonando la noción de tiempo absoluto \cite{Einstein1905}:
+
+\begin{importante}
+\textbf{Postulados de la Relatividad Especial} (Einstein, 1905):
+\begin{enumerate}[leftmargin=2em, label=\textbf{\Roman*.}]
+  \item \textbf{Principio de relatividad:} Las leyes de la física tienen la misma forma en todos los marcos de referencia inerciales.
+  \item \textbf{Invariancia de la velocidad de la luz:} La velocidad de la luz en el vacío, $c$, es la misma para todos los observadores inerciales, independientemente del movimiento de la fuente o del receptor.
+\end{enumerate}
+\end{importante}
+
+De estos dos postulados se deduce que el tiempo y el espacio no son entidades absolutas e independientes, sino que se mezclan bajo transformaciones entre marcos inerciales. La consecuencia profunda es la existencia de un \emph{intervalo espacio-temporal} invariante.
+
+% ===========================================================
+\section{Las transformaciones de Lorentz}
+% ===========================================================
+
+\subsection{Derivación desde los postulados}
+
+Consideremos dos marcos inerciales $S$ y $S'$. El marco $S'$ se mueve con velocidad constante $v$ en la dirección $+x$ respecto a $S$. Los orígenes de ambos marcos coinciden en $t = t' = 0$.
+
+Se buscan relaciones lineales entre las coordenadas $(t, x, y, z)$ y $(t', x', y', z')$ que:
+\begin{enumerate}[leftmargin=2em]
+  \item Sean lineales (homogeneidad del espacio-tiempo).
+  \item Preserven la velocidad de la luz: si $x = ct$, entonces $x' = ct'$.
+  \item Se reduzcan a las transformaciones de Galileo cuando $v/c \ll 1$.
+\end{enumerate}
+
+Definiendo el \textbf{factor de Lorentz}
+\begin{equation}
+  \gamma \equiv \frac{1}{\sqrt{1 - \beta^2}}, \qquad \beta \equiv \frac{v}{c},
+  \label{eq:gamma}
+\end{equation}
+la solución única (salvo reflexiones) es:
+
+\begin{teorema}{Transformaciones de Lorentz}{lorentz_transf}
+Para un \emph{boost} de velocidad $v$ en la dirección $x$, las coordenadas transforman como
+\begin{align}
+  t'  &= \gamma\!\left(t - \frac{v}{c^2}\,x\right), \label{eq:lt1}\\[4pt]
+  x'  &= \gamma\!\left(x - v\,t\right), \label{eq:lt2}\\[4pt]
+  y'  &= y, \label{eq:lt3}\\[4pt]
+  z'  &= z. \label{eq:lt4}
+\end{align}
+La transformación inversa se obtiene reemplazando $v \to -v$ (o equivalentemente $\beta \to -\beta$):
+\begin{equation}
+  t = \gamma\!\left(t' + \frac{v}{c^2}\,x'\right),\qquad
+  x = \gamma\left(x' + v\,t'\right),\qquad
+  y = y',\qquad z = z'.
+  \label{eq:lt_inv}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Exíjase que la condición $x = ct$ implique $x' = ct'$:
+\[
+  x - vt = \gamma(x - vt), \quad ct - \frac{v}{c}x = \gamma\!\left(ct - \frac{v}{c}x\right).
+\]
+Postulando $x' = \gamma(x - vt)$ y sustituyendo en $x'^2 - c^2 t'^2 = x^2 - c^2 t^2$ (invariancia del intervalo), se obtiene $t' = \gamma(t - vx/c^2)$.
+\end{proof}
+
+\subsection{La forma matricial}
+
+En unidades en que $c = 1$, el boost de Lorentz en la dirección $x$ se escribe como la matriz $\Lambda^\mu{}_\nu$ tal que $x'^\mu = \Lambda^\mu{}_\nu x^\nu$:
+
+\begin{equation}
+  \Lambda^\mu{}_\nu =
+  \begin{pmatrix}
+    \gamma        & -\gamma\beta & 0 & 0 \\
+    -\gamma\beta  & \gamma       & 0 & 0 \\
+    0             & 0            & 1 & 0 \\
+    0             & 0            & 0 & 1
+  \end{pmatrix},
+  \label{eq:lorentz_matrix}
+\end{equation}
+donde $x^0 = t$, $x^1 = x$, $x^2 = y$, $x^3 = z$.
+
+\begin{importante}
+Las transformaciones de Lorentz forman un grupo, el \textbf{grupo de Lorentz} $O(1,3)$. Las transformaciones de Lorentz \emph{propias y ortocronomesas} (que preservan la orientación temporal y la orientación espacial) forman el subgrupo $SO^+(1,3)$, o \textbf{grupo de Lorentz restringido}. El grupo de Poincaré incluye también las traslaciones espacio-temporales.
+\end{importante}
+
+\subsection{Ley de adición relativista de velocidades}
+
+Si un objeto se mueve con velocidad $u'$ en la dirección $x'$ según el observador en $S'$, entonces su velocidad $u$ medida en $S$ es
+
+\begin{equation}
+  u = \frac{u' + v}{1 + u'v/c^2}.
+  \label{eq:adicion_vel}
+\end{equation}
+
+\begin{observacion}{Límite newtoniano y barrera de la velocidad de la luz}{}
+Para $v, u' \ll c$, se recupera $u \approx u' + v$ (galileano). Para $u' = c$ (un fotón), la fórmula da $u = c$ independientemente de $v$: la velocidad de la luz es la misma en todos los marcos. Además, si $|u'| < c$ y $|v| < c$, entonces $|u| < c$: ningún objeto material puede alcanzar o superar la velocidad de la luz.
+\end{observacion}
+
+\begin{ejemplo}{Adición de velocidades relativista}{}
+Dos naves espaciales se alejan de la Tierra en sentidos opuestos, cada una a $0{,}8\,c$ según la Tierra. ¿Con qué velocidad ve cada nave a la otra?
+
+\textbf{Solución.} Sean $v = 0{,}8c$ (velocidad de la nave~2 respecto a la Tierra) y $u' = -0{,}8c$ (velocidad de la nave~1 según la nave~2, aplicando la ley \eqref{eq:adicion_vel} con el signo correcto):
+\[
+  u = \frac{-0{,}8c + 0{,}8c}{1 + (0{,}8c)(0{,}8c)/c^2}
+  \;\to\; \text{No es éste el marco.}
+\]
+Tomemos $S$ como el marco de la Tierra, $S'$ como el marco de la nave~1 (que se mueve a $v = +0{,}8c$), y $u' = $ velocidad de la nave~2 según $S'$. La nave~2 se mueve a $-0{,}8c$ según la Tierra:
+\[
+  u' = \frac{u - v}{1 - uv/c^2} = \frac{-0{,}8c - 0{,}8c}{1 - (-0{,}8c)(0{,}8c)/c^2}
+  = \frac{-1{,}6c}{1 + 0{,}64} = \frac{-1{,}6c}{1{,}64} \approx -0{,}976\,c.
+\]
+La nave~1 observa que la nave~2 se aleja a aproximadamente $0{,}976\,c$, \emph{no} a $1{,}6\,c$ como predice la mecánica newtoniana. La velocidad relativa es siempre menor que $c$.
+\end{ejemplo}
+
+% ===========================================================
+\section{El espacio-tiempo de Minkowski}
+% ===========================================================
+
+\subsection{El intervalo espacio-temporal}
+
+La consecuencia más profunda de las transformaciones de Lorentz es que la combinación
+
+\begin{equation}
+  s^2 \equiv -c^2\,\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2
+  \label{eq:intervalo}
+\end{equation}
+
+es \textbf{invariante de Lorentz}: si $s^2$ tiene un valor en el marco $S$, tiene el mismo valor en cualquier otro marco inercial $S'$.
+
+\begin{definicion}{Intervalo espacio-temporal}{intervalo}
+Dado un par de eventos $A$ y $B$ con separación $(\Delta t, \Delta \vec{x})$, el \textbf{intervalo espacio-temporal} es
+\[
+  s^2 = -c^2\,\Delta t^2 + |\Delta\vec{x}|^2.
+\]
+Según el signo de $s^2$, la separación entre eventos se clasifica en:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Tipo temporal} ($s^2 < 0$): existe un marco en que ambos eventos ocurren en el mismo lugar; puede haber relación causal.
+  \item \textbf{Tipo nulo o luminoso} ($s^2 = 0$): los eventos están conectados por una señal a velocidad $c$.
+  \item \textbf{Tipo espacial} ($s^2 > 0$): ningún observador puede ver ambos eventos en el mismo punto; no puede haber relación causal.
+\end{itemize}
+\end{definicion}
+
+\subsection{La métrica de Minkowski}
+
+En coordenadas $(x^0, x^1, x^2, x^3) = (ct, x, y, z)$, el intervalo se puede escribir como
+\begin{equation}
+  ds^2 = \Mink\, dx^\mu\, dx^\nu
+  = -c^2\,dt^2 + dx^2 + dy^2 + dz^2,
+  \label{eq:minkowski_metric}
+\end{equation}
+donde
+\begin{equation}
+  \eta_{\mu\nu} = \mathrm{diag}(-1,+1,+1,+1).
+  \label{eq:eta}
+\end{equation}
+Ésta es la \textbf{métrica de Minkowski} $\eta_{\mu\nu}$, que ya encontramos en el Capítulo~1 como el caso más simple de métrica lorentziana. El espacio-tiempo plano $(\mathbb{R}^4, \eta)$ se denomina \textbf{espacio-tiempo de Minkowski} $\mathcal{M}_4$.
+
+\begin{importante}
+En unidades naturales $c = 1$ (que adoptaremos salvo mención expresa), la métrica es
+\[
+  \eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1),
+  \qquad ds^2 = -dt^2 + d\vec{x}^2.
+\]
+\end{importante}
+
+\subsection{El cono de luz y la estructura causal}
+
+\begin{definicion}{Cono de luz}{cono_luz}
+El \textbf{cono de luz} de un evento $p$ es el conjunto de todos los puntos del espacio-tiempo accesibles desde $p$ por señales luminosas: $\{q \in \mathcal{M}_4 \mid s^2(p,q) = 0\}$. El cono se divide en:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Cono futuro:} $\Delta t > 0$, accesible causalmente desde $p$.
+  \item \textbf{Cono pasado:} $\Delta t < 0$, que puede influir en $p$.
+  \item \textbf{Exterior del cono (región espacial):} $s^2 > 0$; no existe conexión causal con $p$.
+\end{itemize}
+\end{definicion}
+
+La estructura causal es el \emph{andamiaje} sobre el que se construye toda la física relativista: el principio de causalidad exige que ninguna influencia física se propague fuera del cono de luz.
+
+% ===========================================================
+\section{Consecuencias cinemáticas}
+% ===========================================================
+
+\subsection{Dilatación temporal}
+
+Supóngase que un reloj se mueve con velocidad $v$ respecto a un observador en reposo. El reloj mide el \textbf{tiempo propio} $\tau$ (tiempo en el marco del reloj). En el marco del observador, el reloj marca intervalos $\Delta t$ relacionados con $\Delta\tau$ por
+
+\begin{equation}
+  \Delta t = \gamma\,\Delta\tau \geq \Delta\tau.
+  \label{eq:dilatacion}
+\end{equation}
+
+El reloj en movimiento \textbf{marcha más lento} según el observador externo: es la \textbf{dilatación temporal}. Este efecto ha sido verificado con gran precisión en:
+\begin{itemize}
+  \item Decaimiento de muones cósmicos: los muones creados a $\sim 15\,\si{km}$ de altura llegan al suelo porque su tiempo de vida se dilata por $\gamma \gg 1$.
+  \item Relojes atómicos en aviones (experimento Hafele-Keating, 1972).
+  \item El sistema GPS requiere correcciones relativistas tanto especiales como generales.
+\end{itemize}
+
+\begin{ejemplo}{Muones cósmicos}{}
+Un muón se crea en la atmósfera a $h = 15\,\si{km}$ de altura con velocidad $v = 0{,}9994\,c$. El tiempo de vida en reposo del muón es $\tau_0 = 2{,}2\,\si{\mu s}$. ¿Llega al suelo?
+
+\textbf{Sin relatividad:} El tiempo de vuelo clásico es $\Delta t_{\rm cl} = h/v \approx 50\,\si{\mu s} \approx 23\,\tau_0$. El muón debería desintegrarse antes de recorrer $h$.
+
+\textbf{Con relatividad:} El factor de Lorentz es
+\[
+  \gamma = \frac{1}{\sqrt{1-(0{,}9994)^2}} \approx \frac{1}{\sqrt{1-0{,}9988}} \approx \frac{1}{\sqrt{1{,}2\times10^{-3}}} \approx 29.
+\]
+El tiempo de vida \emph{según la Tierra} es $\Delta t = \gamma \tau_0 \approx 29 \times 2{,}2\ \si{\mu s} \approx 64\ \si{\mu s}$. El tiempo de vuelo requerido es $\approx 50\ \si{\mu s} < 64\ \si{\mu s}$: el muón \textbf{sí llega} al suelo, en perfecta concordancia con la observación experimental.
+\end{ejemplo}
+
+\subsection{Contracción de longitudes}
+
+Un objeto en reposo en $S'$ con longitud propia $L_0$ (longitud en su propio marco de reposo) tiene longitud $L$ según un observador en $S$:
+
+\begin{equation}
+  L = \frac{L_0}{\gamma} \leq L_0.
+  \label{eq:contraccion}
+\end{equation}
+
+El objeto aparece \textbf{contraído} en la dirección del movimiento. Las dimensiones transversales no se ven afectadas. Este efecto es completamente recíproco: cada observador ve los objetos del otro contraídos.
+
+\begin{observacion}{Simultaneidad relativa}{}
+Las transformaciones de Lorentz \eqref{eq:lt1}--\eqref{eq:lt4} mezclan el tiempo con la coordenada espacial $x$. Dos eventos simultáneos en $S$ (misma $t$, distintos $x$) \emph{no} son simultáneos en $S'$ en general. La \textbf{relatividad de la simultaneidad} es el origen profundo de la dilatación temporal y la contracción de longitudes: se trata de una sola geometría espacio-temporal vista desde distintos marcos.
+\end{observacion}
+
+\subsection{El tiempo propio}
+
+Para una partícula que sigue una trayectoria arbitraria $x^\mu(\lambda)$, el \textbf{tiempo propio} $\tau$ es la longitud de la curva según la métrica de Minkowski:
+
+\begin{equation}
+  d\tau = \frac{1}{c}\sqrt{-ds^2} = \frac{1}{c}\sqrt{-\eta_{\mu\nu}\, dx^\mu\, dx^\nu}
+        = dt\sqrt{1 - v^2/c^2} = \frac{dt}{\gamma}.
+  \label{eq:tiempo_propio}
+\end{equation}
+
+El tiempo propio es un escalar de Lorentz: todos los observadores están de acuerdo en cuánto tiempo marcó el reloj que viajó con la partícula. Es el parámetro natural para parametrizar las trayectorias de partículas masivas.
+
+\begin{ejemplo}{La paradoja de los gemelos}{}
+Los gemelos Ana (A) y Beto (B) tienen 20 años. Beto parte en una nave a $v = 0{,}8c$ hacia una estrella a $d = 8$ años-luz de la Tierra, y regresa.
+
+\textbf{(a) Tiempo según la Tierra:} El viaje de ida y vuelta dura
+\[
+  \Delta t_A = \frac{2d}{v} = \frac{2 \times 8\,\text{a.l.}}{0{,}8c} = 20\,\text{años}.
+\]
+Ana tiene $20 + 20 = 40$ años al regreso.
+
+\textbf{(b) Tiempo propio de Beto:} Con $\gamma = 1/\sqrt{1-0{,}64} = 1/0{,}6 = 5/3$,
+\[
+  \Delta\tau_B = \frac{\Delta t_A}{\gamma} = \frac{20}{5/3} = 12\,\text{años}.
+\]
+Beto tiene $20 + 12 = 32$ años al regreso.
+
+\textbf{(c) ¿Paradoja?} No hay paradoja: la situación \emph{no} es simétrica. Ana permanece en un marco inercial; Beto acelera al dar la vuelta. La aceleración rompe la equivalencia, y el tiempo propio es el menor para quien acelera (el viajero). El resultado es verificable en principio y se confirma con relojes atómicos.
+\end{ejemplo}
+
+% ===========================================================
+\section{Cuadrivectores y covarianza de Lorentz}
+% ===========================================================
+
+\subsection{Cuadrivectores de posición y desplazamiento}
+
+En el formalismo tensorial del Capítulo~1, el espacio-tiempo de Minkowski es una variedad con métrica $\eta_{\mu\nu}$. Un \textbf{cuadrivector} es un tensor $(1,0)$ en $\mathcal{M}_4$: sus componentes transforman con la matriz de Lorentz $\Lambda^\mu{}_\nu$.
+
+El \textbf{cuadrivector de posición} es
+\begin{equation}
+  x^\mu = (ct,\, x,\, y,\, z), \qquad \mu = 0,1,2,3.
+  \label{eq:cuadripos}
+\end{equation}
+El cuadrivector desplazamiento infinitesimal $dx^\mu$ transforma bajo boosts como \eqref{eq:lorentz_matrix}.
+
+\subsection{El cuadrivector de velocidad}
+
+\begin{definicion}{Cuadrivector de velocidad (4-velocidad)}{4vel}
+Para una partícula con posición $x^\mu(\tau)$ parametrizada por el tiempo propio $\tau$, la \textbf{cuadri-velocidad} es
+\begin{equation}
+  U^\mu \equiv \frac{dx^\mu}{d\tau} = \gamma\!\left(c,\,\vec{v}\right),
+  \label{eq:4vel}
+\end{equation}
+donde $\vec{v} = d\vec{x}/dt$ es la velocidad tridimensional.
+\end{definicion}
+
+La norma cuadrada de $U^\mu$ es un invariante de Lorentz:
+\begin{equation}
+  \eta_{\mu\nu}\, U^\mu U^\nu = \gamma^2(-c^2 + v^2) = -c^2.
+  \label{eq:norma_4vel}
+\end{equation}
+En unidades $c=1$: $U^\mu U_\mu = -1$. Este resultado fue ya obtenido en el Ejemplo~1.3 del Capítulo~1.
+
+\subsection{El cuadrivector de aceleración}
+
+La \textbf{cuadri-aceleración} se define por
+\begin{equation}
+  A^\mu \equiv \frac{dU^\mu}{d\tau},
+  \label{eq:4acel}
+\end{equation}
+y satisface $U_\mu A^\mu = 0$, es decir, la cuadri-aceleración es siempre ortogonal a la cuadri-velocidad en el sentido de la métrica de Minkowski.
+
+\begin{proof}
+Derivando $U_\mu U^\mu = -c^2$ respecto a $\tau$: $2 U_\mu A^\mu = 0$.
+\end{proof}
+
+% ===========================================================
+\section{Mecánica relativista}
+% ===========================================================
+
+\subsection{Cuadrimomento y energía relativista}
+
+\begin{definicion}{Cuadrivector de energía-momento (4-momento)}{4mom}
+El \textbf{cuadrimomento} de una partícula de masa en reposo $m$ es
+\begin{equation}
+  p^\mu \equiv m\,U^\mu = \left(\frac{E}{c},\,\vec{p}\right),
+  \label{eq:4mom}
+\end{equation}
+donde $\vec{p} = \gamma m \vec{v}$ es el \textbf{momento lineal relativista} y $E = \gamma mc^2$ es la \textbf{energía total relativista}.
+\end{definicion}
+
+La norma cuadrada del cuadrimomento da la \textbf{relación de dispersión relativista}:
+\begin{equation}
+  \eta_{\mu\nu}\, p^\mu p^\nu = -m^2 c^2
+  \quad\Longleftrightarrow\quad
+  \boxed{E^2 = |\vec{p}|^2 c^2 + m^2 c^4.}
+  \label{eq:dispersion}
+\end{equation}
+
+\begin{importante}
+La ecuación \eqref{eq:dispersion} contiene los casos límite más famosos:
+\begin{itemize}
+  \item \textbf{Partícula en reposo} ($\vec{p} = 0$): $E = mc^2$ --- la célebre equivalencia masa-energía.
+  \item \textbf{Partícula ultrarelativista} ($|\vec{p}| \gg mc$): $E \approx |\vec{p}|c$.
+  \item \textbf{Fotón} ($m = 0$): $E = |\vec{p}|c = \hbar\omega$ (con $\omega = 2\pi\nu$ la frecuencia angular).
+\end{itemize}
+\end{importante}
+
+\subsection{La cuadrifuerza}
+
+La segunda ley de Newton relativista se formula como una ecuación tensorial:
+\begin{equation}
+  f^\mu \equiv \frac{dp^\mu}{d\tau} = m\,A^\mu,
+  \label{eq:cuadrifuerza}
+\end{equation}
+donde $f^\mu$ es la \textbf{cuadrifuerza} (o fuerza de Minkowski). Para una fuerza tridimensional $\vec{F}$,
+\begin{equation}
+  f^\mu = \gamma\!\left(\frac{\vec{F}\cdot\vec{v}}{c},\, \vec{F}\right).
+  \label{eq:cuadrifuerza2}
+\end{equation}
+En el límite $v \ll c$, se recupera $f^i \to F^i$ y la segunda ley de Newton $\vec{F} = d\vec{p}/dt$.
+
+\subsection{Energía cinética y límite newtoniano}
+
+La energía cinética relativista es la diferencia entre la energía total y la energía en reposo:
+\begin{equation}
+  K = E - mc^2 = (\gamma - 1)mc^2.
+  \label{eq:cinetica}
+\end{equation}
+Para $v \ll c$, $\gamma \approx 1 + v^2/(2c^2)$, luego $K \approx \tfrac{1}{2}mv^2$, recuperando la expresión newtoniana.
+
+\begin{ejemplo}{Umbral de producción de piones en colisiones}{umbral_pion}
+En el acelerador fijo, un protón ($m_p c^2 = 938{,}3\ \si{MeV}$) incidente choca con un protón en reposo para producir un pión neutro ($m_\pi c^2 = 135{,}0\ \si{MeV}$) mediante la reacción $p + p \to p + p + \pi^0$.
+
+\textbf{Energía umbral:} En el sistema del laboratorio (Lab), la energía umbral $E_{\rm th}$ es la energía cinética mínima para que la reacción sea cinemáticamente posible. El umbral se da cuando la energía disponible en el centro de masa es exactamente la masa en reposo de los productos.
+
+\textbf{Invariante de Mandelstam $s$:}
+\[
+  s = -(p_1 + p_2)^2 c^2
+\]
+(en unidades $c=1$). En el umbral, los cuatro productos están en reposo en el centro de masa:
+\[
+  \sqrt{s_{\rm min}} = (2m_p + m_\pi)c^2 = (2 \times 938{,}3 + 135{,}0)\ \si{MeV} = 2011{,}6\ \si{MeV}.
+\]
+En el sistema Lab ($p_2^\mu = (m_p, \vec{0})$),
+\[
+  s = -(p_1 + p_2)^2 = 2m_p^2 + 2m_p E_1
+  \quad\Rightarrow\quad
+  E_1 = \frac{s - 2m_p^2}{2m_p}.
+\]
+Evaluando en el umbral ($s = s_{\rm min}$):
+\[
+  E_{\rm th} = \frac{(2011{,}6)^2 - 2(938{,}3)^2}{2 \times 938{,}3}\ \si{MeV}
+  = \frac{4{,}047 \times 10^6 - 1{,}762 \times 10^6}{1876{,}6}\ \si{MeV}
+  \approx 1218\ \si{MeV}.
+\]
+La energía cinética umbral es $K_{\rm th} = E_{\rm th} - m_p c^2 \approx 280\ \si{MeV}$. Este cálculo tiene aplicaciones directas en física de partículas y en la comprensión de la propagación de rayos cósmicos de alta energía (efecto GZK).
+\end{ejemplo}
+
+\subsection{Conservación del cuadrimomento}
+
+En la mecánica relativista, la ley de conservación del momento-energía es:
+
+\begin{teorema}{Conservación del cuadrimomento}{conserv_mom}
+En un sistema aislado de partículas, el cuadrimomento total
+\[
+  P^\mu_{\rm tot} = \sum_i p^\mu_i
+\]
+se conserva. Al ser una ecuación tensorial ($P^\mu_{\rm tot} = \mathrm{const}$), esta ley es válida en \emph{todos} los marcos inerciales simultáneamente.
+\end{teorema}
+
+% ===========================================================
+\section{Electrodinámica covariante}
+% ===========================================================
+
+\subsection{El tensor de Faraday}
+
+Una de las primeras y más elegantes aplicaciones de la relatividad especial es la formulación covariante del electromagnetismo. Los campos eléctrico $\vec{E}$ y magnético $\vec{B}$ no son vectores tridimensionales independientes: se unifican en un único tensor antisimétrico $(0,2)$, el \textbf{tensor de Faraday}:
+
+\begin{definicion}{Tensor electromagnético de Faraday}{tensor_EM}
+El \textbf{tensor de Faraday} $F_{\mu\nu}$ es un tensor antisimétrico $(0,2)$ cuyas componentes en términos de $\vec{E} = (E_x, E_y, E_z)$ y $\vec{B} = (B_x, B_y, B_z)$ son:
+\begin{equation}
+  F_{\mu\nu} =
+  \begin{pmatrix}
+    0        & E_x/c  &  E_y/c  &  E_z/c \\
+    -E_x/c   & 0      &  B_z    & -B_y   \\
+    -E_y/c   & -B_z   &  0      &  B_x   \\
+    -E_z/c   &  B_y   & -B_x    &  0
+  \end{pmatrix}.
+  \label{eq:faraday}
+\end{equation}
+(En unidades SI con la signatura $(-,+,+,+)$.)
+\end{definicion}
+
+\subsection{Las ecuaciones de Maxwell en forma covariante}
+
+Las cuatro ecuaciones de Maxwell se reducen a \emph{dos} ecuaciones tensoriales:
+
+\begin{equation}
+  \partial_\nu F^{\mu\nu} = \mu_0\, J^\mu,
+  \label{eq:maxwell1}
+\end{equation}
+\begin{equation}
+  \partial_{[\lambda} F_{\mu\nu]} = 0
+  \quad\Longleftrightarrow\quad
+  \partial_\lambda F_{\mu\nu} + \partial_\mu F_{\nu\lambda} + \partial_\nu F_{\lambda\mu} = 0,
+  \label{eq:maxwell2}
+\end{equation}
+donde $J^\mu = (\rho c, \vec{J})$ es el \textbf{cuadrivector de densidad de corriente} y $F^{\mu\nu} = \eta^{\mu\alpha}\eta^{\nu\beta}F_{\alpha\beta}$.
+
+\begin{itemize}
+  \item La ecuación \eqref{eq:maxwell1} contiene la ley de Gauss ($\mu = 0$) y la ley de Ampère-Maxwell ($\mu = i$).
+  \item La ecuación \eqref{eq:maxwell2} contiene la ley de Gauss magnética y la ley de Faraday.
+\end{itemize}
+
+\begin{proposicion}{Conservación de la carga}{conserv_carga}
+La ecuación \eqref{eq:maxwell1} implica automáticamente la conservación de la carga:
+\[
+  \partial_\mu J^\mu = \frac{\partial \rho}{\partial t} + \nabla \cdot \vec{J} = 0.
+\]
+\end{proposicion}
+\begin{proof}
+Aplicando $\partial_\mu$ a ambos lados de \eqref{eq:maxwell1}: $\partial_\mu \partial_\nu F^{\mu\nu} = \mu_0\, \partial_\mu J^\mu$. Pero $F^{\mu\nu}$ es antisimétrico y $\partial_\mu\partial_\nu$ es simétrico, por lo que $\partial_\mu\partial_\nu F^{\mu\nu} = 0$.
+\end{proof}
+
+\subsection{La fuerza de Lorentz covariante}
+
+La fuerza sobre una partícula de carga $q$ se escribe en forma manifiestamente covariante como
+\begin{equation}
+  f^\mu = q\, F^{\mu\nu}\, U_\nu,
+  \label{eq:lorentz_covar}
+\end{equation}
+cuya parte espacial reproduce $\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})$.
+
+\begin{ejemplo}{Transformación de los campos eléctrico y magnético}{}
+Un campo eléctrico uniforme $\vec{E} = E_0\,\hat{x}$ (con $\vec{B} = 0$) existe en el marco $S$. ¿Qué campos mide un observador en $S'$ que se mueve con velocidad $v$ en la dirección $y$?
+
+\textbf{Solución.} El tensor $F_{\mu\nu}$ en $S$ tiene $F_{01} = E_0/c$ y los demás iguales a cero. Un boost en la dirección $y$ transforma el tensor como $F'_{\mu\nu} = \Lambda^\alpha{}_\mu \Lambda^\beta{}_\nu F_{\alpha\beta}$. La matriz de boost en $y$ es análoga a \eqref{eq:lorentz_matrix} con $x \leftrightarrow y$. El cálculo directo da:
+\[
+  E'_x = E_0, \quad E'_y = 0, \quad E'_z = 0,
+\]
+\[
+  B'_x = 0, \quad B'_y = 0, \quad B'_z = -\frac{\gamma v}{c^2}\,E_0.
+\]
+El campo eléctrico en la dirección del boost no cambia; perpendicular al boost aparece un campo magnético. Esto ilustra la unificación de $\vec{E}$ y $\vec{B}$ en el tensor de Faraday: lo que es puramente eléctrico en un marco puede tener componente magnética en otro.
+\end{ejemplo}
+
+% ===========================================================
+\section{El principio de mínima acción relativista}
+% ===========================================================
+
+\subsection{Acción de una partícula libre}
+
+El principio de mínima acción también se formula de manera covariante. Para una partícula masiva libre, la acción es proporcional al tiempo propio:
+
+\begin{equation}
+  S = -mc^2 \int d\tau = -mc \int \sqrt{-\eta_{\mu\nu}\,\dot{x}^\mu\,\dot{x}^\nu}\, d\lambda,
+  \label{eq:accion_libre}
+\end{equation}
+donde $\dot{x}^\mu = dx^\mu/d\lambda$ y $\lambda$ es un parámetro afín. La variación $\delta S = 0$ genera la ecuación de movimiento libre: una línea recta en el espacio-tiempo, que corresponde a movimiento rectilíneo uniforme, en perfecta consistencia con la primera ley de Newton.
+
+\subsection{Acción con campo electromagnético}
+
+Para una partícula cargada en un campo electromagnético (descrito por el 4-potencial $A_\mu = (-\phi/c, \vec{A})$):
+\begin{equation}
+  S = \int \!\left(-mc\sqrt{-\eta_{\mu\nu}\,\dot{x}^\mu\dot{x}^\nu} + \frac{q}{c}\, A_\mu\, \dot{x}^\mu\right)d\lambda.
+  \label{eq:accion_EM}
+\end{equation}
+Las ecuaciones de Euler-Lagrange reproducen la fuerza de Lorentz \eqref{eq:lorentz_covar}.
+
+% ===========================================================
+\section{El tensor de energía-momento}
+\label{sec:TEM}
+% ===========================================================
+
+En relatividad general, la fuente de curvatura del espacio-tiempo es la distribución de masa-energía y momento, representada por el \textbf{tensor de energía-momento} (también llamado tensor de estrés-energía).
+
+\begin{definicion}{Tensor de energía-momento}{TEM}
+El \textbf{tensor de energía-momento} $T^{\mu\nu}$ es un tensor simétrico $(2,0)$ cuyas componentes tienen el siguiente significado físico:
+\begin{itemize}[leftmargin=2em]
+  \item $T^{00}$: densidad de energía.
+  \item $T^{0i} = T^{i0}$: densidad de flujo de energía (o densidad de momento) en la dirección $x^i$.
+  \item $T^{ij}$: tensor de estrés (flujo del momento $p^i$ en la dirección $x^j$).
+\end{itemize}
+\end{definicion}
+
+\subsection{Ley de conservación}
+
+En el espacio-tiempo plano, la conservación de la energía y el momento se expresa como
+\begin{equation}
+  \partial_\nu T^{\mu\nu} = 0.
+  \label{eq:conserv_TEM}
+\end{equation}
+Esta es una ecuación tensorial: vale en todos los marcos inerciales. En relatividad general, se generaliza a $\nabla_\nu T^{\mu\nu} = 0$, donde $\nabla$ es la derivada covariante de la conexión de Levi-Civita.
+
+\subsection{Ejemplos de tensores de energía-momento}
+
+\begin{ejemplo}{Polvo de partículas (fluido sin presión)}{}
+Un fluido de partículas masivas con densidad de masa en reposo $\rho_0$ y cuadri-velocidad $U^\mu$ (uniforme en el fluido) tiene tensor de energía-momento:
+\begin{equation}
+  T^{\mu\nu} = \rho_0\, U^\mu U^\nu.
+  \label{eq:TEM_polvo}
+\end{equation}
+En el marco de reposo, $U^\mu = (c, 0, 0, 0)$, luego $T^{00} = \rho_0 c^2$ y los demás $T^{\mu\nu} = 0$: la única densidad de energía es la energía en reposo.
+\end{ejemplo}
+
+\begin{ejemplo}{Fluido perfecto}{}
+Un fluido perfecto (sin viscosidad ni conducción de calor) con densidad de energía $\rho$ y presión $p$ en su marco de reposo tiene
+\begin{equation}
+  T^{\mu\nu} = \left(\rho + \frac{p}{c^2}\right)U^\mu U^\nu + p\, \eta^{\mu\nu}.
+  \label{eq:TEM_fluido}
+\end{equation}
+En el marco de reposo ($U^\mu = (c,0,0,0)$), esto da $T^{00} = \rho c^2$ y $T^{ij} = p\,\delta^{ij}$: la presión isotrópica actúa como estrés diagonal. Este tensor es el que aparece en las ecuaciones de Friedmann de la cosmología (Capítulo~7).
+\end{ejemplo}
+
+\begin{ejemplo}{Campo electromagnético}{}
+El tensor de energía-momento del campo electromagnético es
+\begin{equation}
+  T^{\mu\nu}_{\rm EM}
+  = \frac{1}{\mu_0}\!\left(F^{\mu\alpha}F^\nu{}_\alpha - \frac{1}{4}\,\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\right).
+  \label{eq:TEM_EM}
+\end{equation}
+La componente $T^{00}_{\rm EM} = \frac{1}{2}\!\left(\varepsilon_0 E^2 + \frac{1}{\mu_0}B^2\right)$ es la densidad de energía del campo electromagnético, bien conocida de la electrodinámica clásica.
+\end{ejemplo}
+
+% ===========================================================
+\section{El límite newtoniano de la relatividad}
+\label{sec:limite_newton}
+% ===========================================================
+
+Es instructivo verificar que la relatividad especial contiene la mecánica newtoniana como caso límite. Para $v \ll c$:
+
+\begin{itemize}
+  \item $\gamma \approx 1 + \tfrac{v^2}{2c^2} + O(v^4/c^4) \approx 1$.
+  \item $E = \gamma mc^2 \approx mc^2 + \tfrac{1}{2}mv^2$: energía en reposo + energía cinética newtoniana.
+  \item $\vec{p} = \gamma m\vec{v} \approx m\vec{v}$: momento lineal clásico.
+  \item Las transformaciones de Lorentz \eqref{eq:lt1}--\eqref{eq:lt4} se reducen a $t' = t$ y $\vec{x}' = \vec{x} - \vec{v}t$: transformaciones de Galileo.
+\end{itemize}
+
+Este límite garantiza que cualquier teoría que se construya sobre la relatividad especial (o general) reproduce la mecánica newtoniana en las condiciones adecuadas.
+
+% ===========================================================
+\section{Ejemplos resueltos adicionales}
+% ===========================================================
+
+\begin{ejemplo}{Decaimiento en vuelo: cinemática relativista}{}
+Una partícula $\pi^+$ ($m_\pi c^2 = 139{,}6\ \si{MeV}$) en vuelo con energía $E_\pi = 500\ \si{MeV}$ se desintegra en $\mu^+ + \nu_\mu$. En el marco de reposo del pión, el muón emerge con energía $E^*_\mu = (m_\pi^2 + m_\mu^2)c^4/(2m_\pi c^2)$ (con $m_\mu c^2 = 105{,}7\ \si{MeV}$).
+
+\textbf{(a) Calcule $E^*_\mu$ en el sistema CM:}
+\[
+  E^*_\mu = \frac{(139{,}6)^2 + (105{,}7)^2}{2 \times 139{,}6}\ \si{MeV}
+  = \frac{19\,488 + 11\,172}{279{,}2}\ \si{MeV}
+  = \frac{30\,660}{279{,}2}\ \si{MeV}
+  \approx 109{,}8\ \si{MeV}.
+\]
+
+\textbf{(b) Boost al laboratorio.} El factor $\gamma_\pi = E_\pi/(m_\pi c^2) = 500/139{,}6 \approx 3{,}58$ y $\beta_\pi\gamma_\pi = p_\pi c/(m_\pi c^2)$. Con $p_\pi c = \sqrt{E_\pi^2 - m_\pi^2 c^4} \approx \sqrt{250\,000 - 19\,488}\ \si{MeV} \approx 479{,}8\ \si{MeV}$, el boost da para el muón emitido hacia adelante:
+\[
+  E_\mu^{\rm lab} = \gamma_\pi\left(E^*_\mu + \beta_\pi p^*_\mu c\right).
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Efecto Doppler relativista}{}
+Una fuente de luz en $S'$ emite radiación con frecuencia $\nu_0$ (frecuencia propia). Si $S'$ se mueve con velocidad $v$ respecto a $S$, el observador en $S$ mide la frecuencia
+
+\begin{equation}
+  \nu = \nu_0 \sqrt{\frac{1 + \beta\cos\theta}{1 - \beta\cos\theta}}
+  \;\overset{\theta=0}{=}\;
+  \nu_0 \sqrt{\frac{1+\beta}{1-\beta}},
+  \label{eq:doppler_rel}
+\end{equation}
+
+donde $\theta$ es el ángulo entre la dirección de movimiento y la dirección de observación (medido en $S$), y $\beta = v/c$. Para $\theta = \pi/2$ (fuente transversal), el efecto Doppler relativista transversal da $\nu = \nu_0/\gamma < \nu_0$: una fuente que se mueve perpendicularmente aparece desplazada al rojo, efecto puramente relativista sin análogo clásico.
+
+\textbf{Aplicación astronómica.} Un quásar tiene corrimiento al rojo $z = (\lambda_{\rm obs} - \lambda_0)/\lambda_0 = 2{,}0$. Asumiendo expansión cosmológica (puramente por movimiento de recesión):
+\[
+  1 + z = \sqrt{\frac{1+\beta}{1-\beta}} = 3 \;\Rightarrow\; \frac{1+\beta}{1-\beta} = 9 \;\Rightarrow\; \beta = \frac{9-1}{9+1} = 0{,}8.
+\]
+El quásar se aleja a $v = 0{,}8c$.
+\end{ejemplo}
+
+\begin{ejemplo}{El tensor de energía-momento del polvo en movimiento}{}
+Un fluido de polvo se mueve con velocidad $v$ en la dirección $x$ respecto al laboratorio. En el marco propio la densidad es $\rho_0$. Calcule $T^{\mu\nu}$ en el laboratorio.
+
+\textbf{Solución.} La cuadri-velocidad es $U^\mu = \gamma(c, v, 0, 0)$. De \eqref{eq:TEM_polvo},
+\[
+  T^{\mu\nu} = \rho_0 U^\mu U^\nu = \rho_0 \gamma^2
+  \begin{pmatrix} c^2 & cv & 0 & 0 \\ cv & v^2 & 0 & 0 \\ 0&0&0&0 \\ 0&0&0&0 \end{pmatrix}.
+\]
+Así:
+\begin{itemize}
+  \item $T^{00} = \rho_0\gamma^2 c^2$: densidad de energía (incluye energía cinética y en reposo).
+  \item $T^{01} = \rho_0\gamma^2 cv$: flujo de energía = densidad de momento $\times\, c^2$.
+  \item $T^{11} = \rho_0\gamma^2 v^2$: presión de ram (estrés cinético).
+\end{itemize}
+En el límite $v \ll c$ ($\gamma \to 1$): $T^{00} \approx \rho_0 c^2$, $T^{01} \approx \rho_0 cv$ y $T^{11} \approx \rho_0 v^2 \approx 0$, recuperando el fluido no relativista.
+\end{ejemplo}
+
+% ===========================================================
+\section{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Verificación de la invariancia del intervalo.}
+  Sean dos eventos: $A = (0, 0, 0, 0)$ y $B = (5\ \si{ns},\ 1\ \si{m},\ 0,\ 0)$ en el marco $S$ (con $c = 3\times10^8\ \si{m/s}$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Clasifique la separación como tipo temporal, nulo o espacial.
+    \item Calcule las coordenadas de $B$ en el marco $S'$ que se mueve con velocidad $v = 0{,}6c$ en la dirección $x$.
+    \item Verifique que el intervalo $s^2$ tiene el mismo valor en $S$ y en $S'$.
+  \end{enumerate}
+
+  \item \textbf{Composición de boosts.}
+  Un boost de Lorentz en la dirección $x$ con velocidad $v_1$ seguido de otro boost en la misma dirección con velocidad $v_2$ es equivalente a un único boost con velocidad $v_3$. Usando la forma matricial \eqref{eq:lorentz_matrix}, demuestre que
+  \[
+    v_3 = \frac{v_1 + v_2}{1 + v_1 v_2/c^2},
+  \]
+  recuperando así la ley de adición de velocidades \eqref{eq:adicion_vel}.
+
+  \item \textbf{Cuadrivector de velocidad y aceleración.}
+  Una partícula se mueve en el eje $x$ con velocidad $v(t) = at/(1 + a^2t^2/c^2)^{1/2}$ (aceleración propia constante $a$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule $\gamma(t)$ y el tiempo propio $\tau$ en función de $t$.
+    \item Demuestre que la norma de la cuadri-aceleración es $A_\mu A^\mu = a^2$.
+    \item Muestre que en el límite $at \ll c$, se recupera $v \approx at$ (cinemática newtoniana).
+  \end{enumerate}
+
+  \item \textbf{Relación de dispersión relativista.}
+  \begin{enumerate}[label=(\alph*)]
+    \item A partir de $p^\mu p_\mu = -m^2c^2$, deduzca la relación $E^2 = p^2c^2 + m^2c^4$.
+    \item Para un fotón ($m = 0$) con longitud de onda $\lambda$, exprese $E$ y $|\vec{p}|$ en función de $\lambda$ y las constantes fundamentales.
+    \item Demuestre que la energía cinética relativista $K = (\gamma-1)mc^2$ se aproxima a $\tfrac{1}{2}mv^2$ para $v \ll c$ (use la expansión en serie de Taylor de $\gamma$).
+  \end{enumerate}
+
+  \item \textbf{Colisión elástica relativista.}
+  Una partícula de masa $m$ y energía $E_1$ colisiona con una partícula idéntica en reposo. Tras la colisión, ambas partículas se mueven formando ángulos $\theta_1$ y $\theta_2$ respecto al eje de incidencia.
+  \begin{enumerate}[label=(\alph*)]
+    \item Escriba las ecuaciones de conservación del cuadrimomento.
+    \item Demuestre que en el límite no relativista ($E_1 \approx mc^2$), se recupera $\theta_1 + \theta_2 = 90°$ (propiedad clásica de las colisiones elásticas entre masas iguales).
+    \item Muestre que en el límite ultrarelativista ($E_1 \gg mc^2$), los dos ángulos tienden a cero: las partículas salen casi paralelamente al eje de incidencia.
+  \end{enumerate}
+
+  \item \textbf{El efecto Doppler y el corrimiento al rojo cosmológico.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Derive la fórmula \eqref{eq:doppler_rel} usando la invariancia de la fase de onda $\phi = k_\mu x^\mu$ bajo transformaciones de Lorentz, donde $k^\mu = (\omega/c, \vec{k})$ es el cuadrivector de onda.
+    \item Una galaxia muestra una línea de emisión del hidrógeno (longitud de onda en reposo $\lambda_0 = 121{,}6\ \si{nm}$, la línea Ly-$\alpha$) en $\lambda_{\rm obs} = 486{,}4\ \si{nm}$. Calcule el corrimiento al rojo $z$ y la velocidad de recesión aparente.
+    \item ¿Puede la velocidad de recesión cosmológica superar $c$? Argumente por qué la fórmula \eqref{eq:doppler_rel} no se aplica directamente al corrimiento al rojo cosmológico para $z > 1$.
+  \end{enumerate}
+
+  \item \textbf{Las ecuaciones de Maxwell en forma covariante.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Verifique que la componente $\mu = 0$ de la ecuación \eqref{eq:maxwell1} reproduce la ley de Gauss eléctrica $\nabla \cdot \vec{E} = \rho/\varepsilon_0$.
+    \item Verifique que las componentes espaciales ($\mu = i$) de \eqref{eq:maxwell1} reproducen la ley de Ampère-Maxwell.
+    \item Muestre que la ecuación \eqref{eq:maxwell2} para $(\lambda, \mu, \nu) = (1, 2, 3)$ reproduce $\nabla \cdot \vec{B} = 0$, y para $(\lambda, \mu, \nu) = (0, 1, 2)$ reproduce la ley de Faraday.
+  \end{enumerate}
+
+  \item \textbf{La fuerza de radiación y la aceleración de Unruh.}
+  Una partícula con carga $q$ y masa $m$ se somete a aceleración propia constante $a$. La potencia irradiada en unidades SI es la fórmula de Larmor relativista:
+  \[
+    P = \frac{q^2 a^2}{6\pi\varepsilon_0 c^3}.
+  \]
+  \begin{enumerate}[label=(\alph*)]
+    \item Escriba la ecuación de movimiento de la partícula incluyendo la fuerza de radiación (fuerza de Abraham-Lorentz-Dirac).
+    \item Estime el radio de radiación del electrón $r_e = q^2/(4\pi\varepsilon_0 m_e c^2)$ y el tiempo característico $\tau_e = r_e/c \approx 6{,}3 \times 10^{-24}\ \si{s}$.
+    \item (Avanzado) La aceleración de Unruh establece que un observador con aceleración propia $a$ percibe un baño térmico con temperatura $T = \hbar a/(2\pi c k_B)$. Para un electrón en el acelerador LEP con $\gamma \approx 10^5$ y radio orbital $r = 3{,}1\ \si{km}$, estime $a$ y la temperatura de Unruh correspondiente.
+  \end{enumerate}
+
+  \item \textbf{Tensor de energía-momento y conservación.}
+  Para el fluido perfecto \eqref{eq:TEM_fluido} en el espacio-tiempo plano con $U^\mu = (c, 0, 0, 0)$ constante (fluido en reposo uniforme):
+  \begin{enumerate}[label=(\alph*)]
+    \item Escriba explícitamente todas las componentes de $T^{\mu\nu}$.
+    \item Muestre que la condición $\partial_\nu T^{\mu\nu} = 0$ se reduce a la ecuación de continuidad $\partial_t\rho + \nabla\cdot(\rho\vec{v}) = 0$ y a la ecuación de Euler $\rho(\partial_t\vec{v} + (\vec{v}\cdot\nabla)\vec{v}) + \nabla p = 0$.
+    \item ¿Qué condición sobre $p$ se necesita para que el fluido en reposo sea estático (sin dependencia temporal)?
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) La invarianza gauge del electromagnetismo.}
+  El 4-potencial $A_\mu = (-\phi/c, \vec{A})$ define el tensor de Faraday mediante $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Demuestre que $F_{\mu\nu}$ es invariante bajo la transformación gauge $A_\mu \to A_\mu + \partial_\mu \chi$ para cualquier función escalar $\chi$.
+    \item En el gauge de Lorenz $\partial^\mu A_\mu = 0$, muestre que la ecuación \eqref{eq:maxwell1} se reduce a la ecuación de onda $\Box A^\nu = \mu_0 J^\nu$, donde $\Box = \eta^{\mu\nu}\partial_\mu\partial_\nu = -\partial_t^2/c^2 + \nabla^2$ es el operador de d'Alembert (o dalembertiano).
+    \item La ecuación de onda libre ($J^\mu = 0$) admite soluciones de onda plana $A^\mu = a^\mu e^{ik_\nu x^\nu}$. Encuentre la condición de dispersión sobre $k^\mu$ y muestre que el fotón viaja a velocidad $c$.
+  \end{enumerate}
+
+\end{enumerate}
