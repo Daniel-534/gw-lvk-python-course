@@ -1,0 +1,566 @@
+% ============================================================
+% Capítulo 3: Relatividad Especial — Postulados y Cinemática
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Relatividad Especial: Postulados y Cinemática}
+\label{cap:re_cinematica}
+
+La relatividad especial de Einstein (1905) constituye el fundamento conceptual de toda la física moderna: implantó la idea de que el espacio y el tiempo no son entidades absolutas e independientes, sino que forman una unidad geométrica —el \textbf{espacio-tiempo de Minkowski}— cuya estructura se revela bajo las transformaciones de Lorentz. El dominio de la relatividad especial es imprescindible antes de abordar la relatividad general: las ecuaciones de campo de Einstein deben reproducir la física de Minkowski en el límite de campo gravitacional débil, y cualquier punto del espacio-tiempo curvo admite un sistema de referencia localmente inercial que es, a efectos locales, un espacio de Minkowski \cite{Carroll2004, Schutz2009, Misner1973, Einstein1905}.
+
+En este capítulo construimos el espacio-tiempo plano desde los dos postulados de Einstein, derivamos las \textbf{transformaciones de Lorentz} y estudiamos todas sus consecuencias \emph{cinemáticas}: dilatación temporal, contracción de longitudes, composición relativista de velocidades, el invariante espacio-temporal y los diagramas de espacio-tiempo. La dinámica relativista (cuadrimomento, relación energía-momento, electrodinámica covariante) se desarrolla en el Capítulo~4.
+
+% ===========================================================
+\section{Motivación histórica y los postulados de Einstein}
+% ===========================================================
+
+\subsection{La crisis de la física clásica a finales del siglo XIX}
+
+A finales del siglo~XIX, la física clásica descansaba sobre dos pilares aparentemente sólidos: la mecánica newtoniana, con su principio de relatividad galileano, y el electromagnetismo de Maxwell. Sin embargo, entre ellos surgió una contradicción fundamental.
+
+Las ecuaciones de Maxwell predicen que las ondas electromagnéticas se propagan con velocidad
+\[
+  c = \frac{1}{\sqrt{\varepsilon_0 \mu_0}} \approx 3{,}00 \times 10^8\ \si{m/s},
+\]
+pero no especifican respecto a qué marco de referencia. La hipótesis dominante era la existencia del \emph{éter luminífero}, un medio absoluto en reposo que servía como soporte de las ondas electromagnéticas. El experimento de Michelson y Morley (1887) intentó medir el movimiento de la Tierra respecto al éter y obtuvo resultado nulo: la velocidad de la luz es la misma en todas las direcciones, con independencia del movimiento del observador \cite{Jackson1999}.
+
+Otros experimentos confirmaron la ausencia de éter:
+\begin{itemize}[leftmargin=2em]
+  \item Las aberraciones estelares (Bradley, 1727) son consistentes con $c$ constante, no con la adición galileana de velocidades.
+  \item El experimento de Fizeau (1851) sobre la propagación de la luz en agua en movimiento mostraba desviaciones de la predicción clásica.
+  \item Los intentos de Lorentz, Poincaré y Fitzgerald de salvar el éter mediante hipótesis ad hoc (contracción de Fitzgerald-Lorentz) resultaban artificiales.
+\end{itemize}
+
+\subsection{Los postulados de Einstein}
+
+Einstein (1905) resolvió la paradoja de raíz, abandonando la noción de tiempo absoluto y proclamando dos postulados simples y elegantes \cite{Einstein1905}:
+
+\begin{importante}
+\textbf{Postulados de la Relatividad Especial} (Einstein, 1905):
+\begin{enumerate}[leftmargin=2em, label=\textbf{\Roman*.}]
+  \item \textbf{Principio de relatividad:} Las leyes de la física tienen la misma forma en todos los marcos de referencia inerciales. Ningún experimento realizado dentro de un sistema cerrado puede determinar si está en reposo o en movimiento rectilíneo uniforme.
+  \item \textbf{Invariancia de la velocidad de la luz:} La velocidad de la luz en el vacío, $c$, es la misma para todos los observadores inerciales, independientemente del movimiento de la fuente o del receptor.
+\end{enumerate}
+\end{importante}
+
+El primer postulado generaliza el principio de relatividad galileano de la mecánica a \emph{todas} las leyes de la física, incluyendo el electromagnetismo. El segundo postulado, radicalmente nuevo, entra en conflicto directo con la adición galileana de velocidades. De su combinación se derivan, de manera lógicamente inevitable, las transformaciones de Lorentz y la nueva cinemática relativista.
+
+% ===========================================================
+\section{Las transformaciones de Lorentz}
+% ===========================================================
+
+\subsection{Derivación desde los postulados}
+
+Consideremos dos marcos inerciales $S$ y $S'$. El marco $S'$ se mueve con velocidad constante $v$ en la dirección $+x$ respecto a $S$. Los orígenes de ambos marcos coinciden en $t = t' = 0$.
+
+Se buscan relaciones lineales entre las coordenadas $(t, x, y, z)$ y $(t', x', y', z')$ que:
+\begin{enumerate}[leftmargin=2em]
+  \item Sean lineales (homogeneidad e isotropía del espacio-tiempo).
+  \item Preserven la velocidad de la luz: si $x = ct$, entonces $x' = ct'$ (Postulado~II).
+  \item Se reduzcan a las transformaciones de Galileo cuando $v/c \ll 1$ (principio de correspondencia).
+\end{enumerate}
+
+Definiendo el \textbf{factor de Lorentz}
+\begin{equation}
+  \gamma \equiv \frac{1}{\sqrt{1 - \beta^2}}, \qquad \beta \equiv \frac{v}{c},
+  \label{eq:gamma}
+\end{equation}
+donde $\gamma \geq 1$ para cualquier velocidad real $v < c$, la solución única (salvo reflexiones) es:
+
+\begin{teorema}{Transformaciones de Lorentz}{lorentz_transf}
+Para un \emph{boost} de velocidad $v$ en la dirección $x$, las coordenadas transforman como
+\begin{align}
+  t'  &= \gamma\!\left(t - \frac{v}{c^2}\,x\right), \label{eq:lt1}\\[4pt]
+  x'  &= \gamma\!\left(x - v\,t\right), \label{eq:lt2}\\[4pt]
+  y'  &= y, \label{eq:lt3}\\[4pt]
+  z'  &= z. \label{eq:lt4}
+\end{align}
+La transformación inversa se obtiene reemplazando $v \to -v$ (o equivalentemente $\beta \to -\beta$):
+\begin{equation}
+  t = \gamma\!\left(t' + \frac{v}{c^2}\,x'\right),\qquad
+  x = \gamma\left(x' + v\,t'\right),\qquad
+  y = y',\qquad z = z'.
+  \label{eq:lt_inv}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Postulamos $x' = \gamma(x - vt)$ y exigimos que si $x = ct$ entonces $x' = ct'$. Sustituyendo y despejando $t'$, obtenemos $t' = \gamma(t - vx/c^2)$. Para verificar la invariancia del intervalo $x^2 - c^2 t^2 = x'^2 - c^2 t'^2$, sustituimos \eqref{eq:lt1}--\eqref{eq:lt2}:
+\begin{align*}
+  x'^2 - c^2 t'^2
+  &= \gamma^2(x-vt)^2 - c^2\gamma^2(t - vx/c^2)^2\\
+  &= \gamma^2\!\left[(x^2 - 2xvt + v^2t^2) - (c^2t^2 - 2vxt + v^2x^2/c^2)\right]\\
+  &= \gamma^2(1 - v^2/c^2)(x^2 - c^2t^2) = x^2 - c^2t^2.
+\end{align*}
+\end{proof}
+
+\subsection{La forma matricial del boost de Lorentz}
+
+En unidades en que $c = 1$, el boost de Lorentz en la dirección $x$ se escribe como la matriz $\Lambda^\mu{}_\nu$ tal que $x'^\mu = \Lambda^\mu{}_\nu x^\nu$:
+
+\begin{equation}
+  \Lambda^\mu{}_\nu =
+  \begin{pmatrix}
+    \gamma        & -\gamma\beta & 0 & 0 \\
+    -\gamma\beta  & \gamma       & 0 & 0 \\
+    0             & 0            & 1 & 0 \\
+    0             & 0            & 0 & 1
+  \end{pmatrix},
+  \label{eq:lorentz_matrix}
+\end{equation}
+donde $x^0 = ct$, $x^1 = x$, $x^2 = y$, $x^3 = z$.
+
+\begin{importante}
+Las transformaciones de Lorentz forman un grupo, el \textbf{grupo de Lorentz} $O(1,3)$. Las transformaciones propias y ortocronomesas (que preservan la orientación temporal y la orientación espacial) forman el subgrupo $SO^+(1,3)$, o \textbf{grupo de Lorentz restringido}. Incluyendo las traslaciones espacio-temporales, se obtiene el \textbf{grupo de Poincaré} $ISO(1,3)$, que es el grupo de simetría completo del espacio-tiempo plano de Minkowski.
+\end{importante}
+
+\subsection{Comparación con las transformaciones de Galileo}
+
+Las transformaciones galileanas son
+\[
+  t' = t, \qquad x' = x - vt, \qquad y' = y, \qquad z' = z.
+\]
+Se obtienen de las transformaciones de Lorentz en el límite $v/c \to 0$ (o equivalentemente $c \to \infty$): $\gamma \to 1$ y el término $vx/c^2 \to 0$. Esto garantiza el \textbf{principio de correspondencia}: la relatividad especial contiene la mecánica newtoniana como caso límite.
+
+\subsection{Ley de adición relativista de velocidades}
+
+Si un objeto se mueve con velocidad $u'$ en la dirección $x'$ según el observador en $S'$, entonces su velocidad $u$ medida en $S$ es
+
+\begin{equation}
+  u = \frac{u' + v}{1 + u'v/c^2}.
+  \label{eq:adicion_vel}
+\end{equation}
+
+\begin{observacion}{Límite newtoniano y barrera de la velocidad de la luz}{}
+Para $v, u' \ll c$, se recupera $u \approx u' + v$ (galileano). Para $u' = c$ (un fotón), la fórmula da $u = c$ independientemente de $v$: la velocidad de la luz es la misma en todos los marcos (Postulado~II verificado). Además, si $|u'| < c$ y $|v| < c$, entonces $|u| < c$: ningún objeto material puede alcanzar o superar la velocidad de la luz.
+\end{observacion}
+
+\begin{ejemplo}{Adición de velocidades relativista: dos naves espaciales}{}
+Dos naves espaciales se alejan de la Tierra en sentidos opuestos, cada una a $0{,}8\,c$ según la Tierra. ¿Con qué velocidad ve cada nave a la otra?
+
+\textbf{Solución.} Tomemos $S$ como el marco de la Tierra, $S'$ como el marco de la nave~1 (que se mueve a $v = +0{,}8c$), y calculamos la velocidad de la nave~2 según $S'$. La nave~2 se mueve a $u = -0{,}8c$ según la Tierra:
+\[
+  u' = \frac{u - v}{1 - uv/c^2} = \frac{-0{,}8c - 0{,}8c}{1 - (-0{,}8c)(0{,}8c)/c^2}
+  = \frac{-1{,}6c}{1 + 0{,}64} = \frac{-1{,}6c}{1{,}64} \approx -0{,}976\,c.
+\]
+La nave~1 observa que la nave~2 se aleja a aproximadamente $0{,}976\,c$, \emph{no} a $1{,}6\,c$ como predice la mecánica newtoniana. La velocidad relativa es siempre menor que $c$.
+\end{ejemplo}
+
+% ===========================================================
+\section{El espacio-tiempo de Minkowski}
+% ===========================================================
+
+\subsection{El intervalo espacio-temporal invariante}
+
+La consecuencia más profunda de las transformaciones de Lorentz es que la combinación
+
+\begin{equation}
+  s^2 \equiv -c^2\,\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2
+  \label{eq:intervalo}
+\end{equation}
+
+es \textbf{invariante de Lorentz}: si $s^2$ tiene un valor en el marco $S$, tiene el mismo valor en cualquier otro marco inercial $S'$. Demostramos esto explícitamente en la prueba del Teorema~\ref{teo:lorentz_transf}.
+
+\begin{definicion}{Intervalo espacio-temporal e invariante de Minkowski}{intervalo}
+Dado un par de eventos $A$ y $B$ con separación $(\Delta t, \Delta\vec{x})$, el \textbf{intervalo espacio-temporal} es
+\[
+  s^2 = -c^2\,\Delta t^2 + |\Delta\vec{x}|^2.
+\]
+Según el signo de $s^2$, la separación entre eventos se clasifica en:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Tipo temporal} ($s^2 < 0$): existe un marco en que ambos eventos ocurren en el mismo lugar; puede haber relación causal. La \emph{separación temporal propia} es $\Delta\tau = \sqrt{-s^2}/c$.
+  \item \textbf{Tipo nulo o luminoso} ($s^2 = 0$): los eventos están conectados por una señal a velocidad $c$. Solo los fotones y partículas sin masa viajan sobre estas curvas.
+  \item \textbf{Tipo espacial} ($s^2 > 0$): ningún observador puede ver ambos eventos en el mismo punto; no puede haber relación causal.
+\end{itemize}
+\end{definicion}
+
+\subsection{La métrica de Minkowski}
+
+En coordenadas $(x^0, x^1, x^2, x^3) = (ct, x, y, z)$, el intervalo se escribe como
+\begin{equation}
+  ds^2 = \eta_{\mu\nu}\, dx^\mu\, dx^\nu
+  = -c^2\,dt^2 + dx^2 + dy^2 + dz^2,
+  \label{eq:minkowski_metric}
+\end{equation}
+donde
+\begin{equation}
+  \eta_{\mu\nu} = \mathrm{diag}(-1,+1,+1,+1).
+  \label{eq:eta}
+\end{equation}
+Ésta es la \textbf{métrica de Minkowski} $\eta_{\mu\nu}$. El espacio-tiempo plano $(\mathbb{R}^4, \eta)$ se denomina \textbf{espacio-tiempo de Minkowski} $\mathcal{M}_4$, y es el escenario de la relatividad especial. A diferencia del espacio euclídeo, la métrica es \emph{indefinida} (tiene una dirección de signo negativo): esto es lo que distingue el tiempo del espacio a nivel geométrico.
+
+\begin{importante}
+En unidades naturales $c = 1$ (que adoptaremos salvo mención expresa en el desarrollo posterior), la métrica es
+\[
+  \eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1),
+  \qquad ds^2 = -dt^2 + d\vec{x}^2.
+\]
+El carácter geométrico del espacio-tiempo de Minkowski, con su métrica de signatura $(-,+,+,+)$, es el precedente directo de la métrica lorentziana que utilizaremos en la relatividad general.
+\end{importante}
+
+\subsection{El cono de luz y la estructura causal}
+
+\begin{definicion}{Cono de luz}{cono_luz}
+El \textbf{cono de luz} de un evento $p$ es el conjunto de todos los puntos del espacio-tiempo accesibles desde $p$ por señales luminosas: $\{q \in \mathcal{M}_4 \mid s^2(p,q) = 0\}$. El cono se divide en:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Cono futuro:} $\Delta t > 0$, accesible causalmente desde $p$.
+  \item \textbf{Cono pasado:} $\Delta t < 0$, que puede influir en $p$.
+  \item \textbf{Exterior del cono (región espacial):} $s^2 > 0$; no existe conexión causal con $p$.
+  \item \textbf{Superficie del cono:} $s^2 = 0$; solo accesible por señales luminosas.
+\end{itemize}
+\end{definicion}
+
+La estructura causal del espacio-tiempo de Minkowski ---determinada por los conos de luz--- es la base sobre la que se construye toda la física relativista. El principio de causalidad exige que ninguna influencia física se propague fuera del cono de luz. Esta estructura se preserva en la relatividad general: incluso en el espacio-tiempo curvo, la causalidad es una propiedad local determinada por los conos de luz de la métrica lorentziana.
+
+% ===========================================================
+\section{Consecuencias cinemáticas de las transformaciones de Lorentz}
+% ===========================================================
+
+\subsection{La relatividad de la simultaneidad}
+
+Las transformaciones de Lorentz \eqref{eq:lt1}--\eqref{eq:lt4} mezclan el tiempo con la coordenada espacial $x$: dos eventos simultáneos en $S$ (misma $t$, distintos $x$) \emph{no} son simultáneos en $S'$ en general.
+
+\begin{ejemplo}{Relatividad de la simultaneidad}{}
+Sean dos eventos $A$ y $B$ que ocurren simultáneamente en $S$: $t_A = t_B = 0$, en posiciones $x_A = 0$ y $x_B = L$. En el marco $S'$ (moviéndose con velocidad $v$ en la dirección $+x$):
+\[
+  t'_A = \gamma(t_A - vx_A/c^2) = 0, \qquad
+  t'_B = \gamma(t_B - vx_B/c^2) = -\gamma vL/c^2 \neq 0.
+\]
+El evento $B$ ocurre antes que $A$ en $S'$ (si $v > 0$). La simultaneidad es relativa al marco de referencia: no existe un ``ahora'' absoluto. Esta es la ruptura más radical con la mecánica newtoniana, donde $t' = t$ de manera universal.
+\end{ejemplo}
+
+\subsection{Dilatación temporal}
+
+Supóngase que un reloj descansa en el origen del marco $S'$ y emite dos ticks: el primero en $t' = 0$ y el segundo en $t' = \Delta\tau$ (con $\Delta x' = 0$, pues el reloj está en reposo en $S'$). El reloj mide el \textbf{tiempo propio} $\Delta\tau$ (tiempo en el marco del reloj). Usando la transformación inversa \eqref{eq:lt_inv}, el intervalo de tiempo medido en $S$ es:
+
+\begin{equation}
+  \Delta t = \gamma\,\Delta\tau \geq \Delta\tau.
+  \label{eq:dilatacion}
+\end{equation}
+
+El reloj en movimiento \textbf{marcha más lento} según el observador externo: es la \textbf{dilatación temporal}. El factor $\gamma \geq 1$ cuantifica este retraso. Este efecto ha sido verificado con gran precisión en:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Decaimiento de muones cósmicos:} Los muones creados a $\sim 15\,\si{km}$ de altura llegan al suelo porque su tiempo de vida se dilata por $\gamma \gg 1$.
+  \item \textbf{Experimento Hafele-Keating (1972):} Relojes atómicos en aviones muestran diferencias de tiempo medibles respecto a relojes en tierra.
+  \item \textbf{GPS:} El sistema de posicionamiento global requiere correcciones relativistas de $\sim 7\,\si{\mu s/día}$ de origen especial-relativista.
+\end{itemize}
+
+\begin{ejemplo}{Muones cósmicos}{muones}
+Un muón se crea en la atmósfera a $h = 15\,\si{km}$ de altura con velocidad $v = 0{,}9994\,c$. El tiempo de vida en reposo del muón es $\tau_0 = 2{,}2\,\si{\mu s}$. ¿Llega al suelo?
+
+\textbf{Sin relatividad:} El tiempo de vuelo clásico es $\Delta t_{\rm cl} = h/v \approx 50\,\si{\mu s} \approx 23\,\tau_0$. El muón debería desintegrarse mucho antes de llegar.
+
+\textbf{Con dilatación temporal:}
+\[
+  \gamma = \frac{1}{\sqrt{1-(0{,}9994)^2}} = \frac{1}{\sqrt{1{,}2\times10^{-3}}} \approx 29.
+\]
+El tiempo de vida según la Tierra es $\Delta t = \gamma\tau_0 \approx 29 \times 2{,}2\ \si{\mu s} \approx 64\ \si{\mu s}$. El tiempo de vuelo requerido es $\approx 50\ \si{\mu s} < 64\ \si{\mu s}$: el muón \textbf{sí llega} al suelo, en perfecta concordancia con la observación experimental.
+
+\textbf{Perspectiva del muón:} En el marco del muón, el tiempo de vida es $\tau_0 = 2{,}2\,\si{\mu s}$. ¿Cómo llega al suelo? Para el muón, la atmósfera está contraída: su grosor aparente es $h' = h/\gamma \approx 15/29\ \si{km} \approx 517\ \si{m}$, y el tiempo de viaje es $h'/v \approx 1{,}7\ \si{\mu s} < 2{,}2\ \si{\mu s}$. Ambas perspectivas son consistentes: el muón llega al suelo.
+\end{ejemplo}
+
+\subsection{Contracción de longitudes (contracción de Lorentz)}
+
+Un objeto en reposo en $S'$ con longitud propia $L_0$ (longitud medida en su propio marco de reposo) tiene longitud $L$ según un observador en $S$:
+
+\begin{equation}
+  L = \frac{L_0}{\gamma} \leq L_0.
+  \label{eq:contraccion}
+\end{equation}
+
+El objeto aparece \textbf{contraído} en la dirección del movimiento. Las dimensiones transversales al movimiento no se ven afectadas: $L_\perp = L_{0,\perp}$. Este efecto es completamente recíproco: cada observador ve los objetos del otro contraídos en la dirección relativa de movimiento.
+
+\begin{importante}
+La dilatación temporal y la contracción de Lorentz son \emph{efectos reales}, no ilusiones ópticas ni errores de medición. Son consecuencia directa de la estructura del espacio-tiempo de Minkowski. Sin embargo, solo se perciben en la comparación entre marcos: dentro del propio marco del objeto, la longitud propia y el tiempo propio no cambian.
+\end{importante}
+
+\begin{ejemplo}{La paradoja del garaje}{garaje}
+Una varilla de longitud propia $L_0 = 10\,\si{m}$ viaja a $v = 0{,}8c$ hacia un garaje de longitud propia $\ell_0 = 8\,\si{m}$.
+
+\textbf{Marco del garaje:} La varilla está contraída a $L = L_0/\gamma = 10/\frac{5}{3} = 6\,\si{m} < 8\,\si{m}$. Sí cabe en el garaje instantáneamente.
+
+\textbf{Marco de la varilla:} El garaje está contraído a $\ell = \ell_0/\gamma = 8 \times 0{,}6 = 4{,}8\,\si{m} < 10\,\si{m}$. La varilla no cabe.
+
+La ``paradoja'' se resuelve por la relatividad de la simultaneidad: los dos eventos (``puerta trasera se cierra'', ``puerta delantera se abre'') no son simultáneos en todos los marcos. Ambos observadores describen la misma física pero con diferentes órdenes temporales de eventos no causalmente relacionados.
+\end{ejemplo}
+
+\subsection{El tiempo propio a lo largo de una trayectoria arbitraria}
+
+Para una partícula que sigue una trayectoria arbitraria $x^\mu(\lambda)$, el \textbf{tiempo propio} $\tau$ es la longitud de la curva según la métrica de Minkowski:
+
+\begin{equation}
+  d\tau = \frac{1}{c}\sqrt{-ds^2} = \frac{1}{c}\sqrt{-\eta_{\mu\nu}\, dx^\mu\, dx^\nu}
+        = dt\sqrt{1 - v^2/c^2} = \frac{dt}{\gamma}.
+  \label{eq:tiempo_propio}
+\end{equation}
+
+El tiempo propio $\tau$ es un \textbf{escalar de Lorentz}: todos los observadores concuerdan en cuánto tiempo marcó el reloj que viajó con la partícula. Esta propiedad lo convierte en el parámetro natural para describir las trayectorias de partículas masivas.
+
+\begin{ejemplo}{La paradoja de los gemelos}{gemelos}
+Los gemelos Ana (A) y Beto (B) tienen 20 años. Beto parte en una nave a $v = 0{,}8c$ hacia una estrella a $d = 8$ años-luz de la Tierra, y regresa.
+
+\textbf{(a) Tiempo según la Tierra:}
+\[
+  \Delta t_A = \frac{2d}{v} = \frac{2 \times 8\,\text{a.l.}}{0{,}8c} = 20\,\text{años}.
+\]
+Ana tiene $20 + 20 = 40$ años al regreso.
+
+\textbf{(b) Tiempo propio de Beto:} Con $\gamma = 1/\sqrt{1-0{,}64} = 1/0{,}6 = 5/3$:
+\[
+  \Delta\tau_B = \frac{\Delta t_A}{\gamma} = \frac{20}{5/3} = 12\,\text{años}.
+\]
+Beto tiene $20 + 12 = 32$ años al regreso.
+
+\textbf{(c) ¿Paradoja?} No hay paradoja: la situación \emph{no} es simétrica. Ana permanece en un marco inercial; Beto acelera al dar la vuelta. La aceleración rompe la equivalencia, y el tiempo propio es el menor para quien se desvía del movimiento inercial. El resultado es verificable experimentalmente y se confirma con relojes atómicos.
+\end{ejemplo}
+
+% ===========================================================
+\section{El efecto Doppler relativista}
+% ===========================================================
+
+Una fuente de luz en $S'$ emite radiación con frecuencia $\nu_0$ (frecuencia propia). Si $S'$ se mueve con velocidad $v$ respecto a $S$, el observador en $S$ mide la frecuencia
+
+\begin{equation}
+  \nu = \nu_0 \sqrt{\frac{1 + \beta\cos\theta'}{1 - \beta^2}}
+  \label{eq:doppler_general}
+\end{equation}
+
+donde $\theta'$ es el ángulo entre la dirección de emisión y la dirección de movimiento medido en el marco de la fuente. Para emisión radial:
+
+\begin{equation}
+  \nu = \nu_0 \sqrt{\frac{1+\beta}{1-\beta}} \quad (\text{fuente acercándose}),
+  \qquad
+  \nu = \nu_0 \sqrt{\frac{1-\beta}{1+\beta}} \quad (\text{fuente alejándose}).
+  \label{eq:doppler_rel}
+\end{equation}
+
+Para $\theta' = \pi/2$ (fuente transversal), el \textbf{efecto Doppler transversal} da $\nu = \nu_0/\gamma < \nu_0$: una fuente que se mueve perpendicularmente aparece desplazada al rojo, efecto puramente relativista sin análogo clásico, consecuencia directa de la dilatación temporal.
+
+\begin{ejemplo}{Corrimiento al rojo de un quásar}{}
+Un quásar tiene corrimiento al rojo $z = (\lambda_{\rm obs} - \lambda_0)/\lambda_0 = 2{,}0$ (desplazamiento al rojo), donde $1 + z = \lambda_{\rm obs}/\lambda_0 = \nu_0/\nu$. Asumiendo recesión radial:
+\[
+  1 + z = \sqrt{\frac{1+\beta}{1-\beta}} = 3 \;\Rightarrow\; \frac{1+\beta}{1-\beta} = 9 \;\Rightarrow\; \beta = \frac{9-1}{9+1} = 0{,}8.
+\]
+El quásar se aleja a $v = 0{,}8c$. Nótese que, para $z > 0$ cosmológico grande, la fórmula~\eqref{eq:doppler_rel} sobreestima $v$: el corrimiento al rojo cosmológico tiene origen en la expansión del espacio-tiempo (métrica FLRW, Capítulo~10), no en el movimiento peculiar.
+\end{ejemplo}
+
+% ===========================================================
+\section{Diagramas de espacio-tiempo (diagramas de Minkowski)}
+% ===========================================================
+
+Los \textbf{diagramas de espacio-tiempo} (o \textbf{diagramas de Minkowski}) son representaciones gráficas del espacio-tiempo en las que el tiempo se mide en el eje vertical (con $ct$ como unidad, de modo que las líneas del mundo de los fotones tengan pendiente 45°) y las coordenadas espaciales en el eje horizontal. Fueron introducidos sistemáticamente por Minkowski en 1908 y constituyen una herramienta visual insustituible para analizar la física relativista.
+
+\subsection{Elementos básicos del diagrama}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Evento:} Un punto en el diagrama, con coordenadas $(ct, x)$.
+  \item \textbf{Línea del mundo:} La traza de un objeto en el espacio-tiempo. Una partícula en reposo tiene línea del mundo vertical; un objeto en movimiento uniforme tiene una línea inclinada.
+  \item \textbf{Luz:} Los fotones siguen líneas del mundo a 45° (pendiente $\pm 1$ en unidades $c = 1$).
+  \item \textbf{Cono de luz:} El cono formado por las líneas del mundo de todos los fotones que pasan por un evento $O$. El interior del cono es causalmente accesible desde $O$; el exterior es causalmente inaccesible.
+  \item \textbf{Simultaneidad en $S'$:} Las líneas de tiempo constante en $S'$ no son horizontales en el diagrama de $S$; están inclinadas con pendiente $\beta$ hacia el eje $ct$. Del mismo modo, el eje $x'$ (líneas de $t' = 0$ en $S'$) está inclinado con pendiente $\beta$ hacia el eje $x$.
+\end{itemize}
+
+\begin{observacion}{Simetría de la relatividad en los diagramas}{}
+Un hecho notable es que tanto el eje $ct'$ como el eje $x'$ forman el mismo ángulo $\alpha = \arctan\beta$ con sus respectivos ejes en $S$ (el primero se inclina hacia la derecha, el segundo hacia arriba). Los ejes del sistema $S'$ se ``cierran'' sobre la línea del mundo de la luz al aumentar $v \to c$. Esto ilustra visualmente por qué es imposible alcanzar $v = c$: los ejes del fotón coinciden con la línea del mundo de la luz.
+\end{observacion}
+
+\subsection{La relatividad de la simultaneidad en el diagrama}
+
+\begin{ejemplo}{Simultaneidad relativa en el diagrama de Minkowski}{}
+Sean dos eventos $A = (0, -L)$ y $B = (0, +L)$ simultáneos en $S$ (misma $t = 0$). En el diagrama de $S$, ambos puntos están sobre la línea horizontal $t = 0$.
+
+Dibujemos los ejes de $S'$ (moviéndose a $\beta = 0{,}5$): el eje $x'$ tiene pendiente $\beta = 0{,}5$ en el diagrama de $S$. Si trazamos las líneas de simultaneidad en $S'$ (paralelas al eje $x'$) que pasan por $A$ y por $B$, vemos que pasan por diferentes valores de $t'$: los eventos no son simultáneos en $S'$. El evento $B$ tiene $t'_B = \gamma(-vL/c^2) < 0$ (ocurre antes en $S'$).
+
+Esta representación gráfica hace intuitivamente claro que la simultaneidad es relativa: los ejes del marco $S'$ simplemente cortan el espacio-tiempo a distintos ángulos.
+\end{ejemplo}
+
+\subsection{Dilatación temporal y contracción de longitudes en el diagrama}
+
+La dilatación temporal se manifiesta en el diagrama porque las marcas de tiempo en la línea del mundo de $S'$ (intervalos iguales de $\tau$) parecen más separadas que las marcas de $S$ al medirlas en el eje vertical. La contracción de longitudes se manifiesta en que un objeto en reposo en $S'$ (línea del mundo vertical en $S'$) tiene una extensión espacial que, medida a $t = \mathrm{const}$ en $S$, es menor que la longitud propia.
+
+\subsection{El intervalo invariante como ``distancia'' en el diagrama}
+
+\begin{importante}
+En el diagrama de Minkowski, el intervalo $s^2 = -c^2\Delta t^2 + \Delta x^2$ no es la ``distancia euclidiana'' entre dos puntos (que sería $c^2\Delta t^2 + \Delta x^2$), sino la \emph{distancia de Minkowski}, que puede ser negativa, cero o positiva. Dos eventos unidos por una línea del mundo de tipo temporal tienen $s^2 < 0$; eventos en el cono de luz tienen $s^2 = 0$. Esta ``distancia'' es la que se preserva bajo transformaciones de Lorentz: es el verdadero invariante del espacio-tiempo.
+\end{importante}
+
+% ===========================================================
+\section{El cuadrivector de posición y la notación tensorial}
+% ===========================================================
+
+Con el lenguaje tensorial del Capítulo~\ref{cap:algebra} y la métrica de Minkowski del Capítulo~\ref{cap:curvatura}, estamos en condiciones de formular la relatividad especial de manera completamente covariante.
+
+\subsection{El cuadrivector de posición}
+
+El \textbf{cuadrivector de posición} es
+\begin{equation}
+  x^\mu = (ct,\, x,\, y,\, z), \qquad \mu = 0,1,2,3.
+  \label{eq:cuadripos}
+\end{equation}
+El cuadrivector desplazamiento infinitesimal $dx^\mu$ transforma bajo boosts como la matriz \eqref{eq:lorentz_matrix}. El intervalo invariante se escribe como
+\[
+  ds^2 = \eta_{\mu\nu}\, dx^\mu\, dx^\nu.
+\]
+
+\subsection{El cuadrivector de velocidad}
+
+\begin{definicion}{Cuadrivector de velocidad (4-velocidad)}{4vel}
+Para una partícula con posición $x^\mu(\tau)$ parametrizada por el tiempo propio $\tau$, la \textbf{cuadri-velocidad} es
+\begin{equation}
+  U^\mu \equiv \frac{dx^\mu}{d\tau} = \gamma\!\left(c,\,\vec{v}\right),
+  \label{eq:4vel}
+\end{equation}
+donde $\vec{v} = d\vec{x}/dt$ es la velocidad tridimensional.
+\end{definicion}
+
+La norma cuadrada de $U^\mu$ es un invariante de Lorentz:
+\begin{equation}
+  \eta_{\mu\nu}\, U^\mu U^\nu = \gamma^2(-c^2 + v^2) = -c^2.
+  \label{eq:norma_4vel}
+\end{equation}
+En unidades $c=1$: $U^\mu U_\mu = -1$. Esta identidad es la condición de normalización de la 4-velocidad, válida en todos los marcos inerciales: el módulo de la 4-velocidad es siempre igual a $c$ (o $1$ en unidades naturales).
+
+\begin{importante}
+La formulación tensorial de la relatividad especial mediante cuadrivectores garantiza la \textbf{covarianza de Lorentz}: si una ecuación es verdadera en un marco inercial y está escrita en forma tensorial, es automáticamente verdadera en todos los marcos inerciales. Este principio es el mismo que utilizaremos en la relatividad general bajo la forma del principio de covarianza general.
+\end{importante}
+
+% ===========================================================
+\section{Ejemplos resueltos adicionales}
+% ===========================================================
+
+\begin{ejemplo}{Verificación de la invariancia del intervalo}{invt_intervalo}
+Sean los eventos $A = (t, x) = (0, 0)$ y $B = (t, x) = (5\,\si{ns},\, 2\,\si{m})$ en el marco $S$ (con $c = 3\times10^8\,\si{m/s}$).
+
+\textbf{(a) Clasificación:}
+\[
+  s^2 = -c^2\Delta t^2 + \Delta x^2 = -(3\times10^8)^2(5\times10^{-9})^2 + (2)^2
+  = -2{,}25 + 4 = +1{,}75\,\si{m^2}.
+\]
+Como $s^2 > 0$, la separación es \textbf{de tipo espacial}: no hay posible conexión causal.
+
+\textbf{(b) Coordenadas en $S'$ ($v = 0{,}6c$, $\gamma = 5/4$):}
+\begin{align*}
+  \Delta t' &= \gamma(\Delta t - v\Delta x/c^2) = \tfrac{5}{4}(5\times10^{-9} - 0{,}6 \times 2/(3\times10^8))
+  = \tfrac{5}{4}(5 - 4)\times10^{-9} = 1{,}25\,\si{ns},\\
+  \Delta x' &= \gamma(\Delta x - v\Delta t) = \tfrac{5}{4}(2 - 0{,}6\times3\times10^8\times5\times10^{-9})
+  = \tfrac{5}{4}(2 - 0{,}9) = 1{,}375\,\si{m}.
+\end{align*}
+
+\textbf{(c) Verificación:}
+\[
+  s'^2 = -(3\times10^8)^2(1{,}25\times10^{-9})^2 + (1{,}375)^2
+  = -0{,}140625 + 1{,}890625 = 1{,}75\,\si{m^2} = s^2.\ \checkmark
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Cálculo del tiempo propio para trayectoria circular}{tiempo_propio_circular}
+Una partícula gira en un círculo de radio $R = 1\,\si{m}$ con rapidez $v = 0{,}9c$. Calcule el tiempo propio $\tau$ en función del tiempo del laboratorio $t$.
+
+\textbf{Solución.} La rapidez instantánea es constante: $v = 0{,}9c$. Entonces $\gamma = 1/\sqrt{1-0{,}81} = 1/\sqrt{0{,}19} \approx 2{,}294$. Por la ecuación~\eqref{eq:tiempo_propio}:
+\[
+  d\tau = dt\sqrt{1 - v^2/c^2} = dt/\gamma,
+  \quad\Rightarrow\quad
+  \tau = t/\gamma \approx 0{,}436\,t.
+\]
+Por cada segundo del laboratorio, el reloj de la partícula avanza solo $\approx 0{,}436$ segundos. Este es exactamente el mismo efecto que se ha verificado con muones en aceleradores de partículas.
+\end{ejemplo}
+
+\begin{ejemplo}{El efecto Doppler relativista y la invariancia de la fase}{}
+Derivemos la fórmula del efecto Doppler~\eqref{eq:doppler_rel} usando cuadrivectores. El cuadrivector de onda de un fotón es $k^\mu = (\omega/c, \vec{k})$, con $|\vec{k}| = \omega/c$. La fase de una onda plana, $\phi = k_\mu x^\mu = -\omega t + \vec{k}\cdot\vec{x}$, es un escalar de Lorentz (invariante). En el marco de la fuente ($S'$), la onda viaja en la dirección $+x'$ con $k'^1 = \omega_0/c$. Aplicando el boost inverso ($v \to -v$):
+\[
+  \omega = \gamma(\omega_0 + v k'^1) = \gamma\omega_0(1 + \beta),
+  \qquad
+  k^1 = \gamma(k'^1 + v\omega_0/c^2) = \gamma\frac{\omega_0}{c}(1+\beta).
+\]
+Entonces $\nu = \omega/(2\pi) = \gamma(1+\beta)\nu_0$. Usando $\gamma(1+\beta) = \sqrt{(1+\beta)/(1-\beta)}$, se recupera \eqref{eq:doppler_rel}. La invariancia de la fase garantiza la consistencia del resultado en todos los marcos.
+\end{ejemplo}
+
+% ===========================================================
+\section{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Verificación de la invariancia del intervalo.}
+  Sean dos eventos: $A = (0, 0, 0, 0)$ y $B = (5\ \si{ns},\ 1\ \si{m},\ 0,\ 0)$ en el marco $S$ (con $c = 3\times10^8\ \si{m/s}$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Clasifique la separación como tipo temporal, nulo o espacial.
+    \item Calcule las coordenadas de $B$ en el marco $S'$ que se mueve con velocidad $v = 0{,}6c$ en la dirección $x$.
+    \item Verifique que el intervalo $s^2$ tiene el mismo valor en $S$ y en $S'$.
+  \end{enumerate}
+
+  \item \textbf{Composición de boosts.}
+  Un boost de Lorentz en la dirección $x$ con velocidad $v_1$ seguido de otro boost en la misma dirección con velocidad $v_2$ es equivalente a un único boost con velocidad $v_3$. Usando la forma matricial~\eqref{eq:lorentz_matrix}, demuestre que
+  \[
+    v_3 = \frac{v_1 + v_2}{1 + v_1 v_2/c^2},
+  \]
+  recuperando así la ley de adición de velocidades~\eqref{eq:adicion_vel}.
+
+  \item \textbf{La paradoja del tren y el túnel.}
+  Un tren de longitud propia $L_T = 300\,\si{m}$ viaja a $v = 0{,}8c$ a través de un túnel de longitud propia $L_0 = 200\,\si{m}$.
+  \begin{enumerate}[label=(\alph*)]
+    \item En el marco del túnel, ¿cuál es la longitud del tren? ¿Cabe instantáneamente en el túnel?
+    \item En el marco del tren, ¿cuál es la longitud del túnel? ¿Cabe el tren?
+    \item Resuelva la aparente paradoja usando el diagrama de espacio-tiempo y la relatividad de la simultaneidad.
+  \end{enumerate}
+
+  \item \textbf{La 4-velocidad y la norma.}
+  Una partícula se mueve en el plano $xy$ con $v_x = 0{,}6c$ y $v_y = 0{,}8c$ según un observador en reposo.
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule la rapidez $v = |\vec{v}|$ y el factor $\gamma$.
+    \item Escriba la 4-velocidad $U^\mu$.
+    \item Verifique que $\eta_{\mu\nu}U^\mu U^\nu = -c^2$.
+    \item Calcule el tiempo propio transcurrido en 1 segundo del laboratorio.
+  \end{enumerate}
+
+  \item \textbf{Relatividad del orden temporal.}
+  Sean los eventos $A = (0, 0)$ y $B = (1\,\si{ns},\, 0{,}5\,\si{m})$ en el marco $S$.
+  \begin{enumerate}[label=(\alph*)]
+    \item ¿Cuál evento ocurre primero en $S$?
+    \item Encuentre un marco $S'$ en el que $B$ ocurra antes que $A$.
+    \item ¿Es posible encontrar un marco en el que $A$ y $B$ sean simultáneos? ¿Por qué?
+    \item ¿Podría este par de eventos representar una relación causa-efecto? Justifique.
+  \end{enumerate}
+
+  \item \textbf{Efecto Doppler relativista transversal.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Demuestre que para $\theta' = \pi/2$ (observador perpendicular al movimiento en el marco de la fuente), la frecuencia observada es $\nu = \nu_0/\gamma$ (redshift transversal).
+    \item Un átomo de hidrógeno se mueve a $v = 0{,}5c$ perpendicularmente a la línea de visión del observador. La línea $H_\alpha$ tiene longitud de onda en reposo $\lambda_0 = 656{,}3\,\si{nm}$. ¿Qué longitud de onda observa el astrónomo?
+    \item ¿Podría el efecto Doppler transversal distinguirse observacionalmente del redshift gravitacional (Capítulo~7)? Discuta.
+  \end{enumerate}
+
+  \item \textbf{Diagramas de espacio-tiempo y simultaneidad.}
+  En el diagrama de Minkowski del marco $S$, grafique (cualitativamente):
+  \begin{enumerate}[label=(\alph*)]
+    \item Los ejes $ct'$ y $x'$ de un marco $S'$ moviéndose a $\beta = 0{,}6$.
+    \item Dos eventos $P$ y $Q$ simultáneos en $S$ pero no en $S'$.
+    \item El cono de luz del evento origen $O = (0,0)$.
+    \item La línea del mundo de un fotón emitido desde $O$ en la dirección $+x$, y su relación con el cono de luz.
+  \end{enumerate}
+
+  \item \textbf{Aceleración propia constante.}
+  Una partícula parte del reposo con aceleración propia constante $g = 9{,}8\,\si{m/s^2}$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que la velocidad en función del tiempo del laboratorio es $v(t) = gt/\sqrt{1+g^2t^2/c^2}$.
+    \item Calcule el tiempo de laboratorio necesario para alcanzar $v = 0{,}9c$.
+    \item Calcule el tiempo propio de la partícula para el mismo intervalo.
+    \item Para $gt/c \ll 1$, verifique que $v \approx gt$ (cinemática newtoniana).
+  \end{enumerate}
+
+  \item \textbf{Transformación de la aceleración bajo boosts.}
+  Un objeto tiene aceleración $a'_x$ en el eje $x'$ según $S'$. Derive la aceleración $a_x$ en $S$ (boost de velocidad $v$ en la dirección $x$):
+  \[
+    a_x = \frac{a'_x}{\gamma^3\left(1 + u'_x v/c^2\right)^3},
+  \]
+  donde $u'_x$ es la velocidad del objeto en $S'$. Verifique que para $v, u'_x \ll c$ se recupera $a_x = a'_x$ (aceleración galileana).
+
+  \item \textbf{(Avanzado) El invariante de Mandelstam y la cinemática de colisiones.}
+  En física de partículas, los \textbf{invariantes de Mandelstam} $s = -(p_1+p_2)^2$, $t = -(p_1-p_3)^2$ y $u = -(p_1-p_4)^2$ son los invariantes de Lorentz de una colisión $1+2\to 3+4$ (en unidades $c=1$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Demuestre que $s + t + u = \sum_i m_i^2 c^2$.
+    \item Para la colisión $e^+e^- \to \mu^+\mu^-$ en un colisionador simétrico (marcos iguales y opuestos) con energía de centro de masa $\sqrt{s} = 91{,}2\,\si{GeV}$ (resonancia del bosón $Z$), calcule la energía de cada haz.
+    \item Muestre que en el límite ultrarelativista ($m \to 0$), $s = 4E^2/c^4$ para colisiones frontales simétricas.
+  \end{enumerate}
+
+\end{enumerate}
