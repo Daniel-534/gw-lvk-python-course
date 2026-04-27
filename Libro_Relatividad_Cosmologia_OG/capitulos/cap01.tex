@@ -1,0 +1,617 @@
+\chapter{Álgebra Tensorial y Variedades Diferenciables}
+
+La relatividad general de Einstein reformuló la gravedad como la geometría del espacio-tiempo. Para expresar esa geometría con precisión y de manera independiente de cualquier sistema de coordenadas, se necesita el lenguaje de las \textbf{variedades diferenciables} y el \textbf{álgebra tensorial}. Este capítulo construye ese lenguaje desde sus fundamentos, comenzando por la definición abstracta de variedad y terminando con los tensores de curvatura que aparecerán en las ecuaciones de campo de Einstein en el Capítulo~6 \cite{Carroll2004,Wald1984,Misner1973}.
+
+% ===========================================================
+\section{¿Por qué la geometría diferencial?}
+% ===========================================================
+
+En la mecánica newtoniana, el espacio y el tiempo son entidades absolutas e independientes. La gravedad actúa como una fuerza ordinaria sobre un fondo fijo y plano. Este cuadro es extraordinariamente exitoso a bajas velocidades y campos débiles, pero falla al describir:
+
+\begin{itemize}
+  \item La precesión del perihelio de Mercurio (43 segundos de arco por siglo sin explicación newtoniana).
+  \item La deflexión de la luz por el Sol (predicha el doble por Einstein que por Newton).
+  \item El retardo de Shapiro en señales de radar.
+  \item La existencia de agujeros negros y la expansión del Universo.
+\end{itemize}
+
+La relatividad general de Einstein (1915) resuelve estas discrepancias al identificar la gravedad con la \emph{curvatura del espacio-tiempo}. Un objeto en caída libre no está sujeto a una fuerza: simplemente sigue la trayectoria más rectilínea posible (una \emph{geodésica}) en un espacio-tiempo curvo. Esta identificación requiere hablar con precisión de:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La estructura de \emph{variedad diferenciable} del espacio-tiempo.
+  \item Los \emph{tensores} como objetos geométricos independientes de coordenadas.
+  \item La \emph{métrica} que define distancias, ángulos y la estructura causal.
+  \item La \emph{curvatura} como la propiedad intrínseca que distingue el espacio-tiempo gravitado del espacio plano de Minkowski.
+\end{enumerate}
+
+% ===========================================================
+\section{Variedades diferenciables}
+% ===========================================================
+
+\subsection{Definición intuitiva y motivación}
+
+Una \textbf{variedad diferenciable} es un espacio que localmente se parece al espacio euclídeo $\mathbb{R}^n$, pero que globalmente puede tener una geometría complicada. Los ejemplos cotidianos son la superficie de la Tierra (localmente plana, globalmente esférica) y el espacio-tiempo (localmente similar a $\mathbb{R}^4$ con la métrica de Minkowski, globalmente curvo por la presencia de masa-energía).
+
+La idea clave es que podemos usar sistemas de coordenadas locales, pero debemos exigir compatibilidad entre sistemas de coordenadas que se solapan. Esto da lugar a la noción de \emph{atlas}.
+
+\subsection{Cartas, atlas y la definición formal}
+
+\begin{definicion}{Variedad diferenciable de dimensión $n$}{variedad}
+Sea $\mathcal{M}$ un conjunto. Una \textbf{carta} (o \textbf{sistema de coordenadas}) en $\mathcal{M}$ es un par $(U, \varphi)$ donde:
+\begin{itemize}[leftmargin=2em]
+  \item $U \subseteq \mathcal{M}$ es un subconjunto abierto.
+  \item $\varphi: U \to V \subseteq \mathbb{R}^n$ es una biyección con $V$ abierto.
+\end{itemize}
+Un \textbf{atlas} $\mathcal{A} = \{(U_\alpha, \varphi_\alpha)\}$ es una colección de cartas tal que $\bigcup_\alpha U_\alpha = \mathcal{M}$. Si dos cartas se solapan, $U_\alpha \cap U_\beta \neq \emptyset$, se exige que el \textbf{mapa de transición}
+\[
+  \varphi_\beta \circ \varphi_\alpha^{-1} : \varphi_\alpha(U_\alpha \cap U_\beta) \to \varphi_\beta(U_\alpha \cap U_\beta)
+\]
+sea una función $C^\infty$ (infinitamente diferenciable). En ese caso, $\mathcal{M}$ con el atlas $\mathcal{A}$ es una \textbf{variedad diferenciable de dimensión $n$}.
+\end{definicion}
+
+Las coordenadas de un punto $p \in U_\alpha$ son los $n$ números reales $\varphi_\alpha(p) = (x^1, x^2, \ldots, x^n)$. Obsérvese que los índices superiores en $x^\mu$ son \emph{índices}, no potencias.
+
+\begin{ejemplo}{Variedades diferenciables usuales}{}
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item $\mathbb{R}^n$ con el atlas formado por una sola carta (la identidad) es una variedad de dimensión $n$.
+  \item La $n$-esfera $S^n = \{x \in \mathbb{R}^{n+1} \mid \|x\|=1\}$ es una variedad de dimensión $n$. Para $n=2$, se necesitan al menos dos cartas (por ejemplo, proyección estereográfica desde el polo norte y desde el polo sur).
+  \item El espacio-tiempo de la relatividad general es una variedad de dimensión 4. Cada carta corresponde a un sistema de coordenadas $(x^0, x^1, x^2, x^3)$, donde convencionalmente $x^0 = t$ (tiempo) y $(x^1, x^2, x^3)$ son coordenadas espaciales.
+  \item El toro $T^2 = S^1 \times S^1$ es una variedad bidimensional compacta (sin borde).
+\end{enumerate}
+\end{ejemplo}
+
+\begin{importante}
+Las ecuaciones de la física deben escribirse de tal manera que sean \textbf{covariantes bajo difeomorfismos}: su forma no puede depender de la elección de carta. Las ecuaciones tensoriales, que estudiaremos a continuación, tienen exactamente esa propiedad. Esta exigencia de covarianza es uno de los principios guía de la relatividad general.
+\end{importante}
+
+% ===========================================================
+\section{El espacio tangente}
+% ===========================================================
+
+\subsection{Vectores como derivaciones}
+
+En $\mathbb{R}^n$, un vector en un punto $p$ es simplemente una flecha. En una variedad abstracta, esa imagen intuitiva falla porque no hay un espacio vectorial ambiente en el que vivan las flechas. La definición correcta de vector usa la noción de \emph{derivación}: un vector tangente es un operador diferencial de primer orden que actúa sobre funciones diferenciables.
+
+\begin{definicion}{Espacio tangente}{tangente}
+Sea $\mathcal{M}$ una variedad y $p \in \mathcal{M}$. Una \textbf{derivación en $p$} es una aplicación $v: C^\infty(\mathcal{M}) \to \mathbb{R}$ que satisface:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Linealidad:} $v(\alpha f + \beta g) = \alpha\, v(f) + \beta\, v(g)$ para $\alpha, \beta \in \mathbb{R}$.
+  \item \textbf{Regla de Leibniz:} $v(fg) = v(f)\, g(p) + f(p)\, v(g)$.
+\end{enumerate}
+El conjunto de todas las derivaciones en $p$ forma el \textbf{espacio tangente} $T_p\mathcal{M}$, que es un espacio vectorial real de dimensión $n = \dim \mathcal{M}$.
+\end{definicion}
+
+\subsection{Base coordenada}
+
+Dada una carta $(U, \varphi)$ con coordenadas $(x^1, \ldots, x^n)$ alrededor de $p$, los operadores de derivada parcial
+\[
+  \left.\pd{}{x^\mu}\right|_p, \qquad \mu = 1, \ldots, n,
+\]
+forman una base de $T_p\mathcal{M}$, llamada la \textbf{base coordenada}. Todo vector tangente $V \in T_p\mathcal{M}$ se escribe como
+\begin{equation}
+  V = V^\mu \pd{}{x^\mu},
+  \label{eq:vector_expansion}
+\end{equation}
+donde $V^\mu \in \mathbb{R}$ son las \textbf{componentes} de $V$ en la base coordenada, y se usa el convenio de suma de Einstein (suma implícita sobre $\mu$ de 1 a $n$).
+
+\subsection{Cambio de base (ley de transformación de vectores)}
+
+Si $(x^\mu)$ y $(\tilde{x}^{\mu'})$ son dos sistemas de coordenadas que se solapan en $p$, las bases respectivas están relacionadas por
+\[
+  \pd{}{\tilde{x}^{\mu'}} = \pd{x^\mu}{\tilde{x}^{\mu'}} \pd{}{x^\mu}.
+\]
+Un vector $V$ tiene componentes $V^\mu$ en la base $(x^\mu)$ y $\widetilde{V}^{\mu'}$ en la base $(\tilde{x}^{\mu'})$. La condición $V = V^\mu \partial_\mu = \widetilde{V}^{\mu'} \tilde{\partial}_{\mu'}$ implica
+
+\begin{equation}
+  \widetilde{V}^{\mu'} = \pd{\tilde{x}^{\mu'}}{x^\mu} V^\mu.
+  \label{eq:trans_vector}
+\end{equation}
+
+\begin{importante}
+La ecuación \eqref{eq:trans_vector} es la \textbf{ley de transformación contravariante}. Cualquier conjunto de $n$ números $\{V^\mu\}$ que transforme de esta manera bajo cambios de coordenadas constituye las componentes de un \emph{vector contravariante} (o simplemente un vector).
+\end{importante}
+
+% ===========================================================
+\section{El espacio cotangente: 1-formas}
+% ===========================================================
+
+El \textbf{espacio cotangente} $T_p^*\mathcal{M}$ es el espacio dual de $T_p\mathcal{M}$: consiste en todas las funciones lineales $\omega: T_p\mathcal{M} \to \mathbb{R}$.
+
+\begin{definicion}{1-forma diferencial}{forma}
+Una \textbf{1-forma} (o \textbf{covector}) en $p$ es un elemento $\omega \in T_p^*\mathcal{M}$. La base dual de la base coordenada $\{\partial_\mu\}$ se denota $\{dx^\mu\}$ y está definida por la condición
+\[
+  dx^\mu\!\left(\pd{}{x^\nu}\right) = \delta^\mu{}_\nu,
+\]
+donde $\delta^\mu{}_\nu$ es la delta de Kronecker. Todo covector $\omega \in T_p^*\mathcal{M}$ se expande como
+\[
+  \omega = \omega_\mu\, dx^\mu,
+\]
+donde $\omega_\mu$ son sus componentes covariantes.
+\end{definicion}
+
+La ley de transformación de las componentes de una 1-forma es
+
+\begin{equation}
+  \tilde{\omega}_{\mu'} = \pd{x^\mu}{\tilde{x}^{\mu'}} \omega_\mu,
+  \label{eq:trans_covector}
+\end{equation}
+
+que es la \textbf{ley de transformación covariante}: el jacobiano aparece en el orden inverso respecto a \eqref{eq:trans_vector}.
+
+\begin{ejemplo}{El gradiente como 1-forma}{}
+Sea $f: \mathcal{M} \to \mathbb{R}$ una función diferenciable. Su diferencial $df$ es una 1-forma cuyas componentes en la base coordenada son
+\[
+  (df)_\mu = \pd{f}{x^\mu}.
+\]
+Su acción sobre un vector $V$ da la derivada direccional:
+\[
+  df(V) = V^\mu\, \pd{f}{x^\mu} = V(f).
+\]
+En $\mathbb{R}^3$ con coordenadas cartesianas, $df = \pd{f}{x}dx + \pd{f}{y}dy + \pd{f}{z}dz$, que es el gradiente usual $\nabla f$ interpretado como una forma lineal.
+\end{ejemplo}
+
+% ===========================================================
+\section{Tensores de tipo $(r,s)$}
+% ===========================================================
+
+\subsection{Definición general}
+
+Los vectores y las 1-formas son casos particulares de una jerarquía más amplia: los \emph{tensores}.
+
+\begin{definicion}{Tensor de tipo $(r,s)$}{tensor}
+Un \textbf{tensor de tipo $(r,s)$} (o tensor $r$ veces contravariante y $s$ veces covariante) en $p \in \mathcal{M}$ es una aplicación multilineal
+\[
+  T: \underbrace{T_p^*\mathcal{M} \times \cdots \times T_p^*\mathcal{M}}_{r\text{ copias}} \times \underbrace{T_p\mathcal{M} \times \cdots \times T_p\mathcal{M}}_{s\text{ copias}} \longrightarrow \mathbb{R}.
+\]
+Sus componentes en la base coordenada son
+\[
+  T^{\mu_1 \cdots \mu_r}{}_{\nu_1 \cdots \nu_s} = T(dx^{\mu_1}, \ldots, dx^{\mu_r}, \partial_{\nu_1}, \ldots, \partial_{\nu_s}).
+\]
+\end{definicion}
+
+Un vector es un tensor $(1,0)$; una 1-forma es un tensor $(0,1)$; un escalar es un tensor $(0,0)$. El número de componentes de un tensor $(r,s)$ en $n$ dimensiones es $n^{r+s}$. En el espacio-tiempo ($n=4$), un tensor $(2,0)$ tiene $16$ componentes.
+
+\subsection{Ley de transformación general}
+
+Bajo un cambio de coordenadas $x^\mu \mapsto \tilde{x}^{\mu'}$, las componentes transforman como
+
+\begin{equation}
+  \widetilde{T}^{\mu_1' \cdots \mu_r'}{}_{\nu_1' \cdots \nu_s'} =
+  \pd{\tilde{x}^{\mu_1'}}{x^{\alpha_1}} \cdots \pd{\tilde{x}^{\mu_r'}}{x^{\alpha_r}}\;
+  \pd{x^{\beta_1}}{\tilde{x}^{\nu_1'}} \cdots \pd{x^{\beta_s}}{\tilde{x}^{\nu_s'}}\;
+  T^{\alpha_1 \cdots \alpha_r}{}_{\beta_1 \cdots \beta_s}.
+  \label{eq:trans_tensor}
+\end{equation}
+
+\begin{importante}
+Una \textbf{ecuación tensorial} es una ecuación de la forma $T = S$ donde $T$ y $S$ son tensores del mismo tipo $(r,s)$. Si la ecuación es válida en un sistema de coordenadas, la ley de transformación \eqref{eq:trans_tensor} garantiza que es válida en \emph{todos} los sistemas de coordenadas. Este es el principio de \textbf{covarianza general}: las leyes físicas se expresan como ecuaciones tensoriales.
+\end{importante}
+
+\subsection{Operaciones tensoriales fundamentales}
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Suma:} $(T + S)^{\mu\cdots}{}_{\nu\cdots} = T^{\mu\cdots}{}_{\nu\cdots} + S^{\mu\cdots}{}_{\nu\cdots}$ (mismo tipo $(r,s)$).
+
+  \item \textbf{Producto tensorial:} Si $T$ es de tipo $(r_1, s_1)$ y $S$ de tipo $(r_2, s_2)$, entonces $T \otimes S$ es de tipo $(r_1+r_2, s_1+s_2)$:
+  \[
+    (T \otimes S)^{\mu_1\cdots\mu_{r_1}\nu_1\cdots\nu_{r_2}}{}_{\alpha_1\cdots\alpha_{s_1}\beta_1\cdots\beta_{s_2}}
+    = T^{\mu_1\cdots\mu_{r_1}}{}_{\alpha_1\cdots\alpha_{s_1}}\, S^{\nu_1\cdots\nu_{r_2}}{}_{\beta_1\cdots\beta_{s_2}}.
+  \]
+
+  \item \textbf{Contracción:} Consiste en igualar un índice contravariante con uno covariante y sumar. Si $T$ es de tipo $(r,s)$ con $r,s \geq 1$, la contracción en los índices $(\mu_i, \nu_j)$ produce un tensor de tipo $(r-1, s-1)$:
+  \[
+    (\text{tr}_{ij}T)^{\mu_1\cdots\hat\mu_i\cdots}{}_{\nu_1\cdots\hat\nu_j\cdots}
+    = T^{\mu_1\cdots\lambda\cdots}{}_{\nu_1\cdots\lambda\cdots}
+    \quad \text{(suma sobre }\lambda\text{)}.
+  \]
+
+  \item \textbf{Simetrización y antisimetrización:}
+  \[
+    T_{(\mu\nu)} = \tfrac{1}{2}(T_{\mu\nu} + T_{\nu\mu}), \qquad
+    T_{[\mu\nu]} = \tfrac{1}{2}(T_{\mu\nu} - T_{\nu\mu}).
+  \]
+\end{enumerate}
+
+% ===========================================================
+\section{El convenio de suma de Einstein}
+% ===========================================================
+
+\begin{definicion}{Convenio de suma de Einstein}{einstein_sum}
+En cualquier expresión tensorial, un índice que aparece exactamente \emph{dos veces} ---una vez como índice superior (contravariante) y una vez como índice inferior (covariante)--- implica \textbf{suma} sobre todos sus valores:
+\[
+  V^\mu \omega_\mu \;\equiv\; \sum_{\mu=0}^{3} V^\mu \omega_\mu,
+  \qquad
+  A^\mu{}_{\mu} \;\equiv\; \sum_{\mu=0}^{3} A^\mu{}_\mu.
+\]
+Un índice repetido se llama \textbf{índice mudo} (o contracción); puede renombrarse sin cambiar el valor. Un índice \emph{libre} aparece una sola vez y señala la estructura tensorial libre de la expresión.
+\end{definicion}
+
+\begin{ejemplo}{Uso del convenio de Einstein}{}
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item El producto escalar de dos vectores (usando la métrica $g_{\mu\nu}$):
+  \[
+    \langle U, V\rangle = g_{\mu\nu} U^\mu V^\nu = \sum_{\mu=0}^{3}\sum_{\nu=0}^{3} g_{\mu\nu} U^\mu V^\nu.
+  \]
+
+  \item La traza del tensor de Ricci: $R = R^\mu{}_\mu = g^{\mu\nu}R_{\mu\nu}$.
+
+  \item La divergencia de un vector: $\nabla_\mu V^\mu$ (se explorará en §\ref{sec:covd}).
+
+  \item Nótese que $A^\mu{}_\mu$ es un escalar (traza), mientras que $A^\mu{}_\nu$ es un tensor $(1,1)$ con dos índices libres.
+\end{enumerate}
+\end{ejemplo}
+
+% ===========================================================
+\section{El tensor métrico}
+% ===========================================================
+
+\subsection{Definición y propiedades}
+
+El \textbf{tensor métrico} es el elemento central de la geometría riemanniana (y pseudo-riemanniana). Es el que define distancias, ángulos, volúmenes y la noción de ortogonalidad.
+
+\begin{definicion}{Tensor métrico}{metrica}
+Una \textbf{métrica} (o \textbf{tensor métrico}) en $\mathcal{M}$ es un campo tensorial de tipo $(0,2)$
+\[
+  g = g_{\mu\nu}\, dx^\mu \otimes dx^\nu
+\]
+que es:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Simétrico:} $g_{\mu\nu} = g_{\nu\mu}$.
+  \item \textbf{No degenerado:} $\det(g_{\mu\nu}) \neq 0$ en todo punto.
+\end{enumerate}
+El \textbf{elemento de línea} o \textbf{intervalo} es la expresión
+\begin{equation}
+  ds^2 = g_{\mu\nu}\, dx^\mu\, dx^\nu.
+  \label{eq:elemento_linea}
+\end{equation}
+\end{definicion}
+
+Si $g_{\mu\nu}$ es definido positivo, la métrica es \textbf{riemanniana}. Si tiene una dirección negativa y las demás positivas (signatura $(-,+,+,+)$), es \textbf{pseudo-riemanniana de Lorentz} (o lorentziana), que es el caso del espacio-tiempo relativista.
+
+\subsection{La métrica inversa}
+
+La métrica $g_{\mu\nu}$ tiene inversa $g^{\mu\nu}$ (de tipo $(2,0)$) definida por
+\begin{equation}
+  g^{\mu\rho}\, g_{\rho\nu} = \delta^\mu{}_\nu.
+  \label{eq:metrica_inv}
+\end{equation}
+
+\subsection{Levantamiento y bajada de índices}
+
+La métrica y su inversa permiten convertir índices contravariantes en covariantes y viceversa:
+
+\begin{equation}
+  V_\mu = g_{\mu\nu}\, V^\nu \quad \text{(bajar índice)}, \qquad
+  \omega^\mu = g^{\mu\nu}\, \omega_\nu \quad \text{(subir índice)}.
+  \label{eq:raise_lower}
+\end{equation}
+
+Esta operación es tan natural que se habla del \emph{mismo} objeto tensorial con índices en posiciones diferentes. Por ejemplo, el tensor de Ricci $R_{\mu\nu} = g^{\rho\sigma} R_{\rho\mu\sigma\nu}$ es la versión ``bajada'' del tensor de Riemann.
+
+\subsection{La signatura de la métrica}
+
+Por el teorema de Sylvester, cualquier métrica no degenerada simétrica se puede diagonalizar en cada punto con entradas $\pm 1$. La \textbf{signatura} es la secuencia de signos $(-, +, +, \ldots, +)$ o $(+,+,\ldots, +)$, y es una propiedad intrínseca independiente de coordenadas.
+
+\begin{definicion}{Espacio-tiempo lorentziano}{lorentz}
+Un \textbf{espacio-tiempo} es un par $(\mathcal{M}, g)$ donde $\mathcal{M}$ es una variedad diferenciable de dimensión 4 y $g$ es una métrica lorentziana con signatura $(-,+,+,+)$. La dirección con signo negativo corresponde al tiempo.
+\end{definicion}
+
+En las coordenadas $(t,x,y,z)$, la métrica plana de Minkowski toma la forma diagonal
+\begin{equation}
+  \Mink = \mathrm{diag}(-1,+1,+1,+1),
+  \label{eq:mink}
+\end{equation}
+y el elemento de línea es
+\[
+  ds^2 = -c^2\, dt^2 + dx^2 + dy^2 + dz^2.
+\]
+
+\begin{ejemplo}{Métricas fundamentales}{}
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item \textbf{Espacio euclídeo $\mathbb{R}^3$ en coordenadas cartesianas:}
+  \[
+    ds^2 = dx^2 + dy^2 + dz^2, \qquad g_{ij} = \delta_{ij}.
+  \]
+
+  \item \textbf{Esfera $S^2$ de radio $R$} (coordenadas esféricas $\theta, \varphi$):
+  \[
+    ds^2 = R^2\,(d\theta^2 + \sin^2\theta\, d\varphi^2).
+  \]
+  Las componentes son $g_{\theta\theta} = R^2$, $g_{\varphi\varphi} = R^2\sin^2\theta$, $g_{\theta\varphi} = 0$.
+
+  \item \textbf{Espacio-tiempo plano de Minkowski} (coordenadas esféricas):
+  \[
+    ds^2 = -c^2\,dt^2 + dr^2 + r^2\,d\theta^2 + r^2\sin^2\theta\,d\varphi^2.
+  \]
+\end{enumerate}
+\end{ejemplo}
+
+% ===========================================================
+\section{La derivada covariante y la conexión de Levi-Civita}
+\label{sec:covd}
+% ===========================================================
+
+\subsection{El problema con la derivada parcial}
+
+La derivada parcial $\partial_\mu V^\nu$ de un vector no es un tensor: sus componentes no transforman según la ley \eqref{eq:trans_tensor} bajo cambios de coordenadas. La razón geométrica es que $\partial_\mu V^\nu$ compara vectores en puntos diferentes de la variedad, donde las bases coordenadas son distintas.
+
+\subsection{Símbolos de Christoffel}
+
+La \textbf{conexión de Levi-Civita} es la conexión compatible con la métrica y libre de torsión. Sus coeficientes en base coordenada son los \textbf{símbolos de Christoffel}:
+
+\begin{definicion}{Símbolos de Christoffel}{christoffel}
+Los \textbf{símbolos de Christoffel} (o \textbf{coeficientes de la conexión de Levi-Civita}) se definen como
+\begin{equation}
+  \Chris{\rho}{\mu}{\nu} = \frac{1}{2}\, g^{\rho\sigma}\!\left(
+    \partial_\mu g_{\sigma\nu}
+    + \partial_\nu g_{\sigma\mu}
+    - \partial_\sigma g_{\mu\nu}
+  \right).
+  \label{eq:christoffel}
+\end{equation}
+Nótese que $\Chris{\rho}{\mu}{\nu} = \Chris{\rho}{\nu}{\mu}$ (simetría en los índices inferiores).
+\end{definicion}
+
+\begin{importante}
+A pesar de su notación con índices, los símbolos de Christoffel \textbf{no son componentes de un tensor}: bajo cambios de coordenadas adquieren un término inhomogéneo que cancelará exactamente el término no tensorial de $\partial_\mu V^\nu$, produciendo una derivada covariante que sí es tensorial.
+\end{importante}
+
+\subsection{La derivada covariante}
+
+\begin{definicion}{Derivada covariante}{cov_deriv}
+La \textbf{derivada covariante} de un vector $V^\nu$ en la dirección $\partial_\mu$ es
+\begin{equation}
+  \nabla_\mu V^\nu = \partial_\mu V^\nu + \Chris{\nu}{\mu}{\lambda}\, V^\lambda.
+  \label{eq:cov_vec}
+\end{equation}
+Para una 1-forma $\omega_\nu$:
+\begin{equation}
+  \nabla_\mu \omega_\nu = \partial_\mu \omega_\nu - \Chris{\lambda}{\mu}{\nu}\, \omega_\lambda.
+  \label{eq:cov_form}
+\end{equation}
+Para un tensor general de tipo $(r,s)$, se añade un término $+\Gamma$ por cada índice contravariante y un término $-\Gamma$ por cada índice covariante.
+\end{definicion}
+
+El resultado es que $\nabla_\mu V^\nu$ es un tensor $(1,1)$, $\nabla_\mu \omega_\nu$ es un tensor $(0,2)$, etc.
+
+\begin{proposicion}{Compatibilidad métrica}{metric_compat}
+La conexión de Levi-Civita satisface
+\[
+  \nabla_\rho\, g_{\mu\nu} = 0.
+\]
+Esto significa que la métrica es \emph{covariante constante}: el transporte paralelo preserva los productos internos.
+\end{proposicion}
+
+\begin{proof}
+Insertar la definición \eqref{eq:christoffel} en $\nabla_\rho g_{\mu\nu} = \partial_\rho g_{\mu\nu} - \Chris{\lambda}{\rho}{\mu} g_{\lambda\nu} - \Chris{\lambda}{\rho}{\nu} g_{\mu\lambda}$ y verificar que la expresión se anula por la estructura de los símbolos de Christoffel.
+\end{proof}
+
+% ===========================================================
+\section{Geodésicas y transporte paralelo}
+% ===========================================================
+
+\subsection{Transporte paralelo}
+
+Una curva $\gamma(\lambda)$ en $\mathcal{M}$ tiene vector tangente $T^\mu = dx^\mu/d\lambda$. Un campo vectorial $V^\mu$ a lo largo de $\gamma$ es \textbf{paralelo} si su derivada covariante a lo largo de $\gamma$ se anula:
+\begin{equation}
+  \frac{DV^\mu}{d\lambda} \equiv \frac{dV^\mu}{d\lambda} + \Chris{\mu}{\nu}{\rho}\, T^\nu V^\rho = 0.
+  \label{eq:paralelo}
+\end{equation}
+
+\subsection{Geodésicas}
+
+\begin{definicion}{Geodésica}{geodesica}
+Una curva $\gamma(\lambda)$ es una \textbf{geodésica} si su vector tangente $T^\mu = dx^\mu/d\lambda$ es autoparalelo:
+\begin{equation}
+  \frac{DT^\mu}{d\lambda} = 0 \qquad \Longleftrightarrow \qquad
+  \frac{d^2 x^\mu}{d\lambda^2} + \Chris{\mu}{\nu}{\rho}\,\frac{dx^\nu}{d\lambda}\,\frac{dx^\rho}{d\lambda} = 0.
+  \label{eq:geodesica}
+\end{equation}
+En relatividad general, las geodésicas de tipo temporal son las trayectorias de objetos en \textbf{caída libre} (sin fuerzas no gravitacionales); las de tipo nulo son las trayectorias de fotones.
+\end{definicion}
+
+\begin{ejemplo}{Geodésicas de la esfera $S^2$}{}
+En la esfera de radio $R$ con coordenadas $(\theta, \varphi)$ y métrica $ds^2 = R^2(d\theta^2 + \sin^2\theta\, d\varphi^2)$, los símbolos de Christoffel no nulos son
+\[
+  \Chris{\theta}{\varphi}{\varphi} = -\sin\theta\cos\theta,\qquad
+  \Chris{\varphi}{\theta}{\varphi} = \Chris{\varphi}{\varphi}{\theta} = \cot\theta.
+\]
+Las ecuaciones de geodésica se reducen a los \textbf{grandes círculos}: por ejemplo, $\theta = \pi/2$, $\varphi = \lambda$ (ecuador) satisface las ecuaciones con $\lambda$ el ángulo azimutal. Los grandes círculos son las rutas más cortas sobre la esfera, en perfecta analogía con las trayectorias de caída libre en el espacio-tiempo curvo.
+\end{ejemplo}
+
+% ===========================================================
+\section{Curvatura: el tensor de Riemann}
+% ===========================================================
+
+\subsection{Motivación geométrica}
+
+En un espacio plano, el transporte paralelo de un vector a lo largo de un lazo cerrado devuelve el vector original. En un espacio curvo, el vector regresa rotado. Esta discrepancia mide la curvatura intrínseca del espacio.
+
+\subsection{Definición del tensor de Riemann}
+
+\begin{definicion}{Tensor de curvatura de Riemann}{riemann}
+El \textbf{tensor de curvatura de Riemann} $R^\rho{}_{\sigma\mu\nu}$ se define por el conmutador de derivadas covariantes actuando sobre un vector:
+\begin{equation}
+  [\nabla_\mu, \nabla_\nu]\, V^\rho
+  = R^\rho{}_{\sigma\mu\nu}\, V^\sigma,
+  \label{eq:riemann_def}
+\end{equation}
+donde el conmutador es $[\nabla_\mu, \nabla_\nu] = \nabla_\mu \nabla_\nu - \nabla_\nu \nabla_\mu$.
+En términos de los símbolos de Christoffel:
+\begin{equation}
+  R^\rho{}_{\sigma\mu\nu}
+  = \partial_\mu \Chris{\rho}{\nu}{\sigma}
+  - \partial_\nu \Chris{\rho}{\mu}{\sigma}
+  + \Chris{\rho}{\mu}{\lambda}\Chris{\lambda}{\nu}{\sigma}
+  - \Chris{\rho}{\nu}{\lambda}\Chris{\lambda}{\mu}{\sigma}.
+  \label{eq:riemann_christoffel}
+\end{equation}
+\end{definicion}
+
+\subsection{Simetrías del tensor de Riemann}
+
+El tensor de Riemann completamente covariante $R_{\rho\sigma\mu\nu} = g_{\rho\lambda}R^\lambda{}_{\sigma\mu\nu}$ satisface las siguientes simetrías:
+
+\begin{proposicion}{Simetrías de Riemann}{sym_riemann}
+\begin{align}
+  R_{\rho\sigma\mu\nu} &= -R_{\sigma\rho\mu\nu}, \label{eq:sym1}\\
+  R_{\rho\sigma\mu\nu} &= -R_{\rho\sigma\nu\mu}, \label{eq:sym2}\\
+  R_{\rho\sigma\mu\nu} &= R_{\mu\nu\rho\sigma}, \label{eq:sym3}\\
+  R_{\rho[\sigma\mu\nu]} &= 0. \label{eq:sym4}
+\end{align}
+La última ecuación, \eqref{eq:sym4}, es la \textbf{primera identidad de Bianchi}. En consecuencia, en 4 dimensiones el tensor de Riemann tiene $20$ componentes independientes.
+\end{proposicion}
+
+\subsection{El tensor de Ricci y el escalar de curvatura}
+
+\begin{definicion}{Tensor de Ricci y escalar de Ricci}{ricci}
+El \textbf{tensor de Ricci} se obtiene contrayendo el tensor de Riemann:
+\begin{equation}
+  \Ricci = R^\lambda{}_{\mu\lambda\nu}.
+  \label{eq:ricci}
+\end{equation}
+Es simétrico: $R_{\mu\nu} = R_{\nu\mu}$. El \textbf{escalar de curvatura de Ricci} (o \textbf{escalar de Ricci}) se obtiene contrayendo el tensor de Ricci con la métrica inversa:
+\begin{equation}
+  \RicciS = g^{\mu\nu}\, \Ricci = R^\mu{}_\mu.
+  \label{eq:ricci_scalar}
+\end{equation}
+\end{definicion}
+
+\subsection{Las identidades de Bianchi diferenciadas}
+
+\begin{teorema}{Segunda identidad de Bianchi}{bianchi}
+El tensor de Riemann satisface las \textbf{identidades de Bianchi diferenciadas}:
+\begin{equation}
+  \nabla_{[\lambda} R_{\rho\sigma]\mu\nu} = 0
+  \qquad \Longleftrightarrow \qquad
+  \nabla_\lambda R_{\rho\sigma\mu\nu}
+  + \nabla_\rho R_{\sigma\lambda\mu\nu}
+  + \nabla_\sigma R_{\lambda\rho\mu\nu} = 0.
+  \label{eq:bianchi2}
+\end{equation}
+\end{teorema}
+
+\begin{corolario}{El tensor de Einstein es libre de divergencia}{div_einstein}
+Contrayendo las identidades de Bianchi dos veces, se obtiene
+\begin{equation}
+  \nabla^\mu \Einstein = 0, \qquad
+  \text{donde } \Einstein = \Ricci - \tfrac{1}{2}\, g_{\mu\nu}\, \RicciS
+  \label{eq:div_einstein}
+\end{equation}
+es el \textbf{tensor de Einstein}. Esta propiedad es fundamental: garantiza la conservación del tensor de energía-momento $\nabla^\mu T_{\mu\nu}=0$ a través de las ecuaciones de campo de Einstein (Capítulo~6).
+\end{corolario}
+
+% ===========================================================
+\section{Ejemplos resueltos}
+% ===========================================================
+
+\begin{ejemplo}{Símbolos de Christoffel en coordenadas polares planas}{}
+Considérese $\mathbb{R}^2$ con coordenadas polares $(r,\theta)$ y métrica
+\[
+  ds^2 = dr^2 + r^2\, d\theta^2, \qquad
+  g_{rr} = 1,\quad g_{\theta\theta} = r^2,\quad g_{r\theta} = 0.
+\]
+\textbf{Cálculo de los símbolos de Christoffel no nulos:}
+
+La métrica inversa es $g^{rr} = 1$, $g^{\theta\theta} = 1/r^2$.
+
+Usando la fórmula \eqref{eq:christoffel}:
+\begin{align*}
+  \Chris{r}{\theta}{\theta}
+  &= \frac{1}{2}\, g^{rr}(2\partial_\theta g_{r\theta} - \partial_r g_{\theta\theta})
+  = \frac{1}{2}(1)(0 - 2r) = -r.
+  \\[4pt]
+  \Chris{\theta}{r}{\theta}
+  = \Chris{\theta}{\theta}{r}
+  &= \frac{1}{2}\, g^{\theta\theta}(\partial_r g_{\theta\theta})
+  = \frac{1}{2}\cdot\frac{1}{r^2}\cdot 2r = \frac{1}{r}.
+\end{align*}
+Todos los demás símbolos son cero.
+
+\textbf{Verificación:} La ecuación de geodésica \eqref{eq:geodesica} en $(r,\theta)$ da
+\[
+  \ddot{r} - r\dot{\theta}^2 = 0, \qquad \ddot{\theta} + \frac{2}{r}\dot{r}\dot{\theta} = 0,
+\]
+que son exactamente las ecuaciones de movimiento libre en polares (aceleración centrífuga y conservación del momento angular), confirmando el resultado.
+\end{ejemplo}
+
+\begin{ejemplo}{Curvatura escalar de la 2-esfera}{}
+Para la esfera $S^2$ de radio $R$ con métrica $ds^2 = R^2(d\theta^2 + \sin^2\theta\, d\varphi^2)$, calculemos el escalar de Ricci.
+
+\textbf{Paso 1 — Símbolos de Christoffel:}
+\begin{align*}
+  \Chris{\theta}{\varphi}{\varphi} &= -\sin\theta\cos\theta, &
+  \Chris{\varphi}{\theta}{\varphi} &= \Chris{\varphi}{\varphi}{\theta} = \cot\theta.
+\end{align*}
+(Los restantes son cero.)
+
+\textbf{Paso 2 — Tensor de Riemann (componente independiente):}
+\[
+  R^\theta{}_{\varphi\theta\varphi}
+  = \partial_\theta \Chris{\theta}{\varphi}{\varphi}
+  - \partial_\varphi \Chris{\theta}{\theta}{\varphi}
+  + \Chris{\theta}{\theta}{\lambda}\Chris{\lambda}{\varphi}{\varphi}
+  - \Chris{\theta}{\varphi}{\lambda}\Chris{\lambda}{\theta}{\varphi}
+  = \sin^2\theta.
+\]
+
+\textbf{Paso 3 — Tensor de Ricci:}
+\[
+  R_{\theta\theta} = R^\lambda{}_{\theta\lambda\theta} = 1, \qquad
+  R_{\varphi\varphi} = \sin^2\theta.
+\]
+
+\textbf{Paso 4 — Escalar de Ricci:}
+\[
+  \RicciS = g^{\theta\theta} R_{\theta\theta} + g^{\varphi\varphi} R_{\varphi\varphi}
+  = \frac{1}{R^2}\cdot 1 + \frac{1}{R^2\sin^2\theta}\cdot\sin^2\theta
+  = \frac{2}{R^2}.
+\]
+
+\textbf{Resultado:} $R = 2/R^2$, constante y positivo, como se esperaba de una variedad de curvatura positiva constante. En el límite $R \to \infty$ (esfera muy grande $\approx$ plana), $R \to 0$.
+\end{ejemplo}
+
+\begin{ejemplo}{Levantamiento de índices y producto interno en Minkowski}{}
+En el espacio-tiempo plano con $\eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1)$, considérese el cuadrivector de velocidad $U^\mu = \gamma(c, v, 0, 0)$ de una partícula moviéndose con velocidad $v$ en la dirección $x$, donde $\gamma = (1-v^2/c^2)^{-1/2}$.
+
+\textbf{(a) Bajar el índice:}
+\[
+  U_\mu = \eta_{\mu\nu} U^\nu \Rightarrow
+  U_0 = -\gamma c, \quad U_1 = \gamma v, \quad U_2 = U_3 = 0.
+\]
+
+\textbf{(b) Producto interno (norma cuadrada):}
+\[
+  \eta_{\mu\nu} U^\mu U^\nu = U_\mu U^\mu = (-\gamma c)(\gamma c) + (\gamma v)(\gamma v)
+  = \gamma^2(-c^2 + v^2) = -c^2.
+\]
+Este resultado $g_{\mu\nu}U^\mu U^\nu = -c^2$ es un invariante de Lorentz: la ``magnitud'' del cuadrivector de velocidad es siempre $-c^2$ (o $-1$ en unidades $c=1$). Es la expresión tensorial de que la velocidad relativa entre observador y partícula no afecta la velocidad propia en el espacio-tiempo.
+\end{ejemplo}
+
+% ===========================================================
+\section{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Transformación de la 1-forma gradiente.} Sea $f: \mathcal{M} \to \mathbb{R}$ diferenciable. Demuestre explícitamente que las componentes de la 1-forma $df$ transforman según la ley covariante \eqref{eq:trans_covector} bajo un cambio de coordenadas $x^\mu \to \tilde{x}^{\mu'}$.
+
+  \item \textbf{Propiedades del producto tensorial.} Sean $A_{\mu\nu}$ un tensor $(0,2)$ antisimétrico y $B^{\mu\nu}$ un tensor $(2,0)$ simétrico. Demuestre que $A_{\mu\nu} B^{\mu\nu} = 0$.
+
+  \item \textbf{Símbolos de Christoffel en coordenadas esféricas.} Para el espacio euclídeo $\mathbb{R}^3$ en coordenadas esféricas $(r, \theta, \varphi)$ con métrica $ds^2 = dr^2 + r^2 d\theta^2 + r^2\sin^2\theta\, d\varphi^2$, calcule todos los símbolos de Christoffel no nulos.
+
+  \item \textbf{Geodésicas en Minkowski.} Muestre que en el espacio-tiempo plano de Minkowski con $\eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1)$ en coordenadas cartesianas, los símbolos de Christoffel son todos cero y, en consecuencia, las geodésicas son líneas rectas en el espacio-tiempo (movimiento rectilíneo uniforme).
+
+  \item \textbf{Tensor de Riemann en 2D.} En una variedad bidimensional, argumente cuántas componentes independientes tiene el tensor de Riemann. Demuestre que en 2D el tensor de Riemann se puede expresar completamente en términos del escalar de curvatura $R$ y la métrica: $R_{\mu\nu\rho\sigma} = \tfrac{R}{2}(g_{\mu\rho}g_{\nu\sigma} - g_{\mu\sigma}g_{\nu\rho})$.
+
+  \item \textbf{Identidad de la traza.} Demuestre que $g^{\mu\nu}G_{\mu\nu} = -R$, donde $G_{\mu\nu}$ es el tensor de Einstein \eqref{eq:div_einstein}. (\textit{Sugerencia:} contraiga con $g^{\mu\nu}$ y use que $g^{\mu\nu}g_{\mu\nu} = 4$ en 4 dimensiones.)
+
+  \item \textbf{Curvatura del cilindro.} El cilindro $\mathbb{R} \times S^1$ tiene métrica $ds^2 = dz^2 + R^2 d\varphi^2$. Calcule el escalar de Ricci y comente la diferencia intrínseca entre el cilindro y la esfera $S^2$.
+
+  \item \textbf{Derivada covariante y torsión.} La \emph{torsión} de una conexión se define como $T^\rho{}_{\mu\nu} = \Chris{\rho}{\mu}{\nu} - \Chris{\rho}{\nu}{\mu}$. Demuestre que la conexión de Levi-Civita (ecuación \eqref{eq:christoffel}) tiene torsión nula. ¿Qué consecuencia tiene esto para la simetría de los símbolos de Christoffel?
+
+  \item \textbf{El gradiente covariante de un escalar.} Sea $f$ un escalar. Demuestre que $\nabla_\mu f = \partial_\mu f$, es decir, la derivada covariante de un escalar coincide con la derivada parcial. Concluya que la derivada covariante de segundo orden $\nabla_\mu \nabla_\nu f$ es un tensor simétrico (para la conexión de Levi-Civita, sin torsión).
+
+  \item \textbf{(Avanzado) Las identidades de Bianchi diferenciadas.} Usando la definición \eqref{eq:riemann_def}, demuestre las identidades de Bianchi $\nabla_{[\lambda}R_{\rho\sigma]\mu\nu}=0$ para la conexión de Levi-Civita. Luego, mediante contracción repetida, deduzca la identidad $\nabla^\mu G_{\mu\nu} = 0$.
+
+\end{enumerate}
