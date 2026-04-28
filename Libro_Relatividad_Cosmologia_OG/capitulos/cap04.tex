@@ -1,0 +1,845 @@
+% ============================================================
+% Capítulo 4: Relatividad Especial — Dinámica Relativista
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Relatividad Especial: Dinámica Relativista}
+\label{cap:re_dinamica}
+
+El capítulo anterior estableció la cinemática del espacio-tiempo de Minkowski: cómo se transforman coordenadas, distancias y tiempos bajo boosts de Lorentz. Corresponde ahora preguntar \emph{cómo se mueven las partículas}: cuál es la versión relativista de la segunda ley de Newton, qué significa la energía en el nuevo marco, cómo se conservan el momento y la energía en colisiones relativistas, y cómo se reescribe el electromagnetismo de Maxwell en forma manifiestamente covariante. Estas son las cuestiones de la \textbf{dinámica relativista} \cite{Carroll2004, Schutz2009, Misner1973, Jackson1999}.
+
+La estrategia es la misma que en cinemática: construir objetos tensoriales bajo el grupo de Lorentz. Un tensor de rango $n$ transformado por $\Lambda$ garantiza que la ecuación sea covariante; si es verdad en un marco inercial, es verdad en todos. La dinámica relativista se formula entonces en términos de \textbf{cuadrivectores} y \textbf{tensores de Minkowski}, explotando el lenguaje desarrollado en los Capítulos~\ref{cap:algebra} y~\ref{cap:curvatura}.
+
+% ===========================================================
+\section{El cuadrimomento}
+% ===========================================================
+
+\subsection{Motivación: el momento newtoniano no es covariante}
+
+En mecánica clásica, el momento lineal de una partícula de masa $m$ con velocidad $\vec{v}$ es $\vec{p} = m\vec{v}$. Su conservación en colisiones, $\sum_i \vec{p}_i = \text{const}$, es una consecuencia de la homogeneidad del espacio. El problema es que $\vec{p}$ no transforma bien bajo boosts de Lorentz: si $\vec{p}$ se conserva en el marco $S$, la cantidad $m\gamma\vec{v}$ transformada no se conserva en $S'$. Se necesita un objeto de cuatro componentes que sea un cuadrivector bajo $O(1,3)$.
+
+La solución es extender el tridimensional $\vec{p} = md\vec{x}/dt$ al cuadrivector
+\[
+  p^\mu = m\,\frac{dx^\mu}{d\tau},
+\]
+donde $\tau$ es el tiempo propio y $m$ es la \textbf{masa en reposo} (o simplemente la masa) de la partícula, un escalar de Lorentz. Esta definición es claramente covariante porque $dx^\mu$ es un cuadrivector y $d\tau$ es un escalar.
+
+\begin{definicion}{Cuadrimomento (4-momento)}{4mom}
+El \textbf{cuadrimomento} de una partícula masiva de masa en reposo $m$ es
+\begin{equation}
+  p^\mu \equiv m\,U^\mu = m\,\frac{dx^\mu}{d\tau} = m\gamma\!\left(\frac{c}{1},\,\vec{v}\right)
+  = \left(\frac{E}{c},\,\vec{p}\right),
+  \label{eq:4mom}
+\end{equation}
+donde $\vec{p} = m\gamma\vec{v}$ es el \textbf{momento relativista} y $E = m\gamma c^2$ es la \textbf{energía relativista total}.
+\end{definicion}
+
+\subsection{El momento relativista}
+
+La componente espacial del cuadrimomento da el \textbf{momento lineal relativista}:
+\begin{equation}
+  \vec{p} = m\gamma\vec{v} = \frac{m\vec{v}}{\sqrt{1 - v^2/c^2}}.
+  \label{eq:momento_rel}
+\end{equation}
+
+Para $v \ll c$, $\gamma \approx 1$ y se recupera $\vec{p} \approx m\vec{v}$. Para $v \to c$, $|\vec{p}| \to \infty$: se necesita una cantidad de momento (e impulso) infinita para acelerar una partícula masiva hasta $c$, lo que es otro argumento de que $c$ es una barrera insuperable.
+
+\begin{observacion}{El significado físico de $\gamma m$}{}
+El producto $\gamma m$ se suele llamar la \emph{masa relativista}, pero esta terminología está en desuso porque puede llevar a confusiones. En física moderna, la ``masa'' de una partícula es siempre la masa en reposo $m$ (un escalar invariante de Lorentz). El factor $\gamma$ forma parte de la dinámica, no de la propiedad intrínseca de la partícula.
+\end{observacion}
+
+\subsection{La energía relativista}
+
+La componente temporal del cuadrimomento, $p^0 = E/c$, nos da la energía. Usando $U^0 = \gamma c$ (ver Capítulo~\ref{cap:re_cinematica}):
+\begin{equation}
+  E = mc^2\gamma = \frac{mc^2}{\sqrt{1-v^2/c^2}}.
+  \label{eq:energia_rel}
+\end{equation}
+
+Para $v = 0$ (partícula en reposo), $E = mc^2$: la célebre \textbf{equivalencia masa-energía} de Einstein. Este resultado no era para nada obvio antes de 1905: implica que la masa es una forma de energía almacenada.
+
+Para expandir \eqref{eq:energia_rel} en serie de potencias en $\beta = v/c$:
+\begin{equation}
+  E = mc^2\left(1 + \frac{1}{2}\frac{v^2}{c^2} + \frac{3}{8}\frac{v^4}{c^4} + \cdots\right)
+  = mc^2 + \underbrace{\frac{1}{2}mv^2}_{\text{EC clásica}} + \mathcal{O}(v^4/c^2).
+  \label{eq:energia_expansion}
+\end{equation}
+
+\begin{importante}
+La energía relativista total incluye la \textbf{energía en reposo} $E_0 = mc^2$ más la \textbf{energía cinética relativista} $K = (\gamma - 1)mc^2$. El principio de correspondencia se satisface: $K \to \frac{1}{2}mv^2$ cuando $v \ll c$, como se ve en \eqref{eq:energia_expansion}.
+\end{importante}
+
+\begin{definicion}{Energía cinética relativista}{Ecinetica}
+La \textbf{energía cinética relativista} de una partícula con masa $m$ moviéndose a velocidad $v$ es
+\begin{equation}
+  K = E - mc^2 = (\gamma - 1)mc^2.
+  \label{eq:Ecinetica}
+\end{equation}
+Para $v \ll c$: $K \approx \frac{1}{2}mv^2$. Para $v \to c$: $K \to \infty$.
+\end{definicion}
+
+% ===========================================================
+\section{La relación energía-momento-masa}
+% ===========================================================
+
+\subsection{El invariante del cuadrimomento}
+
+El cuadrimomento es un cuadrivector, de modo que su norma cuadrada (calculada con la métrica de Minkowski) es un escalar de Lorentz:
+\begin{align}
+  \eta_{\mu\nu}\,p^\mu p^\nu
+  &= -(p^0)^2 + |\vec{p}|^2
+  = -\frac{E^2}{c^2} + |\vec{p}|^2. \nl
+\end{align}
+Pero también, usando la definición \eqref{eq:4mom} y la norma de la 4-velocidad $\eta_{\mu\nu}U^\mu U^\nu = -c^2$:
+\[
+  \eta_{\mu\nu}p^\mu p^\nu = m^2\,\eta_{\mu\nu}U^\mu U^\nu = -m^2c^2.
+\]
+Igualando ambas expresiones y reordenando:
+
+\begin{teorema}{Relación energía-momento-masa}{E2p2m2}
+Para toda partícula de masa en reposo $m$, energía $E$ y momento lineal $\vec{p}$,
+\begin{equation}
+  \boxed{E^2 = (|\vec{p}|\,c)^2 + (mc^2)^2.}
+  \label{eq:E2p2m2}
+\end{equation}
+Esta relación es un invariante de Lorentz: válida en todos los marcos de referencia inerciales.
+\end{teorema}
+
+\begin{proof}
+De la definición del cuadrimomento y la normalización de la 4-velocidad:
+\[
+  p_\mu p^\mu = m^2 U_\mu U^\mu = -m^2 c^2.
+\]
+Escribiendo $p^\mu = (E/c, \vec{p})$ y usando $\eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1)$:
+\[
+  -\frac{E^2}{c^2} + |\vec{p}|^2 = -m^2 c^2
+  \quad\Rightarrow\quad E^2 = |\vec{p}|^2 c^2 + m^2 c^4.
+\]
+\end{proof}
+
+\subsection{Casos límite importantes}
+
+La relación \eqref{eq:E2p2m2} tiene dos casos límite relevantes:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Partícula en reposo} ($\vec{p} = 0$): $E = mc^2$. La masa es energía almacenada.
+  \item \textbf{Partícula sin masa} ($m = 0$): $E = |\vec{p}|\,c$. Los fotones, gluones y gravitones (si existen) caen en esta categoría. Para ellos $E = \hbar\omega$ y $|\vec{p}| = \hbar|\vec{k}| = \hbar\omega/c$, consistente con $E = |\vec{p}|c$.
+\end{enumerate}
+
+\begin{importante}
+Para una \textbf{partícula sin masa} (fotón), el cuadrimomento es
+\[
+  p^\mu_{\gamma} = \left(\frac{\hbar\omega}{c},\ \hbar\vec{k}\right), \qquad |\vec{k}| = \frac{\omega}{c},
+\]
+y satisface $p_\mu p^\mu = 0$ (cuadrivector de tipo nulo): los fotones se mueven sobre el cono de luz del espacio-tiempo de Minkowski. Esto es consistente con que la trayectoria del fotón tiene intervalo $ds^2 = 0$ y tiempo propio $d\tau = 0$.
+\end{importante}
+
+\begin{ejemplo}{Masa de un sistema de dos fotones}{}
+Dos fotones se propagan en sentidos opuestos con la misma energía $E_\gamma$ cada uno. ¿Cuál es la masa invariante del sistema?
+
+\textbf{Solución.} El cuadrimomento total es
+\[
+  P^\mu_{\rm tot} = p^\mu_1 + p^\mu_2 = \left(\frac{E_\gamma}{c} + \frac{E_\gamma}{c},\ \frac{E_\gamma}{c}\hat{x} - \frac{E_\gamma}{c}\hat{x}\right)
+  = \left(\frac{2E_\gamma}{c},\ \vec{0}\right).
+\]
+La masa invariante del sistema:
+\[
+  M^2 c^4 = -\eta_{\mu\nu}P^\mu P^\nu c^2 = \frac{(2E_\gamma)^2}{c^2}\cdot c^2 = 4E_\gamma^2,
+  \quad \Rightarrow \quad M = \frac{2E_\gamma}{c^2}.
+\]
+El sistema de dos fotones tiene masa no nula aunque cada fotón individual sea sin masa. Este resultado es fundamental en física de partículas: se puede crear materia a partir de luz si $2E_\gamma \geq 2m_e c^2$ (producción de pares $e^+e^-$).
+\end{ejemplo}
+
+% ===========================================================
+\section{Conservación del cuadrimomento en colisiones}
+% ===========================================================
+
+\subsection{Ley de conservación covariante}
+
+En toda \textbf{colisión} o reacción entre partículas (en ausencia de fuerzas externas), se conserva el cuadrimomento total:
+
+\begin{teorema}{Conservación del cuadrimomento}{conserv_4mom}
+Para una reacción $A + B \to C + D + \cdots$:
+\begin{equation}
+  p^\mu_A + p^\mu_B = p^\mu_C + p^\mu_D + \cdots
+  \label{eq:conserv_4mom}
+\end{equation}
+Esta ecuación de cuatro componentes (una temporal y tres espaciales) reemplaza las leyes separadas de conservación de energía y momento en mecánica clásica, unificándolas en una sola ley covariante.
+\end{teorema}
+
+La componente temporal da la conservación de la energía; las tres componentes espaciales dan la conservación del momento. Son cuatro ecuaciones escalares bajo rotaciones, pero forman una sola ecuación tensorial bajo el grupo de Lorentz.
+
+\subsection{Umbral de producción de partículas}
+
+Una aplicación fundamental es calcular la \textbf{energía umbral} para producir nuevas partículas. La técnica consiste en usar el invariante $p_\mu p^\mu$ y considerar el estado umbral (mínima energía en el centro de masa).
+
+\begin{ejemplo}{Producción de antimateria: umbral del antiprotón}{antiproton}
+Se quiere producir un par protón-antiprotón en la colisión de un protón acelerado contra un protón en reposo:
+\[
+  p + p \to p + p + p + \bar{p}.
+\]
+La masa del protón es $m_p$. ¿Cuál es la energía mínima del proyectil?
+
+\textbf{Solución.} En el estado umbral, los cuatro productos finales están en reposo en el sistema centro de masa (CM). La masa invariante mínima del sistema final es $M_{\rm min} = 4m_p$.
+
+El cuadrimomento total inicial en el laboratorio (proyectil con energía $E$ y blanco en reposo):
+\[
+  P^\mu_{\rm ini} = \left(\frac{E + m_p c^2}{c},\ \vec{p}_{\rm proy}\right).
+\]
+El invariante de Mandelstam $s$:
+\begin{align*}
+  s &\equiv -\eta_{\mu\nu}P^\mu_{\rm ini}P^\nu_{\rm ini}c^2 \nl
+  &= \left(\frac{E + m_p c^2}{c}\right)^2 c^2 - |\vec{p}_{\rm proy}|^2 c^2 \nl
+  &= (E + m_p c^2)^2 - (E^2 - m_p^2 c^4) \nl
+  &= 2m_p c^2 E + 2m_p^2 c^4.
+\end{align*}
+En el umbral, $\sqrt{s} = 4m_p c^2$, de modo que $s = 16 m_p^2 c^4$:
+\[
+  2m_p c^2 E_{\rm umbral} + 2m_p^2 c^4 = 16 m_p^2 c^4
+  \quad\Rightarrow\quad
+  E_{\rm umbral} = 7\,m_p c^2 \approx 6{,}6\,\si{GeV}.
+\]
+El Bevatrón de Berkeley (1955) fue construido precisamente con esta energía y descubrió el antiprotón en 1955, confirmando el resultado.
+\end{ejemplo}
+
+\subsection{El efecto Compton relativista}
+
+La dispersión de un fotón por un electrón en reposo (efecto Compton, 1923) demostró que la luz tiene cantidad de movimiento y que el cuadrimomento se conserva.
+
+\begin{ejemplo}{Dispersión Compton}{compton}
+Un fotón de longitud de onda $\lambda_0$ choca con un electrón de masa $m_e$ en reposo y se dispersa en un ángulo $\theta$ respecto a su dirección original. Derive el corrimiento Compton.
+
+\textbf{Formulación.} Cuadrimomentos: $k^\mu_i = (\hbar\omega_0/c, \hbar\omega_0\hat{x}/c)$ (fotón incidente), $p^\mu_i = (m_e c, \vec{0})$ (electrón en reposo). Conservación:
+\[
+  k^\mu_i + p^\mu_i = k^\mu_f + p^\mu_f.
+\]
+Despejando el cuadrimomento final del electrón $p^\mu_f = k^\mu_i + p^\mu_i - k^\mu_f$ y usando $p_{\mu,f}p^\mu_f = -m_e^2 c^2$:
+\[
+  (k_i + p_i - k_f)_\mu (k_i + p_i - k_f)^\mu = -m_e^2 c^2.
+\]
+Expandiendo y usando $k_{i,\mu}k^\mu_i = k_{f,\mu}k^\mu_f = 0$ (fotones sin masa) y $p_{i,\mu}p^\mu_i = -m_e^2 c^2$:
+\[
+  2k_{i,\mu}p_i^\mu - 2k_{i,\mu}k_f^\mu - 2k_{f,\mu}p_i^\mu = 0.
+\]
+Calculando cada producto:
+\begin{align*}
+  k_{i,\mu}p_i^\mu &= -\frac{\hbar\omega_0}{c}\cdot m_e c = -m_e\hbar\omega_0, \\
+  k_{f,\mu}p_i^\mu &= -m_e\hbar\omega_f, \\
+  k_{i,\mu}k_f^\mu &= -\frac{\hbar^2\omega_0\omega_f}{c^2} + \frac{\hbar^2\omega_0\omega_f}{c^2}\cos\theta
+  = -\frac{\hbar^2\omega_0\omega_f}{c^2}(1-\cos\theta).
+\end{align*}
+Sustituyendo:
+\[
+  -2m_e\hbar\omega_0 + 2\frac{\hbar^2\omega_0\omega_f}{c^2}(1-\cos\theta) + 2m_e\hbar\omega_f = 0.
+\]
+Dividiendo entre $2\hbar\omega_0\omega_f/c^2$ y usando $\lambda = 2\pi c/\omega$:
+
+\begin{equation}
+  \boxed{\Delta\lambda \equiv \lambda_f - \lambda_0 = \frac{h}{m_e c}(1 - \cos\theta) = \lambda_C(1-\cos\theta),}
+  \label{eq:compton}
+\end{equation}
+
+donde $\lambda_C = h/(m_e c) \approx 2{,}43 \times 10^{-12}\,\si{m}$ es la \textbf{longitud de onda Compton} del electrón. El corrimiento es siempre positivo ($\Delta\lambda \geq 0$): el fotón siempre pierde energía al dispersarse. Para $\theta = 180°$ (retrodispersión), el corrimiento es máximo: $\Delta\lambda = 2\lambda_C$.
+\end{ejemplo}
+
+\subsection{Desintegración de partículas}
+
+La conservación del cuadrimomento también rige las \textbf{desintegraciones} espontáneas. Un caso arquetípico es la desintegración del pión neutro $\pi^0 \to \gamma + \gamma$.
+
+\begin{ejemplo}{Desintegración del pión neutro}{pion}
+El pión neutro $\pi^0$ (masa $m_\pi = 135\,\si{MeV}/c^2$) en reposo se desintegra en dos fotones. Calcule la energía y el ángulo de los fotones.
+
+\textbf{Solución.} Por conservación de momento (pión en reposo $\Rightarrow$ suma de momentos de los fotones es cero), los dos fotones deben emitirse en sentidos opuestos: $\vec{p}_1 = -\vec{p}_2$, con $|\vec{p}_1| = |\vec{p}_2| \equiv p_\gamma$.
+
+Por conservación de energía:
+\[
+  m_\pi c^2 = E_1 + E_2 = 2p_\gamma c
+  \quad\Rightarrow\quad p_\gamma = \frac{m_\pi c}{2},\quad E_\gamma = \frac{m_\pi c^2}{2} \approx 67{,}5\,\si{MeV}.
+\]
+Cada fotón sale con energía $\approx 67{,}5\,\si{MeV}$, en sentidos opuestos. Este es el \textbf{proceso de aniquilación} $\pi^0 \to 2\gamma$, responsable de la emisión gamma observada en fuentes astrofísicas energéticas.
+\end{ejemplo}
+
+% ===========================================================
+\section{La cuadrifuerza}
+% ===========================================================
+
+\subsection{La ecuación de movimiento relativista}
+
+En mecánica clásica, la segunda ley de Newton es $\vec{F} = d\vec{p}/dt$. La generalización covariante introduce la \textbf{cuadrifuerza} (o \textbf{4-fuerza}):
+
+\begin{definicion}{Cuadrifuerza}{4fuerza}
+La \textbf{cuadrifuerza} (4-fuerza de Minkowski) sobre una partícula con cuadrimomento $p^\mu$ es
+\begin{equation}
+  f^\mu \equiv \frac{Dp^\mu}{d\tau} = m\,\frac{DU^\mu}{d\tau},
+  \label{eq:4fuerza}
+\end{equation}
+donde la derivada es respecto al tiempo propio $\tau$. En el espacio-tiempo plano, $D/d\tau = d/d\tau$.
+\end{definicion}
+
+\subsection{Relación entre la 4-fuerza y la fuerza tridimensional}
+
+La fuerza tridimensional ordinaria $\vec{F}$ (tasa de cambio del momento relativista respecto al tiempo coordenado) se relaciona con la 4-fuerza por:
+\[
+  f^\mu = \gamma\left(\frac{\vec{F}\cdot\vec{v}}{c},\ \vec{F}\right).
+\]
+
+La componente temporal de la ecuación de movimiento $f^0 = dp^0/d\tau$ da:
+\begin{equation}
+  \frac{dE}{dt} = \vec{F}\cdot\vec{v},
+  \label{eq:potencia}
+\end{equation}
+que es simplemente la \textbf{potencia} (tasa de trabajo de la fuerza): la componente temporal de la 4-fuerza codifica la ecuación de trabajo-energía.
+
+\begin{proposicion}{Ortogonalidad de la 4-fuerza y la 4-velocidad}{ortog_fuerza}
+La 4-fuerza es siempre ortogonal a la 4-velocidad en el sentido de Minkowski:
+\begin{equation}
+  f^\mu U_\mu = 0.
+  \label{eq:ortog_fuerza}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Diferenciando la condición de normalización $U_\mu U^\mu = -c^2$ respecto a $\tau$:
+\[
+  \frac{d}{d\tau}(U_\mu U^\mu) = 2\,U_\mu\frac{dU^\mu}{d\tau} = 2\,U_\mu\,\frac{f^\mu}{m} = 0.
+\]
+\end{proof}
+
+Esta ortogonalidad es la razón profunda de que la norma de la 4-velocidad sea constante: la 4-fuerza solo puede cambiar la dirección de $U^\mu$ en el espacio de Minkowski, no su magnitud.
+
+\subsection{La fuerza de Lorentz relativista}
+
+La \textbf{fuerza electromagnética} sobre una partícula de carga $q$ se convierte, en formulación covariante, en
+\begin{equation}
+  f^\mu = q\,F^{\mu\nu}\,U_\nu,
+  \label{eq:lorentz_cov}
+\end{equation}
+donde $F^{\mu\nu}$ es el \textbf{tensor de campo electromagnético} (tensor de Maxwell), que introduciremos en la Sección~\ref{sec:maxwell_cov}. Las componentes espaciales de esta ecuación reproducen la ley de Lorentz ordinaria $\vec{F} = q(\vec{E} + \vec{v}\times\vec{B})$.
+
+% ===========================================================
+\section{El tensor de energía-momento}
+\label{sec:Tmunu}
+% ===========================================================
+
+\subsection{Motivación: de partículas a campos}
+
+Las leyes de conservación del cuadrimomento para sistemas de partículas son bien entendidas. Para \textbf{campos continuos} (fluidos, campos electromagnéticos, el campo gravitacional mismo), necesitamos un objeto que describa la densidad y el flujo de energía y momento en cada punto del espacio-tiempo. Este objeto es el \textbf{tensor de energía-momento} $T^{\mu\nu}$ (también llamado tensor de estrés-energía o \emph{stress-energy tensor}).
+
+\begin{definicion}{Tensor de energía-momento}{Tmunu}
+El \textbf{tensor de energía-momento} $T^{\mu\nu}$ es un tensor $(2,0)$ simétrico cuyos componentes tienen las siguientes interpretaciones físicas:
+\begin{itemize}[leftmargin=2em]
+  \item $T^{00}$: densidad de energía (energía por unidad de volumen).
+  \item $T^{0i} = T^{i0}$: densidad de flujo de energía en la dirección $i$ (o equivalentemente, densidad de momento en la dirección $i$ multiplicada por $c$).
+  \item $T^{ij}$: flujo del momento $i$ en la dirección $j$ (tensor de presiones o de estrés).
+\end{itemize}
+\end{definicion}
+
+La conservación del cuadrimomento se expresa localmente como:
+\begin{equation}
+  \partial_\mu T^{\mu\nu} = 0.
+  \label{eq:conserv_Tmunu}
+\end{equation}
+Ésta es una ecuación de continuidad de cuatro componentes ($\nu = 0, 1, 2, 3$) que codifica la conservación local de energía y momento.
+
+\subsection{El tensor de energía-momento del polvo perfecto}
+
+El caso más simple es el \textbf{polvo}: un conjunto de partículas sin presión, sin interacciones, todas moviéndose con la misma 4-velocidad $U^\mu$ y con densidad de masa en reposo $\rho_0$ (en el marco de reposo).
+
+\begin{definicion}{Tensor de energía-momento del polvo}{Tpolvo}
+Para un fluido de polvo con densidad de masa en reposo $\rho_0$ y 4-velocidad $U^\mu$:
+\begin{equation}
+  T^{\mu\nu}_{\rm polvo} = \rho_0\,U^\mu U^\nu.
+  \label{eq:Tpolvo}
+\end{equation}
+\end{definicion}
+
+En el marco de reposo del polvo ($U^\mu = (c, \vec{0})$):
+\[
+  T^{\mu\nu}_{\rm polvo} = \rho_0 c^2
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{pmatrix}.
+\]
+La única componente no nula es $T^{00} = \rho_0 c^2$ (densidad de energía en reposo): no hay presión ni flujo de momento, como se espera de un gas sin temperatura ni interacciones.
+
+\subsection{El tensor de energía-momento del fluido perfecto}
+
+Un \textbf{fluido perfecto} es un fluido sin viscosidad ni conducción de calor. En su marco de reposo instantáneo, se caracteriza por su densidad de energía $\rho$ (incluyendo energía en reposo y energía interna) y su presión isotrópica $P$. El tensor de energía-momento es:
+
+\begin{definicion}{Tensor de energía-momento del fluido perfecto}{Tfluidoperfecto}
+Para un fluido perfecto con densidad de energía $\rho$ (en el marco de reposo), presión $P$ y 4-velocidad $U^\mu$:
+\begin{equation}
+  T^{\mu\nu}_{\rm fluido} = \left(\rho + \frac{P}{c^2}\right)U^\mu U^\nu + P\,\eta^{\mu\nu}.
+  \label{eq:Tfluido}
+\end{equation}
+\end{definicion}
+
+\begin{proof}[Verificación en el marco de reposo]
+En el marco de reposo, $U^\mu = (c, \vec{0})$ y $\eta^{\mu\nu} = \mathrm{diag}(-1,1,1,1)$:
+\[
+  T^{00} = \left(\rho + \frac{P}{c^2}\right)c^2 + P(-1) = \rho c^2 + P - P = \rho c^2, \checkmark
+\]
+\[
+  T^{ij} = P\,\delta^{ij}, \checkmark \quad T^{0i} = 0. \checkmark
+\]
+La presión aparece solo en las componentes espaciales: es el tensor de estrés isótropo.
+\end{proof}
+
+\begin{importante}
+En el límite no relativista ($P \ll \rho c^2$ y $v \ll c$):
+\begin{itemize}[leftmargin=2em]
+  \item $T^{00} \approx \rho c^2$ (densidad de energía en reposo domina).
+  \item $T^{0i} \approx \rho c v^i$ (flujo de momento).
+  \item $T^{ij} \approx \rho v^i v^j + P\delta^{ij}$ (tensor de estrés newtoniano).
+\end{itemize}
+La ecuación de conservación $\partial_\mu T^{\mu\nu} = 0$ da, en este límite, las ecuaciones de Euler de la hidrodinámica.
+\end{importante}
+
+\subsection{El tensor de energía-momento del campo electromagnético}
+
+El campo electromagnético también transporta energía y momento. Su tensor de energía-momento (derivado en la Sección~\ref{sec:maxwell_cov}) es:
+\begin{equation}
+  T^{\mu\nu}_{\rm EM} = \frac{1}{\mu_0}\left(F^{\mu\lambda}F^\nu{}_\lambda - \frac{1}{4}\eta^{\mu\nu}F_{\lambda\sigma}F^{\lambda\sigma}\right),
+  \label{eq:TEM}
+\end{equation}
+donde $F^{\mu\nu}$ es el tensor de Maxwell. Sus componentes en el marco del laboratorio corresponden a la densidad de energía electromagnética $u = (\varepsilon_0 E^2 + B^2/\mu_0)/2$, el vector de Poynting $\vec{S} = (\vec{E}\times\vec{B})/\mu_0$, y el tensor de Maxwell de estrés electromagnético.
+
+\begin{observacion}{El tensor de energía-momento y las ecuaciones de Einstein}{}
+El tensor $T_{\mu\nu}$ es el objeto que aparece en el lado derecho de las \textbf{ecuaciones de campo de Einstein}:
+\[
+  G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu},
+\]
+donde $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$ es el tensor de Einstein (Capítulo~\ref{cap:algebra}). La geometría del espacio-tiempo (lado izquierdo) es determinada por el contenido de energía-momento (lado derecho). Las identidades de Bianchi $\nabla^\mu G_{\mu\nu} = 0$ imponen automáticamente $\nabla^\mu T_{\mu\nu} = 0$: la covarianza de las ecuaciones de Einstein garantiza la conservación local del cuadrimomento.
+\end{observacion}
+
+% ===========================================================
+\section{Electrodinámica covariante}
+\label{sec:maxwell_cov}
+% ===========================================================
+
+\subsection{El potencial 4-vector}
+
+En el formalismo de potenciales del electromagnetismo, el campo eléctrico y el campo magnético se expresan en términos del potencial escalar $\varphi$ y el potencial vector $\vec{A}$:
+\begin{equation}
+  \vec{E} = -\nabla\varphi - \pd{\vec{A}}{t}, \qquad
+  \vec{B} = \nabla\times\vec{A}.
+  \label{eq:EBpotentials}
+\end{equation}
+
+La pregunta natural desde el punto de vista relativista es: ¿forman $\varphi$ y $\vec{A}$ un cuadrivector? La respuesta es sí.
+
+\begin{definicion}{Potencial 4-vector electromagnético}{Amu}
+El \textbf{potencial 4-vector} (o \textbf{4-potencial}) es
+\begin{equation}
+  A^\mu = \left(\frac{\varphi}{c},\ \vec{A}\right).
+  \label{eq:Amu}
+\end{equation}
+Bajo un boost de Lorentz, $A^\mu$ transforma como las coordenadas $x^\mu$: es un cuadrivector contravariante.
+\end{definicion}
+
+La condición de \textbf{gauge de Lorenz} (invariante bajo el grupo de Lorentz) se escribe elegantemente como
+\begin{equation}
+  \partial_\mu A^\mu = 0,
+  \label{eq:lorenz_gauge}
+\end{equation}
+que en componentes es $\frac{1}{c}\pd{\varphi}{t} + \nabla\cdot\vec{A} = 0$.
+
+\subsection{El tensor de campo electromagnético (tensor de Maxwell)}
+
+Los campos $\vec{E}$ y $\vec{B}$ por sí solos no forman un cuadrivector: tienen 6 componentes independientes (3 + 3), lo que sugiere que forman las componentes de un \textbf{tensor antisimétrico de rango 2} en 4 dimensiones, que tiene exactamente $\binom{4}{2} = 6$ componentes independientes.
+
+\begin{definicion}{Tensor de Maxwell}{maxwell_tensor}
+El \textbf{tensor de campo electromagnético} (o \textbf{tensor de Faraday}) es
+\begin{equation}
+  F_{\mu\nu} \equiv \partial_\mu A_\nu - \partial_\nu A_\mu.
+  \label{eq:Fmunu}
+\end{equation}
+Es antisimétrico por construcción: $F_{\mu\nu} = -F_{\nu\mu}$, por lo que $F_{\mu\mu} = 0$.
+\end{definicion}
+
+En términos de los campos $\vec{E} = (E^x, E^y, E^z)$ y $\vec{B} = (B^x, B^y, B^z)$, las componentes del tensor son (con $c = 1$):
+
+\begin{equation}
+  F_{\mu\nu} =
+  \begin{pmatrix}
+    0    &  E^x/c &  E^y/c &  E^z/c \\
+   -E^x/c &  0    &  B^z  & -B^y  \\
+   -E^y/c & -B^z  &  0    &  B^x  \\
+   -E^z/c &  B^y  & -B^x  &  0
+  \end{pmatrix},
+  \label{eq:Fmunu_componentes}
+\end{equation}
+
+y la versión con índices arriba:
+\begin{equation}
+  F^{\mu\nu} = \eta^{\mu\rho}\eta^{\nu\sigma}F_{\rho\sigma} =
+  \begin{pmatrix}
+    0    & -E^x/c & -E^y/c & -E^z/c \\
+    E^x/c &  0    &  B^z  & -B^y  \\
+    E^y/c & -B^z  &  0    &  B^x  \\
+    E^z/c &  B^y  & -B^x  &  0
+  \end{pmatrix}.
+  \label{eq:Fmunuup}
+\end{equation}
+
+\begin{observacion}{El tensor dual de Maxwell}{}
+El \textbf{tensor dual de Maxwell} se define mediante el símbolo de Levi-Civita de cuatro índices $\varepsilon^{\mu\nu\rho\sigma}$ (con $\varepsilon^{0123} = +1/\sqrt{-g}$ en general, y $\varepsilon^{0123} = +1$ en Minkowski):
+\[
+  \widetilde{F}^{\mu\nu} = \frac{1}{2}\,\varepsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}.
+\]
+Sus componentes se obtienen de \eqref{eq:Fmunuup} reemplazando $\vec{E}/c \to -\vec{B}$ y $\vec{B} \to \vec{E}/c$:
+\[
+  \widetilde{F}^{\mu\nu} =
+  \begin{pmatrix}
+    0    &  B^x  &  B^y  &  B^z  \\
+   -B^x  &  0    & -E^z/c & E^y/c  \\
+   -B^y  &  E^z/c &  0    & -E^x/c \\
+   -B^z  & -E^y/c &  E^x/c &  0
+  \end{pmatrix}.
+\]
+El dual $\widetilde{F}^{\mu\nu}$ se obtiene de $F^{\mu\nu}$ por la sustitución de dualidad $\vec{E}/c \to -\vec{B}$, $\vec{B} \to \vec{E}/c$.
+\end{observacion}
+
+\subsection{Las ecuaciones de Maxwell en forma covariante}
+
+Las cuatro ecuaciones de Maxwell se dividen en dos grupos tensoriales:
+
+\begin{teorema}{Ecuaciones de Maxwell covariantes}{maxwell_cov}
+Las cuatro ecuaciones de Maxwell se escriben como dos ecuaciones tensoriales:
+\begin{align}
+  \partial_\mu F^{\mu\nu} &= \mu_0 J^\nu, \label{eq:maxwell1}\\[4pt]
+  \partial_{[\mu} F_{\nu\rho]} &= 0, \label{eq:maxwell2}
+\end{align}
+donde $J^\mu = (\rho_e c, \vec{J})$ es el \textbf{4-vector de corriente} ($\rho_e$ es la densidad de carga eléctrica y $\vec{J}$ es la densidad de corriente tridimensional).
+\end{teorema}
+
+\begin{proof}[Verificación]
+\textbf{Ecuación \eqref{eq:maxwell1} con $\nu = 0$:}
+\[
+  \partial_i F^{i0} = \mu_0 J^0
+  \;\Rightarrow\;
+  \nabla\cdot\vec{E} = \frac{\rho_e}{\varepsilon_0}. \quad \text{(Ley de Gauss)}
+\]
+\textbf{Ecuación \eqref{eq:maxwell1} con $\nu = j$ (espacial):}
+\[
+  \partial_0 F^{0j} + \partial_i F^{ij} = \mu_0 J^j
+  \;\Rightarrow\;
+  -\frac{1}{c}\pd{E^j}{t} + (\nabla\times\vec{B})^j = \mu_0 J^j,
+\]
+que es la ley de Ampère-Maxwell: $\nabla\times\vec{B} = \mu_0\vec{J} + \mu_0\varepsilon_0 \partial\vec{E}/\partial t$.
+
+\textbf{Ecuación \eqref{eq:maxwell2} con $\mu\nu\rho = 0ij$:}
+\[
+  \partial_0 F_{ij} + \partial_i F_{j0} + \partial_j F_{0i} = 0
+  \;\Rightarrow\;
+  \nabla\times\vec{E} + \pd{\vec{B}}{t} = 0. \quad \text{(Ley de Faraday)}
+\]
+\textbf{Ecuación \eqref{eq:maxwell2} con $\mu\nu\rho = ijk$ (todos espaciales):}
+\[
+  \partial_i F_{jk} + \partial_j F_{ki} + \partial_k F_{ij} = 0
+  \;\Rightarrow\;
+  \nabla\cdot\vec{B} = 0. \quad \text{(Ausencia de monopolos magnéticos)}
+\]
+\end{proof}
+
+\begin{importante}
+La ecuación \eqref{eq:maxwell2} es automáticamente satisfecha si $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ (identidad de Bianchi electromagnética, análoga a la identidad de Bianchi geométrica). La ecuación \eqref{eq:maxwell1} contiene la dinámica real: dadas las fuentes $J^\mu$, determina el campo $F^{\mu\nu}$.
+\end{importante}
+
+\subsection{La ley de conservación de la carga}
+
+La antisimetría de $F^{\mu\nu}$ implica que el segundo miembro de \eqref{eq:maxwell1} satisface automáticamente
+\begin{equation}
+  \partial_\nu J^\nu = 0,
+  \label{eq:conserv_carga}
+\end{equation}
+pues $\partial_\nu\partial_\mu F^{\mu\nu} = 0$ (derivadas segundas simétricas aplicadas a un tensor antisimétrico). Esta es la \textbf{ley de conservación de la carga eléctrica}: $\partial\rho_e/\partial t + \nabla\cdot\vec{J} = 0$.
+
+\subsection{Las ecuaciones de Maxwell en el gauge de Lorenz}
+
+En el gauge de Lorenz $\partial_\mu A^\mu = 0$, la ecuación dinámica \eqref{eq:maxwell1} se simplifica a:
+\begin{equation}
+  \Box A^\nu = \mu_0 J^\nu,
+  \label{eq:ondas_EM}
+\end{equation}
+donde $\Box \equiv \partial_\mu\partial^\mu = -\frac{1}{c^2}\pdd{}{t} + \nabla^2$ es el \textbf{operador d'Alembertiano} (o \textbf{cuadri-Laplaciano}). Para $J^\nu = 0$ (vacío), esta ecuación se reduce a la ecuación de onda
+\[
+  \Box A^\nu = 0 \;\Rightarrow\; -\frac{1}{c^2}\pdd{A^\nu}{t} + \nabla^2 A^\nu = 0,
+\]
+que describe la propagación de ondas electromagnéticas a velocidad $c$. La covarianza es manifiesta: $\Box$ es un escalar de Lorentz aplicado al cuadrivector $A^\nu$, por lo que $\Box A^\nu$ transforma correctamente como cuadrivector.
+
+\subsection{Transformación de los campos electromagnéticos bajo boosts}
+
+Puesto que $F_{\mu\nu}$ es un tensor de Lorentz, sus componentes transforman bajo un boost con velocidad $v$ en la dirección $x$ como $F'_{\mu\nu} = \Lambda^\rho{}_\mu \Lambda^\sigma{}_\nu F_{\rho\sigma}$. El resultado explícito es:
+
+\begin{proposicion}{Transformación de $\vec{E}$ y $\vec{B}$ bajo boost}{transf_EB}
+Bajo un boost de Lorentz de velocidad $v$ en la dirección $x$:
+\begin{align}
+  E'_x &= E_x, \qquad & B'_x &= B_x, \label{eq:EB_transf_long}\\
+  E'_y &= \gamma(E_y - vB_z), \qquad & B'_y &= \gamma\!\left(B_y + \frac{v}{c^2}E_z\right), \label{eq:EB_transf_trans1}\\
+  E'_z &= \gamma(E_z + vB_y), \qquad & B'_z &= \gamma\!\left(B_z - \frac{v}{c^2}E_y\right). \label{eq:EB_transf_trans2}
+\end{align}
+\end{proposicion}
+
+\begin{observacion}{Unificación de $\vec{E}$ y $\vec{B}$}{}
+Las ecuaciones \eqref{eq:EB_transf_long}--\eqref{eq:EB_transf_trans2} revelan que $\vec{E}$ y $\vec{B}$ son el mismo fenómeno físico visto desde distintos marcos de referencia: un campo ``puramente eléctrico'' en un marco se convierte en una combinación de campos eléctrico y magnético en otro. El campo magnético puede interpretarse como el resultado relativista del campo eléctrico de cargas en movimiento. Esta unificación, implícita ya en los trabajos de Maxwell, fue completamente elucidada por Einstein en 1905 como motivación directa para la relatividad especial.
+\end{observacion}
+
+\begin{ejemplo}{Campo magnético de un cable como efecto relativista}{}
+Un cable infinito lleva corriente $I$ (electrones moviéndose a velocidad de arrastre $v_d$). En el marco del laboratorio, el cable es eléctricamente neutro (misma densidad lineal de cargas positivas y negativas) y genera solo campo magnético $B = \mu_0 I/(2\pi r)$.
+
+En el marco de un electrón en reposo relativo respecto al cable (moviendose a $v_d$ paralelo al cable), las densidades de carga se ven modificadas por la contracción de Lorentz: la densidad de carga positiva se contrae y la negativa (electrones en reposo en este marco) no. El cable adquiere una densidad de carga neta $\neq 0$ y genera un \textbf{campo eléctrico}. La fuerza que ese campo ejerce sobre una carga de prueba es exactamente la misma fuerza que el campo magnético del laboratorio ejercía sobre la carga en movimiento. El campo magnético del laboratorio \emph{es} el campo eléctrico en el marco de los electrones: son la misma realidad física.
+\end{ejemplo}
+
+% ===========================================================
+\section{El lagrangiano de la partícula relativista}
+% ===========================================================
+
+\subsection{La acción de la partícula libre}
+
+El formalismo lagrangiano se extiende a la relatividad especial exigiendo que la acción sea un escalar de Lorentz. Para una partícula libre, el único escalar invariante que puede construirse a lo largo de la línea del mundo es el tiempo propio $\tau$. La acción es:
+\begin{equation}
+  S_{\rm libre} = -mc^2 \int d\tau = -mc^2 \int \sqrt{-\eta_{\mu\nu}\frac{dx^\mu}{d\lambda}\frac{dx^\nu}{d\lambda}}\, d\lambda,
+  \label{eq:accion_libre}
+\end{equation}
+donde $\lambda$ es un parámetro de la trayectoria. El principio de mínima acción $\delta S = 0$ da las ecuaciones de movimiento:
+\[
+  \frac{d}{d\tau}\left(m\frac{dx^\mu}{d\tau}\right) = 0 \;\Rightarrow\; \frac{dp^\mu}{d\tau} = 0,
+\]
+que es la ley de inercia relativista: sin fuerzas, el cuadrimomento es constante.
+
+\begin{importante}
+El principio variacional \eqref{eq:accion_libre} establece que \textbf{la trayectoria libre de una partícula masiva es la que maximiza el tiempo propio} (o más precisamente, la que hace estacionaria la integral $\int d\tau$). Esta es la versión relativista del principio de inercia, y tiene un análogo exacto en relatividad general: la trayectoria de caída libre es la geodésica que extremiza el tiempo propio en el espacio-tiempo curvo.
+\end{importante}
+
+\subsection{La acción de la partícula cargada en un campo electromagnético}
+
+Para una partícula de carga $q$ en un campo externo $A^\mu$, el único escalar de Lorentz que acopla la carga al campo es $A_\mu U^\mu = A_\mu\, dx^\mu/d\tau$. La acción total es:
+\begin{equation}
+  S = \int\!\left(-mc^2 + q\,A_\mu\frac{dx^\mu}{d\tau}\right) d\tau
+  = \int\!\left(-mc\sqrt{-\eta_{\mu\nu}\dot{x}^\mu\dot{x}^\nu} + q\,A_\mu\dot{x}^\mu\right) d\lambda,
+  \label{eq:accion_cargada}
+\end{equation}
+donde el punto denota derivada respecto a $\lambda$. Las ecuaciones de Euler-Lagrange dan:
+\begin{equation}
+  m\frac{dU^\mu}{d\tau} = q\,F^{\mu\nu}\,U_\nu,
+  \label{eq:EOM_cargada}
+\end{equation}
+que es la ecuación de movimiento relativista con la fuerza de Lorentz \eqref{eq:lorentz_cov}. El formalismo variacional garantiza la covarianza: si la acción es un escalar, las ecuaciones de movimiento son automáticamente covariantes.
+
+\subsection{Invariantes del campo electromagnético}
+
+Del tensor de Maxwell se construyen dos escalares de Lorentz independientes:
+\begin{align}
+  \mathcal{F} &\equiv \frac{1}{2}F_{\mu\nu}F^{\mu\nu}
+  = B^2 - \frac{E^2}{c^2}, \label{eq:inv1EM}\\[4pt]
+  \mathcal{G} &\equiv \frac{1}{4}F_{\mu\nu}\widetilde{F}^{\mu\nu}
+  = \frac{\vec{E}\cdot\vec{B}}{c}. \label{eq:inv2EM}
+\end{align}
+
+Estos invariantes permiten hacer afirmaciones independientes del marco de referencia:
+
+\begin{proposicion}{Propiedades de los invariantes electromagnéticos}{inv_EM}
+\begin{enumerate}[leftmargin=2em]
+  \item Si $\mathcal{F} > 0$ (i.e., $B^2 > E^2/c^2$) en un marco, entonces $B > E/c$ en todos los marcos; existe un marco en que $\vec{E} = 0$.
+  \item Si $\mathcal{F} < 0$ (i.e., $E^2/c^2 > B^2$) en un marco, entonces $E/c > B$ en todos los marcos; existe un marco en que $\vec{B} = 0$.
+  \item Si $\mathcal{G} = \vec{E}\cdot\vec{B} = 0$ en un marco, es cero en todos los marcos.
+  \item Para una onda electromagnética plana, $\mathcal{F} = 0$ y $\mathcal{G} = 0$: los campos $\vec{E}$ y $\vec{B}$ son perpendiculares e iguales en magnitud ($E = cB$) en todos los marcos.
+\end{enumerate}
+\end{proposicion}
+
+% ===========================================================
+\section{Ejemplos resueltos adicionales}
+% ===========================================================
+
+\begin{ejemplo}{Energía umbral para producción de pares $e^+e^-$ en campo de núcleo}{par_produccion}
+Un fotón de alta energía ($\gamma$) colisiona con un fotón de baja energía de fondo ($\gamma_{\rm bg}$, energía $\varepsilon$) y produce un par electrón-positrón: $\gamma + \gamma_{\rm bg} \to e^+ + e^-$. Calcule la energía mínima $E_{\gamma,\rm min}$ del fotón de alta energía, para incidencia frontal ($\theta = \pi$, contrapropagantes).
+
+\textbf{Solución.} El invariante del sistema de dos fotones para incidencia frontal ($\vec{p}_{\gamma}$ y $\vec{p}_{\rm bg}$ opuestos):
+\[
+  s = -\left(\frac{E_\gamma + \varepsilon}{c}\right)^2 c^2 + \left(\frac{E_\gamma}{c} - \left(-\frac{\varepsilon}{c}\right)\right)^2 c^2
+  = -(E_\gamma + \varepsilon)^2 + (E_\gamma + \varepsilon)^2 - 4E_\gamma\varepsilon
+  = 4E_\gamma\varepsilon.
+\]
+[Usando $E_\gamma = |\vec{p}_\gamma|c$ y $\varepsilon = |\vec{p}_{\rm bg}|c$, y la fórmula general $s = 2p_1 \cdot p_2$ para fotones.]
+
+En el umbral, $\sqrt{s_{\rm min}} = 2m_e c^2$, de modo que $s_{\rm min} = 4m_e^2 c^4$:
+\[
+  4E_{\gamma,\rm min}\,\varepsilon = 4m_e^2 c^4
+  \quad\Rightarrow\quad
+  E_{\gamma,\rm min} = \frac{m_e^2 c^4}{\varepsilon}.
+\]
+Para fotones de fondo del CMB ($T \approx 2{,}7\,\si{K}$, $\varepsilon \sim 6\times10^{-4}\,\si{eV}$):
+\[
+  E_{\gamma,\rm min} \approx \frac{(0{,}511\,\si{MeV})^2}{6\times10^{-4}\,\si{eV}}
+  \approx 4{,}4 \times 10^{14}\,\si{eV} = 440\,\si{TeV}.
+\]
+Este es el \textbf{corte GZK} (Greisen-Zatsepin-Kuzmin) para fotones: fotones de energías superiores a $\sim 10^{14}\,\si{eV}$ son absorbidos por el fondo de microondas en distancias cosmológicas. Este efecto es directamente relevante para la astrofísica de los rayos gamma de muy alta energía detectados por telescopios como H.E.S.S., MAGIC y CTA.
+\end{ejemplo}
+
+\begin{ejemplo}{Transformación del campo eléctrico de un hilo al pasar a su marco de reposo}{}
+Un hilo infinito con densidad lineal de carga $\lambda$ está en reposo en $S$. Calcula los campos en el marco $S'$ moviéndose a velocidad $v$ paralela al hilo.
+
+\textbf{En $S$:} Campo eléctrico radial $E_r = \lambda/(2\pi\varepsilon_0 r)$ y $\vec{B} = 0$.
+
+\textbf{Transformación con boost paralelo al hilo (dirección $\hat{z}$), $v\hat{z}$:} Las componentes transversales (radiales) transforman:
+\[
+  E'_r = \gamma(E_r - 0) = \gamma E_r = \frac{\gamma\lambda}{2\pi\varepsilon_0 r}.
+\]
+Las componentes de $B$ transversales al boost:
+\[
+  B'_\phi = \gamma\!\left(0 + \frac{v}{c^2}E_r\right) = \frac{\gamma\lambda v}{2\pi\varepsilon_0 c^2 r}
+  = \frac{\mu_0\gamma\lambda v}{2\pi r}.
+\]
+Esto coincide con el campo magnético de un hilo con corriente $I' = \gamma\lambda v$ (la corriente vista en $S'$ corresponde a la densidad de carga aumentada por $\gamma$ y moviéndose a $v$). El resultado es consistente: en $S'$ el hilo se ve contraído ($\lambda' = \gamma\lambda$) y moviéndose, generando tanto campo eléctrico como magnético.
+\end{ejemplo}
+
+\begin{ejemplo}{Ecuación de movimiento relativista de un electrón en campo magnético uniforme}{}
+Un electrón de masa $m_e$ y carga $-e$ se mueve en un campo magnético uniforme $\vec{B} = B\hat{z}$. Muestre que la órbita es circular con \textbf{radio de Larmor relativista}.
+
+\textbf{Solución.} La fuerza de Lorentz es $\vec{F} = -e(\vec{v}\times\vec{B})$. Como la fuerza es siempre perpendicular al movimiento, $\vec{F}\cdot\vec{v} = 0$: la \textbf{energía} y por tanto $|\vec{p}|$ son constantes. Solo cambia la dirección de $\vec{p}$.
+
+La ecuación de movimiento relativista:
+\[
+  \frac{d\vec{p}}{dt} = -e\vec{v}\times\vec{B} = -e\frac{\vec{p}}{m_e\gamma}\times\vec{B},
+\]
+con $\gamma = \text{const}$. Esto da movimiento circular uniforme con frecuencia de ciclotron:
+\[
+  \omega_c = \frac{eB}{m_e\gamma} \qquad \text{(frecuencia de ciclotron relativista)},
+\]
+y radio:
+\begin{equation}
+  r_L = \frac{|\vec{p}|}{eB} = \frac{m_e\gamma v}{eB} \qquad \text{(radio de Larmor relativista)}.
+  \label{eq:larmor}
+\end{equation}
+Para electrones no relativistas, $\gamma \approx 1$ y $r_L = m_e v/(eB)$ (resultado clásico). En aceleradores de partículas (como el LHC), $\gamma \gg 1$ y el radio de Larmor es mucho mayor que el clásico: por eso se necesitan campos magnéticos de varios Tesla y anillos de kilómetros.
+\end{ejemplo}
+
+% ===========================================================
+\section{Resumen del formalismo covariante}
+% ===========================================================
+
+El cuadro siguiente recapitula los objetos covariantes fundamentales de la relatividad especial dinámica:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{lll}
+\hline
+\textbf{Objeto} & \textbf{Definición} & \textbf{Invariante} \\
+\hline
+4-posición & $x^\mu = (ct, \vec{x})$ & $\eta_{\mu\nu}x^\mu x^\nu = -c^2t^2+|\vec{x}|^2$ \\
+4-velocidad & $U^\mu = \gamma(c, \vec{v})$ & $U_\mu U^\mu = -c^2$ \\
+4-momento   & $p^\mu = (E/c, \vec{p})$ & $p_\mu p^\mu = -m^2c^2$ \\
+4-fuerza    & $f^\mu = dp^\mu/d\tau$ & $f_\mu U^\mu = 0$ \\
+4-corriente & $J^\mu = (\rho_e c, \vec{J})$ & $\partial_\mu J^\mu = 0$ \\
+4-potencial & $A^\mu = (\varphi/c, \vec{A})$ & Gauge: $\partial_\mu A^\mu = 0$ \\
+Tensor de Maxwell & $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ & $\frac{1}{2}F_{\mu\nu}F^{\mu\nu} = B^2 - E^2/c^2$ \\
+Tensor energía-momento & $T^{\mu\nu}$ (simétrico) & $\partial_\mu T^{\mu\nu} = 0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{importante}
+Todo el formalismo de la relatividad especial dinámica está organizado alrededor de un principio: las leyes de la física deben escribirse como \textbf{ecuaciones tensoriales bajo el grupo de Poincaré}. Las ecuaciones de Maxwell $\partial_\mu F^{\mu\nu} = \mu_0 J^\nu$, la ecuación de movimiento $f^\mu = dp^\mu/d\tau$, y la conservación $\partial_\mu T^{\mu\nu} = 0$ son todas ecuaciones tensoriales. Cuando pasemos a la relatividad general en los Capítulos 6 y siguientes, el principio de covarianza general exigirá que estas mismas ecuaciones sean válidas en espacio-tiempo curvo, reemplazando las derivadas parciales $\partial_\mu$ por derivadas covariantes $\nabla_\mu$ (principio de mínimo acoplamiento).
+\end{importante}
+
+% ===========================================================
+\section{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{La relación energía-momento para partículas masivas.}
+  Un protón tiene energía cinética $K = 500\,\si{MeV}$ (masa en reposo $m_p c^2 = 938{,}3\,\si{MeV}$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule la energía total $E$, el momento $|\vec{p}|$ y el factor de Lorentz $\gamma$.
+    \item Calcule la velocidad $v/c$.
+    \item Calcule el tiempo propio transcurrido si el protón recorre $L = 1\,\si{km}$ en el laboratorio.
+    \item Verifique que $E^2 = |\vec{p}|^2c^2 + m_p^2c^4$.
+  \end{enumerate}
+
+  \item \textbf{Colisión elástica relativista.}
+  Una partícula de masa $m$ y energía total $E$ choca elásticamente contra una partícula idéntica en reposo. En el marco del laboratorio:
+  \begin{enumerate}[label=(\alph*)]
+    \item Escriba las ecuaciones de conservación del cuadrimomento.
+    \item Derive la energía del sistema en el centro de masa: $E_{\rm CM} = c^2\sqrt{2m^2c^4 + 2mEc^2}$.
+    \item Para $E = 10\,m c^2$, calcule $E_{\rm CM}/mc^2$.
+    \item Discuta por qué los colisionadores de haz opuesto son mucho más eficientes que los de blanco fijo para producir nuevas partículas.
+  \end{enumerate}
+
+  \item \textbf{Desintegración de dos cuerpos.}
+  Una partícula de masa $M$ en reposo se desintegra en dos partículas de masas $m_1$ y $m_2$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que la energía de la partícula 1 en el marco de reposo de $M$ es
+    $E_1 = \dfrac{(M^2 + m_1^2 - m_2^2)c^4}{2Mc^2}$.
+    \item Calcule las energías para la desintegración del kaón $K^+ \to \mu^+ + \nu_\mu$
+    ($m_{K^+} = 493{,}7\,\si{MeV}/c^2$, $m_{\mu^+} = 105{,}7\,\si{MeV}/c^2$, $m_{\nu_\mu} \approx 0$).
+    \item ¿Cuál es la condición para que la desintegración sea cinemáticamente permitida? Exprésela en términos de $M$, $m_1$ y $m_2$.
+  \end{enumerate}
+
+  \item \textbf{Colisión Compton inversa.}
+  En el proceso Compton \emph{inverso}, un electrón relativista de alta energía transfiere parte de su energía a un fotón de baja energía (proceso astrofísicamente importante, por ejemplo en la radiación de sincrotrón inverso).
+  \begin{enumerate}[label=(\alph*)]
+    \item Un electrón con $\gamma = 10^4$ (energía $E_e = \gamma m_e c^2 \approx 5\,\si{GeV}$) choca con un fotón del CMB ($\varepsilon_0 = 6\times10^{-4}\,\si{eV}$). Estime la energía máxima del fotón dispersado.
+    \item Muestre que, para $\gamma\gg 1$ y $\varepsilon_0\ll m_ec^2$, la energía máxima del fotón después de la colisión es $E_f \approx 4\gamma^2\varepsilon_0$.
+    \item Discuta la importancia astronómica de este proceso para la emisión de rayos X de jets relativistas.
+  \end{enumerate}
+
+  \item \textbf{El tensor de Maxwell y sus invariantes.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para una onda electromagnética plana monocromática propagándose en la dirección $+x$ con $\vec{E} = E_0\hat{y}$ y $\vec{B} = (E_0/c)\hat{z}$, escriba explícitamente el tensor $F_{\mu\nu}$.
+    \item Calcule los invariantes $\mathcal{F} = \frac{1}{2}F_{\mu\nu}F^{\mu\nu}$ y $\mathcal{G} = \frac{1}{4}F_{\mu\nu}\tilde{F}^{\mu\nu}$ y verifique que son cero.
+    \item Muestre que en cualquier otro marco inercial, la onda sigue teniendo $\mathcal{F} = \mathcal{G} = 0$.
+    \item Considere un campo magnético uniforme $\vec{B} = B_0\hat{z}$, $\vec{E} = 0$. Calcule $\mathcal{F}$ y $\mathcal{G}$. ¿Existe un marco en que el campo sea puramente eléctrico?
+  \end{enumerate}
+
+  \item \textbf{La ley de Ampère-Maxwell desde el potencial 4-vector.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Partiendo de $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$, demuestre que la ecuación $\partial_\mu F^{\mu\nu} = \mu_0 J^\nu$ en el gauge de Lorenz se reduce a $\Box A^\nu = \mu_0 J^\nu$.
+    \item Muestre que la solución de $\Box A^\nu = 0$ en el vacío admite soluciones de onda plana $A^\nu = a^\nu e^{ik_\mu x^\mu}$, y derive la condición de dispersión: $k_\mu k^\mu = 0$.
+    \item Interprete la condición $k_\mu k^\mu = 0$: ¿por qué implica que los fotones son sin masa?
+  \end{enumerate}
+
+  \item \textbf{Tensor de energía-momento de la onda plana.}
+  Para una onda electromagnética plana con $\vec{E} = E_0\cos(kx - \omega t)\hat{y}$ y $\vec{B} = (E_0/c)\cos(kx - \omega t)\hat{z}$:
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule las componentes no nulas del tensor $T^{\mu\nu}_{\rm EM}$ (promediadas sobre un período).
+    \item Muestre que $T^{00} = \varepsilon_0 E_0^2/2$ (densidad de energía promedio).
+    \item Calcule el vector de Poynting $\vec{S} = (T^{01}, T^{02}, T^{03})c$ y verifique que $|\vec{S}| = c\,T^{00}$ (la energía se propaga a velocidad $c$).
+    \item Verifique que $T^\mu{}_\mu = 0$ (el tensor de energía-momento del campo electromagnético es sin traza): ¿qué implica esto para la ecuación de estado $P = \rho/3$?
+  \end{enumerate}
+
+  \item \textbf{La fuerza relativista en campo eléctrico y magnético combinados.}
+  Un electrón se mueve en la dirección $+x$ con velocidad $v = 0{,}9c$ en una región donde hay campo eléctrico $\vec{E} = E_0\hat{y}$ y campo magnético $\vec{B} = B_0\hat{z}$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule la fuerza tridimensional $\vec{F}$ sobre el electrón en el marco del laboratorio.
+    \item Calcule la 4-fuerza $f^\mu$ y verifique la ortogonalidad $f_\mu U^\mu = 0$.
+    \item Encuentre la condición sobre $E_0$ y $B_0$ para que el electrón no sea deflectado ($\vec{F} = 0$). ¿Cuál es el nombre de este dispositivo?
+    \item Transforme los campos al marco del electrón y verifique que en ese marco solo hay campo eléctrico perpendicular a la trayectoria.
+  \end{enumerate}
+
+  \item \textbf{Conservación local de la energía-momento para el fluido perfecto.}
+  Considere el tensor de energía-momento del fluido perfecto~\eqref{eq:Tfluido} con 4-velocidad $U^\mu = (c, \vec{0})$ en el límite no relativista ($P \ll \rho c^2$, $v \ll c$).
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule explícitamente las componentes $T^{00}$, $T^{0i}$ y $T^{ij}$ en este límite.
+    \item Muestre que la ecuación $\partial_\mu T^{\mu 0} = 0$ da la ecuación de continuidad de la hidrodinámica: $\partial\rho/\partial t + \nabla\cdot(\rho\vec{v}) = 0$.
+    \item Muestre que $\partial_\mu T^{\mu i} = 0$ da las ecuaciones de Euler: $\rho\,\partial\vec{v}/\partial t + \rho(\vec{v}\cdot\nabla)\vec{v} = -\nabla P$.
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) La dualidad electromagnética y el monopolo magnético de Dirac.}
+  Considere la posibilidad de que existan monopolos magnéticos con densidad de carga magnética $\rho_m$ y corriente $\vec{J}_m$. Las ecuaciones de Maxwell generalizadas son:
+  $\partial_\mu F^{\mu\nu} = \mu_0 J^\nu_e$ y $\partial_\mu \tilde{F}^{\mu\nu} = \mu_0 J^\nu_m$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que estas ecuaciones son invariantes bajo la transformación de dualidad
+    $F^{\mu\nu} \to \cos\alpha\, F^{\mu\nu} + \sin\alpha\, \tilde{F}^{\mu\nu}$,
+    $\tilde{F}^{\mu\nu} \to -\sin\alpha\, F^{\mu\nu} + \cos\alpha\, \tilde{F}^{\mu\nu}$,
+    si simultáneamente $\vec{J}_e \to \vec{J}_m\cos\alpha + \vec{J}_e\sin\alpha$ (y análogo para $\vec{J}_m$).
+    \item Argumente por qué la ausencia experimental de monopolos magnéticos rompe esta simetría.
+    \item El argumento de cuantización de Dirac establece que si existe un monopolo de carga $g$, la carga eléctrica está cuantizada: $eg = n\hbar c/2$ ($n \in \mathbb{Z}$). ¿Cómo se deriva esta condición de consistencia cuántica a partir de la invariancia de gauge?
+  \end{enumerate}
+
+\end{enumerate}
