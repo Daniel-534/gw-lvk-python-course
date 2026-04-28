@@ -1,0 +1,617 @@
+% ============================================================
+% Capítulo 5: El Principio de Equivalencia y el Camino
+%             a la Relatividad General
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{El Principio de Equivalencia y el Camino a la Relatividad General}
+\label{cap:equivalencia}
+
+Los capítulos anteriores construyeron el formalismo matemático de la geometría diferencial y la dinámica de la relatividad especial. Ese andamiaje describe impecablemente la física en ausencia de gravedad: las transformaciones de Lorentz, la equivalencia masa-energía, la formulación covariante del electromagnetismo y la conservación del cuadrimomento. Sin embargo, la \textbf{gravedad} queda fuera del cuadro. La atracción entre masas es, en el esquema newtoniano, una fuerza que actúa instantáneamente a distancia — una descripción incompatible con la relatividad especial, que prohíbe la propagación de información a velocidades superlumínicas.
+
+¿Cómo incorporar la gravedad en el marco covariante? La respuesta de Einstein no fue buscar la versión relativista de la fuerza gravitacional, sino cuestionar si la gravedad es una fuerza en absoluto. El camino hacia esa respuesta pasa por el \textbf{principio de equivalencia}: la observación, antiquísima y sorprendente, de que todos los cuerpos caen igual, independientemente de su masa o composición. Esta sección de aparente trivialidad newtoniana esconde, como Einstein reconoció en 1907, el germen de una teoría completamente nueva de la gravedad \cite{Carroll2004, Misner1973, Schutz2009}.
+
+% ===========================================================
+\section{Masa inercial y masa gravitacional}
+\label{sec:masas}
+% ===========================================================
+
+\subsection{Dos papeles conceptualmente distintos de la masa}
+
+En mecánica clásica, la noción de ``masa'' desempeña dos papeles que, a priori, no tienen por qué estar relacionados:
+
+\begin{definicion}{Masa inercial}{masa_inercial}
+La \textbf{masa inercial} $m_{\rm i}$ de un cuerpo mide su resistencia a ser acelerado. Es el coeficiente que aparece en la segunda ley de Newton:
+\begin{equation}
+  \vec{F} = m_{\rm i}\,\vec{a}.
+  \label{eq:2a_Newton}
+\end{equation}
+Un cuerpo con mayor masa inercial requiere mayor fuerza para producir la misma aceleración.
+\end{definicion}
+
+\begin{definicion}{Masa gravitacional (pasiva y activa)}{masa_grav}
+La \textbf{masa gravitacional pasiva} $m_{\rm g}$ mide la respuesta de un cuerpo al campo gravitacional externo:
+\begin{equation}
+  \vec{F}_{\rm grav} = m_{\rm g}\,\vec{g}.
+  \label{eq:fuerza_grav}
+\end{equation}
+La \textbf{masa gravitacional activa} $M_{\rm g}$ mide la capacidad de un cuerpo para generar campo gravitacional: en la ley de Newton, $\vec{g} = -G M_{\rm g}\hat{r}/r^2$.
+\end{definicion}
+
+Combinando \eqref{eq:2a_Newton} y \eqref{eq:fuerza_grav}, la aceleración de un cuerpo en el campo gravitacional externo $\vec{g}$ es
+\begin{equation}
+  \vec{a} = \frac{m_{\rm g}}{m_{\rm i}}\,\vec{g}.
+  \label{eq:aceleracion_caida}
+\end{equation}
+
+Si el cociente $m_{\rm g}/m_{\rm i}$ fuera diferente para distintos cuerpos, distintos objetos caerían con distintas aceleraciones — lo cual está en contradicción flagrante con la experiencia.
+
+\subsection{La igualdad empírica \texorpdfstring{$m_{\rm i} = m_{\rm g}$}{mi = mg}}
+
+La experiencia cotidiana, verificada con gran precisión experimental, es que \emph{todos los cuerpos caen con la misma aceleración} en el mismo campo gravitacional, independientemente de su masa, composición química, estructura interna o estado cuántico. Esto significa que $m_{\rm g}/m_{\rm i}$ es universal: absorbiendo la constante global en la definición de $G$, podemos tomar
+
+\begin{equation}
+  \boxed{m_{\rm i} = m_{\rm g}.}
+  \label{eq:igualdad_masas}
+\end{equation}
+
+\begin{importante}
+En mecánica newtoniana, la igualdad \eqref{eq:igualdad_masas} es una \emph{coincidencia empírica} sin explicación conceptual. La genialidad de Einstein fue reconocer que esta igualdad no es accidental: es la manifestación de un principio geométrico profundo que debe ocupar el centro de la teoría de la gravedad.
+\end{importante}
+
+\subsection{Verificaciones experimentales}
+
+La igualdad $m_{\rm i} = m_{\rm g}$ es uno de los hechos experimentales más precisamente medidos de la física. Se cuantifica mediante el \textbf{parámetro de Eötvös} $\eta$:
+
+\begin{definicion}{Parámetro de Eötvös}{eotvos}
+Para dos materiales A y B, el parámetro de Eötvös es
+\begin{equation}
+  \eta(A,B) \equiv 2\,\frac{\left|(m_{\rm g}/m_{\rm i})_A - (m_{\rm g}/m_{\rm i})_B\right|}
+                         {(m_{\rm g}/m_{\rm i})_A + (m_{\rm g}/m_{\rm i})_B}.
+  \label{eq:eotvos}
+\end{equation}
+Un valor $\eta = 0$ indica igualdad perfecta.
+\end{definicion}
+
+Los límites observacionales actuales son:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Eötvös (1890, balanza de torsión):} $\eta < 10^{-8}$.
+  \item \textbf{Dicke, Roll \& Krotkov (1964):} $\eta < 10^{-11}$ (comparando aluminio y oro respecto al Sol).
+  \item \textbf{Braginsky \& Panov (1971):} $\eta < 5\times10^{-12}$.
+  \item \textbf{Experimentos MICROSCOPE (2017, satélite):} $\eta < 10^{-14}$, el más preciso a la fecha.
+\end{itemize}
+
+\begin{observacion}{Por qué la igualdad es ``misteriosa'' en Newton}{}
+En electrostática, la razón análoga $q/m$ (carga a masa) varía enormemente entre materiales: el electrón tiene $e/m_e \approx 1{,}76\times10^{11}\,\si{C/kg}$, mientras que el protón tiene $e/m_p \approx 9{,}58\times10^7\,\si{C/kg}$. No hay ninguna razón a priori para que la ``carga gravitacional'' ($m_{\rm g}$) sea numéricamente igual a la ``inercia'' ($m_{\rm i}$). En la teoría newtoniana, es una coincidencia sin causa. En la relatividad general, es una \emph{consecuencia} de la geometría del espacio-tiempo.
+\end{observacion}
+
+% ===========================================================
+\section{El principio de equivalencia}
+\label{sec:principio_equivalencia}
+% ===========================================================
+
+\subsection{El principio de equivalencia débil (PED)}
+
+\begin{definicion}{Principio de Equivalencia Débil (PED)}{PED}
+\emph{Todos los cuerpos no autogravitantes, en caída libre en un campo gravitacional externo, tienen la misma aceleración independientemente de su masa y composición interna.}
+
+Equivalentemente: la trayectoria de un cuerpo en caída libre depende únicamente de su posición inicial y velocidad inicial, no de su naturaleza material.
+\end{definicion}
+
+El PED es directamente la afirmación $m_{\rm i} = m_{\rm g}$ para toda materia. Desde el punto de vista newtoniano, es la generalización de la observación de Galileo sobre el plano inclinado y la Torre de Pisa.
+
+\subsection{El principio de equivalencia de Einstein (PEE)}
+
+Einstein extendió el PED de una manera radical. Observó que si \emph{todos} los objetos físicos (no solo los mecánicos) se comportan igual en un campo gravitacional y en un sistema de referencia acelerado, entonces estos dos situaciones son \textbf{localmente indistinguibles}:
+
+\begin{definicion}{Principio de Equivalencia de Einstein (PEE)}{PEE}
+En una región suficientemente pequeña del espacio-tiempo (local), no es posible distinguir mediante experimentos de la física local (mecánica, óptica, electromagnetismo, etc.) entre:
+\begin{enumerate}[leftmargin=2em]
+  \item Un laboratorio en reposo en un campo gravitacional uniforme $\vec{g}$.
+  \item Un laboratorio acelerado con aceleración $\vec{a} = -\vec{g}$ en el vacío (ausencia de campo gravitacional).
+\end{enumerate}
+\end{definicion}
+
+\begin{importante}
+La palabra ``local'' es crucial. El PEE solo garantiza la equivalencia en regiones lo suficientemente pequeñas como para que el campo gravitacional pueda considerarse \emph{uniforme}. En regiones extensas, las variaciones espaciales del campo (las \textbf{fuerzas de marea}) sí permiten distinguir entre gravedad y aceleración.
+\end{importante}
+
+El PEE implica, en particular, que las leyes de la física especial-relativista (incluyendo el electromagnetismo y la mecánica cuántica, en la medida en que ignoremos el acoplamiento a la curvatura) tienen validez local en presencia de gravedad: en una región suficientemente pequeña, siempre podemos encontrar un marco inercial libre de gravedad (el marco en caída libre) donde rigen las leyes de la relatividad especial.
+
+\subsection{El principio de equivalencia fuerte (PEF)}
+
+\begin{definicion}{Principio de Equivalencia Fuerte (PEF)}{PEF}
+Toda la física, incluida la gravitación autoconsistente, satisface el PEE. Equivalentemente: la masa inercial y la masa gravitacional son iguales incluso para cuerpos que interactúan gravitacionalmente de manera significativa (cuerpos autogravitantes como estrellas de neutrones o agujeros negros).
+\end{definicion}
+
+El PEF es más restrictivo que el PEE. Hay teorías alternativas de la gravedad (como la teoría de Brans-Dicke) que satisfacen el PEE pero violan el PEF. La relatividad general satisface el PEF, lo que tiene consecuencias observacionales testables, por ejemplo en el movimiento de los sistemas binarios de púlsares (Nordtvedt effect).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lll}
+\hline
+\textbf{Principio} & \textbf{Alcance} & \textbf{Contenido} \\
+\hline
+PED & Materia no gravitante & $m_{\rm i} = m_{\rm g}$ para toda materia ordinaria \\
+PEE & Física local (sin autointeracción) & GR local $\simeq$ Minkowski \\
+PEF & Toda la física, incluida la gravedad & $m_{\rm i} = m_{\rm g}$ para cuerpos autogravitantes \\
+\hline
+\end{tabular}
+\end{center}
+
+% ===========================================================
+\section{Los experimentos mentales del ascensor de Einstein}
+\label{sec:ascensor}
+% ===========================================================
+
+En 1907, mientras preparaba un artículo de revisión de la relatividad especial, Einstein tuvo lo que más tarde llamó ``el pensamiento más feliz de mi vida'': imaginó un hombre cayendo libremente desde un techo y se dio cuenta de que, durante la caída, el hombre no sentiría su propio peso. A partir de ahí construyó una serie de experimentos mentales (gedanken experiments) que son la base heurística del principio de equivalencia.
+
+\subsection{El ascensor en caída libre: eliminación local de la gravedad}
+
+\textbf{Situación:} Un laboratorio (el ``ascensor de Einstein'') cae libremente en el campo gravitacional uniforme de la Tierra. Dentro del ascensor hay un observador con instrumentos de medida.
+
+\textbf{Análisis:} Desde el marco del laboratorio (en caída libre), cada objeto dentro del ascensor está también en caída libre. Dos cuerpos de distintas masas, soltados simultáneamente, caen con la misma aceleración $g$ en el marco de la Tierra. Pero \emph{en el marco del ascensor}, ninguno de los dos cae: permanecen flotando. Formalmente, si la posición de la partícula $i$ en el marco de la Tierra es $\vec{r}_i(t)$ y la del ascensor es $\vec{R}(t)$, la posición relativa satisface:
+
+\begin{equation}
+  \ddot{\vec{r}}_i - \ddot{\vec{R}} = \vec{g} - \vec{g} = 0.
+  \label{eq:caida_libre_rel}
+\end{equation}
+
+En el marco del ascensor, los cuerpos se mueven sin aceleración (a menos que sean empujados), exactamente como en el espacio libre de gravedad. El campo gravitacional \emph{ha desaparecido} en este marco local.
+
+\begin{importante}
+Esta cancelación solo es exacta para un campo \emph{uniforme}. El campo real de la Tierra varía en el espacio (el gradiente de $\vec{g}$) y en el tiempo (la Tierra no es perfectamente esférica). Estas variaciones producen \textbf{fuerzas de marea}: dos cuerpos separados por una distancia finita dentro del ascensor sí tienen una pequeña aceleración relativa. Las fuerzas de marea son la manifestación geométrica de la \emph{curvatura del espacio-tiempo}, y \emph{no} pueden eliminarse por un cambio de marco de referencia.
+\end{importante}
+
+\subsection{El ascensor acelerado: simulación de la gravedad}
+
+\textbf{Situación:} El ascensor está en el espacio profundo (sin campo gravitacional), siendo acelerado por un cohete a $\vec{a} = g\hat{z}$.
+
+\textbf{Análisis:} El suelo empuja sobre los pies del observador con la misma fuerza que experimentaría si estuviera de pie sobre la Tierra (con $g = 9{,}81\,\si{m/s^2}$). Si suelta un objeto, el objeto no es acelerado (sin gravedad en el espacio), pero el suelo se acerca a él a aceleración $g$: el observador lo ve ``caer'' con aceleración $g$ hacia el suelo. Todas las leyes mecánicas son idénticas a las del laboratorio en reposo en el campo gravitacional de la Tierra.
+
+\begin{ejemplo}{Trayectoria de un proyectil en el ascensor acelerado}{proyectil-ascensor-acelerado}
+Un observador dentro del ascensor acelerado (aceleración $g$ hacia arriba) lanza horizontalmente una pelota con velocidad $v_0$ en la dirección $\hat{x}$. Desde el marco inercial del espacio libre, la pelota sigue una trayectoria rectilínea (sin gravedad). ¿Qué observa el operador del ascensor?
+
+\textbf{Solución.} En el marco inercial $S$ (espacio libre), la pelota tiene velocidad constante: $x = v_0 t$, $z = 0$ (suponiendo que se lanzó cuando el origen del ascensor coincidía con $S$). El ascensor tiene aceleración $g$, así que la posición de su suelo en $S$ es $Z_{\rm suelo}(t) = \frac{1}{2}g t^2$.
+
+La posición de la pelota respecto al suelo del ascensor es:
+\[
+  z_{\rm rel}(t) = 0 - \frac{1}{2}g t^2 = -\frac{1}{2}g t^2.
+\]
+En el marco del ascensor, la pelota sigue una \textbf{parábola} $z = -g x^2/(2v_0^2)$: exactamente la trayectoria parabólica de un proyectil en un campo gravitacional uniforme $g$. El experimento es \emph{indistinguible} de uno realizado en la Tierra.
+\end{ejemplo}
+
+\subsection{Covarianza local: el marco localmente inercial}
+
+El PEE tiene una formulación más precisa en términos de geometría:
+
+\begin{definicion}{Marco de referencia localmente inercial (MRLI)}{MRLI}
+En todo punto $p$ del espacio-tiempo (con o sin campo gravitacional), existe un sistema de coordenadas $(x^\mu)$ tal que:
+\begin{enumerate}[leftmargin=2em]
+  \item La métrica es de Minkowski en $p$: $g_{\mu\nu}(p) = \eta_{\mu\nu}$.
+  \item Las primeras derivadas de la métrica se anulan en $p$: $\partial_\rho g_{\mu\nu}(p) = 0$.
+  \item Las ecuaciones de movimiento de partículas libres son $d^2x^\mu/d\tau^2 = 0$ en $p$.
+\end{enumerate}
+Tal sistema de coordenadas se llama un \textbf{marco de referencia localmente inercial} (MRLI) o un \textbf{marco en caída libre} alrededor de $p$.
+\end{definicion}
+
+La existencia de un MRLI en cada punto es una consecuencia del \textbf{teorema de normalización de la métrica}: dado que $g_{\mu\nu}$ es una forma bilineal simétrica no degenerada, en cada punto siempre existe una base en la que toma la forma de Minkowski $\eta_{\mu\nu}$. La condición adicional $\partial_\rho g_{\mu\nu} = 0$ equivale a que los símbolos de Christoffel se anulan en $p$: siempre podemos escoger coordenadas geodésicas alrededor de cualquier punto.
+
+\begin{observacion}{El MRLI y la relatividad especial local}{}
+En un MRLI alrededor de $p$, con errores de orden $\mathcal{O}((\Delta x)^2/\mathcal{R})$ donde $\Delta x$ es el tamaño de la región y $\mathcal{R}$ es la escala de curvatura del espacio-tiempo (radio de curvatura), las leyes de la relatividad especial son válidas. Esta es la formulación matemática del PEE: cada punto del espacio-tiempo tiene un ``vecindario'' donde la geometría es esencialmente plana.
+\end{observacion}
+
+% ===========================================================
+\section{Consecuencias del principio de equivalencia}
+\label{sec:consecuencias_PE}
+% ===========================================================
+
+El principio de equivalencia, aplicado a experimentos de luz y relojes, tiene consecuencias espectaculares que pueden derivarse sin conocer las ecuaciones de campo de Einstein. Estas consecuencias fueron confirmadas experimentalmente y constituyen las primeras pruebas de la relatividad general.
+
+\subsection{La curvatura de la luz en un campo gravitacional}
+
+\textbf{Argumento del ascensor:} En el ascensor acelerado (aceleración $g$ hacia arriba), un rayo de luz que entra horizontalmente por un agujero en la pared lateral es visto por el observador interno como curvándose \emph{hacia abajo}, igual que la pelota en el Ejemplo~\ref{ej:proyectil-ascensor-acelerado}.
+
+Por el PEE, en el campo gravitacional de la Tierra el rayo de luz también debe curvarse hacia el suelo. Cuantitativamente, si la luz entra horizontalmente y el laboratorio tiene ancho $L$, el tiempo de tránsito es $t = L/c$ y la desviación vertical es:
+\begin{equation}
+  \delta z = \frac{1}{2}g t^2 = \frac{g L^2}{2c^2}.
+  \label{eq:deflexion_luz_ascensor}
+\end{equation}
+
+Este resultado corresponde a una deflexión del ángulo $\alpha \approx g L/c^2$. Aplicando esto a la deflexión de la luz que pasa rasante al Sol (campo gravitacional solar), la estimación más elemental del PEE da:
+\begin{equation}
+  \alpha_{\rm PE} = \frac{2GM_\odot}{c^2 R_\odot} \approx 0{,}87\,\text{arcseg},
+  \label{eq:deflexion_sol_PE}
+\end{equation}
+donde $R_\odot \approx 6{,}96\times10^8\,\si{m}$ es el radio solar y $M_\odot \approx 1{,}99\times10^{30}\,\si{kg}$. La relatividad general completa duplica este valor:
+
+\begin{equation}
+  \alpha_{\rm RG} = \frac{4GM_\odot}{c^2 R_\odot} \approx 1{,}75\,\text{arcseg}.
+  \label{eq:deflexion_sol_RG}
+\end{equation}
+
+\begin{importante}
+El factor de 2 entre \eqref{eq:deflexion_sol_PE} y \eqref{eq:deflexion_sol_RG} no es trivial: proviene de la contribución de la curvatura \emph{espacial} de la métrica de Schwarzschild, que el PEE por sí solo no captura. La medición de Eddington en 1919 durante el eclipse solar confirmó el valor de la RG completa, convirtiendo a Einstein en una celebridad mundial.
+\end{importante}
+
+\subsection{El corrimiento al rojo gravitacional}
+
+El PEE predice que la luz que escapa de un pozo gravitacional pierde energía: su frecuencia disminuye (\textbf{corrimiento al rojo gravitacional}). El argumento más elegante es el del ascensor:
+
+\textbf{Argumento del ascensor acelerado:} Sea un ascensor de altura $h$ acelerándose hacia arriba con aceleración $g$. En el suelo del ascensor se emite un fotón verticalmente hacia el techo. El techo se aleja del fotón, de modo que cuando el fotón llega al techo, el techo se está moviendo a velocidad $v = g\,(h/c)$ mayor que cuando se emitió el fotón. Por el efecto Doppler de primer orden relativista, la frecuencia recibida en el techo es menor que la emitida en el suelo:
+\begin{equation}
+  \frac{\Delta\nu}{\nu} \approx -\frac{v}{c} = -\frac{gh}{c^2}.
+  \label{eq:redshift_grav_ascensor}
+\end{equation}
+
+Por el PEE, el mismo resultado debe darse en un campo gravitacional. Para un campo gravitacional con potencial $\Phi$ (con $g = -\nabla\Phi$), si la fuente está en un potencial $\Phi_1$ y el receptor en $\Phi_2$:
+
+\begin{teorema}{Corrimiento al rojo gravitacional (aproximación PEE)}{redshift_grav}
+La frecuencia $\nu$ de un fotón que se propaga entre dos puntos en un campo gravitacional satisface:
+\begin{equation}
+  \frac{\nu_2}{\nu_1} = \sqrt{\frac{1 + 2\Phi_1/c^2}{1 + 2\Phi_2/c^2}}
+  \approx 1 + \frac{\Phi_1 - \Phi_2}{c^2},
+  \label{eq:redshift_grav}
+\end{equation}
+donde la aproximación es válida para $|\Phi|/c^2 \ll 1$ (campo débil). Si $\Phi_2 > \Phi_1$ (el receptor está más alto en el pozo potencial), entonces $\nu_2 < \nu_1$: la luz se desplaza al rojo al alejarse de la fuente gravitacional.
+\end{teorema}
+
+\begin{ejemplo}{Corrimiento al rojo gravitacional en la Tierra (experimento de Pound y Rebka)}{pound_rebka}
+En 1959, Pound y Rebka midieron el corrimiento al rojo gravitacional en el laboratorio Jefferson de la Universidad de Harvard: emitieron rayos gamma de ${}^{57}\text{Fe}$ desde el suelo y los detectaron a una altura $h = 22{,}5\,\si{m}$.
+
+\textbf{Predicción teórica.} El potencial gravitacional newtoniano de la Tierra a la superficie es $\Phi = -GM_\oplus/R_\oplus$. La diferencia entre $h = 0$ y $h = 22{,}5\,\si{m}$ es $\Delta\Phi = gh = 9{,}81\,\si{m/s^2}\times 22{,}5\,\si{m} = 220{,}7\,\si{m^2/s^2}$. El corrimiento de frecuencia predicho es:
+\[
+  \frac{\Delta\nu}{\nu} = \frac{\Delta\Phi}{c^2} = \frac{220{,}7}{(3\times10^8)^2}
+  \approx 2{,}46\times10^{-15}.
+\]
+
+\textbf{Resultado experimental.} Pound y Rebka midieron $(2{,}57 \pm 0{,}26)\times10^{-15}$, en acuerdo con la predicción al nivel del 10\%. Experimentos posteriores de Pound y Snider (1965) redujeron la incertidumbre al 1\%. Este fue el primer test experimental directo del PEE.
+\end{ejemplo}
+
+\subsection{Dilatación temporal gravitacional}
+
+El corrimiento al rojo gravitacional implica directamente la \textbf{dilatación temporal gravitacional}: los relojes en un pozo gravitacional \emph{marchan más lento} que los relojes lejos de la fuente gravitacional.
+
+Para ver esto, considere un reloj (un átomo que emite radiación de frecuencia $\nu$) ubicado a potencial $\Phi_1$. Un observador a potencial $\Phi_2 > \Phi_1$ recibe la radiación con frecuencia $\nu_2 < \nu_1$. Desde el punto de vista del receptor, el reloj de la fuente \emph{tick} más lentamente: si en el tiempo coordinado $\Delta t$ la fuente emite $N$ oscilaciones a frecuencia $\nu_1$, entonces $N = \nu_1 \Delta\tau_1$ donde $\Delta\tau_1$ es el tiempo propio de la fuente. El receptor ve esas $N$ oscilaciones a frecuencia $\nu_2$: el tiempo propio del receptor es $\Delta\tau_2 = N/\nu_2 = \nu_1\Delta\tau_1/\nu_2$.
+
+\begin{proposicion}{Dilatación temporal gravitacional}{dilatacion_temporal}
+Dos relojes en reposo en el campo gravitacional a potenciales $\Phi_1$ y $\Phi_2$ tienen ritmos de tiempo propio relacionados por:
+\begin{equation}
+  \frac{d\tau_1}{d\tau_2} = \sqrt{\frac{1 + 2\Phi_1/c^2}{1 + 2\Phi_2/c^2}}
+  \approx 1 + \frac{\Phi_1 - \Phi_2}{c^2}.
+  \label{eq:dilatacion_temporal_grav}
+\end{equation}
+Si $\Phi_1 < \Phi_2$ (el reloj 1 está en un pozo gravitacional más profundo), entonces $d\tau_1 < d\tau_2$: el reloj más profundo en el pozo gravitacional marcha \emph{más lento}.
+\end{proposicion}
+
+\begin{ejemplo}{El GPS y la relatividad general}{GPS}
+El sistema de posicionamiento global (GPS) consiste en satélites que orbitan la Tierra a una altitud $h \approx 20{,}200\,\si{km}$ ($r_{\rm sat} = R_\oplus + h \approx 2{,}66\times10^7\,\si{m}$).
+
+\textbf{Efecto gravitacional.} El potencial gravitacional en la superficie terrestre es $\Phi_s = -GM_\oplus/R_\oplus$ y en la órbita del satélite es $\Phi_{\rm sat} = -GM_\oplus/r_{\rm sat}$. La diferencia es:
+\[
+  \frac{\Delta\Phi}{c^2} = \frac{GM_\oplus}{c^2}\left(\frac{1}{R_\oplus} - \frac{1}{r_{\rm sat}}\right)
+  \approx 5{,}3\times10^{-10}.
+\]
+El reloj del satélite marcha \emph{más rápido} que el reloj en la Tierra: ganancia de $\approx 45{,}9\,\si{\mu s}$ por día (efecto gravitacional).
+
+\textbf{Efecto especial-relativista (dilatación del tiempo por velocidad):} El satélite se mueve a $v \approx 3{,}87\,\si{km/s}$. La dilatación del tiempo de SR hace que el reloj del satélite marche \emph{más lento} en $\approx -7{,}2\,\si{\mu s}$ por día.
+
+\textbf{Efecto neto.} El reloj del satélite se adelanta en $\approx +38{,}4\,\si{\mu s}$ por día respecto a los relojes en la Tierra. Sin corrección, esto causaría un error de posición de $\approx 38{,}4\,\si{\mu s} \times c \approx 11\,\si{km}$ por día. Los receptores GPS corrigen explícitamente por ambos efectos relativistas — la relatividad general es una tecnología cotidiana.
+\end{ejemplo}
+
+\subsection{La curvatura del espacio-tiempo como efecto de marea}
+
+Existe un fenómeno que el principio de equivalencia \emph{no} puede eliminar: las \textbf{fuerzas de marea}. Considere dos partículas en caída libre, separadas horizontalmente por una distancia $\xi$ a una distancia $r$ del centro de la Tierra.
+
+La partícula izquierda cae hacia el centro de la Tierra con una dirección ligeramente diferente a la de la partícula derecha. En el marco en caída libre de la partícula central (punto de referencia), las otras partículas experimentan una aceleración relativa — se acercan entre sí en la dirección horizontal y se separan en la dirección radial.
+
+Cuantitativamente, la aceleración de marea radial (en la dirección de $\vec{r}$) es:
+\begin{equation}
+  a_{\rm marea}^r = +\frac{2GM}{r^3}\,\xi^r, \qquad
+  a_{\rm marea}^\theta = -\frac{GM}{r^3}\,\xi^\theta,
+  \label{eq:mareas}
+\end{equation}
+donde $\xi^r$ y $\xi^\theta$ son las separaciones en dirección radial y transversal, respectivamente. Esta aceleración diferencial es la marca de la curvatura del espacio-tiempo: no puede ser eliminada por ningún cambio de sistema de referencia.
+
+\begin{definicion}{Tensor de curvatura y desviación geodésica}{desviacion_geodesica}
+La aceleración de marea entre dos trayectorias de caída libre separadas por el vector de desviación $\xi^\mu$ viene dada por la \textbf{ecuación de desviación geodésica}:
+\begin{equation}
+  \frac{D^2\xi^\mu}{d\tau^2} = -R^\mu{}_{\nu\rho\sigma}\,U^\nu\,\xi^\rho\,U^\sigma,
+  \label{eq:desviacion_geodesica}
+\end{equation}
+donde $R^\mu{}_{\nu\rho\sigma}$ es el \textbf{tensor de curvatura de Riemann} (introducido en el Capítulo~\ref{cap:curvatura}) y $U^\mu = dx^\mu/d\tau$ es la 4-velocidad. Las fuerzas de marea son, por tanto, una medida directa de la curvatura del espacio-tiempo.
+\end{definicion}
+
+% ===========================================================
+\section{Caída libre como movimiento inercial: la geometrización de la gravedad}
+\label{sec:geodesicas}
+% ===========================================================
+
+\subsection{La gravedad como curvatura: cambio de paradigma}
+
+La relatividad especial equiparó la inercia al movimiento rectilíneo uniforme en el espacio-tiempo de Minkowski: una partícula libre sigue una línea recta (geodésica) en este espacio plano. La gravedad newtona introduce una fuerza que curva esta trayectoria.
+
+Einstein propuso la interpretación radicalmente diferente: \emph{no hay fuerza gravitacional}. La gravedad no es una fuerza en un espacio-tiempo plano, sino la \textbf{curvatura del espacio-tiempo mismo}. Una partícula en ``caída libre'' es, en realidad, una partícula libre que sigue la trayectoria más rectilínea posible (una geodésica) en el espacio-tiempo curvo. La presencia de masa-energía curva el espacio-tiempo, y la curvatura dirige el movimiento.
+
+Esta interpretación es consistente con el PEE: en cada punto, el espacio-tiempo es localmente plano (MRLI), y las partículas libres se mueven localmente en línea recta. A escala global, las geodésicas en el espacio-tiempo curvo parecen trayectorias parabólicas (proyectiles) o elipses orbitales (planetas), como consecuencia de la curvatura.
+
+\subsection{La ecuación geodésica}
+
+La condición de que una trayectoria sea una geodésica en un espacio-tiempo con métrica $g_{\mu\nu}$ se expresa mediante la \textbf{ecuación geodésica}:
+
+\begin{teorema}{Ecuación geodésica}{geodesica}
+La trayectoria $x^\mu(\tau)$ de una partícula libre (en caída libre) en el espacio-tiempo satisface:
+\begin{equation}
+  \frac{d^2x^\mu}{d\tau^2} + \Gamma^\mu{}_{\nu\rho}\,\frac{dx^\nu}{d\tau}\,\frac{dx^\rho}{d\tau} = 0,
+  \label{eq:geodesica}
+\end{equation}
+donde los \textbf{símbolos de Christoffel} (introducidos en el Capítulo~\ref{cap:curvatura})
+\begin{equation}
+  \Gamma^\mu{}_{\nu\rho} = \frac{1}{2}g^{\mu\lambda}
+  \left(\partial_\nu g_{\lambda\rho} + \partial_\rho g_{\lambda\nu} - \partial_\lambda g_{\nu\rho}\right)
+  \label{eq:christoffel_cap5}
+\end{equation}
+dependen de las derivadas de la métrica $g_{\mu\nu}$.
+\end{teorema}
+
+\begin{importante}
+La ecuación geodésica \eqref{eq:geodesica} es la generalización de $d^2x^\mu/d\tau^2 = 0$ (movimiento libre en espacio plano). El término con $\Gamma^\mu{}_{\nu\rho}$ no representa una fuerza: es el efecto de la curvatura del espacio-tiempo, que en un MRLI (donde $\Gamma^\mu{}_{\nu\rho}|_p = 0$) desaparece, recuperando el movimiento rectilíneo de la relatividad especial.
+\end{importante}
+
+\subsection{Correspondencia con la gravedad newtoniana en el límite no relativista}
+
+Para verificar que la ecuación geodésica reproduce la gravitación newtoniana en el límite adecuado, consideremos una partícula que se mueve lentamente ($v \ll c$) en un campo gravitacional débil y estático.
+
+\textbf{Hipótesis:}
+\begin{enumerate}[leftmargin=2em]
+  \item Velocidades bajas: $dx^i/d\tau \ll dx^0/d\tau \approx c$, de modo que el término dominante en \eqref{eq:geodesica} es $\Gamma^\mu{}_{00}\,(c)^2$.
+  \item Campo estático: $\partial_0 g_{\mu\nu} = 0$.
+  \item Campo débil: $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ con $|h_{\mu\nu}| \ll 1$.
+\end{enumerate}
+
+Bajo estas hipótesis, los símbolos de Christoffel relevantes son:
+\begin{equation}
+  \Gamma^i{}_{00} = -\frac{1}{2}\eta^{ij}\partial_j h_{00} = -\frac{1}{2}\partial^i h_{00}.
+  \label{eq:Gamma_i00}
+\end{equation}
+
+La componente espacial de \eqref{eq:geodesica} da:
+\begin{equation}
+  \frac{d^2 x^i}{d\tau^2} = -\Gamma^i{}_{00}\left(\frac{dx^0}{d\tau}\right)^2
+  \approx \frac{c^2}{2}\partial^i h_{00}.
+  \label{eq:geodesica_newtoniana}
+\end{equation}
+
+Para que esto reproduzca la ley de Newton $\ddot{\vec{r}} = -\nabla\Phi$ (con $\Phi$ el potencial gravitacional newtoniano), debemos identificar:
+\begin{equation}
+  \boxed{h_{00} = -\frac{2\Phi}{c^2}}, \quad \text{es decir}, \quad
+  g_{00} = -\left(1 + \frac{2\Phi}{c^2}\right).
+  \label{eq:g00_newtoniano}
+\end{equation}
+
+\begin{importante}
+La ecuación \eqref{eq:g00_newtoniano} revela que la componente $g_{00}$ de la métrica es la versión relativista del \textbf{potencial gravitacional newtoniano} $\Phi$. En la relatividad general, los 10 componentes independientes de $g_{\mu\nu}$ generalizan el único escalar $\Phi$ de la gravitación newtoniana. La métrica \emph{es} el campo gravitacional.
+\end{importante}
+
+\begin{ejemplo}{Tiempo propio y potencial gravitacional en el límite newtoniano}{tiempo_propio_newton}
+Para la métrica \eqref{eq:g00_newtoniano} con campos débiles y velocidades bajas, el elemento de línea es:
+\[
+  ds^2 = g_{\mu\nu}\,dx^\mu\,dx^\nu
+  \approx -\left(1 + \frac{2\Phi}{c^2}\right)c^2\,dt^2 + d\vec{x}^2.
+\]
+Para una partícula en reposo ($d\vec{x} = 0$), el tiempo propio es:
+\[
+  d\tau = \sqrt{-ds^2/c^2} = \sqrt{1 + \frac{2\Phi}{c^2}}\,dt
+  \approx \left(1 + \frac{\Phi}{c^2}\right)dt.
+\]
+Si $\Phi < 0$ (interior del pozo gravitacional), entonces $d\tau < dt$: el reloj en el pozo marcha más lento que el tiempo coordinado. Este resultado reproduce exactamente la dilatación temporal gravitacional de la Proposición~\ref{prop:dilatacion_temporal}, confirmando la coherencia del formalismo.
+\end{ejemplo}
+
+% ===========================================================
+\section{La necesidad de una teoría tensorial de la gravedad}
+\label{sec:necesidad_tensorial}
+% ===========================================================
+
+El principio de equivalencia convence de que la gravedad está relacionada con la geometría del espacio-tiempo. Pero ¿por qué la teoría de la gravedad debe formularse en términos de tensores? ¿Por qué no es suficiente una teoría con un campo escalar o un campo vectorial?
+
+\subsection{Por qué la gravedad no puede ser un campo escalar}
+
+La teoría gravitacional más simple que uno podría imaginar sería la de un campo escalar $\varphi$ que satisface una ecuación de onda relativista. Esta idea fue explorada por Nordström (1912-1913), antes de la relatividad general. El campo escalar produce una aceleración proporcional al gradiente de $\varphi$.
+
+Sin embargo, las teorías escalares de la gravedad tienen problemas fundamentales:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{No desvían la luz (primer orden).} Un campo escalar acoplado solo a la masa en reposo no afecta a los fotones (sin masa). La observación de la deflexión de la luz descarta estas teorías.
+  \item \textbf{No predicen precesión del perihelio.} Las órbitas cerradas en un campo escalar no precesan, en contradicción con la observación de Mercurio.
+  \item \textbf{Energía del campo gravitacional.} La energía del campo gravitacional tiene energía negativa, lo cual crea problemas de estabilidad.
+  \item \textbf{El PEE requiere la métrica.} El PEE establece que localmente el espacio-tiempo es de Minkowski. Esto implica que el campo gravitacional modifica la estructura del intervalo $ds^2$, lo que no puede capturarse con un escalar solo.
+\end{enumerate}
+
+\subsection{Por qué un campo vectorial también es insuficiente}
+
+Podría pensarse que, análogamente al electromagnetismo (un campo tensorial antisimétrico de rango 2 derivado de un potencial vectorial), la gravedad podría describirse por un campo vectorial $B_\mu$.
+
+El problema principal es que una teoría vectorial tiene una fuerza de signo opuesto entre cargas del mismo tipo. En electrostática, dos cargas positivas se repelen. En gravedad, si la ``carga gravitacional'' es la masa (siempre positiva), un campo vectorial predeciría \emph{repulsión} entre masas del mismo signo — lo opuesto a la atracción observada.
+
+Más formalmente, en la teoría cuántica de campos, el potencial vectorial da lugar a un bosón de intercambio con espín 1 (como el fotón). Los bosones de espín 1 producen fuerzas repulsivas entre cargas del mismo signo. Para obtener atracción universal entre masas positivas, el bosón mediador debe tener espín 2 (el gravitón).
+
+\subsection{La métrica como campo fundamental de la gravedad}
+
+La conclusión es que el campo gravitacional debe ser descrito por un tensor simétrico de rango 2: la \textbf{métrica} $g_{\mu\nu}$.
+
+\begin{definicion}{La métrica como campo gravitacional}{metrica_grav}
+En la relatividad general, el campo gravitacional queda completamente descrito por la \textbf{métrica del espacio-tiempo} $g_{\mu\nu}(x)$, un tensor simétrico de tipo $(0,2)$ con signatura $(-,+,+,+)$. La métrica:
+\begin{enumerate}[leftmargin=2em]
+  \item Define el intervalo espacio-temporal: $ds^2 = g_{\mu\nu}\,dx^\mu\,dx^\nu$.
+  \item Determina las trayectorias de caída libre (geodésicas) mediante \eqref{eq:geodesica}.
+  \item Contiene el potencial gravitacional newtoniano como el componente $g_{00} \approx -(1 + 2\Phi/c^2)$ en el límite de campo débil.
+  \item Tiene 10 componentes independientes (en 4 dimensiones), que generalizan el único escalar $\Phi$ de Newton.
+\end{enumerate}
+\end{definicion}
+
+\begin{proposicion}{Cuenta de grados de libertad de la gravedad}{grados_libertad}
+Un tensor simétrico de rango 2 en 4 dimensiones tiene $4(4+1)/2 = 10$ componentes independientes. De estas, 4 pueden eliminarse mediante la libertad de elección de coordenadas (difeomorfismos), y 4 más corresponden a la elección de gauges adicionales. La teoría tiene, por tanto, $10 - 4 - 4 = 2$ grados de libertad físicos propagantes — los dos modos de polarización de las \textbf{ondas gravitacionales} (los modos $+$ y $\times$ que se estudian en detalle en los capítulos finales de este libro).
+\end{proposicion}
+
+\subsection{El principio de covarianza general}
+
+La elección de la métrica como campo fundamental está respaldada por el \textbf{principio de covarianza general}: las ecuaciones de la física deben tener la misma forma en todos los sistemas de coordenadas.
+
+Este principio extiende la covarianza de Lorentz (válida solo bajo transformaciones lineales) a la covarianza bajo \emph{transformaciones arbitrarias de coordenadas} (difeomorfismos). Las ecuaciones tensoriales satisfacen automáticamente este principio.
+
+\begin{definicion}{Principio de covarianza general}{covarianza_general}
+Las leyes de la física deben escribirse como \textbf{ecuaciones tensoriales} bajo difeomorfismos del espacio-tiempo. Si una ecuación tensorial es válida en un sistema de coordenadas, es válida en todos.
+\end{definicion}
+
+\begin{importante}
+La receta para ``elevar'' una ecuación de la relatividad especial a la relatividad general es el \textbf{principio de acoplamiento mínimo}:
+\begin{enumerate}[leftmargin=2em]
+  \item Reemplazar la métrica de Minkowski $\eta_{\mu\nu}$ por la métrica general $g_{\mu\nu}$.
+  \item Reemplazar las derivadas parciales $\partial_\mu$ por las derivadas covariantes $\nabla_\mu$.
+  \item No agregar términos de curvatura adicionales (solo los mínimos necesarios para la consistencia).
+\end{enumerate}
+Por ejemplo, la ecuación de conservación del cuadrimomento $\partial_\mu T^{\mu\nu} = 0$ se convierte en $\nabla_\mu T^{\mu\nu} = 0$.
+\end{importante}
+
+% ===========================================================
+\section{El problema de Einstein: conectar geometría y materia}
+\label{sec:problema_einstein}
+% ===========================================================
+
+Llegados a este punto, el programa de Einstein puede resumirse en dos preguntas:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{¿Cómo mueve la geometría a la materia?} La respuesta es la ecuación geodésica \eqref{eq:geodesica}: la curvatura del espacio-tiempo (codificada en los símbolos de Christoffel, que dependen de $g_{\mu\nu}$) determina las trayectorias de las partículas libres. Esta es la generalización covariante de la primera ley de Newton.
+
+  \item \textbf{¿Cómo mueve la materia a la geometría?} Esta es la pregunta más profunda, y su respuesta son las \textbf{ecuaciones de campo de Einstein} (Capítulo~\ref{cap:ecuaciones_campo}):
+  \begin{equation}
+    G_{\mu\nu} + \Lambda\,g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu},
+    \label{eq:Einstein_preview}
+  \end{equation}
+  donde $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$ es el tensor de Einstein (construido a partir de la curvatura), $\Lambda$ es la constante cosmológica, y $T_{\mu\nu}$ es el tensor de energía-momento (Sección~\ref{sec:Tmunu}) que describe la distribución de materia y energía.
+\end{enumerate}
+
+\begin{observacion}{La analogía con la teoría de campos}{}
+La estructura de la relatividad general tiene una analogía directa con el electromagnetismo:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lll}
+\hline
+\textbf{Concepto} & \textbf{Electromagnetismo} & \textbf{Relatividad general} \\
+\hline
+Campo fundamental & $A^\mu$ (4-potencial) & $g_{\mu\nu}$ (métrica) \\
+Tensor de campo & $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ & $R^\rho{}_{\sigma\mu\nu}$ (Riemann) \\
+Ecuación de campo & $\partial_\mu F^{\mu\nu} = \mu_0 J^\nu$ & $G_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$ \\
+Carga & Carga eléctrica $q$ & Masa-energía $T_{\mu\nu}$ \\
+Ecuación de movimiento & $f^\mu = q F^{\mu\nu}U_\nu$ & Ecuación geodésica \eqref{eq:geodesica} \\
+\hline
+\end{tabular}
+\end{center}
+La diferencia fundamental es que en el EM el campo vive \emph{sobre} el espacio-tiempo; en la RG, el campo gravitacional \emph{es} el espacio-tiempo.
+\end{observacion}
+
+% ===========================================================
+\section{Resumen del capítulo}
+\label{sec:resumen_cap5}
+% ===========================================================
+
+Este capítulo estableció el puente conceptual entre la relatividad especial y la relatividad general mediante el principio de equivalencia. Los puntos clave son:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La igualdad $m_{\rm i} = m_{\rm g}$, verificada experimentalmente al nivel de $10^{-14}$, es la base empírica del principio de equivalencia. En Newton, es una coincidencia; en RG, es una consecuencia geométrica.
+
+  \item El \textbf{Principio de Equivalencia Débil} (PED) establece que todos los cuerpos caen igual. El \textbf{Principio de Equivalencia de Einstein} (PEE) extiende esto a toda la física local: en caída libre, el espacio-tiempo es localmente de Minkowski. El \textbf{Principio de Equivalencia Fuerte} (PEF) incluye cuerpos autogravitantes.
+
+  \item Los experimentos del ascensor de Einstein demuestran que la gravedad puede eliminarse localmente cambiando a un marco en caída libre, pero no globalmente: las fuerzas de marea (que miden la curvatura del espacio-tiempo) son un efecto irreducible.
+
+  \item El PEE predice el \textbf{corrimiento al rojo gravitacional} $\Delta\nu/\nu = -\Delta\Phi/c^2$, la \textbf{deflexión de la luz} por campos gravitacionales, y la \textbf{dilatación temporal gravitacional} $d\tau \approx (1 + \Phi/c^2)dt$. Estas predicciones han sido verificadas con alta precisión (experimento de Pound y Rebka, GPS, observaciones de Eddington).
+
+  \item Las partículas en caída libre siguen \textbf{geodésicas} en el espacio-tiempo curvo, según la ecuación geodésica $d^2x^\mu/d\tau^2 + \Gamma^\mu{}_{\nu\rho}\dot{x}^\nu\dot{x}^\rho = 0$.
+
+  \item En el límite de campo débil, la componente $g_{00} \approx -(1 + 2\Phi/c^2)$ reproduce el potencial gravitacional newtoniano. La métrica $g_{\mu\nu}$ es el campo gravitacional; sus 10 componentes independientes generalizan el único escalar $\Phi$ de Newton.
+
+  \item La teoría de la gravedad debe ser tensorial (espín 2) para producir atracción universal y dar cuenta de la deflexión de la luz. La relatividad general satisface el principio de covarianza general: sus leyes son ecuaciones tensoriales válidas en cualquier sistema de coordenadas.
+\end{enumerate}
+
+% ===========================================================
+\section{Problemas propuestos}
+\label{sec:problemas_cap5}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Igualdad de masas inercial y gravitacional.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Un cuerpo de masa inercial $m_{\rm i}$ y masa gravitacional $m_{\rm g}$ cae en un campo $\vec{g}$. Muestre que si $m_{\rm g}/m_{\rm i} = k \neq 1$ para algún material, esto sería detectable con una balanza de torsión de Eötvös. Estime la diferencia en la aceleración si $k = 1 + 10^{-13}$.
+    \item En el experimento MICROSCOPE (2017), dos cuerpos de titanio y platino de $\sim 400\,\si{g}$ cada uno orbitan en caída libre. Explique cómo la comparación de sus aceleraciones puede detectar una posible diferencia $\eta \sim 10^{-15}$ en el parámetro de Eötvös. ¿Por qué la órbita libre elimina el ruido sísmico que afecta a las balanzas terrestres?
+  \end{enumerate}
+
+  \item \textbf{Experimento del ascensor: análisis detallado.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Un pulso de luz de frecuencia $\nu_0$ es emitido horizontalmente desde la pared izquierda de un ascensor de ancho $L$ que cae libremente en campo $g$. Muestre que en el marco del ascensor el fotón se curva hacia el suelo. Calcule la desviación vertical $\delta z$ cuando el fotón alcanza la pared derecha.
+    \item Repita el cálculo para el ascensor en aceleración $a = g$ en el espacio libre. Muestre que $\delta z$ es idéntico al del caso (a), verificando el PEE.
+    \item Estime $\delta z$ para $L = 10\,\si{m}$ y $g = 9{,}81\,\si{m/s^2}$. ¿Es observable con instrumentos actuales?
+  \end{enumerate}
+
+  \item \textbf{Corrimiento al rojo gravitacional.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Una estrella de masa $M = 1{,}5\,M_\odot$ y radio $R = 10\,\si{km}$ (estrella de neutrones) emite fotones desde su superficie. Calcule el corrimiento al rojo gravitacional $z = \Delta\lambda/\lambda_0$ para un observador a infinito. ¿Es este resultado compatible con la aproximación de campo débil?
+    \item En el límite de campo fuerte, la fórmula exacta (métrica de Schwarzschild) es $1 + z = 1/\sqrt{1 - 2GM/(Rc^2)}$. Evalúe numéricamente para la estrella de neutrones del inciso (a) y compare con la aproximación de campo débil.
+    \item El Sol tiene $M_\odot \approx 1{,}99\times10^{30}\,\si{kg}$ y $R_\odot \approx 6{,}96\times10^8\,\si{m}$. Calcule el corrimiento al rojo de las líneas espectrales solares medido en la Tierra ($r \approx 1\,\si{AU} \gg R_\odot$).
+  \end{enumerate}
+
+  \item \textbf{Dilatación temporal gravitacional en el GPS.}
+  El sistema GPS (ver Ejemplo~\ref{ej:GPS}) requiere precisión temporal de nanosegundos.
+  \begin{enumerate}[label=(\alph*)]
+    \item Reproduzca el cálculo del efecto gravitacional (ganancia de $\approx 45{,}9\,\si{\mu s/día}$) para la órbita GPS a $h = 20{,}200\,\si{km}$. Utilice $GM_\oplus = 3{,}986\times10^{14}\,\si{m^3/s^2}$ y $R_\oplus = 6{,}371\times10^6\,\si{m}$.
+    \item Calcule el efecto especial-relativista (pérdida por velocidad orbital) usando $v_{\rm orb} = \sqrt{GM_\oplus/r_{\rm sat}}$.
+    \item Sume los dos efectos y verifique el valor neto de $\approx +38{,}4\,\si{\mu s/día}$.
+    \item ¿Cuánto error de posición acumularía el GPS en 24 horas si no se corrigieran los efectos relativistas? Justifique la afirmación de que el GPS es una ``aplicación cotidiana de la relatividad general''.
+  \end{enumerate}
+
+  \item \textbf{Fuerzas de marea.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Dos partículas se sueltan simultáneamente desde el reposo a una altura $R = 6{,}5\times10^6\,\si{m}$ sobre el centro de la Tierra, separadas horizontalmente $\xi_\perp = 1\,\si{m}$. Usando la ecuación \eqref{eq:mareas}, calcule la aceleración de marea horizontal entre ellas.
+    \item Un astronauta de altura $H = 1{,}8\,\si{m}$ está en caída libre hacia un agujero negro de masa $M = 10\,M_\odot$. Estime la distancia $r$ a la que las fuerzas de marea longitudinales (estiramiento) son comparables a la fuerza que puede soportar el cuerpo humano ($\sim 10\,g$). ¿Cuál es este fenómeno conocido como?
+    \item Explique cualitativamente por qué las fuerzas de marea son proporcionales al tensor de curvatura de Riemann, es decir, por qué \emph{no} pueden eliminarse con un cambio de marco de referencia.
+  \end{enumerate}
+
+  \item \textbf{El límite newtoniano de la ecuación geodésica.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Partiendo de la ecuación geodésica \eqref{eq:geodesica} con las hipótesis de campo débil, campo estático y velocidades bajas, derive con detalle la ecuación de movimiento \eqref{eq:geodesica_newtoniana} y la identificación \eqref{eq:g00_newtoniano}.
+    \item Para la métrica de Schwarzschild exterior (a derivar en el Capítulo~\ref{cap:schwarzschild}):
+    $g_{00} = -(1 - 2GM/(rc^2))$, verifique que en el límite $r \gg GM/c^2$ se recupera el potencial newtoniano $\Phi = -GM/r$.
+    \item Muestre que la velocidad de escape en el formalismo relativista es $v_{\rm esc} = c\sqrt{2GM/(rc^2)}$, la misma que en Newton. ¿Coincide el radio de Schwarzschild $r_s = 2GM/c^2$ con el ``radio de no-escape'' newtoniano?
+  \end{enumerate}
+
+  \item \textbf{El principio de acoplamiento mínimo.}
+  \begin{enumerate}[label=(\alph*)]
+    \item La ecuación de ondas electromagnéticas en espacio-tiempo plano es $\Box A^\nu = \mu_0 J^\nu$ (Sección~\ref{sec:maxwell_cov}). Escriba su generalización al espacio-tiempo curvo usando el principio de acoplamiento mínimo.
+    \item La conservación del tensor de energía-momento en espacio plano es $\partial_\mu T^{\mu\nu} = 0$. Escriba la versión covariante en espacio curvo.
+    \item ¿Por qué la ecuación $\nabla_\mu T^{\mu\nu} = 0$ (en lugar de $\partial_\mu T^{\mu\nu} = 0$) no implica una ley de conservación global en un espacio-tiempo curvo general? ¿En qué casos sí existe una cantidad conservada?
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Precesión de las órbitas y la prueba de la deflexión de la luz.}
+  \begin{enumerate}[label=(\alph*)]
+    \item La relatividad general predice que la línea de ápsides de una órbita planetaria elíptica precesa en un ángulo por vuelta de $\delta\phi = 6\pi G M/(a(1-e^2)c^2)$, donde $a$ es el semieje mayor y $e$ la excentricidad. Para Mercurio ($a = 5{,}79\times10^{10}\,\si{m}$, $e = 0{,}206$, $T = 87{,}97$ días), calcule la precesión en arcsegundos por siglo y compare con el valor observado de $42{,}98''$/siglo.
+    \item El experimento de Eddington (1919) midió la deflexión de la luz de estrellas de fondo durante un eclipse solar. La relatividad general predice $\alpha_{\rm RG} = 4GM_\odot/(c^2 R_\odot)$, el doble que la predicción del PEE. Explique cualitativamente de dónde viene el factor adicional de 2.
+    \item Calcule el retraso temporal de Shapiro para una señal de radar enviada desde la Tierra, reflejada en Mercurio cuando está casi detrás del Sol ($b \approx R_\odot$), y recibida de vuelta en la Tierra. Use la fórmula aproximada $\Delta t \approx 4GM_\odot/(c^3)\ln(4r_T r_M/b^2)$, con $r_T = 1\,\si{AU}$, $r_M = 0{,}39\,\si{AU}$ y $b \approx R_\odot$.
+  \end{enumerate}
+
+  \item \textbf{Marcos localmente inerciales y curvatura.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que en un MRLI (donde $g_{\mu\nu}(p) = \eta_{\mu\nu}$ y $\partial_\rho g_{\mu\nu}(p) = 0$), el tensor de curvatura de Riemann no es necesariamente cero, y que sus componentes son
+    $R_{\mu\nu\rho\sigma} = \frac{1}{2}(\partial_\rho\partial_\mu g_{\nu\sigma} + \partial_\sigma\partial_\nu g_{\mu\rho} - \partial_\sigma\partial_\mu g_{\nu\rho} - \partial_\rho\partial_\nu g_{\mu\sigma})$.
+    \item Deduzca que el tensor de curvatura de Riemann describe las fuerzas de marea, comparando \eqref{eq:desviacion_geodesica} con \eqref{eq:mareas} en el límite newtoniano.
+    \item ¿Por qué la existencia de un MRLI en cada punto es equivalente al PEE? Formule el argumento en términos de la anulación de los símbolos de Christoffel.
+  \end{enumerate}
+
+  \item \textbf{(Proyecto) Corrimiento al rojo gravitacional en sistemas astrofísicos.}
+  Considere las siguientes fuentes de fotones gravitacionalmente corridas al rojo:
+  \begin{enumerate}[label=(\alph*)]
+    \item \textbf{Enana blanca Sirio B:} $M \approx 1{,}02\,M_\odot$, $R \approx 5{,}9\times10^6\,\si{m}$. Calcule $z = \Delta\lambda/\lambda$ para un observador a infinito. Compare con la medición de Adams (1925): $z \approx 3\times10^{-4}$.
+    \item \textbf{Líneas espectrales de la región de alta velocidad del disco de acreción del agujero negro en Cyg X-1:} el hierro K$\alpha$ (longitud de onda en reposo $\lambda_0 = 0{,}194\,\si{nm}$) se observa con corrimiento al rojo hasta $z \approx 0{,}3$. Estime la distancia al centro del agujero negro desde la que emergen estos fotones, suponiendo masa $M = 14{,}8\,M_\odot$ y usando la métrica de Schwarzschild.
+    \item Discuta la importancia del corrimiento al rojo gravitacional en la interpretación del espectro de ondas gravitacionales de la fusión de objetos compactos: ¿cómo distinguir un agujero negro de $30\,M_\odot$ a $z_{\rm cosmológico} = 0{,}1$ de uno de $27{,}3\,M_\odot$ a $z = 0$?
+  \end{enumerate}
+
+\end{enumerate}
