@@ -1,0 +1,625 @@
+% ============================================================
+% Capítulo 8: Soluciones Exactas II — Agujeros Negros Rotantes
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Soluciones Exactas II: Agujeros Negros Rotantes}
+\label{cap:kerr}
+
+La solución de Schwarzschild describe el espacio-tiempo exterior a cualquier objeto esférico estático. Sin embargo, los objetos astrofísicos reales —estrellas, agujeros negros, galaxias— poseen \emph{momento angular}. Cuando una estrella masiva colapsa gravitacionalmente, la conservación del momento angular concentra la rotación en el objeto remanente, produciendo un agujero negro que puede girar a velocidades próximas al límite físico. La descripción exacta de este espacio-tiempo fue obtenida por Roy Kerr en 1963 \cite{Kerr1963} y representa uno de los resultados más profundos de la relatividad general.
+
+La métrica de Kerr posee una estructura causal considerablemente más rica que la de Schwarzschild: admite dos horizontes de eventos, una singularidad en forma de anillo (no puntual), una región denominada \textbf{ergosfera} en la que ningún observador puede permanecer estático, y predice mecanismos de extracción de energía del campo gravitacional rotacional sin análogo newtoniano. Estas propiedades son relevantes para la física de los núcleos activos de galaxias (AGN), los jets relativistas, las fusiones de binarias de agujeros negros detectadas por LIGO-Virgo \cite{Abbott2016prl} y la imagen directa del agujero negro supermasivo de M87 obtenida por el Event Horizon Telescope \cite{EHT2019}.
+
+En este capítulo estudiamos en detalle la métrica de Kerr: su estructura matemática, sus horizontes y la ergosfera, las geodésicas de partículas y fotones, el proceso de Penrose para la extracción de energía rotacional, la superradianza, la generalización a la solución de Kerr-Newman (carga eléctrica y rotación), y el teorema de unicidad de los agujeros negros. El capítulo cierra con un resumen y una colección de problemas propuestos.
+
+% ===========================================================
+\section{La Métrica de Kerr}
+\label{sec:metrica_kerr}
+% ===========================================================
+
+\subsection{Motivación y estructura general}
+
+La solución de Kerr es la solución estacionaria y axialmente simétrica de las ecuaciones de Einstein en el vacío:
+\begin{equation}
+  R_{\mu\nu} = 0,
+  \label{eq:vacio_kerr}
+\end{equation}
+con la condición adicional de que sea asintóticamente plana (recupere Minkowski para $r \to \infty$). La simetría axial implica la existencia de un vector de Killing $\partial_\varphi$; la estacionaridad implica un vector de Killing temporal $\partial_t$. A diferencia del caso de Schwarzschild, estos dos vectores de Killing \emph{no son ortogonales}: la rotación introduce un acoplamiento $g_{t\varphi} \neq 0$, lo que se conoce como \textbf{arrastre de marcos} (\textit{frame dragging}).
+
+\begin{definicion}{Métrica de Kerr (coordenadas de Boyer-Lindquist)}{kerr_BL}
+La solución de Kerr en las \textbf{coordenadas de Boyer-Lindquist} $(t, r, \theta, \varphi)$ es
+\begin{equation}
+  \boxed{ds^2 = -\!\left(1 - \frac{r_s r}{\Sigma}\right)c^2\,dt^2
+  - \frac{2r_s r\,a\sin^2\!\theta}{\Sigma}\,c\,dt\,d\varphi
+  + \frac{\Sigma}{\Delta}\,dr^2
+  + \Sigma\,d\theta^2
+  + \left(r^2 + a^2 + \frac{r_s r\,a^2\sin^2\!\theta}{\Sigma}\right)\sin^2\!\theta\,d\varphi^2,}
+  \label{eq:kerr_BL}
+\end{equation}
+donde se definen las funciones auxiliares
+\begin{align}
+  \Sigma(r,\theta) &\equiv r^2 + a^2\cos^2\!\theta, \label{eq:Sigma_kerr}\\
+  \Delta(r)        &\equiv r^2 - r_s\,r + a^2,       \label{eq:Delta_kerr}
+\end{align}
+el radio de Schwarzschild $r_s = 2GM/c^2$, y el \textbf{parámetro de giro} (momento angular específico)
+\begin{equation}
+  a \equiv \frac{J}{Mc},
+  \label{eq:param_spin}
+\end{equation}
+con $J$ el momento angular total del agujero negro.
+\end{definicion}
+
+\begin{observacion}{Límites de la métrica de Kerr}{}
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item Para $a = 0$: $\Sigma = r^2$, $\Delta = r^2 - r_s r = r(r - r_s)$ y la métrica se reduce a la de Schwarzschild \eqref{eq:schwarz}.
+  \item Para $M = 0$ (y por tanto $r_s = 0$, $a \to 0$): se recupera el espacio-tiempo de Minkowski en coordenadas esfero-elipsoidales.
+  \item Para $r \to \infty$: la métrica se aproxima asintóticamente a la de Minkowski: $g_{\mu\nu} \to \eta_{\mu\nu} + O(r_s/r)$.
+\end{enumerate}
+\end{observacion}
+
+\subsection{El tensor métrico y sus inversas}
+
+Los componentes no nulos de la métrica de Kerr (con $c = 1$ por brevedad) son:
+\begin{align}
+  g_{tt}       &= -\left(1 - \frac{r_s r}{\Sigma}\right), \quad
+  g_{t\varphi}  = g_{\varphi t} = -\frac{r_s r\,a\sin^2\!\theta}{\Sigma}, \nl
+  g_{rr}        &= \frac{\Sigma}{\Delta}, \quad
+  g_{\theta\theta} = \Sigma, \quad
+  g_{\varphi\varphi} = \left(r^2 + a^2 + \frac{r_s r\,a^2\sin^2\!\theta}{\Sigma}\right)\sin^2\!\theta.
+\end{align}
+El determinante del tensor métrico vale
+\begin{equation}
+  \sqrt{-g} = \Sigma\sin\theta,
+  \label{eq:det_kerr}
+\end{equation}
+expresión que se usa frecuentemente en integrales sobre el volumen del espacio-tiempo. Las componentes de la métrica inversa $g^{\mu\nu}$ relevantes son:
+\begin{equation}
+  g^{tt} = -\frac{(r^2+a^2)^2 - a^2\Delta\sin^2\!\theta}{\Sigma\Delta},
+  \quad
+  g^{t\varphi} = -\frac{r_s r\,a}{\Sigma\Delta}, \quad
+  g^{\varphi\varphi} = \frac{\Delta - a^2\sin^2\!\theta}{\Sigma\Delta\sin^2\!\theta}.
+\end{equation}
+
+\subsection{La singularidad en anillo}
+
+A diferencia de la singularidad puntual de Schwarzschild, la métrica de Kerr posee una singularidad \emph{anular}. El escalar de Kretschner para la solución de Kerr es:
+\begin{equation}
+  K = R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}
+    = \frac{48 G^2 M^2}{\Sigma^6}\!\left(r^2 - a^2\cos^2\!\theta\right)\!\left(r^4 - 14a^2r^2\cos^2\!\theta + a^4\cos^4\!\theta\right).
+  \label{eq:kretschner_kerr}
+\end{equation}
+Este escalar diverge cuando $\Sigma = 0$, es decir, cuando
+\begin{equation}
+  r = 0 \quad \text{y} \quad \cos\theta = 0 \quad (\theta = \pi/2),
+  \label{eq:singularidad_anillo}
+\end{equation}
+que en coordenadas cartesianas corresponde al círculo $x^2 + y^2 = a^2$, $z = 0$: una singularidad en \textbf{anillo de radio} $a$ en el plano ecuatorial. Esta estructura geométrica sugiere que la solución de Kerr, extendida analíticamente más allá del horizonte, conecta con una segunda hoja asimptóticamente plana que posee curvatura de signo opuesto (interpretable como un ``universo de gravedad repulsiva''), aunque esta extensión carece de relevancia astrofísica.
+
+\begin{importante}
+Las singularidades de la métrica de Kerr son de dos tipos: (a) la singularidad \emph{de coordenadas} en $\Delta = 0$ (horizontes de eventos), donde la métrica degenera pero el espacio-tiempo es regular, y (b) la singularidad \emph{física} en $\Sigma = 0$, donde el escalar de Kretschner diverge. Sólo esta última es intrínseca.
+\end{importante}
+
+% ===========================================================
+\section{Horizontes de Eventos y la Ergosfera}
+\label{sec:horizontes_ergosfera}
+% ===========================================================
+
+\subsection{Los dos horizontes de eventos}
+
+Los horizontes de la métrica de Kerr se localizan donde $\Delta(r) = 0$:
+\begin{equation}
+  r^2 - r_s r + a^2 = 0 \implies
+  r_{\pm} = \frac{r_s}{2} \pm \sqrt{\frac{r_s^2}{4} - a^2}
+           = \frac{GM}{c^2} \pm \sqrt{\frac{G^2M^2}{c^4} - a^2}.
+  \label{eq:horizontes_kerr_cap8}
+\end{equation}
+El \textbf{horizonte exterior} $r_+$ es el verdadero horizonte de eventos (ninguna señal puede escapar de $r < r_+$). El \textbf{horizonte interior} $r_-$ (también llamado horizonte de Cauchy) es una superficie de Cauchy interior, relevante para la extensión analítica máxima pero no para la física del colapso real.
+
+\begin{definicion}{Clases de agujeros negros de Kerr}{clases_kerr}
+Según el valor del parámetro de giro $a$:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Sub-extremo} ($|a| < GM/c^2$): dos horizontes $r_- < r_+$ reales y distintos.
+  \item \textbf{Extremo} ($|a| = GM/c^2$): $r_+ = r_- = GM/c^2$ (horizonte degenerado). La temperatura de Hawking es cero.
+  \item \textbf{Sobreextremístico} ($|a| > GM/c^2$): no existen horizontes y la singularidad anular queda desnuda. La conjetura de censura cósmica de Penrose prohíbe esta situación como resultado de un colapso gravitacional físico.
+\end{enumerate}
+\end{definicion}
+
+\begin{ejemplo}{Parámetro de giro adimensional de agujeros negros astrofísicos}{}
+El parámetro de giro se normaliza habitualmente como $\chi \equiv ac^2/(GM) = Jc/(GM^2)$, con $0 \leq \chi \leq 1$.
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Objeto & $M/M_\odot$ & $\chi$ estimado & Método de medida \\
+\hline
+Agujero negro de Sgr\,A* & $4\times10^6$ & $0.6$--$0.9$ & Movimiento estelar \\
+M87* & $6.5\times10^9$ & $> 0.5$ & Imagen EHT \\
+GW150914 (remanente) & $62$ & $\approx 0.67$ & Ondas gravitacionales \\
+Cygnus X-1 & $\approx 21$ & $> 0.98$ & Espectroscopía de rayos X \\
+\hline
+\end{tabular}
+\end{center}
+
+La medición del spin es fundamental porque determina la eficiencia de acreción y la producción de jets relativistas.
+\end{ejemplo}
+
+\subsection{La gravedad superficial del horizonte exterior}
+
+La \textbf{gravedad superficial} $\kappa$ del horizonte exterior $r_+$ es la aceleración propia (medida en el infinito) que necesita un observador estático en el horizonte para permanecer en reposo; para la solución de Kerr:
+\begin{equation}
+  \kappa = \frac{c^4}{GM}\frac{\sqrt{G^2M^2/c^4 - a^2}}{2(r_+^2 + a^2)/c^2}
+         = \frac{c^2(r_+ - r_-)}{2(r_+^2 + a^2)}.
+  \label{eq:gravedad_sup_kerr}
+\end{equation}
+Para $a = 0$ se recupera $\kappa = c^4/(4GM)$ (Schwarzschild). En el límite extremo ($a = GM/c^2$), $\kappa \to 0$: el agujero negro extremo tiene temperatura de Hawking nula y no puede ser enfriado aún más (tercera ley).
+
+\subsection{La velocidad angular del horizonte}
+
+Un observador estacionario en el horizonte exterior debe co-rotar con el agujero negro a la \textbf{velocidad angular del horizonte}:
+\begin{equation}
+  \Omega_H \equiv \left.\frac{d\varphi}{dt}\right|_{r=r_+}
+  = \frac{g_{t\varphi}}{g_{\varphi\varphi}}\bigg|_{\Delta=0}
+  = \frac{a\,c}{r_+^2 + a^2}.
+  \label{eq:omega_horizonte}
+\end{equation}
+Ningún observador puede permanecer estático (con $d\varphi/dt = 0$) en el horizonte; todos son arrastrados con velocidad angular $\Omega_H$. Esta propiedad es la manifestación más directa del \emph{frame dragging} en el horizonte.
+
+\subsection{La ergosfera}
+
+\begin{definicion}{Ergosfera}{ergosfera}
+La \textbf{ergosfera} es la región del espacio-tiempo en que el vector de Killing temporal $\xi^\mu = (\partial_t)^\mu$ es \emph{espacial} (en lugar de temporal):
+\begin{equation}
+  g(\xi,\xi) = g_{tt} = -\left(1 - \frac{r_s r}{\Sigma}\right) \geq 0.
+  \label{eq:ergo_cond}
+\end{equation}
+La condición $g_{tt} = 0$ define la \textbf{superficie de límite estático} (ergosuperficie exterior):
+\begin{equation}
+  r_{\rm ergo}^{(\pm)}(\theta) = \frac{r_s}{2} \pm \sqrt{\frac{r_s^2}{4} - a^2\cos^2\!\theta}
+  = \frac{GM}{c^2} \pm \sqrt{\frac{G^2M^2}{c^4} - a^2\cos^2\!\theta}.
+  \label{eq:ergosuperficie}
+\end{equation}
+La ergosfera exterior es la región $r_+ < r < r_{\rm ergo}^{(+)}(\theta)$.
+\end{definicion}
+
+\begin{importante}
+La ergosfera \textbf{no} es un horizonte: la luz y la materia pueden salir de ella. La diferencia fundamental con el horizonte es que dentro de la ergosfera el vector de Killing $\partial_t$ es espacial, de modo que la ``energía conservada'' $E = -p_t = -g_{t\mu}p^\mu$ puede ser \emph{negativa} para partículas con sentido de movimiento opuesto a la rotación. Esta propiedad es la base del proceso de Penrose.
+\end{importante}
+
+\begin{observacion}{Geometría de la ergosfera}{}
+En los polos ($\theta = 0, \pi$): $r_{\rm ergo}^{(+)} = GM/c^2 + \sqrt{G^2M^2/c^4 - a^2} = r_+$, de modo que la ergosuperficie toca al horizonte en los polos. En el ecuador ($\theta = \pi/2$): $r_{\rm ergo}^{(+)} = r_s = 2GM/c^2 > r_+$. La forma de la ergosfera es similar a un esferoide achatado que rodea al agujero negro.
+\end{observacion}
+
+% ===========================================================
+\section{Arrastre de Marcos y Precesión de Lense-Thirring}
+\label{sec:lense_thirring}
+% ===========================================================
+
+\subsection{El efecto de arrastre de marcos}
+
+Un observador que cae libremente desde el infinito con momento angular cero (ZAMO: \textit{Zero Angular Momentum Observer}) adquiere inevitablemente velocidad angular al acercarse a un agujero negro de Kerr. Esta es la manifestación del \textbf{arrastre de marcos} (o \textit{frame dragging}): el espacio-tiempo mismo es ``arrastrado'' por la rotación del agujero negro.
+
+La velocidad angular de un ZAMO (observador con $L = p_\varphi = 0$) es:
+\begin{equation}
+  \omega_{\rm ZAMO}(r, \theta) = -\frac{g_{t\varphi}}{g_{\varphi\varphi}}
+  = \frac{r_s\,r\,a\,c}{\Sigma(r^2 + a^2) + r_s r\,a^2\sin^2\!\theta}.
+  \label{eq:omega_zamo}
+\end{equation}
+Para $r \gg r_s$:
+\begin{equation}
+  \omega_{\rm ZAMO} \approx \frac{2GJ}{c^2 r^3},
+  \label{eq:arrastre_lejano}
+\end{equation}
+que coincide con el resultado de la relatividad general linealizada (efecto Lense-Thirring).
+
+\subsection{Precesión de Lense-Thirring}
+
+En el límite de campo débil y lenta rotación ($a \ll r$), el arrastre de marcos produce una \textbf{precesión} del plano orbital de un giróscopo o una partícula en órbita alrededor de un cuerpo en rotación. La frecuencia de precesión de Lense-Thirring es:
+\begin{equation}
+  \boldsymbol{\Omega}_{\rm LT} = \frac{G}{c^2 r^3}\left[3\hat{r}(\hat{r}\cdot\mathbf{J}) - \mathbf{J}\right]
+  + O\!\left(\frac{r_s^2}{r^2}\right),
+  \label{eq:lense_thirring}
+\end{equation}
+donde $\mathbf{J}$ es el momento angular del cuerpo central. Este efecto, predicho en 1918 por Lense y Thirring, fue medido con precisión del $\sim 19\%$ por el experimento Gravity Probe B (2004--2005) y con precisión del $\sim 0.2\%$ por el satélite LAGEOS.
+
+\begin{ejemplo}{Precesión de Lense-Thirring para Gravity Probe B}{}
+El experimento Gravity Probe B orbita la Tierra a altura $h = 642\,\si{km}$ con período $P = 97{,}6\,\si{min}$. El momento angular de la Tierra es $J_\oplus \approx 5{,}86\times10^{33}\,\si{kg\cdot m^2/s}$.
+
+En el ecuador orbital ($\hat{r}\perp\mathbf{J}$), la precesión de Lense-Thirring anual es:
+\begin{equation}
+  \Omega_{\rm LT} = \frac{GJ_\oplus}{c^2 r^3}
+  \approx \frac{(6{,}674\times10^{-11})(5{,}86\times10^{33})}{(3\times10^8)^2(7{,}02\times10^6)^3}
+  \approx 39{,}2\,\si{mas/yr},
+\end{equation}
+donde $\si{mas} = $ milisegundo de arco. El experimento midió $37{,}2 \pm 7{,}2\,\si{mas/yr}$, en acuerdo con la predicción al nivel del $19\%$.
+\end{ejemplo}
+
+% ===========================================================
+\section{Geodésicas en el Espacio-tiempo de Kerr}
+\label{sec:geodesicas_kerr}
+% ===========================================================
+
+\subsection{Constantes de movimiento y la ecuación de Carter}
+
+La simetría de la métrica de Kerr implica, por el teorema de Noether, dos constantes de movimiento para geodésicas:
+\begin{align}
+  E  &= -p_t  = -g_{tt}\dot{t} - g_{t\varphi}\dot{\varphi}, \label{eq:energia_kerr}\\
+  L  &= p_\varphi = g_{t\varphi}\dot{t} + g_{\varphi\varphi}\dot{\varphi}, \label{eq:momento_ang_kerr}
+\end{align}
+donde el punto denota derivada respecto al parámetro afín $\lambda$ (tiempo propio $\tau$ para partículas masivas). Aquí $E$ es la energía específica por unidad de masa de reposo (para partículas masivas) y $L$ el momento angular azimutal específico.
+
+Una tercera constante no trivial, la \textbf{constante de Carter} $Q$, fue descubierta por Brandon Carter en 1968:
+\begin{equation}
+  Q \equiv p_\theta^2 + \cos^2\!\theta\!\left(a^2\!\left(\epsilon c^2 - E^2\right) + \frac{L^2}{\sin^2\!\theta}\right),
+  \label{eq:carter}
+\end{equation}
+donde $\epsilon = 0$ para fotones y $\epsilon = 1$ para partículas masivas. La existencia de esta constante implica que las ecuaciones geodésicas son completamente integrables: la métrica de Kerr es uno de los pocos ejemplos de espacio-tiempo con cuatro constantes de movimiento independientes (masa, $E$, $L$, $Q$).
+
+\begin{teorema}{Separabilidad de Hamilton-Jacobi en Kerr (Carter, 1968)}{carter}
+Las ecuaciones geodésicas de la métrica de Kerr son completamente separables. Explícitamente, si se define la función de Hamilton-Jacobi $S = -\tfrac{1}{2}\epsilon\lambda - Et + L\varphi + S_r(r) + S_\theta(\theta)$, entonces las cuatro ecuaciones de primer orden para $(\dot{t}, \dot{r}, \dot{\theta}, \dot{\varphi})$ se obtienen de manera algebraica y las funciones $S_r$, $S_\theta$ cumplen ecuaciones de variables separadas.
+\end{teorema}
+
+Las ecuaciones de movimiento explícitas para una partícula (con $c = G = 1$, masa $\mu$) son:
+\begin{align}
+  \Sigma\dot{r}      &= \pm\sqrt{R(r)}, \label{eq:rdot_kerr}\\
+  \Sigma\dot{\theta} &= \pm\sqrt{\Theta(\theta)}, \label{eq:thetadot_kerr}\\
+  \Sigma\dot{\varphi}&= \frac{L}{\sin^2\!\theta} - aE + \frac{a(E(r^2+a^2)-La)}{\Delta}, \label{eq:phidot_kerr}\\
+  \Sigma\dot{t}      &= -a(aE\sin^2\!\theta - L) + \frac{(r^2+a^2)(E(r^2+a^2)-La)}{\Delta}, \label{eq:tdot_kerr}
+\end{align}
+donde los \emph{potenciales radial y polar} son:
+\begin{align}
+  R(r)            &= \left[E(r^2+a^2) - La\right]^2 - \Delta\left[\epsilon r^2 + (L-aE)^2 + Q\right], \label{eq:R_kerr}\\
+  \Theta(\theta)  &= Q - \cos^2\!\theta\!\left[a^2(\epsilon-E^2) + \frac{L^2}{\sin^2\!\theta}\right]. \label{eq:Theta_kerr}
+\end{align}
+
+\subsection{Órbitas circulares y la ISCO de Kerr}
+
+Para órbitas circulares en el plano ecuatorial ($\theta = \pi/2$, $Q = 0$), la condición $R = 0$ y $dR/dr = 0$ determina la energía y el momento angular de la órbita circular:
+\begin{align}
+  E_{\rm circ} &= \frac{r^{3/2} - r_s r^{1/2}/2 \pm a\sqrt{r_s/4}}{r^{3/4}\sqrt{r^{3/2} - 3r_s r/4 \pm 2a\sqrt{r_s r}/2}},\\
+  L_{\rm circ} &= \pm\frac{\sqrt{r_s r/4}\,(r^2 \mp 2a\sqrt{r_s r/4} + a^2)}{r^{3/4}\sqrt{r^{3/2} - 3r_s r/4 \pm 2a\sqrt{r_s r}/2}},
+\end{align}
+donde el signo superior (inferior) corresponde a órbitas pro-gradas (retrogradas, sentido contrario al giro del agujero negro). La \textbf{última órbita circular estable} (ISCO, del inglés \textit{Innermost Stable Circular Orbit}) se obtiene imponiendo adicionalmente $d^2R/dr^2 = 0$, lo que da la ecuación implícita:
+\begin{equation}
+  r_{\rm ISCO} = \frac{r_s}{2}\!\left\{3 + Z_2 \mp \sqrt{(3-Z_1)(3+Z_1+2Z_2)}\right\},
+  \label{eq:isco_kerr}
+\end{equation}
+donde
+\begin{align}
+  Z_1 &= 1 + \left(1 - \frac{4a^2}{r_s^2}\right)^{1/3}\!\!
+           \left[\left(1+\frac{2a}{r_s}\right)^{1/3} + \left(1-\frac{2a}{r_s}\right)^{1/3}\right],\nl
+  Z_2 &= \sqrt{\frac{12a^2}{r_s^2} + Z_1^2}.
+\end{align}
+
+\begin{ejemplo}{ISCO y eficiencia de acreción en función del spin}{}
+La eficiencia radiativa $\eta = 1 - E_{\rm ISCO}/c^2$ de un disco de acreción que termina en la ISCO depende fuertemente del spin:
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Spin $\chi = a c^2/(GM)$ & $r_{\rm ISCO}/r_s$ & $r_{\rm ISCO}/(GM/c^2)$ & $\eta$ \\
+\hline
+$0$ (Schwarzschild) & $3$  & $6$   & $5.7\%$  \\
+$0.5$ (pro-grado)   & $2.0$ & $4.0$ & $8.2\%$  \\
+$0.9$ (pro-grado)   & $1.16$ & $2.32$ & $15.6\%$ \\
+$1$ (extremo, pro)  & $0.5$ & $1.0$ & $42.3\%$ \\
+$-1$ (extremo, retro) & $4.5$ & $9.0$ & $3.8\%$ \\
+\hline
+\end{tabular}
+\end{center}
+La eficiencia del $42.3\%$ para un agujero negro extremo pro-grado (comparada con el $0.7\%$ de la fusión nuclear estelar) hace de los discos de acreción alrededor de agujeros negros rotantes las fuentes de energía más eficientes del universo.
+\end{ejemplo}
+
+\subsection{Fotones atrapados: la sombra del agujero negro}
+
+Para fotones en órbita esférica inestable ($\epsilon = 0$) alrededor del agujero negro de Kerr, las condiciones $R = 0$, $dR/dr = 0$ con $Q \geq 0$ definen la región de ``fotones atrapados'' y el contorno de la \textbf{sombra del agujero negro}. La forma de la sombra es asimétrica para $a \neq 0$: el lado donde los fotones co-rotan con el agujero negro aparece más pequeño (el agujero negro ``atrae'' menos fuertemente esa trayectoria), mientras que el lado opuesto parece más grande. Esta asimetría fue observada directamente en la imagen del agujero negro M87* por el EHT en 2019 \cite{EHT2019}.
+
+% ===========================================================
+\section{El Proceso de Penrose: Extracción de Energía Rotacional}
+\label{sec:penrose}
+% ===========================================================
+
+\subsection{Energía negativa en la ergosfera}
+
+Dentro de la ergosfera, el vector de Killing $\xi^\mu = (\partial_t)^\mu$ es espacial. La energía conservada de una partícula a lo largo de su geodésica es:
+\begin{equation}
+  E = -g_{\mu\nu}\xi^\mu p^\nu = -p_t,
+  \label{eq:energia_geodesica}
+\end{equation}
+donde $p^\mu$ es el cuadrimomento. Para una partícula real, $p^\mu$ debe ser futuro-apuntante y del tipo apropiado (temporal para masivas, nulo para fotones). Sin embargo, dentro de la ergosfera donde $g_{tt} > 0$, la condición de que la partícula sea del tipo correcto (futuro-apuntante) \emph{no impide} que $E < 0$.
+
+\begin{proposicion}{Energía negativa en la ergosfera}{}
+Sea $p^\mu$ el cuadrimomento de una partícula moviéndose dentro de la ergosfera ($r_+ < r < r_{\rm ergo}$). Si la partícula tiene $d\varphi/d\tau < 0$ (sentido contrario a la rotación del agujero negro) con suficiente momento angular, entonces $E = -p_t < 0$.
+\end{proposicion}
+
+\begin{proof}
+En la ergosfera, $g_{tt} > 0$. Se tiene
+\begin{equation}
+  E = -p_t = -(g_{tt}p^t + g_{t\varphi}p^\varphi).
+\end{equation}
+Si $p^\varphi < 0$ y $|g_{t\varphi}p^\varphi| > g_{tt}p^t$ (posible dentro de la ergosfera), entonces $E < 0$. La condición causal ($g_{\mu\nu}p^\mu p^\nu \leq 0$) permite esta situación siempre que $p^\mu$ sea del tipo temporal futuro.
+\end{proof}
+
+\subsection{El proceso de Penrose}
+
+Roger Penrose propuso en 1969 el siguiente mecanismo para extraer energía de un agujero negro rotante:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{Paso \arabic*.}]
+  \item Una partícula de masa de reposo $m_0$ y energía $E_0 > 0$ cae desde el infinito hacia el agujero negro y penetra en la ergosfera.
+  \item Dentro de la ergosfera, la partícula se divide en dos fragmentos: la partícula 1 (energía $E_1 < 0$, momento angular $L_1 < 0$) y la partícula 2 (energía $E_2$, momento angular $L_2$).
+  \item La partícula 1 es absorbida por el agujero negro; la partícula 2 escapa al infinito.
+\end{enumerate}
+
+La conservación de la energía exige $E_0 = E_1 + E_2$, de modo que
+\begin{equation}
+  E_2 = E_0 - E_1 > E_0,
+  \label{eq:penrose_energia}
+\end{equation}
+ya que $E_1 < 0$. \textbf{La partícula que escapa tiene más energía que la partícula original.} La energía extra proviene de la energía rotacional del agujero negro.
+
+\begin{teorema}{Extracción máxima de energía: proceso de Penrose}{penrose_max}
+La fracción máxima de la masa-energía de un agujero negro de Kerr que puede ser extraída mediante el proceso de Penrose (llevando el agujero negro al estado extremo y luego a Schwarzschild) es
+\begin{equation}
+  \frac{\Delta M_{\rm max}}{M} = 1 - \frac{1}{\sqrt{2}} \approx 29.3\%,
+  \label{eq:penrose_maximo}
+\end{equation}
+obtenida para el caso extremo $a = GM/c^2 \to a = 0$ (Schwarzschild final). La masa irreducible $M_{\rm irr} = M/\sqrt{2}$ (para el extremo) es la fracción que no puede extraerse.
+\end{teorema}
+
+\begin{proof}
+La segunda ley de la mecánica de agujeros negros exige que el área del horizonte $A = 4\pi(r_+^2 + a^2)/c^4 \cdot 4G^2M^2$ no decrezca. Definiendo la masa irreducible
+\begin{equation}
+  M_{\rm irr} \equiv \frac{c^2}{2G}\sqrt{\frac{A}{4\pi}} = \frac{1}{2}\sqrt{r_+^2 + a^2}\,\frac{c^2}{G},
+\end{equation}
+se tiene $M^2 = M_{\rm irr}^2 + J^2/(4G^2M_{\rm irr}^2)$. La energía extraíble es $E_{\rm rot} = M - M_{\rm irr}$. Para el caso extremo ($J = GM^2/c$):
+\begin{equation}
+  M_{\rm irr}^{\rm ext} = \frac{M}{\sqrt{2}},
+  \quad \text{por tanto} \quad
+  E_{\rm rot}^{\rm max} = M\!\left(1 - \frac{1}{\sqrt{2}}\right) \approx 0.293\,Mc^2.
+\end{equation}
+\end{proof}
+
+\subsection{Superradianza}
+
+El proceso de Penrose para ondas (en lugar de partículas) da lugar a la \textbf{superradianza}: una onda electromagnética o gravitacional que incide sobre el agujero negro y es reflejada con \emph{mayor} amplitud si su frecuencia $\omega$ satisface:
+\begin{equation}
+  0 < \omega < m\Omega_H,
+  \label{eq:cond_superradianza}
+\end{equation}
+donde $m$ es el número cuántico azimutal de la onda y $\Omega_H$ la velocidad angular del horizonte. En este régimen, el coeficiente de reflexión $|\mathcal{R}|^2 > 1$: la onda extrae energía y momento angular del agujero negro.
+
+\begin{observacion}{Relevancia astrofísica del proceso de Penrose y la superradianza}{}
+Aunque el proceso de Penrose idealizado (fragmentación de partículas) no ocurre eficientemente en la naturaleza, la superradianza y el mecanismo de \textbf{Blandford-Znajek} (1977) —que extrae energía magnética del horizonte rotante— son considerados los principales mecanismos de potenciación de los jets relativistas observados en núcleos activos de galaxias (AGN) y en microquásares. Los jets de M87 (con una potencia de $\sim 10^{44}\,\si{erg/s}$) son uno de los ejemplos más espectaculares de extracción de energía de un agujero negro rotante.
+\end{observacion}
+
+% ===========================================================
+\section{La Solución de Kerr-Newman}
+\label{sec:kerr_newman}
+% ===========================================================
+
+La generalización más completa de la solución de Schwarzschild incluye tanto rotación como carga eléctrica. Esta solución fue obtenida por Newman y colaboradores en 1965 y se denomina \textbf{métrica de Kerr-Newman}.
+
+\begin{definicion}{Métrica de Kerr-Newman}{kerr_newman}
+La métrica de Kerr-Newman describe el espacio-tiempo exterior a un agujero negro de masa $M$, momento angular $J = Mac$ y carga eléctrica $Q_e$ (se usa $Q_e$ para distinguir de la constante de Carter $Q$). En coordenadas de Boyer-Lindquist:
+\begin{equation}
+  ds^2 = -\frac{\Delta - a^2\sin^2\!\theta}{\Sigma}\,c^2\,dt^2
+  - \frac{2a\sin^2\!\theta\,(r^2+a^2-\Delta)}{\Sigma}\,c\,dt\,d\varphi
+  + \frac{\Sigma}{\Delta_{KN}}\,dr^2 + \Sigma\,d\theta^2
+  + \frac{(r^2+a^2)^2 - \Delta_{KN} a^2\sin^2\!\theta}{\Sigma}\sin^2\!\theta\,d\varphi^2,
+  \label{eq:kerr_newman}
+\end{equation}
+donde ahora
+\begin{equation}
+  \Delta_{KN} \equiv r^2 - r_s r + a^2 + r_Q^2, \quad
+  r_Q^2 \equiv \frac{G Q_e^2}{4\pi\varepsilon_0 c^4} = \frac{k_e G Q_e^2}{c^4},
+  \label{eq:Delta_KN}
+\end{equation}
+siendo $r_Q$ el radio de carga. Los horizontes se localizan en $\Delta_{KN} = 0$:
+\begin{equation}
+  r_{\pm}^{KN} = \frac{GM}{c^2} \pm \sqrt{\frac{G^2M^2}{c^4} - a^2 - r_Q^2}.
+  \label{eq:horizontes_KN}
+\end{equation}
+\end{definicion}
+
+Los casos límites son:
+\begin{itemize}
+  \item $Q_e = 0$: métrica de Kerr (sección anterior).
+  \item $a = 0$: métrica de Reissner-Nordström (agujero negro esférico cargado).
+  \item $a = 0$, $Q_e = 0$: métrica de Schwarzschild.
+\end{itemize}
+
+\begin{observacion}{Relevancia física de la solución de Kerr-Newman}{}
+En la práctica astrofísica, los agujeros negros tienen carga eléctrica despreciable: cualquier carga neta se neutraliza rápidamente al atraer cargas del plasma circundante. Sin embargo, la solución de Kerr-Newman es importante como:
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item El objeto de estudio del \textbf{teorema de unicidad}: es la solución más general de las ecuaciones de Einstein-Maxwell estacionarias y axialmente simétricas.
+  \item Laboratorio matemático para estudiar propiedades de los agujeros negros (ergoesfera, termodinámica) en el caso más general.
+  \item Punto de partida en modelos de física más allá del modelo estándar que proponen cargas oscuras o milicargadas.
+\end{enumerate}
+\end{observacion}
+
+% ===========================================================
+\section{El Teorema de Unicidad: Los Agujeros Negros ``No Tienen Pelo''}
+\label{sec:no_hair}
+% ===========================================================
+
+\subsection{Enunciado del teorema}
+
+Uno de los resultados más sorprendentes de la relatividad general es que los agujeros negros en equilibrio son extraordinariamente simples: toda la complejidad del estado inicial del colapso gravitacional —la distribución de materia, los campos internos, la composición química— desaparece. Sólo tres parámetros sobreviven.
+
+\begin{teorema}{Unicidad de agujeros negros (Israel, Carter, Hawking, Robinson, 1967--1975)}{unicidad_AN}
+Toda solución estacionaria, asintóticamente plana y regular (sin singularidades desnudas) de las ecuaciones de Einstein-Maxwell en el vacío que describe un agujero negro queda completamente determinada por tres parámetros: la \textbf{masa} $M$, el \textbf{momento angular} $J$ y la \textbf{carga eléctrica} $Q_e$. La solución es la métrica de Kerr-Newman.
+
+En particular:
+\begin{enumerate}[leftmargin=2em]
+  \item Si $Q_e = 0$ y $J = 0$: solución de Schwarzschild.
+  \item Si $Q_e = 0$ y $J \neq 0$: solución de Kerr.
+  \item Si $Q_e \neq 0$ y $J = 0$: solución de Reissner-Nordström.
+  \item Si $Q_e \neq 0$ y $J \neq 0$: solución de Kerr-Newman.
+\end{enumerate}
+\end{teorema}
+
+La afirmación coloquial de este teorema es: \textbf{``los agujeros negros no tienen pelo''} (\textit{no-hair theorem}), frase atribuida a John Wheeler. Todo el ``pelo'' (los detalles del estado pre-colapso) cae a la singularidad y queda oculto al observador exterior.
+
+\subsection{Implicaciones del teorema de unicidad}
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+
+\item \textbf{Reversión de información.} Si una estrella de masa solar que contiene $\sim 10^{57}$ protones colapsa a un agujero negro de Schwarzschild, el estado final es completamente descrito por el valor $M = M_\odot$. Toda la información sobre la estructura interna de la estrella queda aparentemente destruida. Esta pérdida de información entra en conflicto con la unitariedad de la mecánica cuántica (paradoja de la información, ver Capítulo~9).
+
+\item \textbf{Parámetros observables.} Las únicas magnitudes que un observador externo puede medir del agujero negro son $M$, $J$ y $Q_e$ (a través de efectos gravitacionales, parámetro de giro y campo eléctrico). Todos los multipoles gravitacionales y electromagnéticos de orden superior están determinados por estos tres valores.
+
+\item \textbf{Límites sobre física nueva.} El teorema de unicidad es válido para la relatividad general estándar (con campo electromagnético). Modificaciones que incluyan otros campos (escalares, vectoriales, campos de Yang-Mills no abelianos) pueden violar el teorema de no-pelo y producir ``pelo'' adicional. La búsqueda experimental de desviaciones del espacio-tiempo de Kerr en agujeros negros observados es una prueba activa de la relatividad general en régimen fuerte.
+
+\end{enumerate}
+
+\subsection{El teorema de área de Hawking y la masa irreducible}
+
+\begin{teorema}{Segunda ley de la mecánica de agujeros negros (Hawking, 1971)}{segunda_ley_AN}
+En cualquier proceso físico clásico (que respete la condición de energía dominante), el área del horizonte de eventos de un agujero negro no puede decrecer:
+\begin{equation}
+  \frac{dA}{dt} \geq 0.
+  \label{eq:segunda_ley_AN}
+\end{equation}
+En una fusión de dos agujeros negros con áreas $A_1$ y $A_2$, el área del remanente satisface $A_f \geq A_1 + A_2$.
+\end{teorema}
+
+\begin{ejemplo}{Verificación para GW150914}{}
+La señal GW150914 provino de la fusión de dos agujeros negros de masas $m_1 \approx 36\,M_\odot$ y $m_2 \approx 29\,M_\odot$, con spins sub-extremos, produciendo un remanente de $M_f \approx 62\,M_\odot$ y $\chi_f \approx 0.67$. Las áreas del horizonte son:
+\begin{align}
+  A_i &= 4\pi\left(r_+^{(i)}\right)^2 \approx 4\pi\!\left(\frac{2GM_i}{c^2}\right)^2 \propto M_i^2
+  \quad (\text{Schwarzschild aproximado}),\nl
+  A_1 + A_2 &\propto (36^2 + 29^2)\,M_\odot^2 = (1296 + 841)\,M_\odot^2 = 2137\,M_\odot^2,\nl
+  A_f &\propto M_f^2(1 + \sqrt{1-\chi_f^2}) \approx (62)^2(1 + 0.742)\,M_\odot^2 \approx 6680\,M_\odot^2.
+\end{align}
+Como $6680 \gg 2137$, la segunda ley se cumple con holgura. La energía irradiada en ondas gravitacionales ($\approx 3\,M_\odot c^2$) es mucho menor que la energía rotacional máxima extraíble.
+\end{ejemplo}
+
+% ===========================================================
+\section{Extensión Analítica Máxima y Estructura Causal}
+\label{sec:kruskal_kerr}
+% ===========================================================
+
+\subsection{Diagrama de Carter-Penrose de Kerr}
+
+La estructura causal de la solución de Kerr es considerablemente más compleja que la de Schwarzschild. La extensión analítica máxima del espacio-tiempo de Kerr (obtenida mediante coordenadas análogas a las de Kruskal-Szekeres para Schwarzschild) revela un número infinito de regiones unidas por los horizontes interior y exterior.
+
+Las regiones más relevantes para el colapso gravitacional físico son:
+\begin{itemize}
+  \item \textbf{Región I (exterior):} $r > r_+$. El espacio-tiempo estático estacionario observable.
+  \item \textbf{Región II (interior del horizonte exterior):} $r_- < r < r_+$. Una vez cruzado $r_+$, el observador es inevitablemente atraído hacia $r_-$; sin embargo, a diferencia de Schwarzschild, puede en principio cruzar $r_-$ y entrar en una región con $r < r_-$.
+  \item \textbf{Región III (interior del horizonte interior):} $r < r_-$. Contiene la singularidad anular pero, crucialmente, el observador \emph{puede} evitar la singularidad moviéndose en dirección polar. La singularidad es de tipo temporal (a diferencia de la de tipo espacial de Schwarzschild), lo que implica que no es inevitable.
+\end{itemize}
+
+\begin{importante}
+La región $r < r_-$ del espacio-tiempo de Kerr contiene, en la extensión analítica máxima, curvas cerradas de tipo temporal (CTC: \textit{Closed Timelike Curves}). Esto se interpreta como una señal de que la extensión analítica es no física: en un colapso gravitacional real, las perturbaciones de las condiciones iniciales producen una singularidad de Cauchy que bloquea el acceso a la región III. La \textbf{conjetura de estabilidad del horizonte interior} de Penrose postula que el horizonte de Cauchy $r_-$ es inestable ante perturbaciones, y que en el escenario físico real la extensión analítica interior no es accesible.
+\end{importante}
+
+% ===========================================================
+\section{Resumen del Capítulo}
+\label{sec:resumen_cap8}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+
+  \item La \textbf{métrica de Kerr} \eqref{eq:kerr_BL} describe el espacio-tiempo exterior a cualquier agujero negro en rotación estacionario, parametrizado por la masa $M$ y el parámetro de giro $a = J/(Mc)$. Sus funciones auxiliares clave son $\Sigma = r^2 + a^2\cos^2\!\theta$ y $\Delta = r^2 - r_s r + a^2$.
+
+  \item Existen \textbf{dos horizontes de eventos}, $r_{\pm} = GM/c^2 \pm \sqrt{G^2M^2/c^4 - a^2}$. Para $|a| < GM/c^2$: agujero negro sub-extremo; para $|a| = GM/c^2$: agujero negro extremo ($T_H = 0$); para $|a| > GM/c^2$: singularidad desnuda (prohibida por la censura cósmica).
+
+  \item La \textbf{ergosfera} es la región $r_+ < r < r_{\rm ergo}(\theta)$ donde el vector de Killing $\partial_t$ es espacial. Los observadores en ella no pueden permanecer estáticos: son arrastrados con velocidad angular $\omega_{\rm ZAMO}$. La energía de partículas en la ergosfera puede ser negativa.
+
+  \item Las ecuaciones geodésicas de Kerr son completamente integrables gracias a la \textbf{constante de Carter} $Q$ \eqref{eq:carter}, descubierta en 1968. Las cuatro constantes de movimiento $(\mu, E, L, Q)$ permiten reducir el problema a cuadraturas.
+
+  \item La \textbf{ISCO} (última órbita circular estable) depende fuertemente del spin: $r_{\rm ISCO} = 6GM/c^2$ para Schwarzschild, $r_{\rm ISCO} \to GM/c^2$ para el extremo pro-grado. La eficiencia de acreción varía del $5.7\%$ (Schwarzschild) al $42.3\%$ (extremo pro-grado).
+
+  \item El \textbf{proceso de Penrose} permite extraer hasta el $29.3\%$ de la masa-energía de un agujero negro extremo, aprovechando la energía negativa disponible en la ergosfera. La \textbf{superradianza} es la versión ondulatoria: una onda con $0 < \omega < m\Omega_H$ es reflejada con amplitud mayor que la incidente.
+
+  \item La \textbf{solución de Kerr-Newman} \eqref{eq:kerr_newman} generaliza Kerr incluyendo carga eléctrica $Q_e$, con $\Delta_{KN} = r^2 - r_s r + a^2 + r_Q^2$. Es la solución más general de Einstein-Maxwell para agujeros negros estacionarios.
+
+  \item El \textbf{teorema de unicidad} (no-hair theorem) establece que todo agujero negro en equilibrio queda completamente determinado por los parámetros $(M, J, Q_e)$. La segunda ley establece $dA/dt \geq 0$ en cualquier proceso clásico.
+
+\end{enumerate}
+
+% ===========================================================
+\section{Problemas Propuestos}
+\label{sec:problemas_cap8}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Propiedades básicas de la métrica de Kerr.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Verifique que para $a = 0$ la métrica de Kerr \eqref{eq:kerr_BL} se reduce exactamente a la de Schwarzschild \eqref{eq:schwarz}.
+    \item Muestre que el determinante del tensor métrico de Kerr satisface $-g = \Sigma^2\sin^2\!\theta$.
+    \item Calcule las componentes $g^{tt}$ y $g^{t\varphi}$ de la métrica inversa de Kerr y verifique que $g^{\mu\nu}g_{\nu\rho} = \delta^\mu{}_\rho$ para los índices $(t,\varphi)$.
+  \end{enumerate}
+
+  \item \textbf{Horizontes y parámetro de giro máximo.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para $M = 10\,M_\odot$, calcule $r_+$ y $r_-$ para $\chi = 0$, $0.5$, $0.9$ y $0.999$.
+    \item Demuestre que el área del horizonte exterior es $A = 4\pi(r_+^2 + a^2)$ y calcula $A$ para cada caso anterior.
+    \item Demuestre que $A$ es una función no decreciente de $\chi$ para masa fija, lo que ilustra la segunda ley.
+  \end{enumerate}
+
+  \item \textbf{La ergosfera.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Grafique cualitativamente la sección transversal ($r$, $\theta$) del horizonte exterior $r_+$ y la ergosuperficie $r_{\rm ergo}(\theta)$ para $\chi = 0.8$, en el plano $(\theta \in [0,\pi])$.
+    \item Demuestre que en los polos ($\theta = 0$) la ergosuperficie coincide con el horizonte exterior, y en el ecuador ($\theta = \pi/2$) se tiene $r_{\rm ergo} = r_s > r_+$.
+    \item ¿Puede un observador en la ergosfera emitir una señal luminosa hacia el infinito? ¿Puede permanecer estático? Justifique.
+  \end{enumerate}
+
+  \item \textbf{Arrastre de marcos y velocidad angular del ZAMO.}
+  \begin{enumerate}[label=(\alph*)]
+    \item A partir de \eqref{eq:omega_zamo}, demuestre que en el límite $r \to \infty$ se recupera $\omega_{\rm ZAMO} \approx 2GJ/(c^2 r^3)$ (resultado de Lense-Thirring).
+    \item Para el agujero negro de Sgr\,A* ($M = 4\times10^6\,M_\odot$, $\chi = 0.9$), calcule la velocidad angular del ZAMO en el ecuador a $r = 10\,r_+$.
+    \item Estime la precesión del periapsis de la órbita de la estrella S2 (semieje mayor $a_{\rm S2} \approx 1000\,\si{UA}$, excentricidad $e \approx 0.88$) debida al efecto Lense-Thirring del agujero negro central.
+  \end{enumerate}
+
+  \item \textbf{ISCO y eficiencia de acreción.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para $\chi = 0$, verifique a partir de \eqref{eq:isco_kerr} que $r_{\rm ISCO} = 6GM/c^2$ (resultado de Schwarzschild).
+    \item Usando la fórmula de la energía de la órbita circular, calcule la eficiencia radiativa $\eta = 1 - E_{\rm ISCO}/c^2$ para $\chi = 0$ y para $\chi = 1$ (pro-grado).
+    \item Un disco de acreción alimenta un agujero negro de $M = 10^8\,M_\odot$ a una tasa $\dot{M} = 1\,M_\odot/\si{yr}$. Calcule la luminosidad del disco para $\chi = 0$ y para $\chi = 0.998$ (agujero negro casi extremo). Compare con la luminosidad de Eddington $L_{\rm Edd} = 4\pi GMm_p c/\sigma_T$.
+  \end{enumerate}
+
+  \item \textbf{El proceso de Penrose.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Una partícula de energía $E_0 = 2\,m_0 c^2$ cae a la ergosfera de un agujero negro de Kerr con $\chi = 0.9$. Se divide en dos; el fragmento 1 tiene energía $E_1 = -0.5\,m_0 c^2$ y es absorbido. Calcule la energía del fragmento 2 y la ganancia porcentual respecto a $E_0$.
+    \item Demuestre que la condición para que $E_1 < 0$ dentro de la ergosfera es compatible con $p^t > 0$ (futuro-apuntante).
+    \item Muestre que cuando el fragmento 1 cae al agujero negro, el momento angular del agujero negro disminuye: $\delta J < 0$. ¿Cuál es la relación entre $\delta M$ y $\delta J$ para el proceso de Penrose óptimo?
+  \end{enumerate}
+
+  \item \textbf{Superradianza.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para una onda electromagnética con $m = 1$ incidiendo sobre un agujero negro de Kerr con $\chi = 0.5$ y $M = 10\,M_\odot$, calcule la frecuencia de corte $\omega_c = \Omega_H$ por encima de la cual no hay superradianza.
+    \item Exprese $\omega_c$ en hercios y compare con las frecuencias típicas de las ondas de radio.
+    \item ¿En qué sentido la ``bomba de agujero negro'' (superradianza con espejo reflectante) es una inestabilidad? Mencione su posible relación con la producción de bosonos ultraligeros.
+  \end{enumerate}
+
+  \item \textbf{La solución de Kerr-Newman.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Escribe explícitamente $r_\pm^{KN}$ para $Q_e = e$ (carga del electrón) y $M = m_e$ (masa del electrón). ¿Tiene horizontes este ``agujero negro''? ¿Qué implica esto sobre el electron en la teoría clásica?
+    \item Para un agujero negro con $M = 10\,M_\odot$, $\chi = 0.5$ y $Q_e = 10^{10}\,C$ (carga extrema macroscópica), calcule la razón $r_Q^2/(GM/c^2)^2$ y verifique que la carga es despreciable para agujeros negros astrofísicos.
+    \item Demuestre que en el límite $a \to 0$, $Q_e \to 0$, la métrica de Kerr-Newman se reduce a la de Schwarzschild.
+  \end{enumerate}
+
+  \item \textbf{Teorema de unicidad y segunda ley.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Dos agujeros negros de Schwarzschild con masas $M_1 = 20\,M_\odot$ y $M_2 = 15\,M_\odot$ se fusionan formando un agujero negro de Kerr con $M_f = 33\,M_\odot$ y $\chi_f = 0.7$. Verifique que la segunda ley se satisface ($A_f \geq A_1 + A_2$).
+    \item Calcule la energía emitida en ondas gravitacionales en este proceso y exprésela en unidades de $M_\odot c^2$.
+    \item ¿Cuál es la fracción máxima de la masa que podría haberse emitido si el proceso fuera perfectamente eficiente (llevando el agujero negro final al estado de Kerr extremo)?
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Constante de Carter y geodésicas.}
+  \begin{enumerate}[label=(\alph*)]
+    \item A partir de la condición $g_{\mu\nu}\dot{x}^\mu\dot{x}^\nu = -c^2$ para una partícula masiva, derive la ecuación para $\Sigma^2\dot{r}^2$ en términos de $E$, $L$, $Q$ y los coeficientes de la métrica.
+    \item Para una partícula en órbita polar ($L = 0$, $Q > 0$) alrededor de un agujero negro de Kerr con $\chi = 0.5$, describa cualitativamente la trayectoria y explique por qué $Q \geq 0$ es necesario para que la órbita sea real.
+    \item Demuestre que en el límite $a = 0$, la constante de Carter se reduce a $Q = L_\theta^2 + L_\varphi^2\cot^2\!\theta$ (componentes del momento angular orbital), y que $Q + L^2 = \mathbf{L}^2$ (módulo cuadrado del momento angular orbital total).
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Gravedad superficial y temperatura de Hawking de Kerr.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Demuestre que la gravedad superficial del horizonte exterior de Kerr es $\kappa = c^2(r_+ - r_-)/(2(r_+^2 + a^2))$ a partir de la definición $\kappa^2 = -\tfrac{1}{2}(\nabla_\mu\xi_\nu)(\nabla^\mu\xi^\nu)|_{r=r_+}$, donde $\xi^\mu = (\partial_t)^\mu + \Omega_H(\partial_\varphi)^\mu$.
+    \item Calcule la temperatura de Hawking $T_H = \hbar\kappa/(2\pi k_B c)$ para $\chi = 0$, $0.5$ y $0.9$ con $M = 10\,M_\odot$.
+    \item Muestre que $T_H \to 0$ en el límite extremo $\chi \to 1$ y discuta las implicaciones termodinámicas de este resultado (tercera ley de la mecánica de agujeros negros).
+  \end{enumerate}
+
+\end{enumerate}
