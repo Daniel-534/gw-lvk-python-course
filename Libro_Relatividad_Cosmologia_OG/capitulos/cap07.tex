@@ -1,0 +1,624 @@
+% ============================================================
+% Capítulo 7: La Solución de Schwarzschild y los Agujeros Negros
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{La Solución de Schwarzschild y los Agujeros Negros}
+\label{cap:schwarzschild}
+
+Las ecuaciones de campo de Einstein forman un sistema de diez ecuaciones diferenciales parciales no lineales para la métrica $g_{\mu\nu}$. En general, encontrar soluciones exactas es extraordinariamente difícil. Sin embargo, cuando se impone suficiente simetría al problema, las ecuaciones se simplifican drásticamente y admiten soluciones analíticas exactas. La más antigua e importante de todas ellas es la \textbf{solución de Schwarzschild} (1916): la geometría del espacio-tiempo exterior a cualquier objeto esférico y estático, sea una estrella, un planeta o un agujero negro \cite{Schwarzschild1916, Carroll2004, Misner1973, Wald1984}.
+
+La solución de Schwarzschild ocupa un lugar central en la física por varias razones. En primer lugar, permite calcular las correcciones relativistas a la mecánica orbital dentro del sistema solar: la precesión del perihelio de Mercurio, la deflexión de la luz por el Sol, el corrimiento gravitacional al rojo y el retardo de Shapiro. Estas predicciones, confirmadas con gran precisión experimental, constituyeron los primeros éxitos observacionales de la relatividad general. En segundo lugar, la solución de Schwarzschild describe el espacio-tiempo exterior a un \textbf{agujero negro de Schwarzschild}: una región del espacio de la que ninguna señal física puede escapar. La existencia de agujeros negros, antes considerada una curiosidad matemática, ha sido confirmada de manera definitiva mediante la observación de ondas gravitacionales producidas por fusiones de binarias de objetos compactos \cite{Abbott2016prl} y la imagen directa del horizonte de eventos de M87 \cite{EHT2019}.
+
+En este capítulo derivamos la métrica de Schwarzschild a partir del teorema de Birkhoff, estudiamos su estructura causal completa mediante las coordenadas de Kruskal-Szekeres, analizamos el movimiento de partículas y fotones en este espacio-tiempo, calculamos las cuatro contrastaciones clásicas de la relatividad general y cerramos con una introducción a la termodinámica de agujeros negros y la radiación de Hawking.
+
+% ===========================================================
+\section{El Teorema de Birkhoff y la Métrica de Schwarzschild}
+\label{sec:birkhoff}
+% ===========================================================
+
+\subsection{Simetría esférica y la forma general de la métrica}
+
+El punto de partida es imponer la máxima simetría espacial compatible con un único objeto masivo: la \textbf{simetría esférica}. Un espacio-tiempo esféricamente simétrico admite un grupo de isometrías $SO(3)$: rotaciones que dejan invariante un punto central. Las orbitas de este grupo son esferas bidimensionales $S^2$.
+
+\begin{definicion}{Espacio-tiempo esféricamente simétrico}{simetria_esferica}
+Un espacio-tiempo $(\mathcal{M}, g_{\mu\nu})$ es \textbf{esféricamente simétrico} si admite el grupo de isometrías $SO(3)$. En coordenadas $(t, r, \theta, \varphi)$ adaptadas a la simetría, la métrica más general que respeta la simetría esférica toma la forma
+\begin{equation}
+  ds^2 = -e^{2\alpha(t,r)}c^2\,dt^2 + e^{2\beta(t,r)}\,dr^2
+         + r^2\!\left(d\theta^2 + \sin^2\!\theta\,d\varphi^2\right),
+  \label{eq:metrica_esferica_general}
+\end{equation}
+donde $\alpha(t,r)$ y $\beta(t,r)$ son funciones arbitrarias, y $r$ es la \textbf{coordenada areal}: el área de la esfera de coordenada $r$ es $4\pi r^2$.
+\end{definicion}
+
+Obsérvese que la forma \eqref{eq:metrica_esferica_general} es exacta; no se ha hecho ninguna aproximación. La parte angular $r^2 d\Omega^2 \equiv r^2(d\theta^2 + \sin^2\!\theta\,d\varphi^2)$ viene impuesta directamente por la simetría: los ángulos sólidos deben medir lo mismo que en el espacio plano cuando se los escala por la distancia radial propia.
+
+\subsection{El teorema de Birkhoff}
+
+Una consecuencia sorprendente de la simetría esférica y las ecuaciones de Einstein en el vacío es el siguiente resultado, análogo relativista del teorema de la corteza esférica de Newton:
+
+\begin{teorema}{Birkhoff (1923)}{birkhoff}
+Toda solución esféricamente simétrica de las ecuaciones de Einstein en el vacío ($R_{\mu\nu} = 0$) es estática y está dada por la métrica de Schwarzschild. En particular, una distribución de masa esférica que pulsa o colapsa radialmente no emite radiación gravitacional.
+\end{teorema}
+
+\begin{proof}
+Sustituimos \eqref{eq:metrica_esferica_general} en las ecuaciones del vacío $R_{\mu\nu} = 0$. Los componentes no nulos del tensor de Ricci son, a primer orden en las funciones $\alpha$ y $\beta$:
+
+\textit{Componente $(t,r)$:}
+\begin{equation}
+  R_{tr} = \frac{2}{r}\pd{\beta}{t} = 0 \implies \pd{\beta}{t} = 0,
+\end{equation}
+lo que significa que $\beta = \beta(r)$ no depende del tiempo.
+
+\textit{Componente $(r,r)$:}
+\begin{equation}
+  R_{rr} = -\pd{\alpha}{r}\frac{2}{r} + \frac{2}{r^2}(e^{2\beta}-1)e^{-2\beta}
+           -\pdd{\alpha}{r} + \ldots = 0.
+\end{equation}
+\textit{Componente $(t,t)$:}
+\begin{equation}
+  R_{tt} = e^{2(\alpha-\beta)}\!\left[\pdd{\alpha}{r} + \left(\pd{\alpha}{r}\right)^2
+           - \pd{\alpha}{r}\pd{\beta}{r} + \frac{2}{r}\pd{\alpha}{r}\right] = 0.
+\end{equation}
+La combinación $e^{-2\beta}R_{tt} + R_{rr} = 0$ implica $\pd{(\alpha+\beta)}{r} = 0$, es decir, $\alpha + \beta = f(t)$ para alguna función $f(t)$. Dado que $\beta$ no depende de $t$, se sigue que $\pd{\alpha}{t}$ es función sólo de $t$, y podemos reabsorber $f(t)$ en una redefinición del tiempo $t \to t'$ tal que $\alpha + \beta = 0$, es decir, $\alpha = -\beta$. En consecuencia, $\alpha$ tampoco depende del tiempo: la solución es estática.
+
+Con $\alpha = -\beta$, la componente $(\theta,\theta)$ da
+\begin{equation}
+  R_{\theta\theta} = e^{-2\beta}(2r\,\pd{\beta}{r} - 1) + 1 = 0,
+\end{equation}
+cuya solución es
+\begin{equation}
+  e^{-2\beta} = 1 - \frac{r_s}{r}, \quad r_s = \text{const} > 0.
+\end{equation}
+La constante de integración $r_s$ queda fijada por el límite newtoniano (ver Sección~\ref{sec:limite_newtoniano_schwarz}): $r_s = 2GM/c^2$.
+\end{proof}
+
+\begin{importante}
+El teorema de Birkhoff tiene una consecuencia práctica fundamental: el espacio-tiempo \emph{exterior} a cualquier distribución de masa esférica (independientemente de su estructura interna, evolución temporal o estado de colapso) es estático e igual a la métrica de Schwarzschild. Una estrella que pulsa radialmente no produce ondas gravitacionales: para generar radiación se requiere asimetría cuadrupolar (Capítulos~\ref{cap:OG_linealizadas}--\ref{cap:gen_OG}).
+\end{importante}
+
+\subsection{La métrica de Schwarzschild}
+
+\begin{definicion}{Métrica de Schwarzschild}{schwarz_metric}
+La solución exterior a un cuerpo esférico de masa $M$ es la \textbf{métrica de Schwarzschild}:
+\begin{equation}
+  \boxed{ds^2 = -\!\left(1 - \frac{r_s}{r}\right)c^2\,dt^2
+  + \left(1 - \frac{r_s}{r}\right)^{-1}dr^2
+  + r^2 d\Omega^2,}
+  \label{eq:schwarz}
+\end{equation}
+donde $d\Omega^2 = d\theta^2 + \sin^2\!\theta\,d\varphi^2$ y el \textbf{radio de Schwarzschild} es
+\begin{equation}
+  r_s \equiv \frac{2GM}{c^2}.
+  \label{eq:radio_schwarz}
+\end{equation}
+Esta solución es válida para $r > r_s$ (exterior) y para $r < r_s$ (interior del horizonte, con las coordenadas $t$ y $r$ intercambiando sus roles).
+\end{definicion}
+
+\begin{ejemplo}{Radios de Schwarzschild de objetos físicos}{}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Objeto & Masa $M$ & Radio de Schwarzschild $r_s$ \\
+\hline
+Tierra & $5{,}97\times10^{24}\,\si{kg}$ & $8{,}87\,\si{mm}$ \\
+Sol & $1{,}99\times10^{30}\,\si{kg}$ & $2{,}95\,\si{km}$ \\
+AGN M87 & $6{,}5\times10^9\,M_\odot$ & $1{,}9\times10^{10}\,\si{km}$ \\
+\hline
+\end{tabular}
+\end{center}
+El radio de Schwarzschild del Sol es $r_s \approx 3\,\si{km}$, mientras que su radio físico es $R_\odot \approx 696\,000\,\si{km}$. Como $R_\odot \gg r_s$, el Sol no es un agujero negro. Los efectos relativistas son pequeñas correcciones de orden $r_s/R_\odot \approx 4\times10^{-6}$.
+\end{ejemplo}
+
+\subsection{El límite newtoniano: fijación de \texorpdfstring{$r_s$}{rs}}
+\label{sec:limite_newtoniano_schwarz}
+
+Para confirmar que $r_s = 2GM/c^2$, comparamos la métrica de Schwarzschild con el límite newtoniano de la relatividad general. En el capítulo anterior (Sección relativa al límite newtoniano), vimos que para un campo estático débil la componente $(0,0)$ de la métrica satisface
+\begin{equation}
+  g_{00} = -\left(1 + \frac{2\Phi}{c^2}\right),
+\end{equation}
+donde $\Phi$ es el potencial gravitacional newtoniano. Para una masa esférica $M$,
+\begin{equation}
+  \Phi(r) = -\frac{GM}{r} \implies g_{00} = -\left(1 - \frac{2GM}{rc^2}\right).
+\end{equation}
+Comparando con \eqref{eq:schwarz}, $g_{00} = -(1 - r_s/r)$, se obtiene $r_s = 2GM/c^2$. \qed
+
+% ===========================================================
+\section{Estructura Causal y el Horizonte de Eventos}
+\label{sec:horizonte}
+% ===========================================================
+
+\subsection{Singularidades de la métrica de Schwarzschild}
+
+La métrica \eqref{eq:schwarz} presenta aparentemente dos problemas:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item En $r = r_s$: el coeficiente $g_{rr} = (1-r_s/r)^{-1}$ diverge.
+  \item En $r = 0$: el coeficiente $g_{tt}$ diverge y la curvatura diverge.
+\end{enumerate}
+
+Es fundamental distinguir entre \textbf{singularidades de coordenadas} (artefactos del sistema de coordenadas que desaparecen en otra carta) y \textbf{singularidades físicas} (donde la curvatura intrínseca del espacio-tiempo diverge).
+
+\begin{proposicion}{Naturaleza de las singularidades de Schwarzschild}{}
+\begin{enumerate}[leftmargin=2em, label=(\alph*)]
+  \item La singularidad en $r = r_s$ es una \textbf{singularidad de coordenadas}: el escalar de curvatura de Kretschner $K = R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} = 48G^2M^2/(c^4 r^6)$ es finito en $r = r_s$. Esta singularidad desaparece al cambiar de sistema de coordenadas.
+  \item La singularidad en $r = 0$ es una \textbf{singularidad física} (o curvatura): $K \to \infty$ cuando $r \to 0$. No puede eliminarse mediante ningún cambio de coordenadas y representa una genuine pathología del espacio-tiempo clásico.
+\end{enumerate}
+\end{proposicion}
+
+\begin{proof}
+El escalar de Kretschner para la métrica de Schwarzschild se calcula contrayendo el tensor de Riemann:
+\begin{equation}
+  K \equiv R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} = \frac{48G^2M^2}{c^4\,r^6}.
+  \label{eq:kretschner}
+\end{equation}
+En $r = r_s = 2GM/c^2$, $K = 48G^2M^2/(c^4 r_s^6) = 3/(4M^4 G^4/c^{12}) < \infty$. En $r \to 0$, $K \to \infty$.
+\end{proof}
+
+\subsection{El horizonte de eventos}
+
+La superficie $r = r_s$ define el \textbf{horizonte de eventos}: la frontera causal que separa las regiones de donde la luz puede escapar al infinito de las que no.
+
+\begin{definicion}{Horizonte de eventos}{horizonte}
+El \textbf{horizonte de eventos} del agujero negro de Schwarzschild es la hipersuperficie nula $r = r_s = 2GM/c^2$. Es una superficie atrapante: cualquier rayo de luz que en algún momento cruza hacia el interior ($r < r_s$) no puede escapar hacia el exterior ($r > r_s$). Para un observador externo, los rayos luminosos emitidos desde cerca del horizonte sufren un corrimiento al rojo gravitacional que tiende a infinito, de modo que el objeto parece ``congelarse'' en $r = r_s$ sin cruzarlo jamás.
+\end{definicion}
+
+Para entender el horizonte, analicemos los conos de luz en coordenadas de Schwarzschild. Para rayos radiales ($d\theta = d\varphi = 0$) con $ds^2 = 0$:
+\begin{equation}
+  \frac{dr}{dt} = \pm c\left(1 - \frac{r_s}{r}\right).
+  \label{eq:cono_luz_schwarz}
+\end{equation}
+Cuando $r \gg r_s$, $dr/dt \approx \pm c$: la velocidad de la luz se recupera. Cuando $r \to r_s^+$, $dr/dt \to 0$: la luz se ``detiene'' respecto al observador en $t$. Esto refleja la singularidad de coordenadas: el tiempo $t$ es el tiempo propio del observador estático en el infinito, que percibe el cruce del horizonte como algo que requiere tiempo infinito.
+
+\subsection{Coordenadas de Eddington-Finkelstein y de Kruskal-Szekeres}
+
+Para eliminar la singularidad de coordenadas en $r = r_s$ e investigar la estructura causal completa del espacio-tiempo de Schwarzschild, introducimos sistemas de coordenadas alternativos.
+
+\subsubsection{Coordenadas de Eddington-Finkelstein entrantes}
+
+Definimos la \textbf{coordenada tortuga} $r^*$:
+\begin{equation}
+  r^* \equiv r + r_s\ln\!\left|\frac{r}{r_s} - 1\right|, \qquad \frac{dr^*}{dr} = \left(1 - \frac{r_s}{r}\right)^{-1}.
+  \label{eq:coordenada_tortuga}
+\end{equation}
+Nótese que $r^* \to -\infty$ cuando $r \to r_s^+$ y $r^* \approx r$ para $r \gg r_s$. Introduciendo la coordenada $v = ct + r^*$ (constante a lo largo de rayos entrantes), la métrica toma la \textbf{forma de Eddington-Finkelstein entrante}:
+\begin{equation}
+  ds^2 = -\!\left(1-\frac{r_s}{r}\right)dv^2 + 2\,dv\,dr + r^2 d\Omega^2.
+  \label{eq:EF_entrante}
+\end{equation}
+Esta expresión es regular en $r = r_s$. Un rayo de luz radial entrante satisface $v = \text{const}$, lo que corresponde a geodésicas que cruzan suavemente el horizonte hacia el interior.
+
+\subsubsection{Diagrama de Penrose-Carter y extensión máxima}
+
+La \textbf{extensión máxima de Kruskal-Szekeres} revela la estructura causal completa del espacio-tiempo de Schwarzschild. Se introducen coordenadas $(T, X)$ tales que
+\begin{align}
+  T^2 - X^2 &= \left(1 - \frac{r}{r_s}\right)e^{r/r_s},
+  \label{eq:kruskal_1}\\
+  \frac{T}{X} &= \tanh\!\left(\frac{ct}{2r_s}\right) \quad (r > r_s), \nonumber\\
+  \frac{X}{T} &= \tanh\!\left(\frac{ct}{2r_s}\right) \quad (r < r_s). \nonumber
+\end{align}
+En estas coordenadas, la métrica toma la forma manifiestamente regular
+\begin{equation}
+  ds^2 = \frac{4r_s^3}{r}e^{-r/r_s}\!\left(-dT^2 + dX^2\right) + r^2 d\Omega^2,
+  \label{eq:metrica_kruskal}
+\end{equation}
+donde $r = r(T,X)$ se obtiene implícitamente de \eqref{eq:kruskal_1}. La singularidad física $r=0$ corresponde a la hipérbola $T^2 - X^2 = 1$, el horizonte a $T = \pm X$, y el espacio-tiempo externo original al cuadrante $X > |T|$.
+
+\begin{observacion}{Las cuatro regiones de Kruskal}{}
+El diagrama de Kruskal muestra cuatro regiones del espacio-tiempo de Schwarzschild:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Región I} ($X > |T|$): exterior estático; el universo al que tenemos acceso.
+  \item \textbf{Región II} ($T > |X|$, $T > 0$): interior del agujero negro; región desde la que ningún observador causal puede escapar a la Región~I.
+  \item \textbf{Región III} ($X < -|T|$): ``universo paralelo'' con otra región asintóticamente plana, no conectada causalmente a la Región~I.
+  \item \textbf{Región IV} ($T < -|X|$): agujero blanco; región de la que toda la materia sale pero a la que nadie puede entrar.
+\end{itemize}
+Las regiones III y IV son matemáticamente posibles pero físicamente no realizables en un colapso gravitacional real: la extensión de Kruskal describe un agujero negro eterno, no uno formado por colapso.
+\end{observacion}
+
+% ===========================================================
+\section{Movimiento Geodésico en el Espacio-Tiempo de Schwarzschild}
+\label{sec:geodesicas_schwarz}
+% ===========================================================
+
+\subsection{Constantes de movimiento e integrales primeras}
+
+La métrica de Schwarzschild admite dos simetrías continuas codificadas por vectores de Killing:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Invariancia bajo traslaciones temporales} ($\partial_t$ es Killing): conservación de la energía específica $E/m$.
+  \item \textbf{Invariancia bajo rotaciones} ($\partial_\varphi$ es Killing): conservación del momento angular específico $L/m$.
+\end{itemize}
+
+Por simetría esférica, el movimiento se restringe a un plano: tomamos $\theta = \pi/2$. La cuadri-velocidad $u^\mu = dx^\mu/d\lambda$ (con $\lambda$ el parámetro afín, $\lambda = \tau/m$ para partículas masivas) satisface:
+
+\begin{align}
+  \tilde{E} &\equiv -g_{tt}\frac{dt}{d\lambda} = \left(1 - \frac{r_s}{r}\right)c^2\frac{dt}{d\tau},
+  \label{eq:energia_schwarz}\\
+  \tilde{L} &\equiv g_{\varphi\varphi}\frac{d\varphi}{d\lambda} = r^2\frac{d\varphi}{d\tau},
+  \label{eq:momento_schwarz}
+\end{align}
+donde $\tilde{E}$ es la \textbf{energía específica} (por unidad de masa en reposo) y $\tilde{L}$ es el \textbf{momento angular específico}. Para partículas masivas, la condición de normalización $g_{\mu\nu}u^\mu u^\nu = -c^2$ proporciona una tercera ecuación:
+
+\begin{equation}
+  \left(\frac{dr}{d\tau}\right)^2 = \frac{\tilde{E}^2}{c^2} - \left(1 - \frac{r_s}{r}\right)\!\left(c^2 + \frac{\tilde{L}^2}{r^2}\right).
+  \label{eq:geodesica_radial}
+\end{equation}
+
+\subsection{El potencial efectivo}
+
+Reescribiendo \eqref{eq:geodesica_radial} como una ecuación de energía:
+\begin{equation}
+  \frac{1}{2}\left(\frac{dr}{d\tau}\right)^2 + V_{\rm eff}(r) = \frac{\tilde{E}^2 - c^4}{2c^2},
+  \label{eq:energia_efec}
+\end{equation}
+con el \textbf{potencial efectivo relativista}
+\begin{equation}
+  \boxed{V_{\rm eff}(r) = -\frac{GM}{r} + \frac{\tilde{L}^2}{2r^2} - \frac{GM\tilde{L}^2}{c^2 r^3}.}
+  \label{eq:pot_efec}
+\end{equation}
+
+\begin{observacion}{Diferencia con el potencial newtoniano}{}
+En mecánica newtoniana, el potencial efectivo para órbitas es
+\[
+  V_{\rm Newton}(r) = -\frac{GM}{r} + \frac{\tilde{L}^2}{2r^2}.
+\]
+La relatividad general añade un término \emph{atractivo} de orden $1/r^3$:
+\[
+  \delta V_{\rm RG} = -\frac{GM\tilde{L}^2}{c^2 r^3}.
+\]
+Este término extra es responsable de la precesión del perihelio (el mínimo del potencial efectivo no coincide exactamente con la distancia de perihelio de la órbita precedente) y, para $r < r_{\rm lsco}$, elimina la barrera centrífuga y provoca la caída inevitable hacia la singularidad.
+\end{observacion}
+
+\subsection{Órbitas circulares y la última órbita estable circular}
+
+Una órbita circular de radio $r$ requiere $dr/d\tau = 0$ y $d^2r/d\tau^2 = 0$, es decir, $V_{\rm eff} = \text{const}$ y $dV_{\rm eff}/dr = 0$. De la segunda condición:
+
+\begin{equation}
+  \frac{dV_{\rm eff}}{dr} = \frac{GM}{r^2} - \frac{\tilde{L}^2}{r^3} + \frac{3GM\tilde{L}^2}{c^2 r^4} = 0.
+\end{equation}
+
+Resolviendo para $\tilde{L}^2$:
+\begin{equation}
+  \tilde{L}^2 = \frac{GMr^2}{r - 3GM/c^2} = \frac{GMr^2}{r - \frac{3}{2}r_s}.
+  \label{eq:momento_circ}
+\end{equation}
+
+Para que la órbita circular exista debe haber $r > 3r_s/2$. La estabilidad requiere $d^2V_{\rm eff}/dr^2 > 0$, lo que impone una restricción más estricta:
+
+\begin{proposicion}{Última órbita circular estable (ISCO)}{isco}
+La \textbf{última órbita circular estable} (\emph{Innermost Stable Circular Orbit}, ISCO) se sitúa en
+\begin{equation}
+  r_{\rm ISCO} = 3\,r_s = \frac{6GM}{c^2}.
+  \label{eq:isco}
+\end{equation}
+Para $r > r_{\rm ISCO}$, las órbitas circulares son estables. Para $r_s < r < r_{\rm ISCO}$, las órbitas circulares existen pero son inestables: una pequeña perturbación provoca la caída hacia el interior. Para $r < \frac{3}{2}r_s$, no existen órbitas circulares en absoluto.
+\end{proposicion}
+
+La ISCO juega un papel crucial en astrofísica: es el borde interno del disco de acreción alrededor de agujeros negros. La eficiencia de conversión de energía en masa en reposo en el disco es $\eta = 1 - E_{\rm ISCO}/(mc^2) \approx 5{,}7\%$ para el agujero negro de Schwarzschild, frente al $\sim 0{,}7\%$ de la fusión nuclear.
+
+\subsection{Geodésicas de fotones y el radio fotonónico}
+
+Para fotones ($ds^2 = 0$), la condición de normalización se reemplaza por $g_{\mu\nu}k^\mu k^\nu = 0$, con $k^\mu = dx^\mu/d\lambda$ ($\lambda$ parámetro afín). Las integrales de movimiento son análogas:
+\begin{equation}
+  \left(\frac{dr}{d\lambda}\right)^2 = \frac{\tilde{E}^2}{c^2} - \left(1 - \frac{r_s}{r}\right)\frac{\tilde{L}^2}{r^2}.
+  \label{eq:geodesica_foton}
+\end{equation}
+
+El potencial efectivo para fotones es $V_{\rm fotón}(r) = \tilde{L}^2(1 - r_s/r)/r^2$, que tiene un máximo en $r = 3r_s/2$. Esta es la \textbf{esfera fotonónica} o \textbf{radio de la órbita circular de la luz}:
+
+\begin{equation}
+  r_{\rm ph} = \frac{3}{2}\,r_s = \frac{3GM}{c^2}.
+  \label{eq:radio_fotonico}
+\end{equation}
+
+La esfera fotonónica es una órbita circular inestable: un fotón con el parámetro de impacto crítico $b_c = r_{\rm ph}/\sqrt{1 - r_s/r_{\rm ph}} = 3\sqrt{3}\,GM/c^2$ orbita perpetuamente en $r = r_{\rm ph}$, pero la más mínima perturbación lo lanza hacia el interior o el exterior. La imagen de la ``sombra'' del agujero negro observada por el EHT \cite{EHT2019} tiene un radio angular directamente relacionado con $b_c$.
+
+% ===========================================================
+\section{Contrastes Observacionales de la Relatividad General}
+\label{sec:contrastes_RG}
+% ===========================================================
+
+La métrica de Schwarzschild predice cuatro efectos medibles que no existen en la mecánica newtoniana y que han sido verificados con gran precisión.
+
+\subsection{Precesión del perihelio de Mercurio}
+
+La órbita de Mercurio en mecánica newtoniana es una elipse cerrada. La relatividad general predice que el perihelio (punto de máximo acercamiento al Sol) gira lentamente —el plano orbital ``gira'' dentro de sí mismo. Este es el efecto histórico que Einstein calculó en noviembre de 1915 y que lo convenció de que su teoría era correcta.
+
+Para una órbita casi circular de radio $r_0 \gg r_s$, la ecuación de la órbita $u(\varphi)$ (donde $u = 1/r$) satisface:
+\begin{equation}
+  \frac{d^2u}{d\varphi^2} + u = \frac{GM}{{\tilde{L}}^2} + \frac{3GM}{c^2}u^2.
+  \label{eq:orbita_schwarz}
+\end{equation}
+El último término es la corrección relativista. Tratándolo perturbativamente sobre la solución kepleriana $u_0 = (GM/\tilde{L}^2)(1 + e\cos\varphi)$ (donde $e$ es la excentricidad), se obtiene que el perihelio avanza en cada vuelta un ángulo:
+
+\begin{equation}
+  \boxed{\Delta\varphi = \frac{6\pi GM}{c^2 a(1-e^2)} = \frac{3\pi r_s}{a(1-e^2)},}
+  \label{eq:precesion_perihelio}
+\end{equation}
+donde $a$ es el semieje mayor de la órbita.
+
+\begin{ejemplo}{Precesión de Mercurio}{}
+Para Mercurio: $a = 5{,}79\times10^{10}\,\si{m}$, $e = 0{,}206$, $r_s^\odot = 2{,}95\,\si{km} = 2{,}95\times10^3\,\si{m}$, período orbital $T = 87{,}97$ días.
+
+La precesión por vuelta es
+\[
+  \Delta\varphi = \frac{3\pi \times 2{,}95\times10^3}{5{,}79\times10^{10}(1 - 0{,}206^2)}
+  \approx 5{,}02\times10^{-7}\,\si{rad/vuelta}.
+\]
+En 100 años hay $100\times365{,}25/87{,}97 \approx 415$ vueltas, dando
+\[
+  \Delta\varphi_{100\,\rm años} \approx 415 \times 5{,}02\times10^{-7}\,\si{rad}
+  \approx 43''\text{ (segundos de arco).}
+\]
+La observación del siglo XIX detectó una precesión anómala de $43{,}11 \pm 0{,}45''$ por siglo que las perturbaciones planetarias newtonianas no podían explicar. La relatividad general la predice con precisión $<0{,}1\%$ \cite{Misner1973}.
+\end{ejemplo}
+
+\subsection{Deflexión de la luz por el Sol}
+
+Un fotón que pasa a distancia $b$ del Sol (parámetro de impacto) es desviado de su trayectoria rectilínea un ángulo:
+
+\begin{equation}
+  \boxed{\delta\theta = \frac{4GM}{c^2 b} = \frac{2r_s}{b}.}
+  \label{eq:deflexion_luz}
+\end{equation}
+
+\begin{importante}
+La predicción newtoniana, obtenida tratando el fotón como partícula con velocidad $c$ en el potencial gravitacional, da sólo la mitad: $\delta\theta_{\rm Newton} = 2GM/(c^2 b)$. El factor extra proviene de la curvatura espacial: la métrica de Schwarzschild curva tanto el tiempo como el espacio, y ambas contribuciones son iguales para la luz. En mecánica newtoniana sólo se tiene en cuenta la curvatura temporal (el gradiente del potencial). Este contraste diferencia directamente la RG de la gravedad newtoniana.
+\end{importante}
+
+Para la luz rasante al borde solar ($b = R_\odot = 6{,}96\times10^8\,\si{m}$):
+\begin{equation}
+  \delta\theta_\odot = \frac{4 \times 6{,}674\times10^{-11} \times 1{,}99\times10^{30}}{(3\times10^8)^2 \times 6{,}96\times10^8}
+  \approx 1{,}75''.
+\end{equation}
+Eddington midió este valor en el eclipse solar del 29 de mayo de 1919, con un resultado $1{,}61 \pm 0{,}30''$ \cite{Misner1973}. Las mediciones actuales con radio-interferometría de línea de base muy larga (VLBI) verifican la predicción al nivel de $0{,}01\%$.
+
+\subsection{Corrimiento gravitacional al rojo}
+
+Un fotón emitido con frecuencia $\nu_e$ a un potencial gravitacional $\Phi_e$ y recibido donde el potencial es $\Phi_r$ experimenta un cambio de frecuencia dado por:
+
+\begin{equation}
+  \boxed{\frac{\nu_r}{\nu_e} = \sqrt{\frac{g_{tt}(r_e)}{g_{tt}(r_r)}} = \sqrt{\frac{1 - r_s/r_e}{1 - r_s/r_r}}.}
+  \label{eq:redshift_grav}
+\end{equation}
+
+Para $r_e < r_r$ (fotón escapando de un campo gravitacional), $\nu_r < \nu_e$: el fotón pierde energía —se corre al rojo. Para un campo débil ($r \gg r_s$):
+\begin{equation}
+  z \equiv \frac{\nu_e - \nu_r}{\nu_r} \approx \frac{\Phi_r - \Phi_e}{c^2} = \frac{GM}{c^2}\!\left(\frac{1}{r_e} - \frac{1}{r_r}\right).
+  \label{eq:redshift_debil}
+\end{equation}
+
+\begin{ejemplo}{Experimento de Pound-Rebka (1959)}{}
+Pound y Rebka midieron el corrimiento al rojo gravitacional en un laboratorio terrestre de altura $h = 22{,}5\,\si{m}$ usando rayos $\gamma$ del ${}^{57}$Fe. La predicción relativista es
+\[
+  \frac{\Delta\nu}{\nu} = \frac{gh}{c^2} = \frac{9{,}81 \times 22{,}5}{(3\times10^8)^2} \approx 2{,}46\times10^{-15}.
+\]
+El resultado experimental concordó con la predicción al $10\%$. Experimentos posteriores lo han verificado al $0{,}01\%$. El corrimiento gravitacional al rojo también es crucial para los sistemas GPS: los relojes en satélite (a $\sim 20\,000\,\si{km}$ de altitud) avanzan $\sim 45\,\si{\mu s/día}$ más rápido que los terrestres debido al potencial gravitacional menor, efecto que debe corregirse para mantener la precisión de localización.
+\end{ejemplo}
+
+\subsection{Retardo de Shapiro}
+
+Un fotón que viaja cerca de un cuerpo masivo tarda más tiempo en recorrer una distancia dada que en el espacio plano. Este efecto, el \textbf{retardo de Shapiro} (1964), es la cuarta prueba clásica de la relatividad general.
+
+Para un fotón que pasa cerca del Sol con parámetro de impacto $b$, el retardo extra respecto a la propagación en el vacío plano entre los puntos $r_1$ y $r_2$ es:
+
+\begin{equation}
+  \Delta t_{\rm Shapiro} = \frac{2GM}{c^3}\ln\!\left(\frac{(r_1 + \sqrt{r_1^2 - b^2})(r_2 + \sqrt{r_2^2 - b^2})}{b^2}\right),
+  \label{eq:retardo_shapiro}
+\end{equation}
+que en el límite $r_{1,2} \gg b$ se simplifica a
+\begin{equation}
+  \Delta t_{\rm Shapiro} \approx \frac{4GM}{c^3}\ln\!\left(\frac{4r_1 r_2}{b^2}\right) = \frac{2r_s}{c}\ln\!\left(\frac{4r_1 r_2}{b^2}\right).
+  \label{eq:retardo_shapiro_aprox}
+\end{equation}
+
+\begin{ejemplo}{Retardo de Shapiro medido con la sonda Cassini}{}
+La sonda Cassini (2002) proporcionó la medición más precisa del retardo de Shapiro. Las señales de radio enviadas a la sonda cuando pasaba cerca del Sol experimentaron un retardo máximo de $\sim 250\,\si{\mu s}$. El resultado fue:
+\[
+  \frac{\Delta t_{\rm obs}}{\Delta t_{\rm RG}} = 1 + (2{,}1 \pm 2{,}3)\times10^{-5},
+\]
+verificando la predicción relativista al nivel de $0{,}002\%$, el test más preciso del parámetro de la postNewtonian $\gamma$ (que mide la curvatura espacial por unidad de potencial gravitacional) \cite{Bertotti2003}.
+\end{ejemplo}
+
+% ===========================================================
+\section{Agujeros Negros: Propiedades y Termodinámica}
+\label{sec:agujeros_negros}
+% ===========================================================
+
+\subsection{Formación por colapso gravitacional}
+
+Un agujero negro se forma cuando la presión interna no puede contrarrestar la atracción gravitacional de un objeto compacto. El límite de Oppenheimer-Volkoff-Tolman para estrellas de neutrones ($M_{\rm max} \approx 2{,}2\,M_\odot$) implica que los remanentes de estrellas masivas con $M > M_{\rm max}$ colapsan inevitablemente hacia agujeros negros. Durante el colapso, el radio de la superficie estelar cruza el radio de Schwarzschild en tiempo finito propio para el observador que colapsa, aunque un observador externo ve el colapso congelado en $r = r_s$.
+
+El teorema de censura cósmica de Penrose (1969) postula que las singularidades físicas siempre quedan ocultadas detrás de horizontes de eventos y nunca son ``desnudas'' (accesibles al observador externo). Aunque no demostrado en general, la censura cósmica está ampliamente corroborada por soluciones conocidas.
+
+\subsection{La solución de Kerr: agujeros negros en rotación}
+
+La generalización de la solución de Schwarzschild a agujeros negros en rotación es la \textbf{métrica de Kerr} (1963) \cite{Kerr1963}:
+\begin{equation}
+  ds^2 = -\!\left(1 - \frac{r_s r}{\rho^2}\right)c^2 dt^2 - \frac{2r_s r\, a\sin^2\!\theta}{\rho^2}\,c\,dt\,d\varphi
+         + \frac{\rho^2}{\Delta}dr^2 + \rho^2\,d\theta^2
+         + \left(r^2 + a^2 + \frac{r_s r\,a^2\sin^2\!\theta}{\rho^2}\right)\sin^2\!\theta\,d\varphi^2,
+  \label{eq:kerr}
+\end{equation}
+donde $a = J/(Mc)$ es el parámetro de giro (momento angular específico), $\rho^2 = r^2 + a^2\cos^2\!\theta$ y $\Delta = r^2 - r_s r + a^2$. Las raíces de $\Delta = 0$ determinan los dos horizontes:
+\begin{equation}
+  r_{\pm} = \frac{r_s}{2} \pm \sqrt{\frac{r_s^2}{4} - a^2} = \frac{GM}{c^2} \pm \sqrt{\frac{G^2M^2}{c^4} - a^2}.
+  \label{eq:horizontes_kerr}
+\end{equation}
+
+Para $a < GM/c^2$ (spin sub-extremo), existen dos horizontes $r_+ > r_-$; para $a = GM/c^2$ (spin extremo), $r_+ = r_- = GM/c^2$; para $a > GM/c^2$ no existe horizonte y hay una singularidad desnuda (censurada, según la conjetura). La ISCO para Kerr depende del sentido del giro: para órbitas prograde en el campo máximo ($a = GM/c^2$), $r_{\rm ISCO} = GM/c^2$ y la eficiencia de acreción sube hasta $\sim 42\%$.
+
+\begin{teorema}{Unicidad de agujeros negros (no hair theorem)}{nohair}
+Un agujero negro en equilibrio (solución estacionaria de las ecuaciones de Einstein-Maxwell en el vacío) queda completamente caracterizado por sólo tres parámetros: masa $M$, momento angular $J$ y carga eléctrica $Q$. No existe ninguna otra propiedad observable del agujero negro: toda la información sobre el estado previo al colapso queda oculta tras el horizonte.
+\end{teorema}
+
+\subsection{Las cuatro leyes de la mecánica de agujeros negros}
+
+La analogía entre agujeros negros y termodinámica, desarrollada por Bekenstein, Bardeen, Carter y Hawking en los años 1970, culminó en las \textbf{cuatro leyes de la mecánica de agujeros negros}:
+
+\begin{proposicion}{Leyes de la mecánica de agujeros negros}{}
+\begin{enumerate}[leftmargin=2em, label=\textbf{Ley \arabic{enumi}a.}, start=0]
+  \item \textbf{Ley cero.} La gravedad superficial $\kappa$ es constante sobre el horizonte de un agujero negro estacionario.
+  \item \textbf{Primera ley.} Para variaciones infinitesimales del estado del agujero negro:
+  \begin{equation}
+    dM = \frac{\kappa}{8\pi G}dA + \Omega_H\,dJ + \Phi_H\,dQ,
+    \label{eq:primera_ley_BH}
+  \end{equation}
+  donde $A$ es el área del horizonte, $\Omega_H$ la velocidad angular del horizonte y $\Phi_H$ el potencial eléctrico. La analogía con $dU = T\,dS - p\,dV$ identifica $\kappa/(8\pi G) \leftrightarrow T$ y $A \leftrightarrow S$.
+  \item \textbf{Segunda ley (Hawking, 1971).} El área del horizonte de eventos nunca decrece en procesos físicos clásicos: $dA \geq 0$. La analogía con $dS \geq 0$ sugiere $S \propto A$.
+  \item \textbf{Tercera ley.} Es imposible alcanzar $\kappa = 0$ en un número finito de pasos (no se puede extremar el agujero negro).
+\end{enumerate}
+\end{proposicion}
+
+\subsection{Entropía de Bekenstein-Hawking}
+
+Bekenstein \cite{Bekenstein1973} propuso que la entropía de un agujero negro es proporcional al área de su horizonte:
+\begin{equation}
+  \boxed{S_{\rm BH} = \frac{k_B c^3}{4G\hbar}\,A = \frac{k_B}{4}\frac{A}{\ell_P^2},}
+  \label{eq:entropia_BH}
+\end{equation}
+donde $A = 4\pi r_s^2 = 16\pi G^2 M^2/c^4$ es el área del horizonte, $\ell_P = \sqrt{\hbar G/c^3} \approx 1{,}62\times10^{-35}\,\si{m}$ es la longitud de Planck, y el factor $1/4$ fue fijado por Hawking mediante el cálculo cuántico. Para el Sol:
+\begin{equation}
+  S_\odot^{\rm BH} \approx \frac{k_B c^3}{4G\hbar}\times 4\pi\left(\frac{2GM_\odot}{c^2}\right)^2
+  \approx 1{,}05\times10^{77}\,k_B,
+\end{equation}
+enormemente mayor que la entropía termodinámica del Sol ($\sim 10^{57}\,k_B$). Un agujero negro de la masa del Sol sería el objeto de mayor entropía posible para esa masa.
+
+\subsection{Radiación de Hawking}
+
+Hawking demostró en 1974 \cite{Hawking1975} que, al incorporar la teoría cuántica de campos en el fondo curvo de Schwarzschild, los agujeros negros no son completamente negros: emiten radiación térmica con temperatura
+
+\begin{equation}
+  \boxed{T_H = \frac{\hbar c^3}{8\pi G M k_B} = \frac{\hbar\kappa}{2\pi k_B c},}
+  \label{eq:temp_hawking}
+\end{equation}
+donde $\kappa = c^4/(4GM)$ es la gravedad superficial de Schwarzschild.
+
+\begin{ejemplo}{Temperatura de Hawking para distintos agujeros negros}{}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Objeto & Masa $M/M_\odot$ & $T_H$ \\
+\hline
+GW150914 (inicial) & $\sim 30$ & $\sim 2\times10^{-9}\,\si{K}$ \\
+Agujero negro solar & $1$ & $\sim 6\times10^{-8}\,\si{K}$ \\
+Agujero negro primordial & $10^{-5}$ ($\sim m_P$) & $\sim 10^{32}\,\si{K}$ \\
+\hline
+\end{tabular}
+\end{center}
+Para agujeros negros astrofísicos, $T_H \ll T_{\rm CMB} \approx 2{,}73\,\si{K}$: la radiación del fondo cósmico de microondas calienta el agujero negro más de lo que él irradia. Sólo agujeros negros primordiales de masa $M \lesssim 5\times10^{11}\,\si{kg}$ podrían estar evaporándose en la época actual.
+\end{ejemplo}
+
+La evaporación de Hawking implica que la masa del agujero negro disminuye. El tiempo de vida de un agujero negro por evaporación es:
+\begin{equation}
+  t_{\rm evap} = \frac{5120\pi G^2 M^3}{\hbar c^4}.
+  \label{eq:tiempo_evap}
+\end{equation}
+Para $M = M_\odot$: $t_{\rm evap} \approx 2\times10^{74}\,\si{años}$, un tiempo astronómicamente mayor que la edad del universo.
+
+\begin{importante}
+La radiación de Hawking plantea el célebre \textbf{problema de la pérdida de información}: si el agujero negro se evapora completamente, la información sobre el estado cuántico de la materia que colapsó queda aparentemente destruida, violando la unitariedad de la mecánica cuántica. Este problema, formulado por Hawking en 1976, sigue sin resolverse de manera satisfactoria y está en el corazón de los esfuerzos modernos por reconciliar la relatividad general con la mecánica cuántica (gravedad cuántica, teoría de cuerdas, holografía de AdS/CFT).
+\end{importante}
+
+% ===========================================================
+\section{Resumen del Capítulo}
+\label{sec:resumen_cap7}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+
+  \item El \textbf{teorema de Birkhoff} establece que la única solución de vacío esféricamente simétrica es la métrica de Schwarzschild, independientemente del estado dinámico interno del objeto. Esto implica que las oscilaciones radiales esféricas no generan ondas gravitacionales.
+
+  \item La \textbf{métrica de Schwarzschild}
+  \(ds^2 = -(1-r_s/r)c^2dt^2 + (1-r_s/r)^{-1}dr^2 + r^2 d\Omega^2\)
+  contiene dos singularidades: una de \emph{coordenadas} en $r = r_s$ (el horizonte de eventos) y una \emph{física} en $r = 0$. El escalar de Kretschner $K = 48G^2M^2/(c^4 r^6)$ diverge sólo en $r = 0$.
+
+  \item Las \textbf{coordenadas de Kruskal-Szekeres} extienden maximalmente el espacio-tiempo de Schwarzschild, mostrando cuatro regiones: el exterior estático (I), el interior del agujero negro (II), un universo paralelo (III) y el agujero blanco (IV). Las regiones III y IV no son accesibles en un colapso gravitacional real.
+
+  \item El \textbf{potencial efectivo relativista} $V_{\rm eff}(r) = -GM/r + \tilde{L}^2/(2r^2) - GM\tilde{L}^2/(c^2 r^3)$ añade un término atractivo de orden $1/r^3$ respecto a Newton. La última órbita circular estable (ISCO) se encuentra en $r_{\rm ISCO} = 6GM/c^2 = 3r_s$.
+
+  \item Las \textbf{cuatro pruebas clásicas} de la RG son: (a) precesión del perihelio, $\Delta\varphi = 6\pi GM/[c^2 a(1-e^2)]$; (b) deflexión de la luz, $\delta\theta = 4GM/(c^2 b)$ (el doble de la predicción newtoniana); (c) corrimiento gravitacional al rojo, $\Delta\nu/\nu \approx gh/c^2$; y (d) retardo de Shapiro, $\Delta t \approx (2r_s/c)\ln(4r_1r_2/b^2)$.
+
+  \item Un \textbf{agujero negro} clásico queda caracterizado únicamente por masa $M$, momento angular $J$ y carga $Q$ (teorema de no-pelo). La \textbf{métrica de Kerr} generaliza Schwarzschild ($a = J/Mc$) y posee ISCO en $r = GM/c^2$ para el caso extremo en co-rotación.
+
+  \item La \textbf{termodinámica de agujeros negros} asigna entropía $S_{\rm BH} = k_B A/(4\ell_P^2)$ y temperatura $T_H = \hbar c^3/(8\pi GMk_B)$ a los agujeros negros. La \textbf{radiación de Hawking} implica evaporación lenta (tiempo $\propto M^3$). El problema de la pérdida de información cuántica permanece abierto.
+
+\end{enumerate}
+
+% ===========================================================
+\section{Problemas Propuestos}
+\label{sec:problemas_cap7}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Radio de Schwarzschild.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule el radio de Schwarzschild de los siguientes objetos: la Tierra ($M_\oplus = 5{,}97\times10^{24}\,\si{kg}$), el Sol ($M_\odot = 1{,}99\times10^{30}\,\si{kg}$), un agujero negro de $10\,M_\odot$ y el agujero negro supermasivo de la Vía Láctea (Sgr~A*, $M \approx 4\times10^6\,M_\odot$).
+    \item Compare el radio de Schwarzschild del Sol con el radio del protón ($\sim 10^{-15}\,\si{m}$) y con el radio de la Tierra. ¿Qué densidad media tendría el Sol si fuera comprimido hasta $r_s$?
+  \end{enumerate}
+
+  \item \textbf{Singularidades de la métrica.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Calcule el escalar de Kretschner $K = R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma} = 48G^2M^2/(c^4 r^6)$ para la métrica de Schwarzschild. ¿En qué punto(s) diverge?
+    \item Evalúe el invariante de Ricci $R = g^{\mu\nu}R_{\mu\nu}$ para la solución de Schwarzschild y verifique que es cero. ¿Qué dice esto sobre la naturaleza de la solución?
+    \item En coordenadas de Eddington-Finkelstein entrantes $(v, r, \theta, \varphi)$ (ecuación \ref{eq:EF_entrante}), calcule los componentes $g_{vv}$, $g_{vr}$ y $g_{rr}$ y verifique que $\det(g_{AB}) \neq 0$ en $r = r_s$, confirmando la regularidad del horizonte.
+  \end{enumerate}
+
+  \item \textbf{Potencial efectivo relativista.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Grafique cualitativamente $V_{\rm eff}(r)$ en unidades de $c^2$ para una partícula con $\tilde{L} = 4GM/c$ y compare con el potencial efectivo newtoniano. ¿Para qué valor de $r$ aparece el mínimo?
+    \item Calcule el radio de la última órbita circular estable $r_{\rm ISCO}$ imponiendo simultáneamente $V_{\rm eff}(r) = E_{\rm orb}$, $dV_{\rm eff}/dr = 0$ y $d^2V_{\rm eff}/dr^2 = 0$.
+    \item Demuestre que en $r_{\rm ISCO}$ la energía específica de la partícula es $\tilde{E}_{\rm ISCO}/c^2 = 2\sqrt{2}/3$ y la eficiencia de acreción es $\eta = 1 - 2\sqrt{2}/3 \approx 5{,}7\%$.
+  \end{enumerate}
+
+  \item \textbf{Precesión del perihelio.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Derive la ecuación de la órbita \eqref{eq:orbita_schwarz} para una partícula masiva en el plano ecuatorial ($\theta = \pi/2$) de la métrica de Schwarzschild, usando $u = 1/r$ y $\varphi$ como variable independiente.
+    \item Resuelva la ecuación perturbativamente: tome $u = u_0 + \epsilon u_1$ con $u_0 = (GM/\tilde{L}^2)(1+e\cos\varphi)$ la solución kepleriana y calcule $u_1(\varphi)$.
+    \item Muestre que el resultado implica una precesión por vuelta $\Delta\varphi = 6\pi GM/(c^2 a(1-e^2))$ y calcula el valor en segundos de arco por siglo para Venus ($a = 1{,}082\times10^{11}\,\si{m}$, $e = 0{,}0068$) y Marte ($a = 2{,}279\times10^{11}\,\si{m}$, $e = 0{,}093$).
+  \end{enumerate}
+
+  \item \textbf{Deflexión de la luz.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para un fotón radial en el plano ecuatorial de Schwarzschild, escribe la ecuación de la trayectoria $u(\varphi)$ y muéstra que al orden más bajo en $r_s/b$ el ángulo de deflexión es $\delta\theta = 4GM/(c^2 b)$.
+    \item ¿A qué distancia del Sol equivale el factor 2 extra respecto a Newton? Es decir, si el ángulo observado es $1{,}75''$, qué valor predice la mecánica newtoniana para la deflexión de la luz?
+    \item Calcula el ángulo de deflexión de la luz para el agujero negro M87 ($M = 6{,}5\times10^9\,M_\odot$) observado a una distancia de $\sim 16$ Mpc. Compare con la resolución angular del EHT ($\sim 25\,\si{\mu as}$).
+  \end{enumerate}
+
+  \item \textbf{Corrimiento gravitacional al rojo.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Derive la ecuación \eqref{eq:redshift_grav} usando el hecho de que a lo largo de una geodésica nula en el espacio-tiempo de Schwarzschild, la energía del fotón $E = -g_{tt}k^t = \tilde{E}(1-r_s/r)$ no varía (es una constante de movimiento), y la frecuencia medida por un observador estático es $\nu = E/[h\sqrt{-g_{tt}}]$.
+    \item Un átomo de hidrógeno en la superficie de una estrella de neutrones ($M = 1{,}4\,M_\odot$, $R = 10\,\si{km}$) emite la línea H$\alpha$ con $\lambda_0 = 656{,}3\,\si{nm}$. ¿Cuál es la longitud de onda observada desde el infinito?
+    \item Calcule el corrimiento al rojo gravitacional en un satélite GPS (altura orbital $h = 20\,200\,\si{km}$). ¿En cuántos nanosegundos por día avanza el reloj del satélite respecto al terrestre? ¿Es este efecto mayor o menor que el efecto de dilatación temporal por la velocidad orbital del satélite?
+  \end{enumerate}
+
+  \item \textbf{Termodinámica de agujeros negros.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Verifique la primera ley \eqref{eq:primera_ley_BH} para el agujero negro de Schwarzschild ($J = Q = 0$): demuestre que $dM = (\kappa/8\pi G)\,dA$, donde $\kappa = c^4/(4GM)$ y $A = 4\pi r_s^2$.
+    \item Muestre que la entropía de Bekenstein-Hawking $S_{\rm BH} = k_B A/(4\ell_P^2)$ para un agujero negro de $10\,M_\odot$ equivale a $\sim 10^{79}\,k_B$. ¿Cuántas veces mayor es esto que la entropía de una estrella de neutrones típica ($\sim 10^{56}\,k_B$)?
+    \item Usando \eqref{eq:primera_ley_BH} con $dM = -dE_{\rm radiada}$ y la ley de Stefan-Boltzmann $dE/dt = \sigma_{\rm SB}A T_H^4$, obtenga la ecuación diferencial $dM/dt = -\alpha/M^2$ (donde $\alpha$ es una constante) y derive el tiempo de evaporación \eqref{eq:tiempo_evap}.
+    \item Calcula el tiempo de evaporación de un agujero negro primordial con masa inicial $M_0 = 10^{12}\,\si{kg}$ formado en el Big Bang. ¿Está evaporándose actualmente?
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Partícula cayendo al agujero negro.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para una partícula que cae radialmente desde el reposo en $r = r_0 \gg r_s$, muestre que el tiempo propio para alcanzar la singularidad es finito: $\tau_{\rm sing} \approx \pi r_0^{3/2}/(2\sqrt{r_s c^2})$ en el límite $r_0 \gg r_s$.
+    \item Muestre que el tiempo coordenado $t \to \infty$ cuando $r \to r_s^+$: el observador externo nunca ve a la partícula cruzar el horizonte.
+    \item Usando las coordenadas de Eddington-Finkelstein entrantes $(v, r)$, dibuja el diagrama espacio-tiempo y muestra que la trayectoria de la partícula cruza el horizonte suavemente en tiempo finito en esta carta.
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Extracción de energía rotacional: proceso de Penrose.}
+  \begin{enumerate}[label=(\alph*)]
+    \item En la métrica de Kerr, la región entre la ``ergosfera'' ($r_{\rm ergo} = GM/c^2 + \sqrt{G^2M^2/c^4 - a^2\cos^2\!\theta}$) y el horizonte exterior $r_+$ se llama \textbf{ergosfera}. Dentro de ella, $g_{tt} > 0$, de modo que el vector de Killing temporal $\partial_t$ es espacial. Explique por qué esto permite que partículas tengan energía negativa (medida por el observador en el infinito).
+    \item En el proceso de Penrose, una partícula cae a la ergosfera y se divide en dos: una con energía negativa que cae al horizonte y otra que escapa al infinito con energía mayor que la original. Calcula la máxima fracción de energía que puede extraerse de la rotación de un agujero negro extremo ($a = GM/c^2$): $\Delta M_{\rm max}/M = 1 - 1/\sqrt{2} \approx 29\%$.
+    \item Conecta este resultado con los jets relativistas observados en núcleos activos de galaxias (AGN) y con el mecanismo de Blandford-Znajek.
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Área del horizonte y segunda ley.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestra que cuando dos agujeros negros de Schwarzschild de masas $M_1$ y $M_2$ se fusionan en uno de masa $M_f$, la segunda ley $A_f \geq A_1 + A_2$ implica $M_f \geq \sqrt{M_1^2 + M_2^2}$.
+    \item Para GW150914: la masa del agujero negro remanente fue $M_f \approx 62\,M_\odot$, la energía emitida en ondas gravitacionales fue $\sim 3\,M_\odot c^2$. Verifique que la segunda ley de la mecánica de agujeros negros se satisface para esta fusión.
+    \item ¿En qué sentido la radiación de Hawking ``viola'' la segunda ley clásica? ¿Cómo se restaura si se incluye la entropía de la radiación emitida?
+  \end{enumerate}
+
+\end{enumerate}
