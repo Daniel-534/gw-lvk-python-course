@@ -1,0 +1,728 @@
+% ============================================================
+% Capítulo 6: Las Ecuaciones de Campo de Einstein
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Las Ecuaciones de Campo de Einstein}
+\label{cap:ecuaciones_campo}
+
+El capítulo anterior estableció el programa de la relatividad general: la gravedad no es una fuerza, sino la curvatura del espacio-tiempo; la materia y energía son las fuentes de esa curvatura; y las partículas en caída libre se mueven a lo largo de geodésicas en el espacio-tiempo curvo. La primera parte del programa —cómo la geometría mueve a la materia— quedó descrita por la ecuación geodésica. La segunda parte —cómo la materia curva la geometría— exige una ecuación que relacione la curvatura con el contenido de energía y momento. Esa ecuación son las \textbf{ecuaciones de campo de Einstein}:
+\begin{equation}
+  \boxed{G_{\mu\nu} + \Lambda\,g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu},}
+  \label{eq:Einstein_completa}
+\end{equation}
+donde $G_{\mu\nu} = R_{\mu\nu} - \tfrac{1}{2}g_{\mu\nu}R$ es el \textbf{tensor de Einstein}, $\Lambda$ es la \textbf{constante cosmológica} y $T_{\mu\nu}$ es el \textbf{tensor de energía-momento} que describe toda la materia y energía no gravitacional presente.
+
+Este capítulo desarrolla en detalle cada uno de esos ingredientes. Primero presentamos el tensor de energía-momento para los fluidos más importantes (polvo, fluido perfecto, campo electromagnético) y su ley de conservación covariante. Luego derivamos las ecuaciones de campo por dos caminos complementarios: un argumento heurístico basado en la analogía con la gravitación newtoniana, y la derivación rigurosa a partir del \textbf{principio de acción} mediante la variación de la \textbf{acción de Einstein-Hilbert}. Cerramos con un análisis de las propiedades de las ecuaciones y el significado físico de la constante cosmológica \cite{Carroll2004, Misner1973, Wald1984}.
+
+% ===========================================================
+\section{El tensor de energía-momento}
+\label{sec:Tmunu}
+% ===========================================================
+
+Para construir las ecuaciones de campo necesitamos describir covariante\-mente la distribución de materia y energía. En la relatividad especial, la densidad de energía y el tensor de esfuerzos de Maxwell se combinan en un único objeto tensorial: el \textbf{tensor de energía-momento} $T^{\mu\nu}$.
+
+\subsection{Definición y componentes}
+
+\begin{definicion}{Tensor de energía-momento}{Tmunu}
+El \textbf{tensor de energía-momento} (también llamado tensor de energía-impulso o tensor de estrés-energía) $T^{\mu\nu}$ es un tensor simétrico de tipo $(2,0)$ cuyos componentes tienen la siguiente interpretación física:
+\begin{itemize}[leftmargin=2em]
+  \item $T^{00}$: densidad de energía (energía por unidad de volumen).
+  \item $T^{0i} = T^{i0}$: densidad de flujo de energía en la dirección $i$, equivalentemente, densidad de momento en la dirección $i$ (multiplicada por $c$).
+  \item $T^{ij}$: flujo de la componente $i$-ésima del momento en la dirección $j$; es el tensor de esfuerzos de Cauchy.
+\end{itemize}
+En particular, las componentes diagonales $T^{ii}$ (sin suma) son las presiones a lo largo de cada eje, mientras que las componentes fuera de la diagonal son los esfuerzos cortantes.
+\end{definicion}
+
+La simetría $T^{\mu\nu} = T^{\nu\mu}$ garantiza la conservación del momento angular. Tiene en total $4(4+1)/2 = 10$ componentes independientes.
+
+\begin{observacion}{Interpretación en el marco en reposo}{}
+En el marco de referencia instantáneo en reposo de un elemento de fluido (el \textbf{marco propio} o \textbf{MCRF}, \emph{momentarily co-moving rest frame}), el tensor de energía-momento toma la forma especialmente transparente
+\begin{equation}
+  T^{\hat\mu\hat\nu} =
+  \begin{pmatrix}
+    \rho c^2 & 0 & 0 & 0 \\
+    0 & p & 0 & 0 \\
+    0 & 0 & p & 0 \\
+    0 & 0 & 0 & p
+  \end{pmatrix}
+  \quad\text{(fluido perfecto isótropo en reposo),}
+  \label{eq:Tmunu_MCRF}
+\end{equation}
+donde $\rho$ es la densidad de masa-energía en el marco propio y $p$ la presión isótropa. Esta forma se generaliza a marcos arbitrarios mediante la transformación tensorial.
+\end{observacion}
+
+\subsection{Polvo: el fluido sin presión}
+
+El caso más simple es el \textbf{polvo}: un conjunto de partículas que no interactúan entre sí (sin presión) y se mueven con la misma cuadri-velocidad $u^\mu$.
+
+\begin{definicion}{Tensor de energía-momento del polvo}{Tmunu_polvo}
+Para un fluido sin presión (polvo) con densidad de masa en reposo $\rho$ (medida en el marco propio) y cuadri-velocidad $u^\mu$, el tensor de energía-momento es
+\begin{equation}
+  T^{\mu\nu}_{\rm polvo} = \rho\,u^\mu u^\nu.
+  \label{eq:Tmunu_polvo}
+\end{equation}
+\end{definicion}
+
+\textbf{Verificación.} En el marco en reposo del fluido, $u^\mu = (c, 0, 0, 0)$ y por tanto $T^{00} = \rho c^2$ (densidad de energía), $T^{0i} = 0$ (sin flujo de momento) y $T^{ij} = 0$ (sin presión). Esto concuerda con \eqref{eq:Tmunu_MCRF} con $p = 0$.
+
+En un marco donde el polvo tiene velocidad ordinaria $\vec{v}$ (con $v \ll c$), usando $u^\mu \approx (c, v^i)$ obtenemos $T^{00} \approx \rho c^2$, $T^{0i} \approx \rho c v^i$ (flujo de energía) y $T^{ij} \approx \rho v^i v^j$ (flujo de momento), exactamente las expresiones de la mecánica de fluidos no relativista.
+
+\subsection{Fluido perfecto}
+
+Un \textbf{fluido perfecto} es un fluido isótropo en su marco propio, con densidad de masa-energía $\rho$ y presión isótropa $p$. No hay viscosidad ni conducción de calor.
+
+\begin{definicion}{Tensor de energía-momento del fluido perfecto}{Tmunu_fluido}
+Para un fluido perfecto con densidad de masa-energía $\rho$, presión $p$ y cuadri-velocidad normalizada $u^\mu u_\mu = -c^2$, el tensor de energía-momento es
+\begin{equation}
+  T^{\mu\nu}_{\rm fluido} = \frac{\rho c^2 + p}{c^2}\,u^\mu u^\nu + p\,g^{\mu\nu}.
+  \label{eq:Tmunu_fluido}
+\end{equation}
+Equivalentemente, bajando los índices:
+\begin{equation}
+  T_{\mu\nu} = \frac{\rho c^2 + p}{c^2}\,u_\mu u_\nu + p\,g_{\mu\nu}.
+\end{equation}
+\end{definicion}
+
+\begin{importante}
+En unidades naturales $c = 1$, la expresión se simplifica a
+\begin{equation}
+  T^{\mu\nu} = (\rho + p)\,u^\mu u^\nu + p\,g^{\mu\nu}.
+  \label{eq:Tmunu_fluido_nat}
+\end{equation}
+Muchos textos adoptan esta notación. En este capítulo mantendremos las potencias de $c$ para hacer explícitas las dimensiones.
+\end{importante}
+
+\textbf{Verificación en el marco propio.} En el MCRF, $u^\mu = (c, 0, 0, 0)$ y $g^{\mu\nu} = \eta^{\mu\nu} = \mathrm{diag}(-1,1,1,1)$ (localmente). Entonces:
+\begin{align}
+  T^{00} &= \frac{\rho c^2 + p}{c^2}\cdot c^2 + p\cdot(-1) = \rho c^2 + p - p = \rho c^2, \nl
+  T^{0i} &= \frac{\rho c^2 + p}{c^2}\cdot c\cdot 0 + 0 = 0, \nl
+  T^{ij} &= 0 + p\,\delta^{ij} = p\,\delta^{ij},
+\end{align}
+que coincide con \eqref{eq:Tmunu_MCRF}. El polvo es el caso particular $p = 0$.
+
+\begin{ejemplo}{Ecuación de estado de la radiación}{radiacion}
+Para radiación (un gas de fotones), la ecuación de estado es $p = \rho c^2/3$. En el MCRF:
+\begin{equation}
+  T^{\mu\nu}_{\rm rad} = \rho c^2\,\mathrm{diag}(1, \tfrac{1}{3}, \tfrac{1}{3}, \tfrac{1}{3}).
+\end{equation}
+La traza del tensor (con firma $(-,+,+,+)$) es
+\begin{equation}
+  T \equiv g_{\mu\nu}T^{\mu\nu} = T^\mu{}_\mu = -\rho c^2 + 3p = -\rho c^2 + \rho c^2 = 0.
+\end{equation}
+La traza nula de $T^{\mu\nu}$ para la radiación es una consecuencia de que los fotones son partículas sin masa, y tiene implicaciones importantes en cosmología y en el límite de campo débil de las ecuaciones de Einstein.
+\end{ejemplo}
+
+\subsection{Campo electromagnético}
+
+El campo electromagnético tiene su propio tensor de energía-momento, que puede derivarse a partir de la acción de Maxwell.
+
+\begin{proposicion}{Tensor de energía-momento del campo electromagnético}{Tmunu_EM}
+Para el campo electromagnético descrito por el tensor de Faraday $F_{\mu\nu}$ (con signatura $(-,+,+,+)$), el tensor de energía-momento es
+\begin{equation}
+  T^{\mu\nu}_{\rm EM} = \frac{1}{\mu_0}\left(F^{\mu\alpha}F^\nu{}_\alpha - \frac{1}{4}g^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\right),
+  \label{eq:Tmunu_EM}
+\end{equation}
+donde $F^\nu{}_\alpha = g^{\nu\beta}F_{\beta\alpha}$ y los índices repetidos se suman (convenio de Einstein). Este tensor es:
+\begin{enumerate}[leftmargin=2em]
+  \item Simétrico: $T^{\mu\nu}_{\rm EM} = T^{\nu\mu}_{\rm EM}$.
+  \item De traza nula: $T^\mu{}_{\mu,\,\rm EM} = 0$, como corresponde a partículas sin masa.
+  \item Covariante: escrito en términos de tensores bajo difeomorfismos generales (reemplazando $\eta_{\mu\nu}$ por $g_{\mu\nu}$, según el principio de acoplamiento mínimo).
+\end{enumerate}
+\end{proposicion}
+
+\textbf{Componentes en 3+1 dimensiones.} En el marco de un observador con $u^\mu = (c,0,0,0)$, usando $\vec{E}$ y $\vec{B}$:
+\begin{align}
+  T^{00}_{\rm EM} &= \frac{1}{2}\left(\epsilon_0 E^2 + \frac{B^2}{\mu_0}\right) = u_{\rm EM}
+  \quad\text{(densidad de energía electromagnética)}, \nl
+  T^{0i}_{\rm EM} &= \frac{1}{\mu_0 c}(\vec{E}\times\vec{B})^i = \frac{S^i}{c}
+  \quad\text{(vector de Poynting)}, \nl
+  T^{ij}_{\rm EM} &= -\epsilon_0 E^i E^j - \frac{B^i B^j}{\mu_0} + \frac{u_{\rm EM}}{c^2}\delta^{ij}
+  \quad\text{(tensor de Maxwell)}.
+\end{align}
+
+\subsection{Conservación covariante del tensor de energía-momento}
+\label{sec:conservacion_Tmunu}
+
+En la relatividad especial, las leyes de conservación de energía y momento se expresan como $\partial_\mu T^{\mu\nu} = 0$. En el espacio-tiempo curvo, el principio de acoplamiento mínimo reemplaza la derivada parcial por la derivada covariante:
+
+\begin{teorema}{Conservación del tensor de energía-momento}{conservacion_T}
+En la relatividad general, el tensor de energía-momento de la materia satisface la \textbf{ley de conservación covariante}:
+\begin{equation}
+  \nabla_\mu T^{\mu\nu} = 0.
+  \label{eq:conservacion_T}
+\end{equation}
+Esta ecuación es una consecuencia de las ecuaciones de campo de Einstein \eqref{eq:Einstein_completa} junto con la identidad de Bianchi $\nabla_\mu G^{\mu\nu} = 0$ (Capítulo~\ref{cap:curvatura}).
+\end{teorema}
+
+\begin{importante}
+La ecuación $\nabla_\mu T^{\mu\nu} = 0$ \textbf{no} implica una ley de conservación global en el sentido usual (integración sobre un volumen de un 4-divergente). En un espacio-tiempo curvo y dinámico, la energía total del sistema materia + campo gravitacional no está bien definida en general, porque el campo gravitacional también puede transportar energía (ondas gravitacionales). Solo en espacio-tiempos con isometrías (vectores de Killing) existen cantidades globalmente conservadas (energía, momento, momento angular).
+\end{importante}
+
+\begin{ejemplo}{Conservación en el fluido perfecto: las ecuaciones hidrodinámicas}{conservacion_fluido}
+Para un fluido perfecto con ecuación de estado $p = p(\rho)$, la ecuación $\nabla_\mu T^{\mu\nu} = 0$ reproduce las ecuaciones de la hidrodinámica relativista.
+
+Proyectando a lo largo de $u_\nu$ (contrayendo $\nabla_\mu T^{\mu\nu} = 0$ con $u_\nu$):
+\begin{equation}
+  \nabla_\mu(\rho u^\mu) + \frac{p}{c^2}\nabla_\mu u^\mu = 0,
+  \label{eq:continuidad_fluido}
+\end{equation}
+que es la \textbf{ecuación de continuidad} (conservación de la densidad de partículas ponderada por la energía).
+
+Proyectando ortogonalmente a $u^\nu$ (en la hipersuperficie instantánea del fluido):
+\begin{equation}
+  \frac{\rho c^2 + p}{c^2}\,u^\mu \nabla_\mu u^\nu + (g^{\mu\nu} + u^\mu u^\nu/c^2)\,\nabla_\mu p = 0,
+  \label{eq:euler_rel}
+\end{equation}
+que generaliza la \textbf{ecuación de Euler relativista}: la densidad de energía más presión, multiplicada por la aceleración covariante, equilibra el gradiente de presión perpendicular al movimiento.
+
+En el límite $v \ll c$ y $p \ll \rho c^2$, estas ecuaciones reducen a la ecuación de continuidad $\partial_t\rho + \vec{\nabla}\cdot(\rho\vec{v}) = 0$ y la ecuación de Euler $\rho(\partial_t\vec{v} + \vec{v}\cdot\nabla\vec{v}) = -\vec{\nabla}p$.
+\end{ejemplo}
+
+% ===========================================================
+\section{Derivación heurística de las ecuaciones de campo}
+\label{sec:derivacion_heuristica}
+% ===========================================================
+
+El camino original de Einstein hacia sus ecuaciones de campo (1915) fue guiado por requerimientos físicos y matemáticos que la nueva teoría debía satisfacer. En esta sección reconstruimos ese argumento \cite{Carroll2004, Schutz2009}.
+
+\subsection{La ecuación de Poisson como modelo}
+
+La gravitación newtoniana queda descrita por la \textbf{ecuación de Poisson}:
+\begin{equation}
+  \nabla^2\Phi = 4\pi G\rho,
+  \label{eq:Poisson}
+\end{equation}
+donde $\Phi$ es el potencial gravitacional y $\rho$ es la densidad de masa. Esta ecuación relaciona una magnitud geométrica del campo ($\nabla^2\Phi$) con la fuente de la materia ($\rho$). La relatividad general debe reproducirla en el límite apropiado.
+
+Recordando el análisis del límite newtoniano del capítulo anterior, la componente $g_{00}$ de la métrica en el límite de campo débil es
+\begin{equation}
+  g_{00} \approx -\left(1 + \frac{2\Phi}{c^2}\right),
+\end{equation}
+de modo que $\Phi \approx c^2(g_{00}+1)/(-2)$. La ecuación de Poisson se convierte entonces en
+\begin{equation}
+  \nabla^2 g_{00} \approx -\frac{8\pi G}{c^2}\rho.
+  \label{eq:Poisson_metrica}
+\end{equation}
+
+Esto sugiere que la ecuación de campo relativista tendrá la forma ``derivadas segundas de la métrica = constante × fuente de energía-momento''.
+
+\subsection{Requerimientos para las ecuaciones de campo}
+
+Las ecuaciones de campo de Einstein deben satisfacer un conjunto de restricciones que, en combinación, las determinan casi unívocamente:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{R\arabic*.}]
+  \item \textbf{Covarianza general}: las ecuaciones deben ser ecuaciones tensoriales bajo difeomorfismos arbitrarios. Esto garantiza que sean independientes del sistema de coordenadas.
+
+  \item \textbf{Segundo orden}: las ecuaciones deben ser de segundo orden en derivadas de la métrica $g_{\mu\nu}$. Ecuaciones de orden superior generarían grados de libertad adicionales con energía negativa (\textbf{fantasmas}), que causarían inestabilidades.
+
+  \item \textbf{Linealidad en las derivadas segundas}: las derivadas segundas de $g_{\mu\nu}$ deben aparecer de manera lineal. Esto garantiza bien-postura del problema de valor inicial.
+
+  \item \textbf{Conservación automática de la fuente}: la divergencia covariante del lado izquierdo debe ser identicamente cero, $\nabla_\mu(\text{lado izquierdo})^{\mu\nu} = 0$, para que sea consistente con $\nabla_\mu T^{\mu\nu} = 0$.
+
+  \item \textbf{Límite newtoniano}: en el límite de campo débil, velocidades bajas y campo estático, las ecuaciones deben reducirse a la ecuación de Poisson \eqref{eq:Poisson} con la identificación $g_{00} \approx -(1 + 2\Phi/c^2)$.
+\end{enumerate}
+
+\subsection{El tensor de Einstein}
+
+Los requerimientos R1--R4 determinan esencialmente el lado izquierdo de las ecuaciones. Por un teorema de Lovelock (1971), el único tensor simétrico de tipo $(0,2)$ que:
+\begin{itemize}[leftmargin=2em]
+  \item es construido a partir de $g_{\mu\nu}$ y sus derivadas hasta segundo orden,
+  \item es lineal en las derivadas segundas de $g_{\mu\nu}$,
+  \item satisface $\nabla_\mu G^{\mu\nu} = 0$ idénticamente,
+\end{itemize}
+en 4 dimensiones es de la forma $\alpha G_{\mu\nu} + \beta g_{\mu\nu}$ con $\alpha, \beta$ constantes.
+
+\begin{definicion}{Tensor de Einstein}{tensor_Einstein}
+El \textbf{tensor de Einstein} se define como
+\begin{equation}
+  G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R,
+  \label{eq:tensor_Einstein}
+\end{equation}
+donde $R_{\mu\nu}$ es el tensor de Ricci, $R = g^{\mu\nu}R_{\mu\nu}$ es el escalar de Ricci, y $g_{\mu\nu}$ es la métrica.
+\end{definicion}
+
+\begin{teorema}{Divergencia nula del tensor de Einstein}{div_Einstein}
+El tensor de Einstein satisface la identidad
+\begin{equation}
+  \nabla^\mu G_{\mu\nu} = 0
+  \label{eq:div_Einstein}
+\end{equation}
+idénticamente para cualquier métrica $g_{\mu\nu}$, como consecuencia de la \textbf{segunda identidad de Bianchi contraída}:
+\begin{equation}
+  \nabla^\mu R_{\mu\nu} = \frac{1}{2}\nabla_\nu R.
+  \label{eq:Bianchi_contraida}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+La segunda identidad de Bianchi (capítulo~\ref{cap:curvatura}) es
+$\nabla_{[\lambda}R_{\rho\sigma]\mu\nu} = 0$, es decir,
+$\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu} = 0$.
+Contrayendo con $g^{\rho\mu}$:
+\begin{equation}
+  g^{\rho\mu}(\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu}) = 0.
+\end{equation}
+Usando las simetrías del tensor de Riemann ($R_{\rho\sigma\mu\nu} = -R_{\sigma\rho\mu\nu}$, $R_{\rho\sigma\mu\nu} = -R_{\rho\sigma\nu\mu}$) y la definición del tensor de Ricci $R_{\sigma\nu} = g^{\rho\mu}R_{\rho\sigma\mu\nu}$, cada término se simplifica:
+\begin{align}
+  g^{\rho\mu}\nabla_\lambda R_{\rho\sigma\mu\nu} &= \nabla_\lambda R_{\sigma\nu}, \nl
+  g^{\rho\mu}\nabla_\rho R_{\sigma\lambda\mu\nu} &= -\nabla^\rho R_{\sigma\lambda\rho\nu}, \nl
+  g^{\rho\mu}\nabla_\sigma R_{\lambda\rho\mu\nu} &= \nabla_\sigma R_{\lambda\nu},
+\end{align}
+de modo que $\nabla_\lambda R_{\sigma\nu} - \nabla^\rho R_{\sigma\lambda\rho\nu} + \nabla_\sigma R_{\lambda\nu} = 0$.
+Una segunda contracción con $g^{\lambda\nu}$ produce exactamente \eqref{eq:Bianchi_contraida}, de donde:
+\begin{equation}
+  \nabla^\mu G_{\mu\nu} = \nabla^\mu R_{\mu\nu} - \frac{1}{2}\nabla_\nu R = \frac{1}{2}\nabla_\nu R - \frac{1}{2}\nabla_\nu R = 0. \qedhere
+\end{equation}
+\end{proof}
+
+\subsection{Determinación del coeficiente por el límite newtoniano}
+
+Las ecuaciones de campo tienen entonces la forma
+\begin{equation}
+  G_{\mu\nu} + \Lambda\,g_{\mu\nu} = \kappa\,T_{\mu\nu},
+  \label{eq:Einstein_kappa}
+\end{equation}
+donde $\kappa$ y $\Lambda$ son constantes a determinar. Para encontrar $\kappa$, tomamos el límite newtoniano (campo débil, materia lenta, campo estático) y comparamos con la ecuación de Poisson.
+
+En el límite de campo débil escribimos $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ con $|h_{\mu\nu}|\ll 1$. Para fuentes no relativistas, $T^{00} \approx \rho c^2 \gg T^{ij}$, y con $\Lambda = 0$ la componente $(0,0)$ de \eqref{eq:Einstein_kappa} se reduce a
+\begin{equation}
+  \nabla^2 h_{00} \approx -\kappa\,\rho c^2.
+\end{equation}
+Identificando $h_{00} = -2\Phi/c^2$ y comparando con \eqref{eq:Poisson_metrica}:
+\begin{equation}
+  \nabla^2\left(-\frac{2\Phi}{c^2}\right) = -\kappa\,\rho c^2
+  \implies
+  \frac{2}{c^2}\cdot 4\pi G\rho = \kappa\,\rho c^2
+  \implies
+  \kappa = \frac{8\pi G}{c^4}.
+\end{equation}
+
+Queda así determinado el coeficiente exacto de las ecuaciones de campo de Einstein.
+
+% ===========================================================
+\section{Derivación variacional: la acción de Einstein-Hilbert}
+\label{sec:accion_EH}
+% ===========================================================
+
+La derivación más elegante y sistemática de las ecuaciones de campo proviene del \textbf{principio variacional}. Este método, propuesto independientemente por Hilbert y Einstein en noviembre de 1915, tiene la ventaja de garantizar automáticamente la consistencia de las ecuaciones, revelar la simetría fundamental de la teoría y generalizar naturalmente a la adición de materia y a teorías modificadas de la gravedad \cite{Misner1973, Wald1984}.
+
+\subsection{El principio de acción en relatividad general}
+
+En mecánica clásica, las ecuaciones de movimiento de un sistema se obtienen extremizando la acción $S = \int L\,dt$. En teoría de campos relativista, la acción es una integral sobre el volumen de espacio-tiempo del lagrangiano de densidad $\mathcal{L}$:
+\begin{equation}
+  S = \int \mathcal{L}\sqrt{-g}\,d^4x,
+  \label{eq:accion_gen}
+\end{equation}
+donde $\sqrt{-g}$ con $g = \det(g_{\mu\nu})$ es el factor invariante de volumen en espacio-tiempo curvo (el elemento de volumen covariante $\sqrt{-g}\,d^4x$ es invariante bajo difeomorfismos).
+
+\begin{importante}
+El signo bajo la raíz es necesario porque $g < 0$ con la signatura $(-,+,+,+)$; se tiene $g = -|\det g_{\mu\nu}|$.
+\end{importante}
+
+\subsection{La acción gravitacional de Einstein-Hilbert}
+
+La acción gravitacional más simple que satisface los requerimientos de covarianza y segundo orden es la propuesta por Hilbert:
+
+\begin{definicion}{Acción de Einstein-Hilbert}{accion_EH}
+La \textbf{acción de Einstein-Hilbert} para la gravedad con constante cosmológica es
+\begin{equation}
+  S_{\rm EH} = \frac{c^4}{16\pi G}\int (R - 2\Lambda)\sqrt{-g}\,d^4x,
+  \label{eq:accion_EH}
+\end{equation}
+donde $R$ es el escalar de curvatura de Ricci.
+
+La acción total del sistema gravedad + materia es
+\begin{equation}
+  S = S_{\rm EH} + S_{\rm mat} = \frac{c^4}{16\pi G}\int (R - 2\Lambda)\sqrt{-g}\,d^4x + \int\mathcal{L}_{\rm mat}\sqrt{-g}\,d^4x.
+  \label{eq:accion_total}
+\end{equation}
+\end{definicion}
+
+La acción $S_{\rm EH}$ es el escalar de curvatura más simple que puede construirse a partir de la métrica: el único escalar que contiene exactamente derivadas segundas de $g_{\mu\nu}$ es $R$. Agregar otros escalares (como $R^2$, $R_{\mu\nu}R^{\mu\nu}$, \ldots) produce las teorías $f(R)$ y la gravedad de Gauss-Bonnet, que son extensiones de la RG.
+
+\subsection{Variación de la acción gravitacional}
+
+Las ecuaciones de campo se obtienen requiriendo que $\delta S/\delta g^{\mu\nu} = 0$ para variaciones arbitrarias $\delta g^{\mu\nu}$ que se anulan en el borde de la región de integración.
+
+Necesitamos calcular la variación de tres factores: $\delta R$, $\delta\sqrt{-g}$ y $\delta(\Lambda\sqrt{-g})$.
+
+\subsubsection*{Variación del determinante de la métrica}
+
+\begin{lema}{Variación de $\sqrt{-g}$}{variacion_raiz_g}
+Bajo una variación $g_{\mu\nu} \to g_{\mu\nu} + \delta g_{\mu\nu}$ (equivalentemente, $g^{\mu\nu} \to g^{\mu\nu} + \delta g^{\mu\nu}$), la variación del factor de volumen es
+\begin{equation}
+  \delta\sqrt{-g} = -\frac{1}{2}\sqrt{-g}\;g_{\mu\nu}\,\delta g^{\mu\nu} = \frac{1}{2}\sqrt{-g}\;g^{\mu\nu}\,\delta g_{\mu\nu}.
+  \label{eq:var_raiz_g}
+\end{equation}
+\end{lema}
+
+\begin{proof}
+Usamos la fórmula de la expansión del determinante: $\delta\ln(\det M) = \mathrm{tr}(M^{-1}\delta M)$ para cualquier matriz $M$. Con $M = g_{\mu\nu}$:
+\begin{equation}
+  \delta g = g\;g^{\mu\nu}\delta g_{\mu\nu}.
+\end{equation}
+Entonces $\delta\sqrt{-g} = \frac{1}{2\sqrt{-g}}\cdot(-\delta g) = \frac{1}{2\sqrt{-g}}\cdot(-g)\,g^{\mu\nu}\delta g_{\mu\nu} = \frac{1}{2}\sqrt{-g}\,g^{\mu\nu}\delta g_{\mu\nu}$.
+Usando $g^{\mu\alpha}g_{\alpha\nu} = \delta^\mu_\nu$ se puede mostrar que $\delta g^{\mu\nu} = -g^{\mu\alpha}g^{\nu\beta}\delta g_{\alpha\beta}$, lo que lleva a la segunda forma en \eqref{eq:var_raiz_g}. \qedhere
+\end{proof}
+
+\subsubsection*{Variación del escalar de Ricci: identidad de Palatini}
+
+\begin{lema}{Identidad de Palatini}{Palatini}
+La variación del tensor de Ricci es
+\begin{equation}
+  \delta R_{\mu\nu} = \nabla_\rho(\delta\Gamma^\rho{}_{\mu\nu}) - \nabla_\nu(\delta\Gamma^\rho{}_{\mu\rho}),
+  \label{eq:Palatini}
+\end{equation}
+donde $\delta\Gamma^\rho{}_{\mu\nu}$ es la variación de los símbolos de Christoffel (que es un tensor, a diferencia de los propios $\Gamma^\rho{}_{\mu\nu}$).
+\end{lema}
+
+A partir de \eqref{eq:Palatini}, la variación del escalar de Ricci es
+\begin{equation}
+  \delta(g^{\mu\nu}R_{\mu\nu}) = R_{\mu\nu}\,\delta g^{\mu\nu} + g^{\mu\nu}\delta R_{\mu\nu}.
+\end{equation}
+El segundo término, $g^{\mu\nu}\delta R_{\mu\nu}$, es la divergencia covariante de un vector:
+\begin{equation}
+  g^{\mu\nu}\delta R_{\mu\nu} = \nabla_\mu V^\mu,
+  \quad V^\mu = g^{\nu\rho}\delta\Gamma^\mu{}_{\nu\rho} - g^{\mu\nu}\delta\Gamma^\rho{}_{\nu\rho}.
+\end{equation}
+Por el teorema de Stokes covariante, $\int\nabla_\mu V^\mu\sqrt{-g}\,d^4x = \oint_\partial V^\mu n_\mu\sqrt{|h|}\,d^3x$, que se anula si las variaciones son cero en el borde (o con la adición del término de borde de Gibbons-Hawking-York, que no altera las ecuaciones de movimiento en el interior). Por tanto:
+
+\begin{equation}
+  \delta\int R\sqrt{-g}\,d^4x = \int\left(R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R\right)\delta g^{\mu\nu}\sqrt{-g}\,d^4x
+  = \int G_{\mu\nu}\,\delta g^{\mu\nu}\sqrt{-g}\,d^4x.
+  \label{eq:var_R}
+\end{equation}
+
+\subsection{Variación de la acción de materia y definición de $T_{\mu\nu}$}
+
+\begin{definicion}{Tensor de energía-momento desde la acción}{Tmunu_variacional}
+El tensor de energía-momento se define de manera covariante como la variación funcional de la acción de materia respecto a la métrica:
+\begin{equation}
+  T_{\mu\nu} \equiv -\frac{2}{\sqrt{-g}}\frac{\delta(\sqrt{-g}\,\mathcal{L}_{\rm mat})}{\delta g^{\mu\nu}}
+             = -2\frac{\partial\mathcal{L}_{\rm mat}}{\partial g^{\mu\nu}} + g_{\mu\nu}\mathcal{L}_{\rm mat}.
+  \label{eq:Tmunu_def_variacional}
+\end{equation}
+\end{definicion}
+
+Esta definición garantiza que $T_{\mu\nu}$ sea automáticamente simétrico, covariante bajo difeomorfismos, y que coincida con las expresiones del tensor de energía-momento obtenidas por otros métodos en todos los casos conocidos.
+
+\begin{ejemplo}{Tensor de energía-momento del campo escalar}{EM_escalar}
+Para un campo escalar real $\phi$ con lagrangiano
+\begin{equation}
+  \mathcal{L}_\phi = -\frac{1}{2}g^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi - V(\phi),
+\end{equation}
+la definición variacional \eqref{eq:Tmunu_def_variacional} da
+\begin{equation}
+  T_{\mu\nu}^\phi = \partial_\mu\phi\,\partial_\nu\phi - g_{\mu\nu}\left(\frac{1}{2}g^{\alpha\beta}\partial_\alpha\phi\,\partial_\beta\phi + V(\phi)\right).
+\end{equation}
+En el marco propio de un campo homogéneo $\phi = \phi(t)$, esto reproduce la forma de un fluido perfecto con $\rho_\phi = \dot\phi^2/(2c^2) + V(\phi)$ y $p_\phi = \dot\phi^2/(2c^2) - V(\phi)$, que es la base de la \textbf{inflación cosmológica} (Capítulo~\ref{cap:inflacion}).
+\end{ejemplo}
+
+\subsection{Las ecuaciones de campo como resultado variacional}
+
+Juntando \eqref{eq:var_R} y \eqref{eq:Tmunu_def_variacional}, la condición de extremo de la acción total \eqref{eq:accion_total} respecto a $\delta g^{\mu\nu}$ es
+\begin{equation}
+  \frac{\delta S}{\delta g^{\mu\nu}} = \frac{c^4}{16\pi G}\left(G_{\mu\nu} + \Lambda g_{\mu\nu}\right) - \frac{1}{2}T_{\mu\nu} = 0,
+\end{equation}
+de donde se obtiene inmediatamente:
+
+\begin{teorema}{Ecuaciones de campo de Einstein (derivación variacional)}{EFE_variacional}
+Las ecuaciones de campo de Einstein con constante cosmológica son
+\begin{equation}
+  G_{\mu\nu} + \Lambda\,g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu}.
+  \label{eq:EFE}
+\end{equation}
+Estas ecuaciones son las ecuaciones de Euler-Lagrange de la acción de Einstein-Hilbert extendida.
+\end{teorema}
+
+% ===========================================================
+\section{Análisis de las ecuaciones de campo de Einstein}
+\label{sec:analisis_EFE}
+% ===========================================================
+
+\subsection{Cuenta de ecuaciones y estructura}
+
+Las ecuaciones \eqref{eq:EFE} son, formalmente, un sistema de $4\times 4 = 16$ ecuaciones tensoriales, pero la simetría $G_{\mu\nu} = G_{\nu\mu}$ y $T_{\mu\nu} = T_{\nu\mu}$ reduce el número a $4(4+1)/2 = 10$ ecuaciones independientes. Estas son:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Ecuaciones diferenciales parciales no lineales} de segundo orden para las 10 componentes de la métrica $g_{\mu\nu}$.
+  \item No todas son independientes: la identidad $\nabla^\mu G_{\mu\nu} = 0$ proporciona 4 vínculos (las \textbf{identidades de Bianchi contraídas}), dejando solo $10 - 4 = 6$ ecuaciones dinámicas independientes.
+  \item La libertad de elegir coordenadas (4 funciones) elimina 4 más, de modo que la teoría describe $6 - 4 = 2$ grados de libertad físicos propagantes: los dos modos de polarización ($+$ y $\times$) de las \textbf{ondas gravitacionales}.
+\end{itemize}
+
+\begin{observacion}{Las ecuaciones de Einstein como generalización de las de Maxwell}{}
+La estructura $G_{\mu\nu} = \kappa T_{\mu\nu}$ es análoga a las ecuaciones de Maxwell $\partial_\mu F^{\mu\nu} = \mu_0 J^\nu$. En ambos casos, un tensor que contiene derivadas del campo es igualado a la corriente (fuente). La diferencia esencial es que las ecuaciones de Einstein son \textbf{no lineales}: el campo gravitacional aparece en $G_{\mu\nu}$ de forma no lineal (a través de los productos de símbolos de Christoffel), mientras que $F^{\mu\nu}$ es lineal en el potencial $A^\mu$. La no linealidad de la RG refleja que la energía del campo gravitacional también actúa como fuente de la gravedad.
+\end{observacion}
+
+\subsection{La forma de la traza inversa}
+
+Tomando la traza de \eqref{eq:EFE} (contrayendo con $g^{\mu\nu}$):
+\begin{equation}
+  g^{\mu\nu}G_{\mu\nu} + \Lambda g^{\mu\nu}g_{\mu\nu} = \frac{8\pi G}{c^4}g^{\mu\nu}T_{\mu\nu}
+  \implies
+  R - \frac{1}{2}\cdot 4\cdot R + 4\Lambda = \frac{8\pi G}{c^4}T
+  \implies
+  -R + 4\Lambda = \frac{8\pi G}{c^4}T,
+\end{equation}
+es decir,
+\begin{equation}
+  R = 4\Lambda - \frac{8\pi G}{c^4}T,
+  \label{eq:traza_EFE}
+\end{equation}
+donde $T = T^\mu{}_\mu$ es la traza del tensor de energía-momento. Sustituyendo \eqref{eq:traza_EFE} en \eqref{eq:EFE}:
+
+\begin{proposicion}{Forma de traza inversa de las ecuaciones de Einstein}{traza_inversa}
+Las ecuaciones de campo \eqref{eq:EFE} son equivalentes a la \textbf{forma de traza inversa}:
+\begin{equation}
+  R_{\mu\nu} = \frac{8\pi G}{c^4}\left(T_{\mu\nu} - \frac{1}{2}g_{\mu\nu}T\right) + \Lambda\,g_{\mu\nu}.
+  \label{eq:EFE_traza_inversa}
+\end{equation}
+\end{proposicion}
+
+Esta forma es útil para calcular soluciones: dado $T_{\mu\nu}$, da directamente el tensor de Ricci $R_{\mu\nu}$. Nótese que para fuentes con traza nula ($T = 0$, como la radiación electromagnética), se tiene $R_{\mu\nu} = \Lambda g_{\mu\nu}$.
+
+\subsection{Ecuaciones en el vacío}
+
+En ausencia de materia ($T_{\mu\nu} = 0$) y con $\Lambda = 0$, las ecuaciones de Einstein se reducen a:
+
+\begin{equation}
+  \boxed{R_{\mu\nu} = 0.}
+  \label{eq:vacío}
+\end{equation}
+
+\begin{importante}
+Las ecuaciones en el vacío $R_{\mu\nu} = 0$ \textbf{no} implican espacio-tiempo plano ($R^\rho{}_{\sigma\mu\nu} = 0$). El tensor de Riemann puede ser no nulo aunque el tensor de Ricci se anule. La parte del tensor de Riemann que no queda determinada por el tensor de Ricci es el \textbf{tensor de Weyl} $C^\rho{}_{\sigma\mu\nu}$, que describe la curvatura libre de materia: ondas gravitacionales, marea gravitacional, y la curvatura alrededor de masas puntuales (como en la solución de Schwarzschild del Capítulo~\ref{cap:schwarzschild}).
+\end{importante}
+
+\begin{observacion}{El tensor de Weyl y la radiación gravitacional}{}
+En 4 dimensiones, el tensor de Riemann tiene 20 componentes independientes. El tensor de Ricci tiene 10. Las otras 10 componentes independientes forman el \textbf{tensor de Weyl} $C_{\mu\nu\rho\sigma}$, que es la parte «sin traza» del tensor de Riemann:
+\begin{equation}
+  R_{\mu\nu\rho\sigma} = C_{\mu\nu\rho\sigma} + \frac{2}{n-2}\left(g_{\mu[\rho}R_{\sigma]\nu} - g_{\nu[\rho}R_{\sigma]\mu}\right) - \frac{2}{(n-1)(n-2)}g_{\mu[\rho}g_{\sigma]\nu}R,
+\end{equation}
+donde $n=4$. En el vacío, $R_{\mu\nu} = 0$, por lo que $R_{\mu\nu\rho\sigma} = C_{\mu\nu\rho\sigma}$: toda la curvatura es de tipo Weyl. Las ondas gravitacionales en el vacío están descritas completamente por $C_{\mu\nu\rho\sigma}$.
+\end{observacion}
+
+\subsection{Las ecuaciones con constante cosmológica: el término $\Lambda$}
+
+La forma más general compatible con los requerimientos R1--R4 incluye el término $\Lambda g_{\mu\nu}$:
+\begin{equation}
+  G_{\mu\nu} + \Lambda\,g_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu}.
+  \label{eq:EFE_Lambda}
+\end{equation}
+
+Este término puede interpretarse de dos maneras equivalentes:
+
+\textbf{Interpretación 1: modificación de la geometría.} El término $\Lambda g_{\mu\nu}$ es una contribución geométrica que modifica la relación entre curvatura y materia. En el vacío ($T_{\mu\nu} = 0$), las ecuaciones son $R_{\mu\nu} = \Lambda g_{\mu\nu}$, cuya solución en el caso $\Lambda > 0$ es el espacio de de Sitter (un espacio-tiempo con expansión acelerada).
+
+\textbf{Interpretación 2: energía del vacío.} El término $\Lambda g_{\mu\nu}$ puede pasarse al lado derecho:
+\begin{equation}
+  G_{\mu\nu} = \frac{8\pi G}{c^4}\left(T_{\mu\nu} - \frac{\Lambda c^4}{8\pi G}g_{\mu\nu}\right)
+             = \frac{8\pi G}{c^4}\left(T_{\mu\nu} + T_{\mu\nu}^{(\Lambda)}\right),
+\end{equation}
+donde $T_{\mu\nu}^{(\Lambda)} = -\frac{\Lambda c^4}{8\pi G}g_{\mu\nu}$ es el tensor de energía-momento de la constante cosmológica. Comparando con \eqref{eq:Tmunu_fluido}, esto tiene la forma de un fluido perfecto con
+\begin{equation}
+  \rho_\Lambda c^2 = \frac{\Lambda c^4}{8\pi G},
+  \qquad
+  p_\Lambda = -\rho_\Lambda c^2 = -\frac{\Lambda c^4}{8\pi G}.
+  \label{eq:rho_Lambda}
+\end{equation}
+Una presión negativa ($p_\Lambda < 0$ para $\Lambda > 0$) produce una expansión acelerada del universo, lo que se identifica con la \textbf{energía oscura} observada (Capítulo~\ref{cap:materia_oscura}).
+
+% ===========================================================
+\section{El límite newtoniano revisitado}
+\label{sec:limite_newtoniano_EFE}
+% ===========================================================
+
+\subsection{Las ecuaciones en el límite de campo débil}
+
+Consideramos las hipótesis del \textbf{régimen newtoniano}:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Campo débil:} $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$, con $|h_{\mu\nu}| \ll 1$.
+  \item \textbf{Campo estático:} $\partial_0 h_{\mu\nu} = 0$.
+  \item \textbf{Materia no relativista:} $v \ll c$, de modo que $T^{00} = \rho c^2 \gg T^{0i} \gg T^{ij}$.
+  \item \textbf{$\Lambda = 0$.}
+\end{enumerate}
+
+En estas condiciones, la componente $(0,0)$ de \eqref{eq:EFE_traza_inversa} con $T = -\rho c^2$ da
+\begin{equation}
+  R_{00} = \frac{8\pi G}{c^4}\left(\rho c^2 - \frac{1}{2}\eta_{00}(-\rho c^2)\right)
+  = \frac{8\pi G}{c^4}\cdot\frac{1}{2}\rho c^2 = \frac{4\pi G\rho}{c^2}.
+  \label{eq:R00_newtoniano}
+\end{equation}
+
+Por otro lado, en el límite de campo débil y campo estático,
+\begin{equation}
+  R_{00} \approx -\frac{1}{2}\nabla^2 h_{00}.
+\end{equation}
+Combinando con \eqref{eq:R00_newtoniano}:
+\begin{equation}
+  \nabla^2 h_{00} = -\frac{8\pi G\rho}{c^2}.
+\end{equation}
+Con $h_{00} = -2\Phi/c^2$, recuperamos la ecuación de Poisson:
+\begin{equation}
+  \nabla^2\Phi = 4\pi G\rho. \qquad\checkmark
+\end{equation}
+
+\subsection{Correcciones postnewtonias}
+
+Las ecuaciones de Einstein contienen correcciones de orden $(v/c)^2$ y $(GM/rc^2)$ respecto a Newton. El desarrollo sistemático de estas correcciones forma el \textbf{formalismo postnewtoniano} (PN), en el que las ecuaciones de movimiento se expanden en potencias de $1/c^2$. Este formalismo es fundamental para el cálculo de la forma de onda de las ondas gravitacionales emitidas por binarias compactas (Capítulo~\ref{cap:gen_OG}), donde las correcciones PN determinan la fase orbital con precisión suficiente para la detección.
+
+% ===========================================================
+\section{La constante cosmológica: historia e interpretación}
+\label{sec:constante_cosmologica}
+% ===========================================================
+
+\subsection{Einstein y el universo estático (1917)}
+
+Cuando Einstein publicó la relatividad general en 1915, el modelo cosmológico dominante era el de un universo estático, eterno e infinito. Aplicar sus ecuaciones \eqref{eq:EFE} (sin $\Lambda$) a un universo lleno de materia llevaba inevitablemente a un universo en expansión o contracción — no a un universo estático. Para obtener una solución estática, Einstein introdujo en 1917 el término cosmológico $\Lambda g_{\mu\nu}$ con $\Lambda > 0$:
+\begin{equation}
+  G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}.
+\end{equation}
+El universo estático de Einstein (la \textbf{solución estática de Einstein}) requiere $\Lambda = 4\pi G\rho_0/c^2$, donde $\rho_0$ es la densidad media de materia. Sin embargo, esta solución es inestable: una pequeña perturbación en $\rho_0$ hace que el universo colapse o se expanda.
+
+Cuando Hubble descubrió en 1929 que el universo se está expandiendo (ley de Hubble-Lemaître), Einstein retiró $\Lambda$ lamentando haberla introducido. Según el relato del físico George Gamow, Einstein la calificó de su ``mayor equivocación'' (\textit{größter Fehler}).
+
+\subsection{El regreso de $\Lambda$: la expansión acelerada}
+
+En 1998-1999, dos grupos independientes (Perlmutter et al.\ \cite{Perlmutter1999} y Riess et al.\ \cite{Riess1998}) midieron la relación distancia-corrimiento al rojo de supernovas tipo Ia en el universo lejano y encontraron que la expansión del universo está \textbf{acelerándose}. Esta observación, imposible de explicar con solo materia y radiación, requiere el retorno de la constante cosmológica, o algún fluido con presión negativa (energía oscura).
+
+Los valores actuales de los parámetros cosmológicos (Planck 2018 \cite{Planck2020}) son:
+\begin{equation}
+  \Omega_\Lambda \equiv \frac{\Lambda c^2}{3H_0^2} \approx 0{,}685,
+  \qquad
+  H_0 \approx 67{,}4\,\si{km\,s^{-1}\,Mpc^{-1}},
+\end{equation}
+donde $\Omega_\Lambda$ es la fracción de energía cosmológica debida a $\Lambda$. La densidad de energía de la constante cosmológica es
+\begin{equation}
+  \rho_\Lambda c^2 = \frac{\Lambda c^4}{8\pi G} \approx 5{,}9\times10^{-10}\,\si{J\,m^{-3}} \approx 6{,}9\times10^{-27}\,\si{kg\,m^{-3}}\cdot c^2.
+\end{equation}
+
+\subsection{La constante cosmológica y la energía del vacío}
+
+Desde la perspectiva de la teoría cuántica de campos, el vacío tiene fluctuaciones cuánticas que contribuyen a su densidad de energía. La estimación naive de la densidad de energía del vacío a la escala de Planck ($l_P = \sqrt{\hbar G/c^3} \approx 1{,}6\times10^{-35}\,\si{m}$) es
+\begin{equation}
+  \rho_{\rm vacío}^{\rm QFT} \sim \frac{c^5}{\hbar G^2} \approx 10^{96}\,\si{kg\,m^{-3}},
+\end{equation}
+que es $\sim 10^{123}$ órdenes de magnitud mayor que la $\rho_\Lambda$ observada. Esta discrepancia monumental es el \textbf{problema de la constante cosmológica}, uno de los problemas abiertos más profundos de la física teórica.
+
+\begin{observacion}{Espacio de de Sitter}{}
+El espacio-tiempo de \textbf{de Sitter} es la solución de las ecuaciones de Einstein en el vacío con $\Lambda > 0$:
+\begin{equation}
+  R_{\mu\nu} = \Lambda g_{\mu\nu}.
+\end{equation}
+En coordenadas de FLRW (plano), la métrica de de Sitter es
+\begin{equation}
+  ds^2 = -c^2 dt^2 + e^{2Ht}(dx^2+dy^2+dz^2),
+  \qquad H = \sqrt{\frac{\Lambda c^2}{3}} = \mathrm{const},
+\end{equation}
+que describe un universo que se expande exponencialmente con tasa de Hubble $H$ constante. Este espacio es el modelo de la \textbf{inflación cósmica} (Capítulo~\ref{cap:inflacion}) y del universo dominado por energía oscura en el futuro lejano.
+\end{observacion}
+
+% ===========================================================
+\section{Resumen del capítulo}
+\label{sec:resumen_cap6}
+% ===========================================================
+
+Este capítulo ha desarrollado las ecuaciones fundamentales de la relatividad general. Los puntos clave son:
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+
+  \item El \textbf{tensor de energía-momento} $T_{\mu\nu}$ describe toda la materia y energía no gravitacional. Sus componentes son: $T^{00}$ (densidad de energía), $T^{0i}$ (densidad de flujo de energía / momento), $T^{ij}$ (esfuerzos mecánicos). Para polvo: $T^{\mu\nu} = \rho u^\mu u^\nu$; para fluido perfecto: $T^{\mu\nu} = \frac{\rho c^2+p}{c^2}u^\mu u^\nu + p g^{\mu\nu}$.
+
+  \item La \textbf{ley de conservación covariante} $\nabla_\mu T^{\mu\nu} = 0$ es consecuencia de las ecuaciones de campo y generaliza la conservación de energía y momento a la relatividad general. En el caso del fluido perfecto, reproduce la hidrodinámica relativista.
+
+  \item La \textbf{derivación heurística} de las ecuaciones de campo parte de la analogía con la ecuación de Poisson ($\nabla^2\Phi = 4\pi G\rho$) y los requerimientos de covarianza, segundo orden, linealidad en derivadas segundas, y divergencia nula. El tensor de Einstein $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$ satisface $\nabla^\mu G_{\mu\nu} = 0$ por la identidad de Bianchi. El coeficiente $8\pi G/c^4$ queda fijado por el límite newtoniano.
+
+  \item La \textbf{derivación variacional} a partir de la acción de Einstein-Hilbert $S_{\rm EH} = \frac{c^4}{16\pi G}\int(R-2\Lambda)\sqrt{-g}\,d^4x$ reproduce las mismas ecuaciones de forma sistemática, y proporciona una definición covariante de $T_{\mu\nu}$ como variación de la acción de materia respecto a $g^{\mu\nu}$.
+
+  \item Las \textbf{ecuaciones de campo de Einstein} $G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$ son un sistema de 10 ecuaciones diferenciales parciales no lineales de segundo orden para $g_{\mu\nu}$. Tienen 2 grados de libertad propagantes: los modos de polarización $+$ y $\times$ de las ondas gravitacionales.
+
+  \item En el vacío ($T_{\mu\nu} = 0$, $\Lambda = 0$) se tiene $R_{\mu\nu} = 0$, pero la curvatura (codificada en el tensor de Weyl $C_{\mu\nu\rho\sigma}$) puede ser no nula. Las soluciones más importantes son la métrica de Schwarzschild (Capítulo~\ref{cap:schwarzschild}) y las ondas gravitacionales (Capítulos~\ref{cap:OG_linealizadas}--\ref{cap:gen_OG}).
+
+  \item La \textbf{constante cosmológica} $\Lambda$ fue introducida por Einstein en 1917 para obtener un universo estático, retirada en 1929 y redescubierta en 1998 mediante la observación de la expansión acelerada del universo. Hoy corresponde a la \textbf{energía oscura} con $\Omega_\Lambda \approx 0{,}685$, cuya naturaleza microscópica es uno de los grandes problemas abiertos de la física.
+
+\end{enumerate}
+
+% ===========================================================
+\section{Problemas propuestos}
+\label{sec:problemas_cap6}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Tensor de energía-momento del polvo.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Verifique que para un haz de polvo con densidad de partículas $n$ en el marco propio, masa en reposo por partícula $m$, y cuadri-velocidad $u^\mu$, la conservación $\nabla_\mu(n u^\mu) = 0$ implica $\nabla_\mu T^{\mu\nu} = 0$ con $T^{\mu\nu} = \rho u^\mu u^\nu$ ($\rho = nm$).
+    \item En el límite no relativista, muestre que $\nabla_\mu T^{\mu 0} = 0$ y $\nabla_\mu T^{\mu i} = 0$ reproducen respectivamente la ecuación de continuidad $\partial_t\rho + \nabla\cdot(\rho\vec{v}) = 0$ y la ecuación de Euler $\rho(\partial_t\vec{v} + \vec{v}\cdot\nabla\vec{v}) = 0$ (sin presión).
+  \end{enumerate}
+
+  \item \textbf{Tensor de energía-momento del fluido perfecto.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Compruebe que la ecuación \eqref{eq:Tmunu_fluido} reduce a \eqref{eq:Tmunu_polvo} cuando $p = 0$.
+    \item Calcule la traza $T = g_{\mu\nu}T^{\mu\nu}$ del fluido perfecto en términos de $\rho$ y $p$.
+    \item Muestre que para polvo ($p = 0$) se tiene $T = -\rho c^2$, para radiación ($p = \rho c^2/3$) se tiene $T = 0$, y para energía oscura ($p = -\rho c^2$) se tiene $T = 2\rho c^2$.
+    \item Verifique que la identidad $\nabla_\mu T^{\mu\nu} = 0$ para el fluido perfecto implica la ecuación de continuidad relativista \eqref{eq:continuidad_fluido} y la ecuación de Euler \eqref{eq:euler_rel}.
+  \end{enumerate}
+
+  \item \textbf{Tensor de energía-momento del campo electromagnético.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Partiendo de \eqref{eq:Tmunu_EM}, verifique que $T^{00}_{\rm EM} = \frac{\epsilon_0}{2}(E^2 + c^2 B^2)$ es la densidad de energía del campo EM.
+    \item Muestre que $T^{0i}_{\rm EM} = (\vec{E}\times\vec{B})^i/(\mu_0 c)$ es el vector de Poynting dividido por $c$.
+    \item Calcule la traza $T^{\rm EM} = g_{\mu\nu}T^{\mu\nu}_{\rm EM}$ y verifique que es cero.
+    \item En el vacío ($J^\mu = 0$) con $\Lambda = 0$, use la forma de traza inversa \eqref{eq:EFE_traza_inversa} para mostrar que $R_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}^{\rm EM}$ (sin el término de traza).
+  \end{enumerate}
+
+  \item \textbf{El tensor de Einstein y sus propiedades.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Usando la definición $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$, calcule la traza $G \equiv g^{\mu\nu}G_{\mu\nu}$ en términos de $R$ y demuestre que $G = -R$ (en 4 dimensiones).
+    \item Muestre que las ecuaciones $G_{\mu\nu} = \kappa T_{\mu\nu}$ (sin $\Lambda$) implican $R = -\kappa T$, y que en el vacío se tiene $R = 0$, es decir, $G_{\mu\nu} = 0$ $\Leftrightarrow$ $R_{\mu\nu} = 0$.
+    \item Verifique que la divergencia $\nabla^\mu G_{\mu\nu} = 0$ implica la conservación $\nabla^\mu T_{\mu\nu} = 0$ a través de las ecuaciones de campo.
+  \end{enumerate}
+
+  \item \textbf{Derivación del coeficiente $8\pi G/c^4$.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Partiendo de las ecuaciones $G_{\mu\nu} = \kappa T_{\mu\nu}$ con $\Lambda = 0$, muestre paso a paso que en el límite newtoniano la componente $(0,0)$ implica $\nabla^2\Phi = 4\pi G\rho$ si y solo si $\kappa = 8\pi G/c^4$.
+    \item ¿Por qué no es suficiente tomar $\kappa = 4\pi G/c^4$ (el coeficiente de la ecuación de Poisson)? ¿Qué papel juega la traza del tensor de energía-momento en la determinación del coeficiente?
+    \item Analice dimensionalmente: si $[G_{\mu\nu}] = \si{m^{-2}}$ y $[T_{\mu\nu}] = \si{J\,m^{-3}} = \si{kg\,m^{-1}\,s^{-2}}$, verifique que $[8\pi G/c^4] = \si{m\,kg^{-1}\,s^2}$ hace que las ecuaciones sean dimensionalmente consistentes.
+  \end{enumerate}
+
+  \item \textbf{Variación de la acción de Einstein-Hilbert.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Usando la fórmula $\delta\ln\det(M) = \mathrm{tr}(M^{-1}\delta M)$, derive el lema \ref{lem:variacion_raiz_g}: demuestre que $\delta\sqrt{-g} = -\frac{1}{2}\sqrt{-g}\,g_{\mu\nu}\delta g^{\mu\nu}$.
+    \item Verifique que para una constante cosmológica, la variación de $-2\Lambda\sqrt{-g}$ respecto a $g^{\mu\nu}$ produce el término $+\Lambda g_{\mu\nu}\sqrt{-g}$ en las ecuaciones de campo.
+    \item Para el lagrangiano de un campo escalar $\mathcal{L}_\phi = -\frac{1}{2}g^{\mu\nu}\partial_\mu\phi\,\partial_\nu\phi - V(\phi)$, use la definición \eqref{eq:Tmunu_def_variacional} para calcular $T_{\mu\nu}^\phi$ y verifica que en el marco propio de $\phi = \phi(t)$ homogéneo toma la forma de un fluido perfecto con los valores dados en el Ejemplo~\ref{ej:EM_escalar}.
+  \end{enumerate}
+
+  \item \textbf{Ecuaciones de Einstein con constante cosmológica.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que si $\Lambda > 0$ actúa como un fluido perfecto con ecuación de estado $w \equiv p/(\rho c^2) = -1$, donde $\rho_\Lambda = \Lambda c^2/(8\pi G)$ es la densidad de energía del vacío.
+    \item El espacio de de Sitter tiene métrica de FLRW plana con $a(t) = e^{Ht}$ y $H = \sqrt{\Lambda c^2/3}$. Verifique que esta solución satisface las ecuaciones de Einstein con $T_{\mu\nu} = 0$ y $\Lambda > 0$.
+    \item Calcule el valor numérico de $H$ (en $\si{s^{-1}}$ y en $\si{km\,s^{-1}\,Mpc^{-1}}$) para el valor observado $\Lambda \approx 1{,}1\times10^{-52}\,\si{m^{-2}}$ (Planck 2018). Compare con $H_0 \approx 67{,}4\,\si{km\,s^{-1}\,Mpc^{-1}}$.
+  \end{enumerate}
+
+  \item \textbf{El límite newtoniano completo.}
+  \begin{enumerate}[label=(\alph*)]
+    \item En el límite de campo débil $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$, expanda el tensor de Ricci a primer orden en $h_{\mu\nu}$ para campo estático y muestre que $R_{ij} \approx -\frac{1}{2}\partial_i\partial_j h_{00} + \ldots$
+    \item Usando la traza \eqref{eq:traza_EFE} y la ecuación \eqref{eq:R00_newtoniano}, verifique la consistencia del límite newtoniano: las 9 ecuaciones $R_{ij} = \kappa(T_{ij} - \frac{1}{2}\eta_{ij}T)$ son automáticamente satisfechas al orden dominante para materia lenta con $T_{ij} \approx 0$.
+    \item ¿Por qué son necesarias las 10 ecuaciones de Einstein para reproducir el único campo escalar $\Phi$ de Newton? ¿Cuántas de las 10 ecuaciones son ``dinámicas'' en el sentido de dar ecuaciones de propagación para $\Phi$?
+  \end{enumerate}
+
+  \item \textbf{El problema de la constante cosmológica.}
+  \begin{enumerate}[label=(\alph*)]
+    \item La densidad de energía del vacío cuántico se estima en teoría cuántica de campos como $\rho_{\rm vac}^{\rm QFT} \sim m_P^4 c^3/\hbar^3$, donde $m_P = \sqrt{\hbar c/G} \approx 2{,}18\times10^{-8}\,\si{kg}$ es la masa de Planck. Calcule numéricamente $\rho_{\rm vac}^{\rm QFT}$.
+    \item Compare con el valor observado $\rho_\Lambda \approx 6{,}9\times10^{-27}\,\si{kg\,m^{-3}}$ y estime el número de órdenes de magnitud de discrepancia.
+    \item Proponga y evalúe cualitativamente tres posibles resoluciones al problema: (i) cancelación supersimétrica, (ii) ajuste fino, (iii) principio antrópico. ¿Por qué ninguna es satisfactoria desde el punto de vista teórico?
+  \end{enumerate}
+
+  \item \textbf{(Avanzado) Simetría gauge y grados de libertad de la métrica.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Las ecuaciones de Einstein son invariantes bajo difeomorfismos $x^\mu \to x^\mu + \xi^\mu(x)$, que actúan sobre la perturbación $h_{\mu\nu}$ como $\delta h_{\mu\nu} = \partial_\mu\xi_\nu + \partial_\nu\xi_\mu$ en el límite lineal. Muestre que 4 componentes de $h_{\mu\nu}$ pueden fijarse eligiendo los 4 parámetros de $\xi^\mu$.
+    \item Defina la \textbf{traza inversa} $\bar{h}_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h$ (donde $h = \eta^{\mu\nu}h_{\mu\nu}$) y muestre que en el \textbf{gauge de Lorenz} $\partial^\mu\bar{h}_{\mu\nu} = 0$, las ecuaciones de Einstein en el vacío se reducen a la ecuación de onda:
+    \begin{equation}
+      \Box\bar{h}_{\mu\nu} \equiv \partial^\alpha\partial_\alpha\bar{h}_{\mu\nu} = 0.
+    \end{equation}
+    \item En el gauge de Lorenz, aún quedan 4 libertades gauge residuales. Mostrando que se pueden usar para imponer las condiciones $\bar{h}_{0\mu} = 0$ y $\bar{h}^i{}_i = 0$ (gauge TT: transverso-sin-traza), concluya que quedan exactamente 2 grados de libertad físicos: los modos de polarización $h_+$ y $h_\times$ (que se estudian en detalle en el Capítulo~\ref{cap:OG_linealizadas}).
+  \end{enumerate}
+
+\end{enumerate}
