@@ -262,9 +262,16 @@ $\nabla_{[\lambda}R_{\rho\sigma]\mu\nu} = 0$, es decir,
 $\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu} = 0$.
 Contrayendo con $g^{\rho\mu}$:
 \begin{equation}
-  g^{\rho\mu}(\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu}) = 0,
+  g^{\rho\mu}(\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu}) = 0.
 \end{equation}
-lo que da $\nabla_\lambda R_{\sigma\nu} - \nabla^\rho R_{\sigma\lambda\rho\nu} + \nabla_\sigma R_{\lambda\nu} - \frac{1}{2}\delta^\rho_\nu\nabla_\sigma R_{\lambda\rho} = 0$ tras usar las simetrías del tensor de Riemann. Una segunda contracción con $g^{\lambda\nu}$ produce exactamente \eqref{eq:Bianchi_contraida}, de donde:
+Usando las simetrías del tensor de Riemann ($R_{\rho\sigma\mu\nu} = -R_{\sigma\rho\mu\nu}$, $R_{\rho\sigma\mu\nu} = -R_{\rho\sigma\nu\mu}$) y la definición del tensor de Ricci $R_{\sigma\nu} = g^{\rho\mu}R_{\rho\sigma\mu\nu}$, cada término se simplifica:
+\begin{align}
+  g^{\rho\mu}\nabla_\lambda R_{\rho\sigma\mu\nu} &= \nabla_\lambda R_{\sigma\nu}, \nl
+  g^{\rho\mu}\nabla_\rho R_{\sigma\lambda\mu\nu} &= -\nabla^\rho R_{\sigma\lambda\rho\nu}, \nl
+  g^{\rho\mu}\nabla_\sigma R_{\lambda\rho\mu\nu} &= \nabla_\sigma R_{\lambda\nu},
+\end{align}
+de modo que $\nabla_\lambda R_{\sigma\nu} - \nabla^\rho R_{\sigma\lambda\rho\nu} + \nabla_\sigma R_{\lambda\nu} = 0$.
+Una segunda contracción con $g^{\lambda\nu}$ produce exactamente \eqref{eq:Bianchi_contraida}, de donde:
 \begin{equation}
   \nabla^\mu G_{\mu\nu} = \nabla^\mu R_{\mu\nu} - \frac{1}{2}\nabla_\nu R = \frac{1}{2}\nabla_\nu R - \frac{1}{2}\nabla_\nu R = 0. \qedhere
 \end{equation}
@@ -574,7 +581,7 @@ Cuando Einstein publicó la relatividad general en 1915, el modelo cosmológico 
 \end{equation}
 El universo estático de Einstein (la \textbf{solución estática de Einstein}) requiere $\Lambda = 4\pi G\rho_0/c^2$, donde $\rho_0$ es la densidad media de materia. Sin embargo, esta solución es inestable: una pequeña perturbación en $\rho_0$ hace que el universo colapse o se expanda.
 
-Cuando Hubble descubrió en 1929 que el universo se está expandiendo (ley de Hubble-Lemaître), Einstein retiró $\Lambda$ llamándola su ``mayor error'' (\textit{grösste Esel}).
+Cuando Hubble descubrió en 1929 que el universo se está expandiendo (ley de Hubble-Lemaître), Einstein retiró $\Lambda$ lamentando haberla introducido. Según el relato del físico George Gamow, Einstein la calificó de su ``mayor equivocación'' (\textit{größter Fehler}).
 
 \subsection{El regreso de $\Lambda$: la expansión acelerada}
 
