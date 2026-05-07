@@ -1,0 +1,418 @@
+% ============================================================
+% Capítulo 9: Física de Agujeros Negros y Termodinámica
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Física de Agujeros Negros y Termodinámica}
+\label{cap:termo_bh}
+
+La relatividad general clásica describe al agujero negro como una región causalmente desconectada del infinito futuro: una vez que materia o radiación cruza el horizonte de eventos, no puede regresar al exterior. Durante décadas, este carácter irreversible se interpretó como una analogía puramente formal con la termodinámica. Sin embargo, los trabajos de Bekenstein y Hawking establecieron que la analogía es, en realidad, una identidad física profunda: los agujeros negros poseen entropía, temperatura, energía interna y obedecen leyes de balance equivalentes a las leyes termodinámicas ordinarias \cite{Bekenstein1973, Hawking1975, Wald1984, Carroll2004, Misner1973}.
+
+Este resultado conecta dominios que, en principio, pertenecen a teorías distintas: gravedad clásica (Einstein), teoría cuántica de campos en espacio-tiempo curvo y mecánica estadística. En particular, la radiación térmica predicha por Hawking implica que los agujeros negros no son eternos: pueden evaporarse en escalas de tiempo enormes, perdiendo masa por emisión cuántica. El proceso plantea uno de los problemas conceptuales más profundos de la física moderna: la paradoja de la información.
+
+En este capítulo desarrollamos la mecánica y la termodinámica de agujeros negros en cuatro niveles: (i) formulación clásica de las leyes de la mecánica de agujeros negros, (ii) identificación cuántica de entropía y temperatura de Bekenstein--Hawking, (iii) evaporación y escalas físicas, y (iv) implicaciones contemporáneas: paradoja de la información, agujeros negros primordiales y conexión con observaciones de EHT y ondas gravitacionales.
+
+% ===========================================================
+\section{Horizontes, área y gravedad superficial}
+\label{sec:horizonte_area_gravsup}
+% ===========================================================
+
+\subsection{Horizonte de eventos como superficie nula}
+
+Sea $\mathcal{H}$ el horizonte de eventos de un agujero negro estacionario. Matemáticamente, $\mathcal{H}$ es una hipersuperficie nula generada por geodésicas nulas sin futuro final en el dominio externo. Su definición es global:
+\begin{equation}
+  \mathcal{H} = \partial J^{-}(\mathscr{I}^{+}),
+\end{equation}
+donde $J^{-}(\mathscr{I}^{+})$ es el pasado causal del infinito nulo futuro $\mathscr{I}^{+}$. Esta definición resalta que el horizonte no es un objeto local detectado por una medición puntual, sino una frontera causal del espacio-tiempo completo.
+
+\begin{definicion}{Gravedad superficial}{def_gravedad_superficial}
+Sea $\chi^\mu$ el vector de Killing nulo que genera el horizonte de un agujero negro estacionario. La \textbf{gravedad superficial} $\kappa$ se define por
+\begin{equation}
+  \chi^\nu \nabla_\nu \chi^\mu = \kappa\,\chi^\mu
+  \qquad \text{en } \mathcal{H}.
+  \label{eq:def_kappa_bh}
+\end{equation}
+\end{definicion}
+
+Físicamente, $\kappa$ mide la aceleración (redshifted al infinito) requerida para sostener una partícula de prueba justo fuera del horizonte. Para Schwarzschild,
+\begin{equation}
+  \kappa_{\text{Schw}} = \frac{c^4}{4GM}.
+  \label{eq:kappa_schw_cap9}
+\end{equation}
+Para Kerr,
+\begin{equation}
+  \kappa_{\text{Kerr}} = \frac{c^2(r_+ - r_-)}{2(r_+^2 + a^2)},
+\end{equation}
+resultado introducido en el capítulo anterior.
+
+\subsection{Teorema del área}
+
+Un resultado central de la relatividad clásica es que, bajo condiciones de energía razonables y evolución causal regular, el área del horizonte no decrece.
+
+\begin{teorema}{Teorema del área de Hawking}{teo_area_hawking}
+En relatividad general clásica, para soluciones físicamente razonables (condición de energía nula y censura cósmica débil), el área $A$ de una sección espacial del horizonte de eventos satisface
+\begin{equation}
+  \frac{dA}{dt} \ge 0.
+  \label{eq:teorema_area}
+\end{equation}
+\end{teorema}
+
+\begin{observacion}{Interpretación termodinámica inicial}{}
+La monotonía de $A$ sugiere la analogía con la segunda ley de la termodinámica, $dS\ge0$. Antes de Hawking, se pensaba que esta era solo una metáfora. Tras incorporar efectos cuánticos, la identificación $S\propto A$ se vuelve cuantitativa y exacta.
+\end{observacion}
+
+% ===========================================================
+\section{Las cuatro leyes de la mecánica de agujeros negros}
+\label{sec:cuatro_leyes_bh}
+% ===========================================================
+
+Las leyes de la mecánica de agujeros negros fueron formuladas en estrecha analogía con la termodinámica ordinaria. Consideremos un agujero negro de Kerr--Newman con masa $M$, momento angular $J$ y carga eléctrica $Q_e$.
+
+\subsection{Ley cero}
+
+\begin{proposicion}{Ley cero de la mecánica de agujeros negros}{}
+En un agujero negro estacionario, la gravedad superficial $\kappa$ es constante sobre todo el horizonte de eventos.
+\end{proposicion}
+
+Este resultado es análogo a la uniformidad de temperatura en equilibrio termodinámico. Es no trivial porque el horizonte es una hipersuperficie geométrica extendida con estructura angular y dinámica intrínseca.
+
+\subsection{Primera ley}
+
+\begin{teorema}{Primera ley de la mecánica de agujeros negros}{teo_primera_ley_bh}
+Para perturbaciones cuasiestáticas entre estados estacionarios cercanos de un agujero negro de Kerr--Newman,
+\begin{equation}
+  dM = \frac{\kappa}{8\pi G}\,dA + \Omega_H\,dJ + \Phi_H\,dQ_e,
+  \label{eq:primera_ley_BH_cap9}
+\end{equation}
+donde $\Omega_H$ es la velocidad angular del horizonte y $\Phi_H$ su potencial electrostático.
+\end{teorema}
+
+La estructura de \eqref{eq:primera_ley_BH_cap9} coincide con la primera ley termodinámica,
+\begin{equation}
+  dU = T\,dS + \text{trabajo mecánico} + \text{trabajo electromagnético}.
+\end{equation}
+La identificación física final requiere fijar $T$ y $S$, lo cual surge de la teoría cuántica de campos en espacio-tiempo curvo.
+
+\subsection{Segunda ley}
+
+La segunda ley clásica está dada por el teorema del área \eqref{eq:teorema_area}. En procesos de fusión (por ejemplo, los observados por LIGO--Virgo), el área total final del horizonte debe ser al menos la suma de áreas iniciales.
+
+\begin{ejemplo}{Chequeo cualitativo para fusiones binarias}{}
+En GW150914, dos agujeros negros de decenas de masas solares se fusionan en un remanente con menor masa total por la energía emitida en ondas gravitacionales, pero con un área de horizonte final compatible con $A_f\ge A_1+A_2$ dentro de incertidumbres observacionales \cite{Abbott2016prl}.
+\end{ejemplo}
+
+\subsection{Tercera ley}
+
+\begin{proposicion}{Tercera ley (versión de inaccesibilidad)}{}
+No es posible, mediante un proceso físico finito, reducir la gravedad superficial a cero ($\kappa\to0$) partiendo de un agujero negro sub-extremo.
+\end{proposicion}
+
+Esto equivale a afirmar que no se puede alcanzar en tiempo finito un agujero negro extremo ideal. El paralelo con la termodinámica ordinaria es la inaccesibilidad de $T=0$ por un número finito de operaciones.
+
+\begin{importante}
+A nivel clásico, las cuatro leyes son una mecánica geométrica de horizontes. La entrada de la constante de Planck $\hbar$ por Hawking convierte esta estructura en termodinámica real: la analogía deja de ser formal.
+\end{importante}
+
+% ===========================================================
+\section{Entropía de Bekenstein--Hawking}
+\label{sec:entropia_bekenstein_hawking}
+% ===========================================================
+
+\subsection{Argumento de Bekenstein}
+
+Bekenstein propuso que un agujero negro debe poseer entropía para evitar violaciones de la segunda ley: si se deja caer un sistema con entropía ordinaria al interior del horizonte, la entropía exterior disminuiría, salvo que el agujero negro gane una contribución entrópica compensatoria \cite{Bekenstein1973}.
+
+\begin{definicion}{Entropía de Bekenstein--Hawking}{def_S_BH}
+La entropía de un agujero negro estacionario es
+\begin{equation}
+  \boxed{S_{\rm BH} = \frac{k_B c^3}{4\hbar G}A = \frac{k_B A}{4\ell_P^2},}
+  \label{eq:SBH_cap9}
+\end{equation}
+donde $\ell_P = \sqrt{\hbar G/c^3}$ es la longitud de Planck.
+\end{definicion}
+
+La fórmula implica una propiedad sorprendente: la entropía escala con el \emph{área} y no con el volumen. Esta observación anticipa ideas holográficas desarrolladas más tarde en gravedad cuántica.
+
+\subsection{Área y entropía en Schwarzschild}
+
+Para un agujero negro no rotante,
+\begin{equation}
+  r_s = \frac{2GM}{c^2},
+  \qquad
+  A = 4\pi r_s^2 = \frac{16\pi G^2M^2}{c^4}.
+\end{equation}
+Sustituyendo en \eqref{eq:SBH_cap9}:
+\begin{equation}
+  S_{\rm BH}^{\text{Schw}} = \frac{4\pi k_B G M^2}{\hbar c}.
+  \label{eq:SBH_schw}
+\end{equation}
+
+\begin{ejemplo}{Escala entrópica de agujeros negros astrofísicos}{}
+Para $M=10\,M_\odot$,
+\begin{equation}
+  S_{\rm BH}/k_B \sim 10^{79}.
+\end{equation}
+Este valor excede enormemente la entropía de una estrella ordinaria de masa comparable. Por ello, la formación de un agujero negro representa un incremento drástico de entropía gravitacional macroscópica.
+\end{ejemplo}
+
+\subsection{Entropía generalizada}
+
+\begin{definicion}{Segunda ley generalizada}{}
+La cantidad
+\begin{equation}
+  S_{\rm gen} = S_{\rm exterior} + S_{\rm BH}
+\end{equation}
+no decrece:
+\begin{equation}
+  dS_{\rm gen} \ge 0.
+\end{equation}
+\end{definicion}
+
+La ley generalizada restaura el principio termodinámico una vez se incluye la entropía asociada al horizonte. Este principio es robusto y guía múltiples enfoques de gravedad cuántica.
+
+% ===========================================================
+\section{Radiación de Hawking y temperatura del horizonte}
+\label{sec:radiacion_hawking}
+% ===========================================================
+
+\subsection{Idea física semiclásica}
+
+El cálculo de Hawking considera un campo cuántico propagándose sobre un fondo gravitacional clásico con horizonte. La mezcla no trivial entre modos de frecuencia positiva y negativa entre el pasado y el futuro produce creación de partículas para observadores en el infinito. El espectro resultante es térmico \cite{Hawking1975}.
+
+\begin{definicion}{Temperatura de Hawking}{def_temp_hawking}
+La temperatura asociada a un agujero negro estacionario es
+\begin{equation}
+  \boxed{T_H = \frac{\hbar\kappa}{2\pi k_B c}.}
+  \label{eq:TH_general}
+\end{equation}
+\end{definicion}
+
+Para Schwarzschild, usando \eqref{eq:kappa_schw_cap9}:
+\begin{equation}
+  \boxed{T_H^{\text{Schw}} = \frac{\hbar c^3}{8\pi G M k_B}.}
+  \label{eq:TH_schw}
+\end{equation}
+
+\begin{observacion}{Dependencia con la masa}{}
+$T_H \propto 1/M$: agujeros negros más masivos son más fríos. Los agujeros negros astrofísicos tienen temperaturas muy inferiores al fondo cósmico de microondas ($T_{\rm CMB}\approx2.725\,\si{K}$), por lo que hoy absorben más energía de la que emiten térmicamente.
+\end{observacion}
+
+\subsection{Consistencia con la primera ley termodinámica}
+
+Identificando energía interna con $U = Mc^2$ y usando \eqref{eq:TH_schw} y \eqref{eq:SBH_schw}:
+\begin{equation}
+  d(Mc^2) = T_H\,dS_{\rm BH},
+\end{equation}
+confirmando que las expresiones de Bekenstein y Hawking son exactamente consistentes con la primera ley para el caso no rotante ni cargado.
+
+\subsection{Espectro y potencia radiada}
+
+Aproximando la emisión como cuerpo negro (con factores de gris para mayor precisión), la potencia total escala como
+\begin{equation}
+  P \propto A T_H^4 \propto \frac{1}{M^2}.
+\end{equation}
+Una parametrización útil es
+\begin{equation}
+  \frac{dM}{dt} = -\frac{\alpha}{M^2},
+  \label{eq:dMdt_hawking}
+\end{equation}
+con $\alpha$ una constante efectiva que depende de especies radiadas y factores de transmisión del horizonte.
+
+% ===========================================================
+\section{Evaporación, tiempos característicos y fase final}
+\label{sec:evaporacion_tiempos}
+% ===========================================================
+
+Integrando \eqref{eq:dMdt_hawking} para masa inicial $M_0$:
+\begin{equation}
+  t_{\rm evap} \sim \frac{5120\pi G^2}{\hbar c^4}M_0^3,
+  \label{eq:tiempo_evap_cap9}
+\end{equation}
+(dentro de factores numéricos que refinan los factores de gris y el contenido de partículas del modelo estándar).
+
+\begin{ejemplo}{Escala de evaporación}{}
+\begin{itemize}[leftmargin=2em]
+  \item Para $M_0\sim M_\odot$: $t_{\rm evap}$ supera por muchísimo la edad actual del Universo.
+  \item Para $M_0\sim10^{12}\,\si{kg}$: $t_{\rm evap}$ es comparable a escalas cosmológicas y su evaporación podría estar ocurriendo en la época actual.
+\end{itemize}
+\end{ejemplo}
+
+Como $T_H\propto1/M$, la evaporación se acelera al reducirse la masa: la fase final es más energética y rápida. La descripción completa de los últimos instantes requiere una teoría cuántica de la gravedad, ausente en el marco semiclásico.
+
+\begin{importante}
+La evaporación de Hawking es una predicción robusta de la teoría cuántica de campos en espacio-tiempo curvo, no de una teoría completa de gravedad cuántica. Lo incierto no es la existencia de radiación térmica, sino la dinámica microscópica del final de la evaporación y la recuperación de información.
+\end{importante}
+
+% ===========================================================
+\section{Paradoja de la información y propuestas de resolución}
+\label{sec:paradoja_info}
+% ===========================================================
+
+\subsection{Formulación de la paradoja}
+
+Si un estado cuántico puro colapsa para formar un agujero negro y este evapora completamente en radiación térmica, la evolución parecería transformar estado puro en mezcla térmica, en tensión con la unitariedad cuántica. Esta es la \textbf{paradoja de la información}.
+
+\begin{observacion}{Naturaleza del problema}{}
+No es una inconsistencia algebraica local, sino una tensión global entre tres ingredientes: (i) causalidad semiclasica de horizontes, (ii) validez de teoría cuántica de campos en vecindades suaves del horizonte, y (iii) unitariedad exacta de la mecánica cuántica.
+\end{observacion}
+
+\subsection{Panorama conceptual moderno}
+
+Entre las ideas más discutidas están:
+\begin{enumerate}[leftmargin=2em, label=\textbf{(\alph*)}]
+  \item \textbf{Remanentes}: sobreviviría un objeto final que almacena la información.
+  \item \textbf{Pérdida fundamental}: la evolución no sería unitaria (hipótesis hoy poco favorecida).
+  \item \textbf{Restauración unitaria}: la información sale codificada en correlaciones sutiles de la radiación de Hawking.
+\end{enumerate}
+
+En años recientes, cálculos de entropía fina-granulada con superficies cuánticas extremales y la reproducción de la curva de Page en marcos holográficos han reforzado la hipótesis de unitariedad global. Aun así, la interpretación microscópica completa del interior y del horizonte permanece abierta.
+
+% ===========================================================
+\section{Agujeros negros primordiales y relevancia cosmológica}
+\label{sec:pbh}
+% ===========================================================
+
+\subsection{Origen temprano}
+
+Los \textbf{agujeros negros primordiales} (PBH) podrían formarse en el universo temprano por colapso de sobre-densidades, transiciones de fase o colisiones de defectos topológicos. A diferencia de agujeros negros estelares, su masa puede ser muy inferior a una masa solar.
+
+\begin{proposicion}{Escala de masa de formación}{}
+La masa típica de un PBH formado en tiempo cósmico $t$ es del orden de la masa dentro del horizonte cosmológico:
+\begin{equation}
+  M_{\rm PBH}(t) \sim \frac{c^3 t}{G}.
+\end{equation}
+\end{proposicion}
+
+Esto permite una población amplia de masas iniciales, desde escalas microscópicas hasta objetos astrofísicos.
+
+\subsection{Observacionales y restricciones}
+
+Los PBH están restringidos por múltiples observables: fondo difuso de rayos gamma (evaporación tardía), microlentes gravitacionales, dinámica estelar, anisotropías del CMB y eventos de ondas gravitacionales. En ciertos rangos de masa, siguen siendo candidatos parciales a materia oscura, aunque fuertemente limitados.
+
+\begin{ejemplo}{PBH y búsqueda de transientes de alta energía}{}
+Un PBH en fase final de evaporación emitiría un estallido de partículas de alta energía en tiempos cortos. La no detección robusta de estos eventos en campañas prolongadas restringe la abundancia cosmológica de PBH ligeros.
+\end{ejemplo}
+
+% ===========================================================
+\section{Conexión observacional: EHT, ondas gravitacionales y termodinámica}
+\label{sec:observacional_termo}
+% ===========================================================
+
+La termodinámica de agujeros negros no es solamente una construcción formal. Está conectada con observables de frontera:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{EHT}: la imagen de M87* y Sgr A* revela geometría de región fuerte y escala de horizonte compatible con Kerr \cite{EHT2019}.
+  \item \textbf{Ondas gravitacionales}: masas y espines de remanentes de fusión permiten contrastar leyes de área y no-pelo en régimen dinámico \cite{Abbott2016prl}.
+  \item \textbf{Astrofísica de acreción}: la ubicación de la ISCO y la eficiencia radiativa dependen del spin, ligando dinámica orbital (Cap. 8) y balances energéticos termodinámicos.
+\end{itemize}
+
+\begin{observacion}{Límite experimental actual}{}
+La radiación de Hawking de agujeros negros astrofísicos no es directamente observable con tecnología actual por su temperatura extremadamente baja. Las validaciones presentes son indirectas: consistencia global entre relatividad general, teoría cuántica de campos y datos astrofísicos de horizonte fuerte.
+\end{observacion}
+
+% ===========================================================
+\section{Resumen del Capítulo}
+\label{sec:resumen_cap9}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+
+  \item Los agujeros negros estacionarios se describen por variables macroscópicas $(M,J,Q_e)$ y propiedades geométricas del horizonte (área $A$, gravedad superficial $\kappa$, velocidad angular $\Omega_H$, potencial $\Phi_H$).
+
+  \item Las \textbf{cuatro leyes de la mecánica de agujeros negros} son el análogo gravitacional de las leyes termodinámicas. En particular,
+  \(dM = (\kappa/8\pi G)\,dA + \Omega_H dJ + \Phi_H dQ_e\).
+
+  \item La \textbf{entropía de Bekenstein--Hawking} es
+  \(S_{\rm BH} = k_B A/(4\ell_P^2)\),
+  y la \textbf{temperatura de Hawking} es
+  \(T_H = \hbar\kappa/(2\pi k_B c)\).
+  Estas expresiones convierten la analogía mecánica en termodinámica física real.
+
+  \item Para Schwarzschild,
+  \(T_H = \hbar c^3/(8\pi GMk_B)\),
+  de modo que agujeros negros más masivos son más fríos. La potencia radiada escala como $P\propto 1/M^2$ y el tiempo de evaporación como $t_{\rm evap}\propto M^3$.
+
+  \item La \textbf{segunda ley generalizada} establece que
+  \(S_{\rm exterior}+S_{\rm BH}\)
+  no decrece. Esto preserva la consistencia termodinámica cuando sistemas con entropía ordinaria cruzan el horizonte.
+
+  \item La \textbf{paradoja de la información} surge de la tensión entre unitariedad cuántica y evaporación térmica. Evidencia teórica reciente favorece la recuperación unitaria de información, aunque persisten preguntas abiertas sobre la microfísica del horizonte.
+
+  \item Los \textbf{agujeros negros primordiales} enlazan física de horizontes con cosmología temprana y materia oscura. Su abundancia está fuertemente acotada por observaciones de alta energía, microlentes, CMB y ondas gravitacionales.
+
+  \item Observaciones modernas (EHT y LIGO--Virgo) no detectan directamente Hawking, pero sí validan con alta precisión la geometría fuerte de agujeros negros y las relaciones macroscópicas coherentes con la mecánica/termodinámica de horizontes.
+
+\end{enumerate}
+
+% ===========================================================
+\section{Problemas Propuestos}
+\label{sec:problemas_cap9}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{P\thechapter.\arabic*.}]
+
+  \item \textbf{Gravedad superficial y temperatura en Schwarzschild.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Partiendo de la métrica de Schwarzschild, derive $\kappa = c^4/(4GM)$ usando la definición geométrica \eqref{eq:def_kappa_bh}.
+    \item Sustituya en \eqref{eq:TH_general} y obtenga \eqref{eq:TH_schw}.
+    \item Calcule $T_H$ para $M = M_\odot$, $10M_\odot$ y $10^6M_\odot$. Compare con $T_{\rm CMB}$.
+  \end{enumerate}
+
+  \item \textbf{Entropía de Bekenstein--Hawking.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Muestre que para Schwarzschild $S_{\rm BH}=4\pi k_BGM^2/(\hbar c)$.
+    \item Evalúe $S_{\rm BH}/k_B$ para $M=10M_\odot$ y para $M=6.5\times10^9M_\odot$ (M87*).
+    \item Compare estos valores con una entropía estelar típica $\sim10^{57}k_B$ y discuta su significado físico.
+  \end{enumerate}
+
+  \item \textbf{Primera ley para agujero negro no rotante.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para $J=Q_e=0$, escriba la primera ley como $d(Mc^2)=T_H\,dS_{\rm BH}$.
+    \item Verifique explícitamente la identidad usando \eqref{eq:TH_schw} y \eqref{eq:SBH_schw}.
+    \item Interprete el término $T_H dS_{\rm BH}$ como energía interna asociada al horizonte.
+  \end{enumerate}
+
+  \item \textbf{Evaporación y escala temporal.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Integre la ecuación $dM/dt=-\alpha/M^2$ para obtener $M(t)$ y $t_{\rm evap}$.
+    \item Usando \eqref{eq:tiempo_evap_cap9}, estime el tiempo de evaporación para $M_0=10^{12}\,\si{kg}$ y para $M_0=M_\odot$.
+    \item Explique por qué la fase final de evaporación es explosiva en comparación con fases tempranas.
+  \end{enumerate}
+
+  \item \textbf{Segunda ley del área en fusiones.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Para dos agujeros negros de Schwarzschild con masas $M_1$ y $M_2$, demuestre que $A_f\ge A_1+A_2$ implica $M_f\ge\sqrt{M_1^2+M_2^2}$.
+    \item Tome $M_1=36M_\odot$, $M_2=29M_\odot$ y $M_f=62M_\odot$; verifique si la desigualdad se satisface.
+    \item Discuta por qué esta verificación es un test termodinámico de relatividad en régimen fuerte.
+  \end{enumerate}
+
+  \item \textbf{Paradoja de la información (conceptual).}
+  \begin{enumerate}[label=(\alph*)]
+    \item Formule de manera precisa la tensión entre evolución unitaria y radiación térmica.
+    \item Distinga entre entropía gruesa y entropía fina en el contexto de la evaporación.
+    \item Explique qué información aporta la curva de Page al problema.
+  \end{enumerate}
+
+  \item \textbf{Agujeros negros primordiales y cosmología.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Derive la estimación de masa de formación $M_{\rm PBH}\sim c^3t/G$.
+    \item Para $t=10^{-23}\,\si{s}$ y $t=1\,\si{s}$, estime $M_{\rm PBH}$.
+    \item Discuta qué bandas de masa pueden contribuir de forma relevante a materia oscura sin violar límites observacionales actuales.
+  \end{enumerate}
+
+  \item \textbf{Kerr extremo y tercera ley.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Use $\kappa_{\text{Kerr}}=c^2(r_+-r_-)/[2(r_+^2+a^2)]$ para mostrar que $\kappa\to0$ cuando $a\to GM/c^2$.
+    \item Interprete este límite como análogo de $T\to0$.
+    \item Explique por qué la tercera ley impide alcanzar exactamente el estado extremo por procesos físicos finitos.
+  \end{enumerate}
+
+  \item \textbf{Observacionales de horizonte fuerte.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Relacione cualitativamente la escala angular de la sombra de M87* con el radio gravitacional $r_g=GM/c^2$.
+    \item Explique cómo medidas de spin por ondas gravitacionales se conectan con termodinámica de horizontes (vía $\kappa$, $\Omega_H$, área final).
+    \item Argumente por qué la no detección directa de Hawking en agujeros negros astrofísicos no contradice su predicción teórica.
+  \end{enumerate}
+
+\end{enumerate}
