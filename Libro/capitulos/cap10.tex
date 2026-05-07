@@ -1,0 +1,267 @@
+% ============================================================
+% Capítulo 10: Cosmología I — El Universo Homogéneo e Isótropo
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Cosmología I: El Universo Homogéneo e Isótropo}
+\label{cap:flrw_fundamentos}
+
+La relatividad general permite describir no sólo campos gravitacionales locales (como estrellas, agujeros negros o binarias compactas), sino también la dinámica global del Universo. A escalas suficientemente grandes ($\gtrsim 100\,\si{Mpc}$), la distribución de materia y radiación puede aproximarse como estadísticamente uniforme e isótropa. Esta observación conduce al \textbf{principio cosmológico}, hipótesis que reduce de forma drástica la complejidad geométrica del problema y da lugar a la familia de métricas de Friedmann--Lemaître--Robertson--Walker (FLRW) \cite{Peebles1993, Weinberg2008, Ryden2017}.
+
+En este capítulo introducimos los elementos cinemáticos de la cosmología relativista: la métrica FLRW, el factor de escala $a(t)$, el corrimiento al rojo cosmológico, las principales definiciones de distancia y la ley de Hubble--Lemaître. Cerramos con la evidencia observacional clave del fondo cósmico de microondas (CMB), que respalda de manera contundente el marco homogéneo-isótropo.
+
+% ===========================================================
+\section{El principio cosmológico}
+\label{sec:principio_cosmologico}
+% ===========================================================
+
+\subsection{Homogeneidad e isotropía}
+
+\begin{definicion}{Principio cosmológico}{def_principio_cosmologico}
+El Universo, cuando se promedia sobre escalas suficientemente grandes, es \textbf{homogéneo} (no existe un punto espacial privilegiado) e \textbf{isótropo} (no existe una dirección espacial privilegiada).
+\end{definicion}
+
+La isotropía observada alrededor de un observador comóvil, combinada con el principio copernicano (no ocupamos una posición especial), implica homogeneidad espacial. Matemáticamente, las hipersuperficies espaciales de tiempo cósmico constante deben tener \textbf{curvatura constante}. Esto restringe su geometría a tres clases: curvatura positiva ($k=+1$), nula ($k=0$) o negativa ($k=-1$).
+
+\begin{observacion}{Régimen de validez}{obs_validez_cosmo}
+La homogeneidad no es exacta a escala de galaxias o cúmulos. Es una descripción efectiva de grano grueso a gran escala, donde las inhomogeneidades locales se promedian estadísticamente.
+\end{observacion}
+
+\subsection{Tiempo cósmico y observadores comóviles}
+
+En cosmología relativista se introduce una familia preferente de observadores: los \textbf{comóviles}, que ven al fluido cosmológico sin velocidad peculiar promedio. El tiempo propio de esos observadores define el \textbf{tiempo cósmico} $t$, y las hipersuperficies $t=\text{const}$ describen la geometría espacial instantánea del Universo.
+
+\begin{definicion}{Factor de escala}{def_factor_escala}
+El \textbf{factor de escala} $a(t)$ cuantifica la expansión (o contracción) global del Universo. Distancias físicas entre observadores comóviles escalan como
+\begin{equation}
+  d_{\text{fís}}(t) = a(t)\,\chi,
+\end{equation}
+donde $\chi$ es una coordenada comóvil constante para cada observador.
+\end{definicion}
+
+% ===========================================================
+\section{La métrica de Friedmann--Lemaître--Robertson--Walker}
+\label{sec:metrica_flrw}
+% ===========================================================
+
+\subsection{Forma general}
+
+\begin{definicion}{Métrica FLRW}{def_flrw}
+La métrica más general compatible con homogeneidad e isotropía es
+\begin{equation}
+  \boxed{ds^2 = -c^2dt^2 + a^2(t)\left[\frac{dr^2}{1-kr^2} + r^2\left(d\theta^2 + \sin^2\theta\,d\varphi^2\right)\right],}
+  \label{eq:flrw_metric}
+\end{equation}
+donde $k\in\{-1,0,+1\}$ codifica la curvatura espacial normalizada.
+\end{definicion}
+
+La parte temporal es universal y la parte espacial se reescala por $a(t)$. Cuando $a(t)$ crece, las distancias físicas entre observadores comóviles aumentan: el Universo se expande.
+
+\subsection{Coordenada radial comóvil y forma conforme}
+
+Para trayectorias radiales ($d\theta=d\varphi=0$), puede escribirse
+\begin{equation}
+  ds^2 = -c^2dt^2 + a^2(t)\frac{dr^2}{1-kr^2}.
+\end{equation}
+Introduciendo la coordenada conforme $\eta$ mediante $d\eta = dt/a(t)$, la métrica toma la forma
+\begin{equation}
+  ds^2 = a^2(\eta)\left[-c^2d\eta^2 + d\Sigma_k^2\right],
+\end{equation}
+lo que separa de manera clara la expansión global (factor conforme) de la geometría espacial de curvatura constante.
+
+\subsection{Parámetro de Hubble}
+
+\begin{definicion}{Parámetro de Hubble}{def_hubble}
+La tasa instantánea de expansión se define como
+\begin{equation}
+  H(t) \equiv \frac{\dot a(t)}{a(t)}.
+  \label{eq:def_hubble}
+\end{equation}
+Su valor actual es $H_0 \equiv H(t_0)$.
+\end{definicion}
+
+\begin{ejemplo}{Escala temporal de expansión}{ej_tiempo_hubble}
+El inverso de $H_0$ define el \textbf{tiempo de Hubble},
+\begin{equation}
+  t_H = H_0^{-1}.
+\end{equation}
+Para $H_0\sim70\,\si{km\,s^{-1}\,Mpc^{-1}}$, se obtiene $t_H\sim14\,\si{Gyr}$, de orden comparable a la edad del Universo.
+\end{ejemplo}
+
+% ===========================================================
+\section{Corrimiento al rojo cosmológico}
+\label{sec:redshift_cosmologico}
+% ===========================================================
+
+\subsection{Definición observacional}
+
+\begin{definicion}{Redshift cosmológico}{def_redshift}
+Para una línea espectral emitida con longitud de onda $\lambda_{\rm em}$ y observada como $\lambda_{\rm obs}$, el corrimiento al rojo se define por
+\begin{equation}
+  z \equiv \frac{\lambda_{\rm obs}-\lambda_{\rm em}}{\lambda_{\rm em}}.
+\end{equation}
+\end{definicion}
+
+En una geometría FLRW, los rayos de luz se estiran junto con el espacio, por lo que
+\begin{equation}
+  \boxed{1+z = \frac{a(t_0)}{a(t_{\rm em})}.}
+  \label{eq:redshift_scalefactor}
+\end{equation}
+Si se normaliza $a(t_0)=1$, entonces $a(t_{\rm em})=1/(1+z)$.
+
+\begin{proposicion}{Interpretación física del redshift}{prop_interpretacion_z}
+El redshift cosmológico no es, en general, un simple efecto Doppler especial-relativista local. Es una consecuencia global de la evolución temporal de la métrica del espacio-tiempo.
+\end{proposicion}
+
+\subsection{Límite de bajo redshift}
+
+Para $z\ll1$, la cinemática cosmológica recupera una ley lineal:
+\begin{equation}
+  cz \approx H_0 d,
+\end{equation}
+que coincide con la forma observacional de la ley de Hubble--Lemaître para distancias no relativistas.
+
+% ===========================================================
+\section{Distancias en cosmología observacional}
+\label{sec:distancias_cosmologicas}
+% ===========================================================
+
+En cosmología no existe una única noción de distancia. La distancia relevante depende del observable (flujo, tamaño angular, tiempo de viaje de la luz, etc.).
+
+\subsection{Distancia comóvil y distancia propia}
+
+Para una fuente a redshift $z$, la distancia comóvil radial en un modelo FLRW es
+\begin{equation}
+  D_C(z) = c\int_0^z \frac{dz'}{H(z')}.
+  \label{eq:dist_comovil}
+\end{equation}
+La distancia propia en un tiempo dado es $D_P(t)=a(t)\chi$.
+
+\subsection{Distancia angular y de luminosidad}
+
+\begin{definicion}{Distancia angular}{def_dist_angular}
+Si un objeto de tamaño físico transversal $\ell$ subtiende un ángulo pequeño $\delta\theta$, su distancia angular se define como
+\begin{equation}
+  D_A \equiv \frac{\ell}{\delta\theta}.
+\end{equation}
+\end{definicion}
+
+\begin{definicion}{Distancia de luminosidad}{def_dist_lum}
+Si una fuente de luminosidad intrínseca $L$ produce flujo observado $F$, la distancia de luminosidad se define por
+\begin{equation}
+  F = \frac{L}{4\pi D_L^2}.
+\end{equation}
+\end{definicion}
+
+En cosmología FLRW se cumple la relación de reciprocidad de Etherington:
+\begin{equation}
+  \boxed{D_L = (1+z)^2 D_A.}
+  \label{eq:etherington}
+\end{equation}
+Esta identidad es central para contrastar consistencia entre sondas cosmológicas.
+
+\begin{ejemplo}{Módulo de distancia de supernovas}{ej_mu_sn}
+En astronomía observacional se usa
+\begin{equation}
+  \mu \equiv m-M = 5\log_{10}\!\left(\frac{D_L}{10\,\si{pc}}\right),
+\end{equation}
+que conecta directamente magnitud aparente y absoluta. Las supernovas tipo Ia, al actuar como candelas estándar calibrables, permitieron detectar la expansión acelerada \cite{Riess1998, Perlmutter1999}.
+\end{ejemplo}
+
+% ===========================================================
+\section{La ley de Hubble--Lemaître y su interpretación}
+\label{sec:hubble_lemaitre}
+% ===========================================================
+
+\subsection{Ley empírica}
+
+Las observaciones espectroscópicas de galaxias muestran, para bajo redshift, una relación aproximadamente lineal entre velocidad recesional inferida y distancia:
+\begin{equation}
+  v \simeq H_0 d.
+  \label{eq:hubble_law}
+\end{equation}
+Desde la perspectiva relativista, esta ley emerge de la expansión homogénea codificada en $a(t)$ y no de una explosión en un punto preexistente del espacio.
+
+\begin{observacion}{Expansión del espacio versus movimiento en el espacio}{obs_expansion_espacio}
+En el régimen cosmológico, las galaxias comóviles no ``vuelan'' a través de un fondo estático; es la métrica espacial la que evoluciona. Por ello, velocidades recesionales efectivas mayores que $c$ pueden aparecer a gran escala sin violar causalidad local.
+\end{observacion}
+
+\subsection{Parámetro de desaceleración}
+
+Una medida útil de la cinemática global es
+\begin{equation}
+  q(t) \equiv -\frac{a\ddot a}{\dot a^2}.
+\end{equation}
+Si $q<0$, la expansión es acelerada; si $q>0$, desacelerada. El signo actual inferido observacionalmente es negativo en el marco estándar $\Lambda$CDM.
+
+% ===========================================================
+\section{Evidencia observacional: el fondo cósmico de microondas}
+\label{sec:cmb_evidencia}
+% ===========================================================
+
+\subsection{Descubrimiento y naturaleza térmica}
+
+El \textbf{fondo cósmico de microondas} (CMB), descubierto por Penzias y Wilson en 1965, es una radiación casi isotrópica con espectro de cuerpo negro a temperatura
+\begin{equation}
+  T_0 = 2.7255\,\si{K}.
+\end{equation}
+Su existencia constituye una evidencia decisiva del origen caliente y denso del Universo temprano.
+
+\begin{importante}
+La isotropía del CMB (con anisotropías relativas de orden $\Delta T/T\sim10^{-5}$) respalda de forma directa el principio cosmológico y proporciona condiciones iniciales para la formación de estructura.
+\end{importante}
+
+\subsection{Anisotropías y parámetros cosmológicos}
+
+Las anisotropías angulares del CMB codifican información de gran precisión sobre la composición y geometría del Universo. Las misiones \textit{COBE}, \textit{WMAP} y \textit{Planck} han permitido estimar parámetros cosmológicos con precisión porcentual, en acuerdo robusto con el modelo base $\Lambda$CDM \cite{Planck2020}.
+
+\begin{ejemplo}{Escala física del desacople}{ej_desacople}
+El CMB se origina cuando el plasma primordial se neutraliza y los fotones desacoplan de la materia bariónica (recombinación), alrededor de $z\sim1100$. Desde entonces, los fotones se propagan casi libremente y su temperatura escala como
+\begin{equation}
+  T(z) = T_0(1+z).
+\end{equation}
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis conceptual y transición al capítulo siguiente}
+\label{sec:sintesis_cap10}
+% ===========================================================
+
+La cosmología homogénea-isótropa proporciona un marco geométrico mínimo y extremadamente poderoso:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item El principio cosmológico restringe la geometría a la familia FLRW.
+  \item El factor de escala $a(t)$ y el parámetro de Hubble $H(t)$ describen la cinemática de la expansión.
+  \item El redshift cosmológico conecta observables espectroscópicos con la evolución temporal de la métrica.
+  \item Distancias cosmológicas distintas ($D_C$, $D_A$, $D_L$) responden a observables diferentes y se relacionan de forma no trivial.
+  \item El CMB confirma la isotropía a gran escala y fija condiciones iniciales del Universo temprano.
+\end{enumerate}
+
+En el próximo capítulo se derivarán las ecuaciones dinámicas que gobiernan $a(t)$ a partir de las ecuaciones de Einstein: las ecuaciones de Friedmann y la ecuación de continuidad para fluidos cosmológicos.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Redshift y factor de escala.} \\
+Demuestre, a partir de geodésicas nulas radiales en FLRW, la relación $1+z=a(t_0)/a(t_{\rm em})$.
+
+\item \textbf{Ley de Hubble en bajo redshift.} \\
+Partiendo de la expansión de Taylor de $a(t)$ alrededor de $t_0$, derive la aproximación $cz\approx H_0 d$ para $z\ll1$.
+
+\item \textbf{Curvatura espacial.} \\
+Para $k=+1,0,-1$, describa cualitativamente la geometría espacial de las hipersuperficies $t=\text{const}$ y discuta si su signo determina por sí solo el destino dinámico del Universo en presencia de constante cosmológica.
+
+\item \textbf{Distancias cosmológicas.} \\
+Muestre que la relación de Etherington $D_L=(1+z)^2D_A$ se cumple en FLRW bajo conservación de número de fotones y propagación sobre geodésicas nulas.
+
+\item \textbf{Módulo de distancia.} \\
+Calcule el módulo de distancia $\mu$ para una fuente con $D_L=1\,\si{Gpc}$ y compárelo con el caso $D_L=100\,\si{Mpc}$.
+
+\item \textbf{Escalamiento térmico del CMB.} \\
+Usando el corrimiento cosmológico, deduzca $T(z)=T_0(1+z)$ y estime la temperatura del plasma de fotones en recombinación para $z\sim1100$.
+
+\end{enumerate}
