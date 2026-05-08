@@ -1,0 +1,213 @@
+% ============================================================
+% Capítulo 13: Cosmología IV — Materia Oscura y Energía Oscura
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Cosmología IV: Materia Oscura y Energía Oscura}
+\label{cap:materia_oscura}
+
+El escenario cosmológico de precisión indica que la materia bariónica ordinaria representa sólo una fracción del contenido total del Universo. El resto está dominado por dos componentes cuya naturaleza microscópica sigue abierta: \textbf{materia oscura} (que gravita y estructura) y \textbf{energía oscura} (que impulsa la expansión acelerada tardía) \cite{Peebles1993, Dodelson2003, Weinberg2008, Ryden2017, Planck2020}.
+
+Este capítulo organiza la evidencia observacional de ambos sectores, presenta los candidatos físicos más estudiados para materia oscura, formula la dinámica efectiva de energía oscura mediante el parámetro de ecuación de estado y resume el estado actual del modelo $\Lambda$CDM, incluyendo tensiones observacionales contemporáneas.
+
+% ===========================================================
+\section{Evidencias de materia oscura}
+\label{sec:evidencias_dm}
+% ===========================================================
+
+\subsection{Curvas de rotación galáctica}
+
+En una galaxia espiral, la dinámica newtoniana esperada a grandes radios predice $v_c(r)\propto r^{-1/2}$ si casi toda la masa estuviera concentrada en el bulbo y el disco luminoso. Sin embargo, observacionalmente las curvas de rotación tienden a permanecer aproximadamente planas: $v_c(r)\approx\text{cte}$ hasta radios muy superiores al tamaño óptico.
+
+\begin{definicion}{Masa dinámica por rotación}{def_masa_dinamica_rot}
+Para órbitas casi circulares en potencial aproximadamente esférico,
+\begin{equation}
+  M(<r)\simeq \frac{v_c^2(r)\,r}{G}.
+\end{equation}
+Si $v_c(r)$ es casi constante, entonces $M(<r)\propto r$, indicando un halo extendido no trazado por la luz estelar.
+\end{definicion}
+
+\begin{ejemplo}{Halo isoterma y velocidad plana}{ej_halo_isotermo}
+Un perfil efectivo $\rho(r)\propto r^{-2}$ produce $M(<r)\propto r$ y, por tanto, $v_c(r)\simeq\text{cte}$. Esta aproximación explica de forma simple por qué la cinemática en galaxias espirales requiere masa no luminosa dominante en regiones externas.
+\end{ejemplo}
+
+\subsection{Dinámica de cúmulos y lentes gravitacionales}
+
+En cúmulos de galaxias, las velocidades dispersas de sus miembros, el gas caliente detectado en rayos X y el mapeo de lentes gravitacionales no convergen con la masa bariónica visible. La reconstrucción del potencial gravitatorio exige masa adicional distribuida en halos extendidos.
+
+\begin{observacion}{Consistencia multiprobe en cúmulos}{obs_multimess_dm}
+La combinación de cinemática de galaxias, emisión térmica del plasma intracúmulo y lentes débiles/fuertes permite estimar la masa total de manera redundante; en todos los casos aparece un excedente sistemático frente al inventario bariónico.
+\end{observacion}
+
+\subsection{CMB y estructura a gran escala}
+
+La física de oscilaciones acústicas en el plasma primordial y la forma del espectro angular del CMB requieren una componente no bariónica fría para reproducir simultáneamente alturas de picos, posición angular y evolución de perturbaciones. Asimismo, la formación jerárquica de estructura en simulaciones cosmológicas necesita materia oscura fría para concordar con catálogos de galaxias \cite{Dodelson2003, Planck2020}.
+
+\begin{proposicion}{Papel dinámico de la materia oscura fría}{prop_cdm}
+Una componente con presión despreciable ($w\approx 0$), no acoplada fuertemente al plasma radiativo, comienza a agruparse gravitacionalmente antes de la recombinación y establece pozos de potencial que guían el crecimiento posterior de bariones.
+\end{proposicion}
+
+% ===========================================================
+\section{Naturaleza física y candidatos de materia oscura}
+\label{sec:candidatos_dm}
+% ===========================================================
+
+\subsection{Requisitos fenomenológicos básicos}
+
+\begin{definicion}{Condiciones mínimas para un candidato viable}{def_requisitos_dm}
+Un candidato de materia oscura debe, al menos:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item aportar densidad cosmológica compatible con observaciones;
+  \item ser eléctricamente neutro y muy débilmente interactuante con radiación;
+  \item ser estable (o metaestable con vida media cosmológica);
+  \item permitir crecimiento de estructura consistente con datos.
+\end{enumerate}
+\end{definicion}
+
+\subsection{Candidatos principales}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{WIMPs:} partículas masivas débilmente interactuantes, motivadas por física más allá del modelo estándar.
+  \item \textbf{Axiones (y ALPs):} bosones ligeros originados en extensiones con simetrías pseudoescalares.
+  \item \textbf{Neutrinos masivos:} contribuyen a la densidad total, pero su libre recorrido térmico los hace insuficientes como componente dominante de materia oscura fría.
+  \item \textbf{Escenarios compactos primordiales:} en ventanas restringidas de masa, objetos compactos pueden contribuir parcialmente, sujetos a límites observacionales estrictos.
+\end{itemize}
+
+\begin{importante}
+La materia oscura bariónica ordinaria (gas frío tenue, objetos compactos estelares, etc.) no alcanza para cerrar el presupuesto dinámico inferido por CMB, cúmulos y estructura a gran escala.
+\end{importante}
+
+\begin{ejemplo}{Fracción de neutrinos en la densidad total}{ej_neutrinos}
+Aunque los neutrinos masivos son una evidencia directa de nueva física respecto al modelo estándar mínimo, su contribución cosmológica actual es subdominante. Por ello se consideran un componente complementario, no la solución completa al problema de materia oscura.
+\end{ejemplo}
+
+% ===========================================================
+\section{Evidencias de energía oscura}
+\label{sec:evidencias_de}
+% ===========================================================
+
+\subsection{Supernovas tipo Ia y expansión acelerada}
+
+Las observaciones de supernovas tipo Ia en corrimientos al rojo intermedios y altos mostraron que el Universo reciente se expande de manera acelerada \cite{Riess1998, Perlmutter1999}. En términos de la ecuación de Friedmann de aceleración, esto exige una componente efectiva con presión suficientemente negativa.
+
+\begin{definicion}{Condición de aceleración tardía}{def_aceleracion_tardia}
+En FLRW,
+\begin{equation}
+  \frac{\ddot a}{a}=-\frac{4\pi G}{3}\left(\rho+\frac{3p}{c^2}\right)>0
+  \quad\Longrightarrow\quad
+  w_{\rm eff}<-\frac{1}{3}.
+\end{equation}
+\end{definicion}
+
+\subsection{CMB, BAO y consistencia global}
+
+La combinación de CMB con oscilaciones acústicas de bariones (BAO) y medidas de estructura favorece un modelo casi plano con una fracción dominante de energía oscura en épocas tardías \cite{Planck2020}. Estas sondas son complementarias: CMB fija condiciones tempranas y BAO/supernovas mapean la expansión a bajo redshift.
+
+\begin{observacion}{Degeneracias y sinergia observacional}{obs_degeneracias}
+Parámetros cosmológicos como $H_0$, $\Omega_m$ y $w$ presentan degeneracias cuando se ajustan con una sola sonda. La combinación de múltiples observables rompe dichas degeneracias y mejora robustez inferencial.
+\end{observacion}
+
+% ===========================================================
+\section{Modelado dinámico de energía oscura}
+\label{sec:modelado_de}
+% ===========================================================
+
+\subsection{Constante cosmológica y fluidos efectivos}
+
+El caso más simple es la constante cosmológica $\Lambda$, equivalente a un fluido con
+\begin{equation}
+  p_\Lambda = -\rho_\Lambda c^2,
+  \qquad
+  w_\Lambda=-1.
+\end{equation}
+
+\begin{definicion}{Ecuación de estado de energía oscura}{def_w_de}
+Se parametriza la energía oscura por
+\begin{equation}
+  w(a)\equiv \frac{p_{\rm DE}}{\rho_{\rm DE}c^2}.
+\end{equation}
+Para $w=\text{cte}$, la densidad evoluciona como
+\begin{equation}
+  \rho_{\rm DE}(a)\propto a^{-3(1+w)}.
+\end{equation}
+\end{definicion}
+
+\subsection{Forma general de $H(z)$}
+
+En un modelo casi plano con materia, radiación y energía oscura efectiva:
+\begin{equation}
+  H^2(z)=H_0^2\!\left[\Omega_m(1+z)^3+\Omega_r(1+z)^4+\Omega_{\rm DE}\,f_{\rm DE}(z)+\Omega_k(1+z)^2\right],
+\end{equation}
+donde $f_{\rm DE}(z)=1$ para $\Lambda$ y cambia cuando $w\neq -1$ o es variable.
+
+\begin{ejemplo}{Caso de $w$ constante}{ej_w_const}
+Si $w=\text{cte}$, entonces
+\begin{equation}
+  f_{\rm DE}(z)=(1+z)^{3(1+w)}.
+\end{equation}
+Así, comparar distancias observadas con esta ley permite probar desviaciones respecto a $\Lambda$CDM.
+\end{ejemplo}
+
+% ===========================================================
+\section{Modelo $\Lambda$CDM y tensiones actuales}
+\label{sec:lcdm_tensiones}
+% ===========================================================
+
+El modelo base $\Lambda$CDM, con seis parámetros cosmológicos efectivos en su versión mínima, describe de manera notable CMB, BAO y crecimiento lineal de estructura \cite{Planck2020}. Sin embargo, persisten discrepancias estadísticas entre inferencias tempranas y tardías.
+
+\subsection{Tensión de Hubble}
+
+\begin{definicion}{Tensión de $H_0$}{def_tension_h0}
+La tensión de Hubble es la discrepancia entre el valor de $H_0$ inferido desde el Universo temprano (principalmente CMB bajo $\Lambda$CDM) y el valor medido con indicadores de distancia locales.
+\end{definicion}
+
+\subsection{Tensión de amplitud de estructura}
+
+\begin{definicion}{Tensión en crecimiento ($\sigma_8$/$S_8$)}{def_tension_s8}
+Se refiere al desacuerdo moderado entre la amplitud de fluctuaciones de materia inferida de CMB y la deducida de lentes débiles y conteos de estructura a bajo redshift.
+\end{definicion}
+
+\begin{observacion}{Interpretación prudente}{obs_tensiones}
+Las tensiones pueden reflejar sistemáticos residuales, calibraciones cruzadas incompletas o física más allá de $\Lambda$CDM. Su interpretación requiere consistencia entre múltiples catálogos y metodologías de inferencia.
+\end{observacion}
+
+% ===========================================================
+\section{Síntesis y conexión con el siguiente capítulo}
+\label{sec:sintesis_cap13}
+% ===========================================================
+
+La imagen cosmológica actual combina dos hechos robustos:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item Existe una componente gravitante no bariónica que domina la formación de estructura.
+  \item La expansión cósmica tardía está acelerada y requiere presión efectiva negativa.
+\end{enumerate}
+
+El marco $\Lambda$CDM captura ambos fenómenos con alta precisión observacional, pero deja abierta la naturaleza microscópica de materia oscura y energía oscura. En el próximo capítulo estudiaremos perturbaciones cosmológicas lineales y el crecimiento de estructura, puente directo entre teoría relativista y observables de precisión.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Curva de rotación plana.} \\
+Suponiendo $v_c(r)=v_0$ constante para $r>r_s$, derive $M(<r)$ y la densidad radial efectiva $\rho(r)$ en esa región. Interprete el resultado en términos de halo extendido.
+
+\item \textbf{Criterio de aceleración.} \\
+Partiendo de la ecuación de aceleración de Friedmann, muestre que un fluido dominante con $w<-1/3$ produce $\ddot a>0$. Evalúe explícitamente los casos $w=-1$ y $w=-2/3$.
+
+\item \textbf{Evolución de energía oscura con $w$ constante.} \\
+Demuestre que $\rho_{\rm DE}(a)\propto a^{-3(1+w)}$ a partir de la ecuación de continuidad y compare el comportamiento para $w=-1$, $w=-0.9$ y $w=-1.1$.
+
+\item \textbf{Composición cósmica en $\Lambda$CDM plano.} \\
+Usando $\Omega_m+\Omega_r+\Omega_\Lambda=1$, estime $\Omega_\Lambda$ para $\Omega_m=0.315$ y $\Omega_r=9\times10^{-5}$. Comente por qué radiación es despreciable hoy pero dominante en el Universo temprano.
+
+\item \textbf{Escala de redshift de igualdad materia--energía oscura.} \\
+En un modelo plano con $w=-1$, use $\rho_m\propto a^{-3}$ y $\rho_\Lambda=\text{cte}$ para obtener una expresión de $z_{\rm eq}^{m\Lambda}$ en función de $\Omega_m$ y $\Omega_\Lambda$.
+
+\item \textbf{Discusión crítica de tensiones cosmológicas.} \\
+Elabore un esquema comparativo de posibles explicaciones de la tensión de $H_0$: (i) sistemáticos observacionales, (ii) calibración de distancias, (iii) extensión física del modelo base. Indique para cada opción qué observables podrían discriminarla.
+
+\end{enumerate}
