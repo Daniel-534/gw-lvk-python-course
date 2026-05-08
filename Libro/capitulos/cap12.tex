@@ -9,7 +9,7 @@
 
 El modelo FLRW con materia, radiación y constante cosmológica describe con gran precisión gran parte de la historia cósmica. Sin embargo, al extrapolar el modelo estándar hacia tiempos muy tempranos aparecen problemas conceptuales: causalidad aparente del CMB (horizonte), ajuste extremo de la curvatura (planitud) y reliquias topológicas no observadas (monopolos). La hipótesis inflacionaria propone que, antes del plasma caliente del Big Bang, el Universo atravesó una fase de expansión acelerada casi exponencial que resuelve simultáneamente estos problemas \cite{Guth1981, Linde1982, Kolb1990, Dodelson2003, Weinberg2008}.
 
-En este capítulo presentamos la lógica física de la inflación, su formulación mínima con un campo escalar, el régimen de \emph{slow-roll}, la generación de fluctuaciones primordiales y sus predicciones observacionales. Se incluyen ejemplos de la vida cotidiana para fijar intuiciones, sin perder el marco cuantitativo.
+En este capítulo presentamos la lógica física de la inflación, su formulación mínima con un campo escalar, el régimen de \emph{slow-roll}, la generación de fluctuaciones primordiales y sus predicciones observacionales, manteniendo en todo momento el marco cuantitativo de la cosmología relativista.
 
 % ===========================================================
 \section{Motivación: límites del Big Bang caliente sin inflación}
@@ -24,8 +24,8 @@ La temperatura del CMB es casi isotrópica en direcciones del cielo que, en el m
 El \textbf{problema del horizonte} consiste en explicar por qué regiones separadas por ángulos grandes en el CMB presentan casi el mismo estado térmico pese a no haber compartido cono de luz pasado en el escenario no inflacionario.
 \end{definicion}
 
-\begin{ejemplo}{Una analogía cotidiana: dos hornos aislados}{ej_hornos}
-Imagine dos hornos industriales encendidos por separado, sin tuberías ni contacto térmico entre ellos. Si, horas después, ambos muestran exactamente el mismo perfil de temperatura en todos sus puntos, lo natural sería sospechar que en algún momento sí estuvieron conectados o que hubo un mecanismo común de homogenización. El problema del horizonte es análogo: la isotropía del CMB sugiere una etapa previa de contacto causal efectivo.
+\begin{ejemplo}{Dos parches opuestos del CMB}{ej_hornos}
+Considere dos regiones del CMB separadas por casi $180^\circ$ en el cielo. En el escenario no inflacionario, sus conos de luz pasados no se superponen antes del desacople, por lo que no habrían podido intercambiar información térmica. La inflación resuelve esta tensión causal al hacer que ambas regiones provengan de una zona originalmente conectada que luego fue estirada a escalas superhorizonte.
 \end{ejemplo}
 
 \subsection{Problema de la planitud}
@@ -40,8 +40,8 @@ En eras de materia o radiación, $a^2H^2$ no crece lo suficiente para suprimir d
 El \textbf{problema de la planitud} es el ajuste fino requerido en condiciones iniciales para obtener un Universo casi plano en la actualidad, dentro del marco no inflacionario.
 \end{definicion}
 
-\begin{ejemplo}{Moneda casi vertical}{ej_moneda}
-Si una moneda permanece casi perfectamente vertical durante mucho tiempo, la explicación más probable no es que ``casualmente'' cayó con precisión extrema, sino que hubo una acción que estabilizó su orientación. De forma análoga, inflación actúa como mecanismo dinámico que empuja $\Omega_k\to0$ sin ajuste manual extremo.
+\begin{ejemplo}{Supresión de curvatura en fase cuasi-de Sitter}{ej_moneda}
+Durante inflación, $a(t)\propto e^{Ht}$ con $H\approx\text{cte}$, por lo que $a^2H^2\propto e^{2Ht}$. Como $\Omega_k=-kc^2/(a^2H^2)$, su magnitud cae exponencialmente con los e-folds: aun una curvatura inicial apreciable se vuelve despreciable tras $N\sim 60$.
 \end{ejemplo}
 
 \subsection{Problema de monopolos y otras reliquias}
@@ -85,8 +85,8 @@ La evolución homogénea del inflatón en FLRW satisface
 donde el término $3H\dot\phi$ actúa como fricción cosmológica.
 \end{definicion}
 
-\begin{ejemplo}{Pelota bajando una loma con barro}{ej_loma}
-Piense en una pelota descendiendo una pendiente suave cubierta de barro espeso. La pendiente (potencial) impulsa el movimiento, pero el barro (fricción efectiva) evita que acelere bruscamente. En inflación, la ``fricción Hubble'' permite un descenso lento del campo y sostiene la expansión acelerada durante el tiempo necesario.
+\begin{ejemplo}{Descenso lento en un potencial inflacionario}{ej_loma}
+Para un potencial suave $V(\phi)$, el término $3H\dot\phi$ de \eqref{eq:kg_inflaton} domina sobre $\ddot\phi$ y el campo evoluciona lentamente. Ese régimen mantiene $p_\phi\simeq-\rho_\phi$ durante muchos tiempos de Hubble, permitiendo una fase cuasi-de Sitter prolongada.
 \end{ejemplo}
 
 % ===========================================================
@@ -126,8 +126,8 @@ El crecimiento exponencial total durante inflación se cuantifica por
 
 Resolver simultáneamente horizonte y planitud suele requerir $N\gtrsim 50$--$60$, dependiendo del modelo y del recalentamiento.
 
-\begin{ejemplo}{Interés compuesto extremo}{ej_interes}
-En finanzas, un capital con interés compuesto crece exponencialmente. Aunque la tasa sea moderada, el resultado final tras muchos periodos puede multiplicar varias veces el capital inicial. Inflación es una versión física extrema: en $\sim60$ e-folds, escalas microscópicas pueden estirarse hasta tamaños astrofísicos.
+\begin{ejemplo}{Estiramiento de una escala comóvil}{ej_interes}
+Si una escala física inicial es $L_i=10^{-26}\,\si{m}$ y la inflación dura $N=60$ e-folds, entonces $L_f=L_i e^{N}\approx 10^{-26}e^{60}\,\si{m}\sim 1\,\si{m}$. Este cálculo muestra cómo modos originalmente microscópicos pueden salir del horizonte y reingresar mucho después como perturbaciones cosmológicas relevantes.
 \end{ejemplo}
 
 % ===========================================================
@@ -149,8 +149,8 @@ donde $A_s$ es la amplitud en el pivote $k_*$ y $n_s$ el índice espectral.
 
 Un valor $n_s=1$ corresponde a espectro exactamente invariante de escala (Harrison--Zel'dovich). Observacionalmente se encuentra un leve ``tilt rojo'' ($n_s<1$), consistente con slow-roll.
 
-\begin{ejemplo}{Semillas de lluvia y nubes}{ej_semillas}
-La lluvia intensa requiere gotas-semilla microscópicas en la nube. Sin ellas, la condensación macroscópica no progresa igual. De forma análoga, las pequeñas fluctuaciones primordiales son las ``semillas'' iniciales de la estructura cósmica observable hoy.
+\begin{ejemplo}{De fluctuaciones primordiales a picos acústicos}{ej_semillas}
+Las perturbaciones escalares generadas durante inflación fijan las condiciones iniciales de los osciladores barión-fotón antes del desacople. Esas oscilaciones dejan una huella en los picos acústicos del CMB y, más tarde, en la función de correlación de galaxias.
 \end{ejemplo}
 
 \subsection{Predicciones de primer orden en slow-roll}
@@ -182,8 +182,8 @@ mide la amplitud relativa de modos tensoriales y escalares en un pivote dado.
 Detectar un modo-$B$ primordial limpio de foregrounds galácticos sería una evidencia fuerte de física inflacionaria y fijaría la escala energética de inflación.
 \end{importante}
 
-\begin{ejemplo}{Rizado en un estanque}{ej_estanque}
-Si se infla de manera brusca una membrana elástica sumergida en agua, aparecen ondulaciones en la superficie que sobreviven un tiempo incluso cuando cesa la perturbación inicial. Las ondas tensoriales primordiales son análogas: un ``rizado'' del espacio-tiempo producido en la fase acelerada temprana.
+\begin{ejemplo}{Escala de energía inflacionaria y amplitud tensorial}{ej_estanque}
+En modelos canónicos, una cota observacional sobre $r$ limita directamente la escala de energía de inflación, pues $\mathcal{P}_t\propto H^2/M_{\rm Pl}^2$ durante la fase cuasi-de Sitter. Por eso la no detección de modo-$B$ primordial ya restringe familias enteras de potenciales inflacionarios.
 \end{ejemplo}
 
 % ===========================================================
@@ -217,8 +217,8 @@ Estos resultados apoyan de forma cualitativa el escenario inflacionario y descar
 La búsqueda de modo-$B$ primordial exige separar con extremo cuidado contribuciones astrofísicas (polvo galáctico, sincrotrón) de la señal cosmológica genuina.
 \end{observacion}
 
-\begin{ejemplo}{Micrófono en una avenida}{ej_microfono}
-Detectar una conversación suave en una avenida ruidosa requiere modelar y quitar primero buses, motos y viento. Del mismo modo, en CMB-polarización se modelan foregrounds para aislar la posible señal primordial tensorial.
+\begin{ejemplo}{Separación multifrecuencia de foregrounds}{ej_microfono}
+Las componentes de polvo galáctico y sincrotrón tienen dependencias espectrales distintas a la señal cosmológica del CMB. Al combinar mapas en múltiples frecuencias se ajustan y sustraen esos foregrounds para extraer límites robustos sobre el modo-$B$ primordial y, por ende, sobre $r$.
 \end{ejemplo}
 
 % ===========================================================
