@@ -1,0 +1,265 @@
+% ============================================================
+% Capítulo 12: Cosmología III — Inflación Cósmica
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Cosmología III: Inflación Cósmica}
+\label{cap:inflacion}
+
+El modelo FLRW con materia, radiación y constante cosmológica describe con gran precisión gran parte de la historia cósmica. Sin embargo, al extrapolar el modelo estándar hacia tiempos muy tempranos aparecen problemas conceptuales: causalidad aparente del CMB (horizonte), ajuste extremo de la curvatura (planitud) y reliquias topológicas no observadas (monopolos). La hipótesis inflacionaria propone que, antes del plasma caliente del Big Bang, el Universo atravesó una fase de expansión acelerada casi exponencial que resuelve simultáneamente estos problemas \cite{Guth1981, Linde1982, Kolb1990, Dodelson2003, Weinberg2008}.
+
+En este capítulo presentamos la lógica física de la inflación, su formulación mínima con un campo escalar, el régimen de \emph{slow-roll}, la generación de fluctuaciones primordiales y sus predicciones observacionales. Se incluyen ejemplos de la vida cotidiana para fijar intuiciones, sin perder el marco cuantitativo.
+
+% ===========================================================
+\section{Motivación: límites del Big Bang caliente sin inflación}
+\label{sec:motivacion_inflacion}
+% ===========================================================
+
+\subsection{Problema del horizonte}
+
+La temperatura del CMB es casi isotrópica en direcciones del cielo que, en el modelo FLRW estándar sin inflación, no habrían estado causalmente conectadas antes del desacople. Es decir, regiones que ``nunca hablaron entre sí'' aparecen con la misma temperatura a nivel de una parte en $10^5$.
+
+\begin{definicion}{Problema del horizonte}{def_horizonte}
+El \textbf{problema del horizonte} consiste en explicar por qué regiones separadas por ángulos grandes en el CMB presentan casi el mismo estado térmico pese a no haber compartido cono de luz pasado en el escenario no inflacionario.
+\end{definicion}
+
+\begin{ejemplo}{Una analogía cotidiana: dos hornos aislados}{ej_hornos}
+Imagine dos hornos industriales encendidos por separado, sin tuberías ni contacto térmico entre ellos. Si, horas después, ambos muestran exactamente el mismo perfil de temperatura en todos sus puntos, lo natural sería sospechar que en algún momento sí estuvieron conectados o que hubo un mecanismo común de homogenización. El problema del horizonte es análogo: la isotropía del CMB sugiere una etapa previa de contacto causal efectivo.
+\end{ejemplo}
+
+\subsection{Problema de la planitud}
+
+De la ecuación de Friedmann:
+\begin{equation}
+  \Omega_k(a)= -\frac{k c^2}{a^2H^2}.
+\end{equation}
+En eras de materia o radiación, $a^2H^2$ no crece lo suficiente para suprimir de forma natural desviaciones iniciales de planitud. Para que hoy $\Omega_k$ sea tan pequeño, el valor inicial debía estar ajustado con enorme precisión.
+
+\begin{definicion}{Problema de la planitud}{def_planitud}
+El \textbf{problema de la planitud} es el ajuste fino requerido en condiciones iniciales para obtener un Universo casi plano en la actualidad, dentro del marco no inflacionario.
+\end{definicion}
+
+\begin{ejemplo}{Moneda casi vertical}{ej_moneda}
+Si una moneda permanece casi perfectamente vertical durante mucho tiempo, la explicación más probable no es que ``casualmente'' cayó con precisión extrema, sino que hubo una acción que estabilizó su orientación. De forma análoga, inflación actúa como mecanismo dinámico que empuja $\Omega_k\to0$ sin ajuste manual extremo.
+\end{ejemplo}
+
+\subsection{Problema de monopolos y otras reliquias}
+
+Muchas teorías de gran unificación predicen defectos topológicos pesados (como monopolos magnéticos) en el Universo temprano. Sin inflación, su abundancia comóvil sería grande; observacionalmente, no aparecen.
+
+\begin{observacion}{Dilución de reliquias}{obs_dilucion}
+Una expansión exponencial multiplica el volumen físico tan rápido que cualquier densidad numérica inicial de reliquias se diluye drásticamente, llevando su abundancia actual a niveles prácticamente nulos.
+\end{observacion}
+
+% ===========================================================
+\section{Mecánica mínima de inflación}
+\label{sec:mecanica_inflacion}
+% ===========================================================
+
+\subsection{Condición de expansión acelerada}
+
+En FLRW, hay aceleración cuando
+\begin{equation}
+  \frac{\ddot a}{a}>0
+  \quad\Longleftrightarrow\quad
+  \rho + \frac{3p}{c^2}<0.
+\end{equation}
+Por tanto, se requiere un componente con presión suficientemente negativa.
+
+\subsection{Campo escalar inflatón}
+
+El modelo mínimo introduce un campo escalar homogéneo $\phi(t)$ con potencial $V(\phi)$:
+\begin{align}
+  \rho_\phi &= \frac{1}{2}\dot\phi^2 + V(\phi),\\
+  p_\phi &= \frac{1}{2}\dot\phi^2 - V(\phi).
+\end{align}
+Si domina la energía potencial, $\dot\phi^2 \ll V(\phi)$, entonces $p_\phi \simeq -\rho_\phi$, análogo a una constante cosmológica efectiva.
+
+\begin{definicion}{Ecuación del inflatón}{def_kg_inflaton}
+La evolución homogénea del inflatón en FLRW satisface
+\begin{equation}
+  \ddot\phi + 3H\dot\phi + V'(\phi)=0,
+  \label{eq:kg_inflaton}
+\end{equation}
+donde el término $3H\dot\phi$ actúa como fricción cosmológica.
+\end{definicion}
+
+\begin{ejemplo}{Pelota bajando una loma con barro}{ej_loma}
+Piense en una pelota descendiendo una pendiente suave cubierta de barro espeso. La pendiente (potencial) impulsa el movimiento, pero el barro (fricción efectiva) evita que acelere bruscamente. En inflación, la ``fricción Hubble'' permite un descenso lento del campo y sostiene la expansión acelerada durante el tiempo necesario.
+\end{ejemplo}
+
+% ===========================================================
+\section{Régimen de slow-roll y número de e-folds}
+\label{sec:slow_roll}
+% ===========================================================
+
+\subsection{Parámetros de slow-roll}
+
+Una parametrización útil del régimen cuasi-de Sitter es:
+\begin{align}
+  \epsilon_V &\equiv \frac{M_{\rm Pl}^2}{2}\left(\frac{V'}{V}\right)^2,\\
+  \eta_V &\equiv M_{\rm Pl}^2\frac{V''}{V},
+\end{align}
+con $M_{\rm Pl}=1/\sqrt{8\pi G}$ (masa de Planck reducida). En slow-roll se requiere
+\begin{equation}
+  \epsilon_V \ll 1,\qquad |\eta_V|\ll1.
+\end{equation}
+
+\begin{proposicion}{Ecuaciones aproximadas de slow-roll}{prop_sr}
+Bajo slow-roll:
+\begin{equation}
+  H^2 \simeq \frac{V(\phi)}{3M_{\rm Pl}^2},
+  \qquad
+  3H\dot\phi \simeq -V'(\phi).
+\end{equation}
+\end{proposicion}
+
+\subsection{Número de e-folds}
+
+\begin{definicion}{Número de e-folds}{def_efolds}
+El crecimiento exponencial total durante inflación se cuantifica por
+\begin{equation}
+  N \equiv \ln\!\left(\frac{a_f}{a_i}\right)=\int_{t_i}^{t_f}H\,dt.
+\end{equation}
+\end{definicion}
+
+Resolver simultáneamente horizonte y planitud suele requerir $N\gtrsim 50$--$60$, dependiendo del modelo y del reheating.
+
+\begin{ejemplo}{Interés compuesto extremo}{ej_interes}
+En finanzas, un capital con interés compuesto crece exponencialmente. Aunque la tasa sea moderada, el resultado final tras muchos periodos puede multiplicar varias veces el capital inicial. Inflación es una versión física extrema: en $\sim60$ e-folds, escalas microscópicas pueden estirarse hasta tamaños astrofísicos.
+\end{ejemplo}
+
+% ===========================================================
+\section{Fluctuaciones cuánticas primordiales}
+\label{sec:fluctuaciones}
+% ===========================================================
+
+\subsection{Origen de las perturbaciones escalares}
+
+Durante inflación, las fluctuaciones cuánticas del inflatón y de la métrica se amplifican y se ``congelan'' al salir del horizonte de Hubble. Tras reingresar en eras posteriores, actúan como semillas de estructura (galaxias, cúmulos, red cósmica).
+
+\begin{definicion}{Espectro primordial escalar}{def_ps}
+El espectro adimensional de perturbaciones escalares se escribe como
+\begin{equation}
+  \mathcal{P}_s(k)=A_s\left(\frac{k}{k_*}\right)^{n_s-1},
+\end{equation}
+donde $A_s$ es la amplitud en el pivote $k_*$ y $n_s$ el índice espectral.
+\end{definicion}
+
+Un valor $n_s=1$ corresponde a espectro exactamente invariante de escala (Harrison--Zel'dovich). Observacionalmente se encuentra un leve ``tilt rojo'' ($n_s<1$), consistente con slow-roll.
+
+\begin{ejemplo}{Semillas de lluvia y nubes}{ej_semillas}
+La lluvia intensa requiere gotas-semilla microscópicas en la nube. Sin ellas, la condensación macroscópica no progresa igual. De forma análoga, las pequeñas fluctuaciones primordiales son las ``semillas'' iniciales de la estructura cósmica observable hoy.
+\end{ejemplo}
+
+\subsection{Predicciones de primer orden en slow-roll}
+
+En muchos modelos canónicos:
+\begin{equation}
+  n_s \simeq 1-6\epsilon_V+2\eta_V,
+  \qquad
+  r \simeq 16\epsilon_V,
+\end{equation}
+donde $r$ es la razón tensor-escalar.
+
+% ===========================================================
+\section{Ondas gravitacionales primordiales}
+\label{sec:gw_primordiales}
+% ===========================================================
+
+La inflación también genera perturbaciones tensoriales cuánticas: ondas gravitacionales primordiales casi invariantes de escala. Su huella más buscada es el modo-$B$ primordial en polarización del CMB.
+
+\begin{definicion}{Razón tensor-escalar}{def_r}
+La cantidad
+\begin{equation}
+  r \equiv \frac{\mathcal{P}_t(k_*)}{\mathcal{P}_s(k_*)}
+\end{equation}
+mide la amplitud relativa de modos tensoriales y escalares en un pivote dado.
+\end{definicion}
+
+\begin{importante}
+Detectar un modo-$B$ primordial limpio de foregrounds galácticos sería una evidencia fuerte de física inflacionaria y fijaría la escala energética de inflación.
+\end{importante}
+
+\begin{ejemplo}{Rizado en un estanque}{ej_estanque}
+Si se infla de manera brusca una membrana elástica sumergida en agua, aparecen ondulaciones en la superficie que sobreviven un tiempo incluso cuando cesa la perturbación inicial. Las ondas tensoriales primordiales son análogas: un ``rizado'' del espacio-tiempo producido en la fase acelerada temprana.
+\end{ejemplo}
+
+% ===========================================================
+\section{Fin de inflación, reheating y conexión con el Big Bang caliente}
+\label{sec:reheating}
+% ===========================================================
+
+Inflación no puede durar para siempre. Cuando slow-roll falla ($\epsilon_V\sim1$), el inflatón oscila alrededor del mínimo de $V(\phi)$ y transfiere energía a partículas del modelo estándar (o sectores acoplados), calentando el Universo.
+
+\begin{definicion}{Reheating}{def_reheating}
+El \textbf{reheating} es la etapa de conversión de la energía del inflatón en un plasma térmico que inicia la fase del Big Bang caliente convencional.
+\end{definicion}
+
+\begin{observacion}{Puente entre dos descripciones}{obs_puente}
+La inflación explica condiciones iniciales efectivas; la nucleosíntesis, recombinación y formación de estructura describen la evolución posterior. El reheating conecta ambos regímenes.
+\end{observacion}
+
+% ===========================================================
+\section{Estado observacional actual}
+\label{sec:obs_inflacion}
+% ===========================================================
+
+Los datos del CMB de \textit{Planck} indican \cite{Planck2020}:
+\begin{align}
+  n_s &\approx 0.965 \quad (\text{tilt rojo}),\\
+  r &< \mathcal{O}(10^{-1}) \text{ (límite superior, dependiente de combinación de datos)}.
+\end{align}
+Estos resultados apoyan de forma cualitativa el escenario inflacionario y descartan modelos demasiado empinados del potencial.
+
+\begin{observacion}{Rol de foregrounds}{obs_foregrounds}
+La búsqueda de modo-$B$ primordial exige separar con extremo cuidado contribuciones astrofísicas (polvo galáctico, sincrotrón) de la señal cosmológica genuina.
+\end{observacion}
+
+\begin{ejemplo}{Micrófono en una avenida}{ej_microfono}
+Detectar una conversación suave en una avenida ruidosa requiere modelar y quitar primero buses, motos y viento. Del mismo modo, en CMB-polarización se modelan foregrounds para aislar la posible señal primordial tensorial.
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis conceptual y transición al capítulo siguiente}
+\label{sec:sintesis_cap12}
+% ===========================================================
+
+La inflación cósmica ofrece una solución dinámica y unificada a problemas de condiciones iniciales del modelo FLRW:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item Expansión acelerada temprana con $N\gtrsim 50$--$60$ e-folds.
+  \item Supresión natural de curvatura espacial efectiva ($\Omega_k\to0$).
+  \item Homogeneización causal de regiones que hoy observamos en el CMB.
+  \item Dilución de reliquias pesadas no observadas.
+  \item Generación de perturbaciones escalares y tensoriales cuánticas medibles.
+\end{enumerate}
+
+En el próximo capítulo abordaremos la física de materia oscura y energía oscura, componentes dominantes del Universo tardío y claves para entender la expansión acelerada y la formación de estructura.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Condición de aceleración.} \\
+Partiendo de la ecuación de Friedmann de aceleración, demuestre que $\ddot a>0$ requiere $\rho+3p/c^2<0$. Interprete físicamente este resultado en términos de la ecuación de estado $w$.
+
+\item \textbf{E-folds mínimos.} \\
+Estime cuántos e-folds se necesitan para que una escala física inicial $L_i=10^{-26}\,\si{m}$ alcance $L_f=1\,\si{m}$ durante inflación. Discuta si ese valor está por debajo o por encima del rango típico cosmológico.
+
+\item \textbf{Slow-roll en potencial cuadrático.} \\
+Para $V(\phi)=\frac{1}{2}m^2\phi^2$, calcule $\epsilon_V$ y $\eta_V$ en función de $\phi$ y determine la condición sobre $\phi/M_{\rm Pl}$ para el régimen de slow-roll.
+
+\item \textbf{Tilt espectral.} \\
+Usando $n_s \simeq 1-6\epsilon_V+2\eta_V$, evalúe $n_s$ para $\epsilon_V=0.004$ y $\eta_V=-0.006$. Compare con el valor observacional típico de \textit{Planck}.
+
+\item \textbf{Monopolos y dilución.} \\
+Si una población de reliquias tiene densidad numérica inicial $n_i$, ¿cuál sería su densidad tras $N$ e-folds suponiendo sólo dilución volumétrica? Evalúe la razón $n_f/n_i$ para $N=60$.
+
+\item \textbf{Intuición física aplicada.} \\
+Escoja una analogía cotidiana distinta a las del capítulo para explicar el mecanismo de inflación a estudiantes de primer curso. Indique claramente qué parte de la analogía corresponde a (i) expansión acelerada, (ii) homogenización y (iii) generación de fluctuaciones.
+
+\end{enumerate}
