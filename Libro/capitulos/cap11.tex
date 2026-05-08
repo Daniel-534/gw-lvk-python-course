@@ -1,0 +1,374 @@
+% ============================================================
+% Capítulo 11: Cosmología II — Dinámica del Universo
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Cosmología II: Dinámica del Universo}
+\label{cap:friedmann}
+
+El capítulo anterior estableció la cinemática del Universo homogéneo e isótropo: la métrica FLRW y el factor de escala $a(t)$ describen con precisión la geometría del espacio-tiempo cosmológico. Lo que faltaba era responder a la pregunta dinámica: \emph{¿qué impulsa la evolución de $a(t)$?}
+
+La respuesta se obtiene aplicando las ecuaciones de campo de Einstein a la métrica FLRW con un contenido material descrito por un fluido perfecto ideal. El resultado son las célebres \textbf{ecuaciones de Friedmann}, núcleo de toda la cosmología relativista moderna. En este capítulo las derivamos paso a paso, identificamos las componentes de energía-momento del Universo y estudiamos sus soluciones analíticas más relevantes. Cerramos con el modelo estándar $\Lambda$CDM y los parámetros de densidad que lo caracterizan \cite{Peebles1993, Weinberg2008, Ryden2017, Planck2020}.
+
+% ===========================================================
+\section{Tensor de energía-momento de un fluido perfecto}
+\label{sec:tem_fluido_perfecto}
+% ===========================================================
+
+\subsection{Forma covariante}
+
+En relatividad general, la materia y la energía se representan mediante el tensor de energía-momento $T_{\mu\nu}$. Para un fluido perfecto —sin viscosidad ni conductividad térmica— en su referencial comóvil, este tensor toma la forma canónica.
+
+\begin{definicion}{Tensor de energía-momento de fluido perfecto}{def_tem_fluido}
+Para un fluido perfecto con densidad de energía en reposo $\rho$ y presión isótropa $p$, el tensor de energía-momento es
+\begin{equation}
+  T_{\mu\nu} = (\rho + p)u_\mu u_\nu + p\,g_{\mu\nu},
+  \label{eq:tem_fluido}
+\end{equation}
+donde $u^\mu$ es la cuadrivelocidad del fluido y $g_{\mu\nu}$ es la métrica del espacio-tiempo. Se usa la firma $(-,+,+,+)$.
+\end{definicion}
+
+En el referencial comóvil del fluido, $u^\mu=(c,0,0,0)$ en coordenadas donde la métrica temporal tiene componente $g_{00}=-1$. Entonces:
+\begin{equation}
+  T^{\mu\nu}\big|_{\rm reposo} = \mathrm{diag}(\rho c^2,\, p,\, p,\, p).
+\end{equation}
+
+La traza del tensor de energía-momento es
+\begin{equation}
+  T \equiv g^{\mu\nu}T_{\mu\nu} = -\rho c^2 + 3p.
+\end{equation}
+
+\subsection{Ecuación de estado}
+
+Los distintos constituyentes del Universo se clasifican por su \textbf{ecuación de estado}, que relaciona la presión con la densidad de energía.
+
+\begin{definicion}{Parámetro de ecuación de estado}{def_eos}
+El parámetro de ecuación de estado $w$ de un fluido cosmológico se define por
+\begin{equation}
+  p = w\,\rho c^2,
+  \label{eq:eos}
+\end{equation}
+donde $w$ puede depender del tiempo en general.
+\end{definicion}
+
+Los casos más relevantes son:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Materia no relativista (polvo):} $w=0$, pues la presión cinética es despreciable frente a la energía en reposo.
+  \item \textbf{Radiación (o materia ultra-relativista):} $w=1/3$, resultado de la relación de dispersión relativista.
+  \item \textbf{Constante cosmológica $\Lambda$:} $w=-1$, que equivale a una densidad de energía del vacío constante.
+\end{itemize}
+
+% ===========================================================
+\section{Derivación de las ecuaciones de Friedmann}
+\label{sec:derivacion_friedmann}
+% ===========================================================
+
+\subsection{Componentes del tensor de Einstein para FLRW}
+
+Dada la métrica FLRW (ecuación~\ref{eq:flrw_metric}), se calculan los símbolos de Christoffel no nulos y el tensor de Ricci. Las componentes no triviales son (con $c=1$ de aquí en adelante, salvo indicación):
+\begin{align}
+  R_{00} &= -3\frac{\ddot a}{a},
+  \label{eq:R00}\\[4pt]
+  R_{ij} &= \left[\frac{a\ddot a + 2\dot a^2 + 2kc^2}{a^2}\right] g_{ij}^{(3)},
+  \label{eq:Rij}
+\end{align}
+donde $g_{ij}^{(3)}$ es la métrica espacial tridimensional de curvatura $k$. El escalar de Ricci resulta
+\begin{equation}
+  R = 6\left[\frac{\ddot a}{a} + \left(\frac{\dot a}{a}\right)^2 + \frac{kc^2}{a^2}\right].
+  \label{eq:ricci_escalar_flrw}
+\end{equation}
+
+\subsection{Proyección de las ecuaciones de Einstein}
+
+Las ecuaciones de campo $G_{\mu\nu}=8\pi G/c^4\,T_{\mu\nu}$ proyectadas sobre la componente $(0,0)$ y sobre una componente espacial $(i,i)$ dan lugar a las dos ecuaciones de Friedmann.
+
+\begin{teorema}{Primera ecuación de Friedmann}{teo_friedmann1}
+Proyectando la componente temporal de las ecuaciones de Einstein sobre la métrica FLRW con fluido perfecto, se obtiene
+\begin{equation}
+  \boxed{H^2 \equiv \left(\frac{\dot a}{a}\right)^2 = \frac{8\pi G}{3}\rho - \frac{kc^2}{a^2} + \frac{\Lambda c^2}{3},}
+  \label{eq:friedmann1}
+\end{equation}
+donde $\rho$ es la densidad total de energía, $k$ la curvatura espacial y $\Lambda$ la constante cosmológica.
+\end{teorema}
+
+\begin{teorema}{Segunda ecuación de Friedmann (ecuación de aceleración)}{teo_friedmann2}
+La proyección espacial de las ecuaciones de Einstein produce
+\begin{equation}
+  \boxed{\frac{\ddot a}{a} = -\frac{4\pi G}{3}\left(\rho + \frac{3p}{c^2}\right) + \frac{\Lambda c^2}{3}.}
+  \label{eq:friedmann2}
+\end{equation}
+\end{teorema}
+
+\begin{observacion}{Independencia de las ecuaciones}{obs_independencia_friedmann}
+Las ecuaciones \eqref{eq:friedmann1} y \eqref{eq:friedmann2} no son independientes entre sí: combinadas con la ecuación de conservación de energía, cualquiera puede obtenerse de la otra. En la práctica se usa \eqref{eq:friedmann1} junto con la ecuación de continuidad, y se comprueba \eqref{eq:friedmann2} como consistencia.
+\end{observacion}
+
+\subsection{Ecuación de continuidad cosmológica}
+
+La conservación local del tensor de energía-momento, $\nabla_\mu T^{\mu\nu}=0$, en el fondo FLRW homogéneo produce:
+
+\begin{proposicion}{Ecuación de continuidad (ecuación de fluido)}{prop_continuidad}
+Para un fluido cosmológico con ecuación de estado $p=w\rho c^2$ en la métrica FLRW, la identidad de Bianchi implica
+\begin{equation}
+  \dot\rho + 3H\!\left(\rho + \frac{p}{c^2}\right) = 0,
+  \label{eq:continuidad}
+\end{equation}
+o bien, usando \eqref{eq:eos},
+\begin{equation}
+  \dot\rho + 3H(1+w)\rho = 0.
+  \label{eq:continuidad_w}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Integrando \eqref{eq:continuidad_w} para $w$ constante:
+\begin{equation}
+  \frac{d\rho}{\rho} = -3(1+w)\frac{da}{a}
+  \;\implies\;
+  \rho(a) = \rho_0\,a^{-3(1+w)}.
+  \label{eq:rho_escala}
+\end{equation}
+\end{proof}
+
+\begin{ejemplo}{Escalamiento de las componentes de energía}{ej_escalamiento}
+Aplicando \eqref{eq:rho_escala} a cada componente:
+\begin{align}
+  w=0 &\quad\Rightarrow\quad \rho_m \propto a^{-3}, \label{eq:rho_m}\\
+  w=1/3 &\quad\Rightarrow\quad \rho_r \propto a^{-4}, \label{eq:rho_r}\\
+  w=-1 &\quad\Rightarrow\quad \rho_\Lambda = \text{const}. \label{eq:rho_Lambda}
+\end{align}
+La materia diluye el volumen ($a^{-3}$); la radiación, además, sufre redshift energético ($a^{-4}$); la energía del vacío permanece constante.
+\end{ejemplo}
+
+% ===========================================================
+\section{Componentes del Universo}
+\label{sec:componentes_universo}
+% ===========================================================
+
+\subsection{Densidad crítica y parámetros de densidad}
+
+Un concepto central en cosmología es la densidad que haría al Universo espacialmente plano ($k=0$) para una tasa de expansión dada.
+
+\begin{definicion}{Densidad crítica}{def_densidad_critica}
+La \textbf{densidad crítica} se define como
+\begin{equation}
+  \rho_c(t) \equiv \frac{3H^2(t)}{8\pi G}.
+  \label{eq:densidad_critica}
+\end{equation}
+Su valor actual es $\rho_{c,0}\approx 9.47\times10^{-27}\,\si{kg\,m^{-3}}$ para $H_0\approx 70\,\si{km\,s^{-1}\,Mpc^{-1}}$.
+\end{definicion}
+
+\begin{definicion}{Parámetros de densidad}{def_omega}
+Los \textbf{parámetros de densidad} normalizados se definen para cada componente $i$ como
+\begin{equation}
+  \Omega_i(t) \equiv \frac{\rho_i(t)}{\rho_c(t)}.
+  \label{eq:omega_def}
+\end{equation}
+Se definen además un parámetro de curvatura y uno de energía oscura evaluados hoy:
+\begin{align}
+  \Omega_k &\equiv -\frac{kc^2}{a_0^2 H_0^2}, \label{eq:omega_k}\\
+  \Omega_\Lambda &\equiv \frac{\Lambda c^2}{3H_0^2}. \label{eq:omega_Lambda}
+\end{align}
+\end{definicion}
+
+Con estas definiciones, la primera ecuación de Friedmann evaluada en $t=t_0$ toma la elegante forma de cierre:
+\begin{equation}
+  \boxed{\Omega_m + \Omega_r + \Omega_\Lambda + \Omega_k = 1.}
+  \label{eq:cierre}
+\end{equation}
+
+\begin{importante}
+La ecuación de cierre \eqref{eq:cierre} no es una identidad trivial: expresa que la geometría del Universo (codificada en $\Omega_k$) está fijada por el contenido de energía. Si $\Sigma_i\Omega_i>1$, el Universo es espacialmente cerrado ($k=+1$); si $\Sigma_i\Omega_i<1$, es hiperbólico ($k=-1$); si $\Sigma_i\Omega_i=1$, es plano ($k=0$).
+\end{importante}
+
+\subsection{La primera ecuación de Friedmann en forma adimensional}
+
+Introduciendo el factor de escala normalizado $\tilde a=a/a_0$ y usando los parámetros $\Omega_i$ evaluados hoy, la ecuación~\eqref{eq:friedmann1} adopta la forma de uso práctico en cálculos observacionales:
+\begin{equation}
+  H^2(z) = H_0^2\!\left[\Omega_m(1+z)^3 + \Omega_r(1+z)^4 + \Omega_\Lambda + \Omega_k(1+z)^2\right],
+  \label{eq:friedmann_z}
+\end{equation}
+donde se usó $\tilde a = 1/(1+z)$. Esta expresión es el punto de partida para calcular distancias cosmológicas (§\ref{sec:distancias_cosmologicas}) y para ajustar modelos a datos observacionales.
+
+% ===========================================================
+\section{Soluciones analíticas de las ecuaciones de Friedmann}
+\label{sec:soluciones_friedmann}
+% ===========================================================
+
+Las soluciones exactas en presencia de una sola componente permiten comprender la física de cada era cosmológica.
+
+\subsection{Universo dominado por materia (polvo)}
+
+Para $k=0$, $\Lambda=0$, $\rho\propto a^{-3}$, la ecuación~\eqref{eq:friedmann1} se reduce a
+\begin{equation}
+  \dot a^2 = \frac{8\pi G\rho_0}{3}\,a^{-1}.
+\end{equation}
+La solución es la \textbf{solución de Einstein--de Sitter}:
+\begin{equation}
+  \boxed{a(t) = \left(\frac{t}{t_0}\right)^{2/3},}
+  \label{eq:eds}
+\end{equation}
+con $t_0=2/(3H_0)$. El Universo se expande de forma desacelerada: $\ddot a<0$.
+
+\subsection{Universo dominado por radiación}
+
+Para $k=0$, $\Lambda=0$, $\rho\propto a^{-4}$:
+\begin{equation}
+  a(t)\propto t^{1/2},\qquad H=\frac{1}{2t}.
+  \label{eq:a_radiacion}
+\end{equation}
+La expansión es más rápida en épocas tempranas que para materia; el parámetro de desaceleración vale $q=1$ (desaceleración fuerte).
+
+\subsection{Universo de de Sitter ($\Lambda > 0$, $k=0$, $\rho_m=0$)}
+
+Si sólo existe constante cosmológica, la primera ecuación de Friedmann da $H=\sqrt{\Lambda c^2/3}\equiv H_\Lambda=\text{const}$, con solución exponencial:
+\begin{equation}
+  \boxed{a(t) = a_0\,e^{H_\Lambda(t-t_0)}.}
+  \label{eq:de_sitter}
+\end{equation}
+Este régimen reproduce la expansión acelerada observada hoy y es también el modelo base de la inflación cósmica temprana.
+
+\begin{ejemplo}{Tiempo de vida media del Universo de de Sitter}{ej_desitter}
+En el modelo de de Sitter, el horizonte de eventos tiene radio físico
+\begin{equation}
+  d_{\rm H}^{\rm dS} = \frac{c}{H_\Lambda}.
+\end{equation}
+Para $H_\Lambda\approx H_0\approx 70\,\si{km\,s^{-1}\,Mpc^{-1}}$, se obtiene $d_{\rm H}^{\rm dS}\approx 4.4\,\si{Gpc}$, del orden del horizonte observable actual.
+\end{ejemplo}
+
+\subsection{Universo con curvatura y materia: solución general}
+
+Para $k\neq0$ y $\Lambda=0$, las ecuaciones de Friedmann tienen soluciones paramétricas. En particular, para $k=+1$ la solución es un cicloide en el espacio $(t,a)$:
+\begin{align}
+  a(\eta) &= \frac{a_{\rm max}}{2}(1-\cos\eta),\\
+  t(\eta) &= \frac{a_{\rm max}}{2H_0\sqrt{|\Omega_m-1|}}(\eta-\sin\eta),
+\end{align}
+con $a_{\rm max}$ la escala máxima antes del Big Crunch. Esta solución describe un Universo de Friedmann cerrado que se expande, llega a un máximo y recolapsa.
+
+% ===========================================================
+\section{Eras cosmológicas y transiciones}
+\label{sec:eras_cosmologicas}
+% ===========================================================
+
+\subsection{Jerarquía temporal}
+
+El Universo ha atravesado distintas eras de dominancia según qué componente de energía predomina. Dado que $\rho_r\propto a^{-4}$ decrece más rápido que $\rho_m\propto a^{-3}$, existió una época en que la radiación dominaba y otra en que la materia tomó el relevo.
+
+\begin{definicion}{Igualdad materia-radiación}{def_igualdad_mr}
+El redshift de igualdad entre materia y radiación, $\rho_m(z_{\rm eq})=\rho_r(z_{\rm eq})$, viene dado por
+\begin{equation}
+  1+z_{\rm eq} = \frac{\Omega_m}{\Omega_r} \approx 3400,
+\end{equation}
+empleando los valores observados del modelo $\Lambda$CDM.
+\end{definicion}
+
+\begin{definicion}{Igualdad materia-energía oscura}{def_igualdad_mL}
+Igualando $\rho_m(z_{\rm mL})=\rho_\Lambda$:
+\begin{equation}
+  1+z_{\rm mL} = \left(\frac{\Omega_\Lambda}{\Omega_m}\right)^{1/3} \approx 1.33\quad\Rightarrow\quad z_{\rm mL}\approx 0.33.
+\end{equation}
+\end{definicion}
+
+Por lo tanto, la secuencia temporal de eras es:
+\begin{equation}
+  \underbrace{\text{Era de radiación}}_{z\gtrsim3400}
+  \;\longrightarrow\;
+  \underbrace{\text{Era de materia}}_{3400\gtrsim z\gtrsim0.3}
+  \;\longrightarrow\;
+  \underbrace{\text{Era de energía oscura}}_{z\lesssim0.3}.
+\end{equation}
+
+\begin{observacion}{Importancia de la era de materia}{obs_era_materia}
+La era de materia es la que permite la formación de grandes estructuras (galaxias, cúmulos). El tiempo de Jeans decrece con la expansión durante la era de radiación, pero se vuelve suficientemente grande durante la era de materia para permitir el colapso gravitacional.
+\end{observacion}
+
+% ===========================================================
+\section{El modelo estándar $\Lambda$CDM}
+\label{sec:lambdacdm}
+% ===========================================================
+
+\subsection{Constituyentes}
+
+El modelo concordante $\Lambda$CDM describe el Universo como compuesto por:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Materia oscura fría (CDM):} partículas masivas no relativistas que interactúan solo gravitacionalmente, $w=0$.
+  \item \textbf{Materia bariónica:} protones, neutrones y electrones, $w\approx0$ a bajas energías.
+  \item \textbf{Radiación:} fotones y neutrinos relativistas, $w=1/3$.
+  \item \textbf{Constante cosmológica $\Lambda$:} energía oscura con $w=-1$, responsable de la expansión acelerada actual.
+\end{enumerate}
+
+\subsection{Parámetros actuales}
+
+Los valores de consenso obtenidos por la colaboración \textit{Planck} 2018 son \cite{Planck2020}:
+\begin{align}
+  H_0 &= 67.4\pm0.5\,\si{km\,s^{-1}\,Mpc^{-1}}, \label{eq:H0_planck}\\
+  \Omega_b h^2 &= 0.02237\pm0.00015, \label{eq:omegab}\\
+  \Omega_c h^2 &= 0.1200\pm0.0012, \label{eq:omegac}\\
+  \Omega_\Lambda &= 0.685\pm0.007, \label{eq:omegaL}\\
+  \Omega_k &= 0.001\pm0.002\quad(\text{plano}). \label{eq:omegak}
+\end{align}
+donde $h=H_0/(100\,\si{km\,s^{-1}\,Mpc^{-1}})$. El modelo es espacialmente plano a nivel de precisión actual.
+
+\begin{importante}
+El modelo $\Lambda$CDM tiene sólo seis parámetros libres ($H_0,\,\Omega_b h^2,\,\Omega_c h^2,\,A_s,\,n_s,\,\tau$) y ajusta notablemente bien observaciones de naturaleza completamente distinta: CMB, oscilaciones acústicas de bariones (BAO), supernovas tipo Ia y estructura a gran escala.
+\end{importante}
+
+\subsection{Tensión de Hubble}
+
+A pesar del éxito del modelo $\Lambda$CDM, existe una discrepancia estadísticamente significativa entre el valor de $H_0$ inferido del CMB ($\approx67\,\si{km\,s^{-1}\,Mpc^{-1}}$) y el obtenido mediante la escala de distancias locales con cefeidas y supernovas ($\approx73\,\si{km\,s^{-1}\,Mpc^{-1}}$). Esta \textbf{tensión de Hubble} a nivel de $\sim5\sigma$ podría indicar nueva física más allá del modelo estándar.
+
+\begin{observacion}{Relevancia para ondas gravitacionales}{obs_tension_gw}
+Las sirenas estándar —binarias compactas detectadas en ondas gravitacionales con contraparte electromagnética— ofrecen una medición independiente de $H_0$ \cite{Abbott2017H0}. Con más detecciones en el futuro (Einstein Telescope, LISA), podrán discriminar entre las mediciones en tensión y ayudar a resolver este problema abierto de la cosmología.
+\end{observacion}
+
+% ===========================================================
+\section{Síntesis conceptual y transición al capítulo siguiente}
+\label{sec:sintesis_cap11}
+% ===========================================================
+
+Las ecuaciones de Friedmann completan el cuadro dinámico del Universo homogéneo e isótropo:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La primera ecuación de Friedmann \eqref{eq:friedmann1} relaciona la tasa de expansión $H$ con el contenido de energía y la curvatura espacial.
+  \item La ecuación de aceleración \eqref{eq:friedmann2} muestra que la materia y la radiación frenan la expansión, mientras que la constante cosmológica (con $p=-\rho c^2$) la acelera.
+  \item La ecuación de continuidad \eqref{eq:continuidad} impone la conservación local de energía y determina el escalamiento $\rho\propto a^{-3(1+w)}$.
+  \item La combinación de estos ingredientes lleva al modelo $\Lambda$CDM, que describe con alta precisión la historia del Universo desde la nucleosíntesis primordial hasta la expansión acelerada actual.
+  \item La tensión de Hubble señala posibles limitaciones del modelo y abre la puerta a nueva física, en la que las ondas gravitacionales juegan un papel creciente como sonda cosmológica independiente.
+\end{enumerate}
+
+En el próximo capítulo abordaremos las perturbaciones sobre el fondo FLRW: la teoría de perturbaciones cosmológicas lineal, la formación de estructura y el espectro de potencias de materia, que conectan directamente con los observable cosmológicos de precisión modernos.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Derivación de la ecuación de Friedmann.} \\
+Partiendo de las componentes del tensor de Einstein para la métrica FLRW y del tensor de energía-momento de un fluido perfecto, deduzca explícitamente la primera y la segunda ecuación de Friedmann (\ref{eq:friedmann1} y \ref{eq:friedmann2}). Indique claramente qué componentes de $G_{\mu\nu}=8\pi G/c^4\,T_{\mu\nu}$ se emplean en cada caso.
+
+\item \textbf{Escalamiento de componentes.} \\
+A partir de la ecuación de continuidad \eqref{eq:continuidad_w}, demuestre el escalamiento $\rho\propto a^{-3(1+w)}$ para $w$ constante. Dibuje cualitativamente $\log\rho$ versus $\log a$ para materia, radiación y constante cosmológica en el mismo gráfico, e identifique los redshifts de transición.
+
+\item \textbf{Edad del Universo.} \\
+Para el modelo $\Lambda$CDM con $\Omega_m=0.315$, $\Omega_\Lambda=0.685$, $k=0$ y $H_0=67.4\,\si{km\,s^{-1}\,Mpc^{-1}}$, estime numéricamente la edad del Universo mediante la integral
+\begin{equation}
+  t_0 = \int_0^\infty \frac{dz}{(1+z)H(z)},
+\end{equation}
+usando la expresión \eqref{eq:friedmann_z} con $\Omega_r\approx 9\times10^{-5}$.
+
+\item \textbf{Horizonte de partículas.} \\
+Muestre que el horizonte de partículas comóvil
+\begin{equation}
+  \chi_{\rm ph}(t) = c\int_0^t \frac{dt'}{a(t')}
+\end{equation}
+diverge para el modelo de de Sitter \eqref{eq:de_sitter} extendido hacia el pasado infinito, pero converge (implica un horizonte finito) en un Universo dominado por materia.
+
+\item \textbf{Densidad crítica y unidades.} \\
+Calcule $\rho_{c,0}$ en \si{kg\,m^{-3}} y en \si{M_\odot\,Mpc^{-3}} para $H_0=70\,\si{km\,s^{-1}\,Mpc^{-1}}$, y compárelo con la densidad media de la materia bariónica $\rho_{b,0}=\Omega_b\rho_{c,0}$ con $\Omega_b\approx0.05$.
+
+\item \textbf{Sirenas estándar y $H_0$.} \\
+Si una binaria de agujeros negros a redshift $z=0.1$ emite ondas gravitacionales con distancia de luminosidad inferida $D_L=450\,\si{Mpc}$ (sin incertidumbre en este ejercicio), ¿qué valor de $H_0$ se obtiene en el límite $z\ll1$, usando $cz\approx H_0 D_L$? Discuta por qué a orden superior en $z$ habría que especificar el modelo cosmológico completo.
+
+\end{enumerate}
