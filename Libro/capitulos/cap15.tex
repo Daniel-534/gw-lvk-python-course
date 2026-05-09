@@ -1,0 +1,300 @@
+% ============================================================
+% Capítulo 15: Relatividad General Linealizada y Ondas Gravitacionales
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Relatividad General Linealizada y Ondas Gravitacionales}
+\label{cap:rg_linealizada_og}
+
+La relatividad general completa es no lineal: el propio campo gravitacional gravita. Sin embargo, en regiones donde la curvatura es débil y las desviaciones respecto al espacio-tiempo plano son pequeñas, la teoría puede tratarse perturbativamente. Este régimen conduce a una descripción de \textbf{ondas gravitacionales} como perturbaciones tensoriales que se propagan a velocidad de la luz y transportan información dinámica de sus fuentes \cite{Misner1973, Wald1984, Carroll2004, Maggiore2007, Maggiore2018}.
+
+En este capítulo se desarrolla la formulación linealizada sobre Minkowski, la libertad de gauge, la condición de Lorenz, las soluciones ondulatorias en vacío, el gauge transverso-traceless (TT), las polarizaciones $(+)$ y $(\times)$, y el efecto físico sobre un conjunto de partículas de prueba.
+
+% ===========================================================
+\section{Régimen débil y descomposición perturbativa}
+\label{sec:regimen_debil}
+% ===========================================================
+
+Partimos de una perturbación pequeña sobre la métrica de Minkowski:
+\begin{equation}
+  g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},
+  \qquad
+  |h_{\mu\nu}|\ll 1,
+\end{equation}
+donde $\eta_{\mu\nu}=\mathrm{diag}(-1,1,1,1)$ y $h_{\mu\nu}$ contiene la dinámica gravitacional en primer orden.
+
+\begin{definicion}{Aproximación linealizada}{def:linealizada}
+La \textbf{relatividad general linealizada} consiste en truncar las ecuaciones de Einstein al primer orden en $h_{\mu\nu}$ y sus derivadas, despreciando términos de orden $\mathcal{O}(h^2)$ o superior.
+\end{definicion}
+
+En esta aproximación:
+\begin{itemize}[leftmargin=2em]
+  \item los índices se levantan y bajan con $\eta_{\mu\nu}$,
+  \item derivadas covariantes se reemplazan por derivadas parciales,
+  \item la dinámica se vuelve una teoría de campo tensorial sobre fondo plano.
+\end{itemize}
+
+\begin{observacion}{Dominio de validez}{obs:validez_lineal}
+La aproximación lineal es adecuada lejos de fuentes compactas, en zonas de radiación y para amplitudes de onda pequeñas (por ejemplo, tensiones $h\sim10^{-21}$ en detectores terrestres).
+\end{observacion}
+
+% ===========================================================
+\section{Libertad de gauge y tensor traza-invertida}
+\label{sec:gauge_lorenz}
+% ===========================================================
+
+\subsection{Transformaciones de gauge infinitesimales}
+
+Bajo un cambio de coordenadas pequeño
+\begin{equation}
+  x^{\mu}\to x'^{\mu}=x^{\mu}+\xi^{\mu}(x),
+\end{equation}
+la perturbación transforma como
+\begin{equation}
+  h_{\mu\nu}\to h'_{\mu\nu}=h_{\mu\nu}-\partial_{\mu}\xi_{\nu}-\partial_{\nu}\xi_{\mu}.
+\end{equation}
+
+\begin{definicion}{Libertad de gauge linealizada}{def:gauge_lin}
+Dos perturbaciones relacionadas por la transformación anterior representan la misma geometría física a primer orden. La elección de $\xi^\mu$ permite fijar condiciones de gauge útiles para simplificar las ecuaciones.
+\end{definicion}
+
+\subsection{Traza invertida}
+
+Definimos la traza $h\equiv \eta^{\mu\nu}h_{\mu\nu}$ y el tensor traza-invertida:
+\begin{equation}
+  \bar h_{\mu\nu}\equiv h_{\mu\nu}-\frac{1}{2}\eta_{\mu\nu}h.
+\end{equation}
+En cuatro dimensiones se cumple inversamente
+\begin{equation}
+  h_{\mu\nu}=\bar h_{\mu\nu}-\frac{1}{2}\eta_{\mu\nu}\bar h,
+  \qquad
+  \bar h\equiv\eta^{\mu\nu}\bar h_{\mu\nu}=-h.
+\end{equation}
+
+\begin{importante}
+La variable $\bar h_{\mu\nu}$ diagonaliza de forma natural la estructura lineal de Einstein y permite escribir ecuaciones de onda con fuente en forma compacta.
+\end{importante}
+
+\subsection{Condición de Lorenz}
+
+Se elige el gauge de Lorenz:
+\begin{equation}
+  \partial^{\mu}\bar h_{\mu\nu}=0.
+  \label{eq:lorenz_gauge}
+\end{equation}
+
+\begin{proposicion}{Ecuaciones linealizadas con fuente}{prop:einstein_lin}
+En gauge de Lorenz, las ecuaciones de Einstein linealizadas toman la forma
+\begin{equation}
+  \Box\bar h_{\mu\nu}=-\frac{16\pi G}{c^4}T_{\mu\nu},
+  \label{eq:wave_with_source}
+\end{equation}
+donde $\Box\equiv \eta^{\alpha\beta}\partial_\alpha\partial_\beta$ es el operador d'Alembertiano en espacio-tiempo plano.
+\end{proposicion}
+
+% ===========================================================
+\section{Ondas gravitacionales en vacío}
+\label{sec:ondas_vacio}
+% ===========================================================
+
+En ausencia de fuente ($T_{\mu\nu}=0$), la ecuación \eqref{eq:wave_with_source} se reduce a
+\begin{equation}
+  \Box\bar h_{\mu\nu}=0.
+  \label{eq:wave_vacuum}
+\end{equation}
+
+\subsection{Solución de onda plana}
+
+Una solución elemental es
+\begin{equation}
+  \bar h_{\mu\nu}=A_{\mu\nu}e^{ik_\alpha x^\alpha}+\text{c.c.},
+\end{equation}
+con amplitud constante $A_{\mu\nu}$ y cuadrivector de onda $k^\mu=(\omega/c,\mathbf{k})$.
+
+Sustituyendo en \eqref{eq:wave_vacuum} se obtiene:
+\begin{equation}
+  k_\mu k^\mu=0
+  \quad\Longrightarrow\quad
+  \omega=c|\mathbf{k}|.
+\end{equation}
+
+\begin{teorema}{Propagación lumínica de ondas gravitacionales}{teo:null_dispersion}
+En relatividad general linealizada, las ondas gravitacionales en vacío se propagan sobre trayectorias nulas del fondo de Minkowski, con velocidad de fase y de grupo igual a $c$.
+\end{teorema}
+
+\begin{proof}
+La condición de onda plana en \eqref{eq:wave_vacuum} exige $k_\mu k^\mu=0$. En signatura $(-,+,+,+)$ esto implica $-\omega^2/c^2+|\mathbf{k}|^2=0$, luego $\omega=c|\mathbf{k}|$.
+\end{proof}
+
+\subsection{Restricciones de gauge sobre la amplitud}
+
+La condición de Lorenz impone
+\begin{equation}
+  k^\mu A_{\mu\nu}=0,
+\end{equation}
+que reduce el número de componentes independientes. Una elección adicional de gauge residual elimina grados no físicos y conduce al gauge TT.
+
+% ===========================================================
+\section{Gauge transverso-traceless y polarizaciones físicas}
+\label{sec:gauge_tt}
+% ===========================================================
+
+\begin{definicion}{Gauge TT}{def:gauge_tt}
+Para una onda plana propagándose en dirección $\hat{z}$, el gauge TT satisface:
+\begin{equation}
+  h_{0\mu}^{\mathrm{TT}}=0,
+  \qquad
+  \partial^i h_{ij}^{\mathrm{TT}}=0,
+  \qquad
+  h^{\mathrm{TT}\,i}{}_{i}=0.
+\end{equation}
+Sólo permanecen dos grados de libertad dinámicos.
+\end{definicion}
+
+Para propagación en $+z$, la parte espacial no nula puede escribirse como:
+\begin{equation}
+  h_{ij}^{\mathrm{TT}}(t,z)=
+  \begin{pmatrix}
+    h_+ & h_\times & 0\\
+    h_\times & -h_+ & 0\\
+    0 & 0 & 0
+  \end{pmatrix},
+\end{equation}
+donde $h_+(t-z/c)$ y $h_\times(t-z/c)$ son las dos polarizaciones tensoriales.
+
+\begin{definicion}{Tensores de polarización}{def:tensores_polarizacion}
+En una base ortonormal transversal $(\hat{x},\hat{y})$ se definen
+\begin{equation}
+  e^{+}_{ij}=\hat{x}_i\hat{x}_j-\hat{y}_i\hat{y}_j,
+  \qquad
+  e^{\times}_{ij}=\hat{x}_i\hat{y}_j+\hat{y}_i\hat{x}_j,
+\end{equation}
+y
+\begin{equation}
+  h_{ij}^{\mathrm{TT}}=h_+ e^{+}_{ij}+h_\times e^{\times}_{ij}.
+\end{equation}
+\end{definicion}
+
+\begin{observacion}{Contenido físico}{obs:dos_grados}
+La existencia de exactamente dos polarizaciones tensoriales es una predicción característica de la relatividad general para ondas gravitacionales en vacío.
+\end{observacion}
+
+% ===========================================================
+\section{Efecto sobre partículas de prueba}
+\label{sec:efecto_particulas}
+% ===========================================================
+
+La interacción observable de una onda gravitacional débil se describe mediante la desviación geodésica. Para dos masas de prueba separadas por un vector espacial $\xi^i$, la aceleración relativa en gauge TT es
+\begin{equation}
+  \frac{d^2\xi^i}{dt^2}=-R^i{}_{0j0}\,\xi^j
+  =\frac{1}{2}\ddot h^{\mathrm{TT}}_{ij}\,\xi^j.
+  \label{eq:geodesic_deviation_tt}
+\end{equation}
+
+\begin{ejemplo}{Anillo de partículas para polarización $+$}{ej:anillo_plus}
+Considere una onda monocromática $h_+(t)=h_0\cos\omega t$ con $h_\times=0$ propagándose en $z$. Un anillo de partículas en el plano $xy$ sufre deformaciones alternadas: cuando el eje $x$ se estira, el eje $y$ se comprime, y medio período después ocurre lo contrario. La deformación fraccional típica es
+\begin{equation}
+  \frac{\Delta L}{L}\sim\frac{h_+}{2}.
+\end{equation}
+\end{ejemplo}
+
+\begin{ejemplo}{Respuesta para polarización $\times$}{ej:anillo_cross}
+Si $h_+=0$ y $h_\times\neq0$, los ejes principales de deformación están rotados $45^\circ$ respecto a $(x,y)$. El patrón de estiramiento-compresión se conserva, pero en la base diagonal del plano transversal.
+\end{ejemplo}
+
+\begin{importante}
+La magnitud adimensional medible en un interferómetro es la \textbf{strain} $h\sim\Delta L/L$. En detectores terrestres, valores detectables son extremadamente pequeños, del orden $10^{-22}$--$10^{-21}$.
+\end{importante}
+
+% ===========================================================
+\section{Energía y flujo radiativo en el régimen lineal}
+\label{sec:energia_flujo}
+% ===========================================================
+
+Aunque en relatividad general no existe un tensor local de energía gravitacional covariante global, en el régimen de onda débil y promedio sobre varias longitudes de onda se define un flujo efectivo.
+
+\begin{definicion}{Densidad de flujo promedio de una onda plana}{def:flux_plane_wave}
+Para una onda casi monocromática en gauge TT, el flujo promedio en dirección de propagación es
+\begin{equation}
+  \langle F\rangle=
+  \frac{c^3}{32\pi G}
+  \left\langle
+    \dot h^{\mathrm{TT}}_{ij}\dot h^{\mathrm{TT}}_{ij}
+  \right\rangle
+  =\frac{c^3}{16\pi G}\left\langle\dot h_+^2+\dot h_\times^2\right\rangle.
+\end{equation}
+\end{definicion}
+
+\begin{observacion}{Puente con fuentes astrofísicas}{obs:puente_cuadrupolo}
+El cálculo explícito de amplitud y potencia radiada exige conectar $h_{ij}^{\mathrm{TT}}$ con la dinámica de la fuente. Esa conexión la proporciona la aproximación de cuadrupolo, tema central del próximo capítulo.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado: orden de magnitud en un detector}
+\label{sec:ejemplo_detector}
+% ===========================================================
+
+\begin{ejemplo}{Desplazamiento diferencial en un interferómetro kilométrico}{ej:desplazamiento_ifo}
+Para un interferómetro con brazo $L=4\,\mathrm{km}$ y una señal con amplitud pico $h=1.0\times10^{-21}$:
+
+\textbf{Paso 1: relación strain--desplazamiento.}
+\begin{equation}
+  \Delta L \sim hL.
+\end{equation}
+
+\textbf{Paso 2: sustituir valores.}
+\begin{equation}
+  \Delta L \sim (10^{-21})(4\times10^3\,\mathrm{m})=4\times10^{-18}\,\mathrm{m}.
+\end{equation}
+
+\textbf{Paso 3: interpretación.}
+Este desplazamiento es miles de veces menor que el tamaño de un protón. La detección requiere interferometría láser de alta precisión, control de ruido sísmico/térmico/cuántico y técnicas avanzadas de calibración.
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis y transición}
+\label{sec:sintesis_cap15}
+% ===========================================================
+
+La teoría linealizada establece los ingredientes esenciales de la radiación gravitacional:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item En campo débil, la métrica se escribe como $\eta_{\mu\nu}+h_{\mu\nu}$.
+  \item La libertad de gauge permite imponer la condición de Lorenz y simplificar Einstein linealizada.
+  \item En vacío, las perturbaciones satisfacen una ecuación de onda nula y se propagan a velocidad $c$.
+  \item El gauge TT exhibe dos polarizaciones físicas: $+$ y $\times$.
+  \item El observable experimental es la strain $h\sim\Delta L/L$ y su flujo energético promedio depende de $\dot h_{ij}^{\mathrm{TT}}$.
+\end{enumerate}
+
+Con esta base, el siguiente capítulo derivará cómo una fuente material concreta genera ondas gravitacionales: la fórmula de cuadrupolo de Einstein, la potencia radiada y su aplicación a binarias compactas.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Gauge linealizado.} \\
+Partiendo de $h'_{\mu\nu}=h_{\mu\nu}-\partial_\mu\xi_\nu-\partial_\nu\xi_\mu$, demuestre que la traza transforma como $h' = h - 2\partial_\alpha\xi^\alpha$ y obtenga la transformación de $\bar h_{\mu\nu}$.
+
+\item \textbf{Condición de Lorenz en espacio de Fourier.} \\
+Para una onda plana $\bar h_{\mu\nu}=A_{\mu\nu}e^{ik\cdot x}$, derive la restricción $k^\mu A_{\mu\nu}=0$ y discuta cuántos grados de libertad elimina.
+
+\item \textbf{Relación de dispersión.} \\
+Use la ecuación en vacío $\Box\bar h_{\mu\nu}=0$ para derivar $k_\mu k^\mu=0$. Interprete físicamente por qué esto implica propagación lumínica.
+
+\item \textbf{Patrón de deformación para $h_+$.} \\
+Considere una onda con $h_+=h_0\cos\omega t$ y $h_\times=0$. Dibuje el estado de un anillo de partículas en $\omega t=0,\pi/2,\pi,3\pi/2$ y describa la evolución de los ejes principales.
+
+\item \textbf{Estimación instrumental.} \\
+Calcule $\Delta L$ para un interferómetro de $L=3\,\mathrm{km}$ si pasa una onda con $h=5\times10^{-22}$. Compare con el caso de $L=4\,\mathrm{km}$ y explique la dependencia con longitud de brazo.
+
+\item \textbf{Flujo energético promedio.} \\
+Para una onda monocromática con $h_+=h_0\cos\omega t$ y $h_\times=0$, use
+\begin{equation*}
+\langle F\rangle=\frac{c^3}{16\pi G}\langle\dot h_+^2\rangle
+\end{equation*}
+para mostrar que $\langle F\rangle\propto \omega^2 h_0^2$.
+
+\end{enumerate}

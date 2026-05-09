@@ -1,0 +1,277 @@
+% ============================================================
+% Capítulo 16: Generación de Ondas Gravitacionales — Aproximación de Cuadrupolo
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Generación de Ondas Gravitacionales: La Aproximación de Cuadrupolo}
+\label{cap:cuadrupolo}
+
+El capítulo anterior mostró que, en régimen linealizado, existen ondas gravitacionales que se propagan en vacío con dos polarizaciones tensoriales. Falta ahora resolver el problema de \textbf{emisión}: ¿cómo una distribución de masa-energía genera esa radiación? Para fuentes lentas y campos débiles, la respuesta está contenida en la \textbf{aproximación de cuadrupolo}, base de la astrofísica de binarias compactas y de la interpretación de señales detectadas por LIGO--Virgo--KAGRA \cite{Maggiore2007, Maggiore2018, Peters1964, Abbott2016prl}.
+
+Este capítulo deriva la fórmula de cuadrupolo, presenta la potencia radiada (Peters--Mathews), introduce la masa chirp $\mathcal{M}$, estudia el decaimiento orbital por reacción de radiación y discute la verificación clásica mediante el púlsar binario de Hulse--Taylor.
+
+% ===========================================================
+\section{Solución retardada de Einstein linealizada}
+\label{sec:retarded_solution}
+% ===========================================================
+
+Partimos de la ecuación linealizada con fuente en gauge de Lorenz:
+\begin{equation}
+  \Box\bar h_{\mu\nu}=-\frac{16\pi G}{c^4}T_{\mu\nu}.
+\end{equation}
+
+La solución causal se expresa con potencial retardado:
+\begin{equation}
+  \bar h_{\mu\nu}(t,\mathbf{x})=
+  \frac{4G}{c^4}
+  \int
+  \frac{T_{\mu\nu}(t_r,\mathbf{x}')}{|\mathbf{x}-\mathbf{x}'|}
+  \,d^3x',
+  \qquad
+  t_r\equiv t-\frac{|\mathbf{x}-\mathbf{x}'|}{c}.
+  \label{eq:retarded_h}
+\end{equation}
+
+\begin{definicion}{Zona de radiación lejana}{def:far_zone}
+La \textbf{zona de onda} o \textbf{far zone} corresponde a distancias $r$ mucho mayores que el tamaño $L$ de la fuente y la longitud de onda característica, de forma que el frente de onda localmente es casi plano y la amplitud cae como $1/r$.
+\end{definicion}
+
+En esa región, para fuentes no relativistas ($v\ll c$), domina el término cuadrupolar espacial $h_{ij}^{\mathrm{TT}}$.
+
+% ===========================================================
+\section{Momento cuadrupolar y amplitud radiada}
+\label{sec:quadrupole_amplitude}
+% ===========================================================
+
+\subsection{Monopolo y dipolo no radían en gravedad}
+
+La conservación de masa-energía y momento lineal elimina radiación monopolar y dipolar gravitacional en primer orden. El primer multipolo radiativo no trivial es el cuadrupolo.
+
+\begin{definicion}{Tensor cuadrupolar reducido de masa}{def:quadrupole_reduced}
+Para densidad de masa $\rho(t,\mathbf{x})$, se define
+\begin{equation}
+  \tilde I_{ij}(t)
+  =
+  \int \rho(t,\mathbf{x})
+  \left(x_i x_j-\frac{1}{3}\delta_{ij}r^2\right)
+  d^3x.
+\end{equation}
+\end{definicion}
+
+\begin{teorema}{Fórmula de cuadrupolo (campo lejano)}{teo:quadrupole_formula}
+En el límite de campo débil, fuente lenta y zona de radiación,
+\begin{equation}
+  h_{ij}^{\mathrm{TT}}(t,\mathbf{x})
+  =
+  \frac{2G}{c^4 r}
+  \ddot{\tilde I}_{ij}^{\mathrm{TT}}(t-r/c).
+  \label{eq:quadrupole_h}
+\end{equation}
+\end{teorema}
+
+\begin{observacion}{Escalamiento físico}{obs:scaling_quadrupole}
+La amplitud escala como $h\sim (G/c^4)(\ddot I/r)$. Sistemas más masivos, más compactos y más rápidos (mayor aceleración interna) irradian con mayor amplitud.
+\end{observacion}
+
+% ===========================================================
+\section{Potencia radiada: fórmula de Peters--Mathews}
+\label{sec:peters_mathews}
+% ===========================================================
+
+Promediando angular y temporalmente en la zona de onda, la luminosidad gravitacional resulta
+\begin{equation}
+  P_{\mathrm{GW}}=
+  \frac{G}{5c^5}
+  \left\langle
+    \dddot{\tilde I}_{ij}\dddot{\tilde I}_{ij}
+  \right\rangle.
+  \label{eq:quadrupole_power}
+\end{equation}
+
+\begin{definicion}{Fórmula de Peters--Mathews}{def:peters_mathews}
+La expresión \eqref{eq:quadrupole_power}, aplicada a sistemas binarios keplerianos, conduce a las tasas de pérdida de energía orbital derivadas por Peters y Mathews \cite{Peters1964}.
+\end{definicion}
+
+\subsection{Caso circular de dos cuerpos}
+
+Para una binaria circular con masas $m_1,m_2$, separación $a$, masa total $M=m_1+m_2$ y masa reducida $\mu=m_1m_2/M$:
+\begin{equation}
+  P_{\mathrm{GW}}=
+  \frac{32}{5}
+  \frac{G^4}{c^5}
+  \frac{\mu^2 M^3}{a^5}.
+  \label{eq:power_circular}
+\end{equation}
+
+\begin{importante}
+La dependencia $a^{-5}$ muestra que la emisión crece drásticamente al compactarse la órbita. Por ello la fase final inspiral de binarias compactas domina la señal detectable en interferómetros terrestres.
+\end{importante}
+
+% ===========================================================
+\section{Reacción de radiación y decaimiento orbital}
+\label{sec:orbital_decay}
+% ===========================================================
+
+La energía orbital newtoniana para órbita circular es
+\begin{equation}
+  E_{\mathrm{orb}}=-\frac{G\mu M}{2a}.
+\end{equation}
+
+Imponiendo balance energético
+\begin{equation}
+  \frac{dE_{\mathrm{orb}}}{dt}=-P_{\mathrm{GW}},
+\end{equation}
+se obtiene
+\begin{equation}
+  \frac{da}{dt}=-\frac{64}{5}\frac{G^3}{c^5}\frac{\mu M^2}{a^3}.
+  \label{eq:da_dt_circular}
+\end{equation}
+
+\begin{proposicion}{Inspiral inevitable}{prop:inspiral}
+Si no existen otras fuentes externas de energía o momento angular, la emisión gravitacional reduce $a(t)$ de forma monótona y la frecuencia orbital aumenta con el tiempo, produciendo una señal tipo \emph{chirp}.
+\end{proposicion}
+
+\subsection{Extensión cualitativa a órbitas excéntricas}
+
+Para excentricidad $e\neq0$, Peters (1964) mostró que tanto $a$ como $e$ decrecen secularmente. El sistema tiende a circularizar mientras espirala.
+
+\begin{observacion}{Circularización}{obs:circularizacion}
+La emisión gravitacional extrae relativamente más energía cerca del periastro, donde velocidades y aceleraciones son mayores. Esto acelera la reducción de excentricidad en muchas binarias astrofísicas antes de entrar en banda de detectores terrestres.
+\end{observacion}
+
+% ===========================================================
+\section{Frecuencia gravitacional y masa chirp}
+\label{sec:chirp_mass}
+% ===========================================================
+
+Sea $f_{\mathrm{orb}}$ la frecuencia orbital y $f=2f_{\mathrm{orb}}$ la frecuencia dominante de onda gravitacional para órbitas cuasi-circulares. Con la tercera ley de Kepler y el balance energético se obtiene
+\begin{equation}
+  \dot f=
+  \frac{96}{5}\pi^{8/3}
+  \left(\frac{G\mathcal{M}}{c^3}\right)^{5/3}
+  f^{11/3},
+  \label{eq:fdot_chirp}
+\end{equation}
+donde
+\begin{equation}
+  \mathcal{M}\equiv
+  \frac{(m_1m_2)^{3/5}}{(m_1+m_2)^{1/5}}
+\end{equation}
+es la \textbf{masa chirp}.
+
+\begin{definicion}{Masa chirp}{def:chirp_mass}
+La masa chirp es la combinación de masas más directamente medida por la fase de inspiral, porque controla la evolución temporal de la frecuencia observada a través de \eqref{eq:fdot_chirp}.
+\end{definicion}
+
+\begin{ejemplo}{Escalamiento de $\dot f$ con frecuencia}{ej:fdot_scaling}
+Si una señal pasa de $50\,\mathrm{Hz}$ a $100\,\mathrm{Hz}$ conservando la misma $\mathcal{M}$, la razón de barridos es
+\begin{equation}
+  \frac{\dot f(100)}{\dot f(50)}=\left(\frac{100}{50}\right)^{11/3}=2^{11/3}\approx 12.7.
+\end{equation}
+La aceleración de fase cerca de coalescencia explica el carácter distintivo del chirp en el dominio temporal.
+\end{ejemplo}
+
+% ===========================================================
+\section{Ejemplo desarrollado: escala temporal de coalescencia}
+\label{sec:ejemplo_tau}
+% ===========================================================
+
+\begin{ejemplo}{Tiempo de fusión en aproximación líder}{ej:coalescence_time}
+En orden líder post-newtoniano para órbita circular, el tiempo remanente hasta coalescencia desde una frecuencia $f$ es
+\begin{equation}
+  t_c-t \simeq
+  \frac{5}{256}
+  \left(\frac{G\mathcal{M}}{c^3}\right)^{-5/3}
+  (\pi f)^{-8/3}.
+\end{equation}
+
+Considere un sistema de estrellas de neutrones con $m_1=m_2=1.4\,M_\odot$ ($\mathcal{M}\approx1.22\,M_\odot$):
+
+\textbf{Paso 1: dependencia principal.}
+El tiempo decrece como $f^{-8/3}$, por lo que los últimos ciclos en altas frecuencias duran muy poco.
+
+\textbf{Paso 2: estimación comparativa.}
+Sin sustituir constantes numéricas detalladas, pasar de $f=20\,\mathrm{Hz}$ a $f=40\,\mathrm{Hz}$ reduce el tiempo por un factor
+\begin{equation}
+  \left(\frac{40}{20}\right)^{-8/3}=2^{-8/3}\approx0.157.
+\end{equation}
+
+\textbf{Paso 3: interpretación física.}
+Una fracción grande del tiempo de observación se acumula a bajas frecuencias; la etapa final concentra la mayor potencia y variación de fase.
+\end{ejemplo}
+
+% ===========================================================
+\section{Verificación clásica: el púlsar binario de Hulse--Taylor}
+\label{sec:hulse_taylor}
+% ===========================================================
+
+El sistema PSR B1913+16, descubierto por Hulse y Taylor \cite{HulseTaylor1975}, permitió medir con precisión la variación de período orbital y contrastarla con la predicción relativista de pérdida energética por radiación gravitacional \cite{Taylor1982}.
+
+\begin{definicion}{Prueba de decaimiento orbital}{def:ht_test}
+La prueba consiste en comparar $\dot P_b^{\mathrm{obs}}$ con $\dot P_b^{\mathrm{GR}}$ calculado mediante dinámica relativista y emisión de cuadrupolo. La concordancia observada dentro de incertidumbres constituye evidencia indirecta robusta de ondas gravitacionales.
+\end{definicion}
+
+\begin{observacion}{Importancia histórica}{obs:historica_ht}
+Décadas antes de la detección directa en 2015, el púlsar binario estableció la evidencia empírica de que los sistemas compactos pierden energía exactamente en la forma esperada para radiación gravitacional.
+\end{observacion}
+
+% ===========================================================
+\section{Conexión con detección directa y análisis moderno}
+\label{sec:conexion_lvk}
+% ===========================================================
+
+Las relaciones de cuadrupolo y chirp mass son la base de las plantillas de inspiral en análisis de datos:
+\begin{itemize}[leftmargin=2em]
+  \item La fase $\phi(t)$ depende fuertemente de $\mathcal{M}$ y parámetros de masa-espín.
+  \item La amplitud escalada por distancia luminosa permite inferir geometría fuente--detector.
+  \item Correcciones post-newtonianas refinan la forma de onda para inferencia de precisión.
+\end{itemize}
+
+\begin{importante}
+La detección de GW150914 \cite{Abbott2016prl} confirmó de forma directa la existencia de ondas gravitacionales y validó, en su régimen de aplicabilidad, el marco linealizado y la física de inspiral basada en la aproximación de cuadrupolo.
+\end{importante}
+
+% ===========================================================
+\section{Síntesis y transición}
+\label{sec:sintesis_cap16}
+% ===========================================================
+
+Resultados centrales del capítulo:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La solución retardada conecta la fuente $T_{\mu\nu}$ con la perturbación radiativa en campo lejano.
+  \item El primer multipolo radiativo gravitacional es el cuadrupolo; monopolo y dipolo no irradian en primer orden.
+  \item La amplitud en TT está dada por \eqref{eq:quadrupole_h} y la potencia por \eqref{eq:quadrupole_power}.
+  \item En binarias compactas, la pérdida de energía produce inspiral, aumento de frecuencia y señal chirp.
+  \item La masa chirp gobierna la evolución de fase y es un observable clave en análisis de datos.
+  \item El púlsar de Hulse--Taylor verificó de manera indirecta la emisión gravitacional mucho antes de la detección directa.
+\end{enumerate}
+
+En el siguiente capítulo se estudiarán las fuentes astrofísicas concretas de ondas gravitacionales (BNS, BBH, colapso estelar, señales continuas y fondo estocástico), conectando teoría de emisión con poblaciones observables.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Escalamiento de amplitud con distancia.} \\
+A partir de \eqref{eq:quadrupole_h}, muestre que al duplicar la distancia a la fuente la amplitud observada se reduce a la mitad. Discuta implicaciones para alcance de detectores.
+
+\item \textbf{Balance energético en órbita circular.} \\
+Use $E_{\mathrm{orb}}=-G\mu M/(2a)$ y \eqref{eq:power_circular} para derivar \eqref{eq:da_dt_circular}.
+
+\item \textbf{Dependencia fuerte con separación orbital.} \\
+Para una binaria fija en masas, compare la potencia radiada entre órbitas de radios $a$ y $2a$. Interprete el resultado usando \eqref{eq:power_circular}.
+
+\item \textbf{Masa chirp para masas iguales.} \\
+Demuestre que si $m_1=m_2=m$, entonces $\mathcal{M}=m/2^{1/5}$. Evalúe numéricamente para $m=30\,M_\odot$.
+
+\item \textbf{Barrido de frecuencia.} \\
+Usando \eqref{eq:fdot_chirp}, calcule la razón $\dot f(f_2)/\dot f(f_1)$ para $f_1=30\,\mathrm{Hz}$ y $f_2=120\,\mathrm{Hz}$. Comente por qué la señal acelera cerca de coalescencia.
+
+\item \textbf{Prueba conceptual del púlsar binario.} \\
+Explique por qué la medición de $\dot P_b<0$ en PSR B1913+16 constituye evidencia de emisión gravitacional. Liste los supuestos principales requeridos para comparar teoría y observación.
+
+\end{enumerate}
