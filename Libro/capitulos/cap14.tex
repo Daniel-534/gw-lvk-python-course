@@ -1,0 +1,437 @@
+% ============================================================
+% Capítulo 14: Cosmología V — Perturbaciones y Formación de Estructura
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Cosmología V: Perturbaciones y Formación de Estructura}
+\label{cap:perturbaciones_estructura}
+
+Los capítulos anteriores establecieron el fondo cosmológico homogéneo-isótropo, la dinámica de Friedmann y el contenido energético dominante del Universo. Sin embargo, galaxias, cúmulos, vacíos y filamentos muestran que el Universo real no es perfectamente uniforme. La pieza faltante es entender \textbf{cómo pequeñas inhomogeneidades primordiales crecieron gravitacionalmente} hasta producir la estructura cósmica observada hoy \cite{Peebles1993, Dodelson2003, Weinberg2008, Ryden2017, Planck2020}.
+
+Este capítulo desarrolla la teoría lineal de perturbaciones sobre FLRW, la evolución del contraste de densidad, la construcción del espectro de potencia de materia, la física de oscilaciones acústicas bariónicas (BAO), la transición al régimen no lineal y el papel de simulaciones numéricas. Además, incluye \textbf{ejemplos desarrollados paso a paso} para conectar ecuaciones con estimaciones físicas concretas.
+
+% ===========================================================
+\section{Planteamiento general: fondo FLRW + perturbaciones}
+\label{sec:planteamiento_perturbaciones}
+% ===========================================================
+
+\subsection{Descomposición perturbativa}
+
+La idea central es separar cada campo cosmológico en una parte de fondo (homogénea) y una corrección pequeña (inhomogénea):
+\begin{equation}
+X(\mathbf{x},t)=\bar X(t)+\delta X(\mathbf{x},t),
+\qquad
+\left|\delta X\right|\ll\left|\bar X\right|.
+\end{equation}
+
+De manera equivalente, para la métrica:
+\begin{equation}
+g_{\mu\nu}=\bar g_{\mu\nu}+\delta g_{\mu\nu},
+\qquad
+\left|\delta g_{\mu\nu}\right|\ll\left|\bar g_{\mu\nu}\right|.
+\end{equation}
+
+\begin{definicion}{Contraste de densidad}{def_delta}
+Para una componente material con densidad $\rho(\mathbf{x},t)$ se define el \textbf{contraste de densidad}
+\begin{equation}
+\delta(\mathbf{x},t)\equiv\frac{\rho(\mathbf{x},t)-\bar\rho(t)}{\bar\rho(t)}=\frac{\delta\rho}{\bar\rho}.
+\end{equation}
+\end{definicion}
+
+En régimen lineal, $|\delta|\ll1$, las ecuaciones de Einstein y conservación se linealizan en $\delta$ y sus derivadas.
+
+\subsection{Descomposición escalar, vectorial y tensorial}
+
+Las perturbaciones pueden clasificarse por su comportamiento bajo rotaciones espaciales:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Escalares:} asociados a sobre/subdensidades y flujos compresionales; son los más relevantes para formación de galaxias.
+  \item \textbf{Vectoriales:} vorticidad; en cosmología estándar decaen con la expansión si no hay fuentes activas.
+  \item \textbf{Tensoriales:} ondas gravitacionales, estudiadas más adelante en el libro.
+\end{itemize}
+
+\begin{observacion}{Dominio escalar en estructura}{obs_escalar_dominio}
+La formación de estructura a gran escala está gobernada principalmente por perturbaciones escalares. Por ello, en este capítulo nos concentramos en ese sector.
+\end{observacion}
+
+% ===========================================================
+\section{Gauge y potenciales en el régimen lineal}
+\label{sec:gauge_potenciales}
+% ===========================================================
+
+La relatividad general permite transformaciones de coordenadas infinitesimales que mezclan partes de fondo y perturbativas. Esto genera la llamada \emph{ambigüedad de gauge}. Una elección práctica para física de estructura es el \textbf{gauge newtoniano} (también llamado longitudinal).
+
+\begin{definicion}{Métrica perturbada en gauge newtoniano}{def_newtonian_gauge}
+Ignorando anisotropía de esfuerzo a primer orden, la métrica escalar toma la forma
+\begin{equation}
+  ds^2=-(1+2\Psi)c^2dt^2+a^2(t)(1-2\Phi)\delta_{ij}dx^i dx^j,
+\end{equation}
+y para muchos fluidos cosmológicos en régimen lineal se cumple $\Phi\simeq\Psi$.
+\end{definicion}
+
+\begin{importante}
+Aunque el gauge es una elección matemática, los observables físicos deben ser invariantes de gauge. En práctica, elegir una gauge conveniente simplifica cálculos sin alterar predicciones observables.
+\end{importante}
+
+\subsection{Límite subhorizonte y ecuación de Poisson cosmológica}
+
+Para modos con longitud de onda mucho menor que el radio de Hubble ($k\gg aH$), y velocidades peculiares no relativistas, la relatividad lineal recupera una ecuación tipo Poisson:
+\begin{equation}
+\nabla^2\Phi = 4\pi G a^2\bar\rho_m\,\delta_m,
+\label{eq:poisson_cosmo}
+\end{equation}
+donde $\delta_m$ es el contraste de materia total que agrupa gravitacionalmente.
+
+\begin{ejemplo}{Escalamiento del potencial gravitacional lineal}{ej_phi_scaling}
+En un modo de número de onda comóvil $k$, la ecuación \eqref{eq:poisson_cosmo} sugiere en espacio de Fourier
+\begin{equation}
+\Phi_k\sim -\frac{4\pi G a^2\bar\rho_m}{k^2}\,\delta_k.
+\end{equation}
+Así, para un mismo $\delta_k$, los modos de mayor escala (menor $k$) generan potenciales más profundos. Este hecho explica por qué las grandes estructuras dominan varias señales integradas (por ejemplo, ciertos efectos de lente débil a gran ángulo).
+\end{ejemplo}
+
+% ===========================================================
+\section{Ecuación de crecimiento lineal de materia}
+\label{sec:crecimiento_lineal_materia}
+% ===========================================================
+
+En el régimen newtoniano-cosmológico de subhorizonte y para materia fría (presión despreciable), combinar continuidad, Euler y Poisson produce la ecuación maestra:
+\begin{equation}
+\ddot\delta_m + 2H\dot\delta_m -4\pi G\bar\rho_m\,\delta_m =0.
+\label{eq:growth_equation}
+\end{equation}
+
+\begin{teorema}{Crecimiento en era de materia}{teo_growth_matter}
+En un Universo dominado por materia, $a(t)\propto t^{2/3}$ y la ecuación \eqref{eq:growth_equation} tiene dos modos:
+\begin{equation}
+\delta_m(t)=A\,t^{2/3}+B\,t^{-1}.
+\end{equation}
+El modo creciente satisface $\delta_m\propto a$ y el modo decreciente se suprime con el tiempo.
+\end{teorema}
+
+\begin{proof}
+Para $a\propto t^{2/3}$, se tiene $H=2/(3t)$ y $4\pi G\bar\rho_m=2/(3t^2)$. Sustituyendo en \eqref{eq:growth_equation}:
+\begin{equation}
+\ddot\delta_m+\frac{4}{3t}\dot\delta_m-\frac{2}{3t^2}\delta_m=0.
+\end{equation}
+Buscando una ley de potencia $\delta_m\propto t^p$:
+\begin{equation}
+p(p-1)+\frac{4}{3}p-\frac{2}{3}=0
+\quad\Rightarrow\quad
+3p^2+p-2=0.
+\end{equation}
+Las raíces son $p=2/3$ y $p=-1$.
+\end{proof}
+
+\subsection{Factor de crecimiento y tasa de crecimiento}
+
+\begin{definicion}{Factor de crecimiento lineal}{def_growth_factor}
+Se define el factor de crecimiento $D(a)$ mediante
+\begin{equation}
+\delta_m(\mathbf{x},a)=D(a)\,\delta_m(\mathbf{x},a_\ast),
+\end{equation}
+donde $a_\ast$ es una época de referencia en régimen lineal.
+\end{definicion}
+
+\begin{definicion}{Tasa de crecimiento}{def_growth_rate}
+La tasa logarítmica de crecimiento se define como
+\begin{equation}
+f(a)\equiv\frac{d\ln D}{d\ln a}.
+\end{equation}
+En era de materia pura, $D\propto a$ y por tanto $f=1$.
+\end{definicion}
+
+En modelos con energía oscura dominante tardía, la fricción cosmológica ($2H\dot\delta$) domina más temprano y el crecimiento se desacelera ($f<1$).
+
+% ===========================================================
+\section{Ejemplo desarrollado I: crecimiento entre recombinación y hoy}
+\label{sec:ejemplo_crecimiento_recomb}
+% ===========================================================
+
+\begin{ejemplo}{Estimación paso a paso del crecimiento lineal}{ej_growth_step}
+Suponga un modo lineal de materia con amplitud efectiva inicial
+\begin{equation}
+\delta_i=10^{-5}
+\end{equation}
+a redshift $z_i\approx 1100$ (escala típica del desacople), y use una aproximación simple de era de materia para estimar su amplitud hoy.
+
+\textbf{Paso 1: relación entre $a$ y $z$.}
+\begin{equation}
+a=\frac{1}{1+z}
+\quad\Rightarrow\quad
+\frac{a_0}{a_i}=1+z_i\approx 1101.
+\end{equation}
+
+\textbf{Paso 2: usar $D\propto a$ en primera aproximación.}
+\begin{equation}
+\delta_0\approx\delta_i\frac{D_0}{D_i}\approx\delta_i\frac{a_0}{a_i}
+\approx10^{-5}\times1101\approx1.1\times10^{-2}.
+\end{equation}
+
+\textbf{Paso 3: interpretación física.}
+Con esta aproximación, el modo sigue en régimen lineal hoy ($\delta_0\ll1$). Para llegar a estructuras colapsadas ($\delta\gtrsim1$) se requieren: (i) escalas específicas con mayor amplitud efectiva, (ii) evolución no lineal posterior y (iii) transferencia de potencia dependiente de escala.
+
+\textbf{Paso 4: refinamiento conceptual.}
+En un cálculo real, la presencia de radiación temprana, bariones acoplados antes del desacople y energía oscura tardía modifica el crecimiento simple $\propto a$. Aun así, esta estimación de orden de magnitud captura la lógica básica de amplificación gravitacional.
+\end{ejemplo}
+
+% ===========================================================
+\section{Espectro de potencia de materia y función de transferencia}
+\label{sec:pk_transfer}
+% ===========================================================
+
+El campo de contraste puede descomponerse en Fourier:
+\begin{equation}
+\delta(\mathbf{x})=\int\frac{d^3k}{(2\pi)^3}\,\delta(\mathbf{k})e^{i\mathbf{k}\cdot\mathbf{x}}.
+\end{equation}
+
+\begin{definicion}{Espectro de potencia}{def_pk}
+El \textbf{espectro de potencia} $P(k)$ se define por
+\begin{equation}
+\langle \delta(\mathbf{k})\delta^\ast(\mathbf{k}')\rangle=(2\pi)^3\delta_D(\mathbf{k}-\mathbf{k}')P(k),
+\end{equation}
+donde $\delta_D$ es la delta de Dirac.
+\end{definicion}
+
+Una forma útil del espectro lineal es
+\begin{equation}
+P(k,z)=A_s\,k^{n_s}\,T^2(k)\,D^2(z),
+\label{eq:pk_factorized}
+\end{equation}
+con:
+\begin{itemize}[leftmargin=2em]
+  \item $A_s, n_s$: amplitud e inclinación primordial;
+  \item $T(k)$: función de transferencia que codifica física de horizonte, acoplamiento radiación-materia y bariones;
+  \item $D(z)$: crecimiento temporal lineal.
+\end{itemize}
+
+\subsection{Escalas características}
+
+\begin{definicion}{Escala de igualdad materia-radiación}{def_keq}
+La escala de igualdad $k_{\rm eq}$ separa modos que entraron al horizonte en era radiación de los que lo hicieron en era materia. Esta escala introduce un cambio de pendiente en $P(k)$.
+\end{definicion}
+
+\begin{observacion}{Consecuencia física de $k_{\rm eq}$}{obs_keq}
+Modos que entran en horizonte durante dominación radiativa crecen menos eficientemente en materia oscura que los que entran durante dominación de materia. Esto imprime la forma de ``quiebre'' del espectro de potencia de materia.
+\end{observacion}
+
+% ===========================================================
+\section{BAO: oscilaciones acústicas bariónicas}
+\label{sec:bao}
+% ===========================================================
+
+Antes del desacople, bariones y fotones forman un fluido acoplado que soporta ondas acústicas. Tras recombinación, esas oscilaciones dejan una escala comóvil preferida (horizonte sonoro) observable en:
+\begin{itemize}[leftmargin=2em]
+  \item picos acústicos del CMB,
+  \item función de correlación de galaxias,
+  \item modulación oscilatoria de $P(k)$.
+\end{itemize}
+
+\begin{definicion}{Regla de escala BAO}{def_bao_scale}
+La escala BAO actúa como \textbf{regla estándar cosmológica}: comparar su tamaño físico conocido con su tamaño angular/redshift observado permite inferir distancias cosmológicas y la expansión $H(z)$.
+\end{definicion}
+
+\begin{ejemplo}{Interpretación de una detección BAO}{ej_bao_interp}
+Si un levantamiento de galaxias detecta un exceso de pares alrededor de una separación comóvil característica, esa separación se interpreta como la huella del horizonte sonoro al arrastre de bariones. Midiendo esa misma escala en distintos redshifts se reconstruye la historia de expansión y se constriñen $\Omega_m$, $H_0$ y parámetros de energía oscura en combinación con CMB y supernovas.
+\end{ejemplo}
+
+% ===========================================================
+\section{De lineal a no lineal: colapso gravitacional}
+\label{sec:no_lineal_colapso}
+% ===========================================================
+
+Cuando $\delta\sim1$, la aproximación lineal deja de ser suficiente. El crecimiento no lineal produce colapso de halos, formación de filamentos y vacíos, y acoplamiento entre modos de distinta escala.
+
+\subsection{Modelo de colapso esférico}
+
+Un modelo pedagógico útil es seguir la evolución de una sobredensidad casi homogénea y esférica embebida en el fondo.
+
+\begin{definicion}{Umbral lineal de colapso}{def_delta_c}
+En el modelo de colapso esférico en cosmología tipo Einstein--de Sitter, el colapso no lineal corresponde a un contraste lineal extrapolado
+\begin{equation}
+\delta_c\simeq1.686.
+\end{equation}
+\end{definicion}
+
+\begin{importante}
+El valor $\delta_c$ no significa que el colapso físico ocurra cuando $\delta=1.686$ real; es un valor \emph{lineal extrapolado} útil para conectar teoría lineal con abundancia de halos.
+\end{importante}
+
+\subsection{Virialización}
+
+Tras el colapso inicial, el sistema no termina en una singularidad puntual, sino que redistribuye energía gravitacional y cinética hasta un estado cuasi-estacionario (virializado), base para describir halos de materia oscura.
+
+\begin{observacion}{Conexión con halos galácticos}{obs_halos}
+La física de virialización explica por qué galaxias y cúmulos están embebidos en halos extendidos de materia oscura, responsables de curvas de rotación y lentes gravitacionales discutidas en el capítulo previo.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado II: escala no lineal aproximada}
+\label{sec:ejemplo_escala_no_lineal}
+% ===========================================================
+
+\begin{ejemplo}{Estimación de cuándo un modo entra a no linealidad}{ej_nonlinear_scale}
+Considere un modo con amplitud lineal efectiva $\delta(z=0)=0.2$ hoy. Suponiendo crecimiento aproximado $D\propto a$ durante una etapa dominada por materia, estimemos a qué redshift habría alcanzado $\delta\sim1$ si extrapolamos hacia el futuro o hacia un modelo con mayor crecimiento.
+
+\textbf{Paso 1: relación de escalamiento lineal.}
+\begin{equation}
+\delta(z)\propto D(z)\propto \frac{1}{1+z}
+\quad\Rightarrow\quad
+\frac{\delta_2}{\delta_1}=\frac{1+z_1}{1+z_2}.
+\end{equation}
+
+\textbf{Paso 2: fijar estado 1 en $z_1=0$.}
+\begin{equation}
+\delta_1=0.2,
+\qquad
+\delta_2=1.
+\end{equation}
+Entonces
+\begin{equation}
+\frac{1}{0.2}=\frac{1}{1+z_2}
+\quad\Rightarrow\quad
+1+z_2=0.2
+\quad\Rightarrow\quad
+z_2=-0.8.
+\end{equation}
+
+\textbf{Paso 3: interpretación.}
+El resultado $z_2<0$ indica que, bajo esta extrapolación, el modo todavía no sería no lineal hoy y requeriría más crecimiento futuro para llegar a $\delta\sim1$. Esta cuenta ilustra por qué distintas escalas del espectro presentan estados dinámicos distintos en la actualidad.
+
+\textbf{Paso 4: límite del cálculo.}
+En cosmología real, energía oscura reduce el crecimiento futuro y la relación simple $D\propto a$ deja de ser exacta. Aun así, la estimación es útil para visualizar la jerarquía de escalas lineales/no lineales.
+\end{ejemplo}
+
+% ===========================================================
+\section{Simulaciones de N-cuerpos y red cósmica}
+\label{sec:nbody}
+% ===========================================================
+
+La evolución no lineal completa de millones de modos acoplados no admite solución analítica cerrada. Por eso se emplean simulaciones de \textbf{N-cuerpos}, que discretizan la materia oscura en partículas gravitantes y resuelven su dinámica en expansión cosmológica.
+
+\begin{definicion}{Objetivo de una simulación N-cuerpos cosmológica}{def_nbody}
+Una simulación N-cuerpos busca integrar la dinámica gravitacional de muchas partículas en un volumen comóvil grande para predecir estadísticos de estructura: función de correlación, distribución de halos, perfiles de densidad y velocidad peculiar.
+\end{definicion}
+
+\subsection{Ingredientes conceptuales}
+
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Condiciones iniciales:} se generan desde el espectro primordial modulado por $T(k)$.
+  \item \textbf{Integración temporal:} se actualizan posiciones y velocidades con el fondo $a(t)$.
+  \item \textbf{Cálculo gravitacional:} esquemas árbol, malla o híbridos para acelerar el cómputo.
+  \item \textbf{Identificación de halos:} algoritmos como friends-of-friends o spherical overdensity.
+\end{enumerate}
+
+\begin{ejemplo}{De un cubo simulado al catálogo de halos}{ej_catalogo_halos}
+En una simulación típica, tras evolucionar partículas desde alto redshift hasta $z=0$, se identifican regiones sobredensas autoconsistentes gravitacionalmente. Cada región se asocia con un halo de masa $M$, radio virial y velocidad de dispersión. La colección de halos permite predecir funciones de masa y comparar con catálogos observacionales de cúmulos y galaxias.
+\end{ejemplo}
+
+% ===========================================================
+\section{Observables de estructura a gran escala}
+\label{sec:observables_lss}
+% ===========================================================
+
+La teoría de perturbaciones no se valida con una sola medición, sino con múltiples sondas complementarias:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Clustering de galaxias:} mide correlaciones espaciales y BAO.
+  \item \textbf{Lente gravitacional débil:} sondea potenciales proyectados y distribución integrada de masa.
+  \item \textbf{Distorsiones en espacio de redshift (RSD):} informan sobre velocidades peculiares y tasa de crecimiento $f$.
+  \item \textbf{Abundancia de cúmulos:} sensible a cola de altas masas y amplitud de fluctuaciones.
+\end{itemize}
+
+\begin{proposicion}{Romper degeneracias cosmológicas}{prop_multisonda}
+Combinar CMB, BAO, clustering y lente débil permite romper degeneracias entre parámetros como $\Omega_m$, $\sigma_8$, $H_0$ y parámetros de energía oscura, mejorando robustez inferencial.
+\end{proposicion}
+
+\begin{observacion}{Sistemáticos astrofísicos e instrumentales}{obs_sistematicos_lss}
+La inferencia cosmológica de precisión exige modelar sesgo de galaxias, calibraje fotométrico, errores de selección y efectos no lineales bariónicos. Ignorar estos sistemáticos puede sesgar parámetros incluso con barras estadísticas pequeñas.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado III: varianza de densidad en una esfera}
+\label{sec:ejemplo_sigmaR}
+% ===========================================================
+
+\begin{ejemplo}{Cálculo conceptual de $\sigma_R$ y su interpretación}{ej_sigmaR}
+La amplitud de fluctuaciones puede resumirse por la varianza suavizada en una escala $R$:
+\begin{equation}
+\sigma_R^2=\int_0^\infty\frac{k^2dk}{2\pi^2}P(k)W^2(kR),
+\end{equation}
+donde $W$ es la ventana (por ejemplo, top-hat esférica).
+
+\textbf{Paso 1: rol de la ventana.} La función $W(kR)$ filtra modos. Para $kR\ll1$, contribuyen casi sin supresión; para $kR\gg1$, la contribución se atenúa.
+
+\textbf{Paso 2: cambiar $R$.} Si disminuye $R$, se incorporan más modos de alto $k$ (escalas pequeñas), típicamente con mayor no linealidad; por eso $\sigma_R$ suele aumentar al reducir $R$.
+
+\textbf{Paso 3: caso de referencia.} En cosmología observacional se usa frecuentemente $R=8\,h^{-1}\,\mathrm{Mpc}$ para definir $\sigma_8$, parámetro clave en comparaciones entre CMB y estructura tardía.
+
+\textbf{Paso 4: interpretación física.} Valores mayores de $\sigma_8$ implican estructura más ``grumosa'' hoy. Comparar su inferencia entre sondas tempranas y tardías permite testear consistencia del modelo base.
+\end{ejemplo}
+
+% ===========================================================
+\section{Conexión con ondas gravitacionales como trazadores cosmológicos}
+\label{sec:conexion_og}
+% ===========================================================
+
+Aunque la formación de estructura se estudia clásicamente con galaxias y CMB, la astronomía de ondas gravitacionales añade nuevas rutas:
+\begin{itemize}[leftmargin=2em]
+  \item Sirenas estándar para reconstruir expansión cósmica.
+  \item Distribución espacial de eventos compactos como trazador sesgado del campo de materia.
+  \item Correlaciones cruzadas entre mapas de galaxias, lente y catálogos de fusiones binarias.
+\end{itemize}
+
+\begin{observacion}{Sinergia multi-mensajera}{obs_multimensajera_lss}
+En la próxima década, combinar sondas electromagnéticas y gravitacionales permitirá pruebas independientes del crecimiento de estructura y de la consistencia gravedad--expansión.
+\end{observacion}
+
+% ===========================================================
+\section{Síntesis conceptual y transición al capítulo siguiente}
+\label{sec:sintesis_cap14}
+% ===========================================================
+
+La teoría de perturbaciones cosmológicas completa el puente entre Universo temprano y estructura observada hoy:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item Las inhomogeneidades primordiales se describen linealmente por $\delta\ll1$ sobre fondo FLRW.
+  \item El crecimiento gravitacional de materia en primer orden está gobernado por \eqref{eq:growth_equation}.
+  \item El espectro $P(k)$ codifica información de inflación, contenido cósmico y evolución dinámica.
+  \item Las BAO proveen una regla estándar robusta para la historia de expansión.
+  \item La no linealidad requiere modelos de colapso y simulaciones N-cuerpos para describir la red cósmica real.
+  \item Las sondas observacionales combinadas permiten tests de precisión del modelo $\Lambda$CDM y extensiones.
+\end{enumerate}
+
+Con esta base, en el siguiente capítulo pasaremos de perturbaciones escalares cosmológicas a perturbaciones tensoriales del espacio-tiempo: la relatividad general linealizada y la teoría de ondas gravitacionales.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Derivación del modo creciente en era de materia.} \\
+Partiendo de la ecuación
+\begin{equation*}
+\ddot\delta+2H\dot\delta-4\pi G\bar\rho_m\delta=0,
+\end{equation*}
+use $a\propto t^{2/3}$ para derivar explícitamente los dos modos de potencia y determine cuál corresponde al modo físico relevante para formación de estructura.
+
+\item \textbf{Evolución aproximada de una perturbación.} \\
+Una perturbación tiene $\delta=3\times10^{-4}$ en $z=100$. Estime $\delta$ en $z=10$ y $z=0$ usando $D\propto a$. Discuta en qué etapa la aproximación lineal sigue siendo razonable.
+
+\item \textbf{Poisson cosmológica en Fourier.} \\
+A partir de \eqref{eq:poisson_cosmo}, derive la relación entre $\Phi_k$ y $\delta_k$. Explique cómo cambia la amplitud del potencial al duplicar la escala física del modo.
+
+\item \textbf{Interpretación de BAO como regla estándar.} \\
+Describa cómo una medición de la escala BAO en dos redshifts distintos puede usarse para restringir $H(z)$ y distancias angulares. No se pide ajuste numérico, sino esquema inferencial claro.
+
+\item \textbf{Escala de no linealidad.} \\
+Suponga un modo con $\delta(z=0)=0.4$. Bajo la aproximación $D\propto a$, estime el redshift al que tendría $\delta=1$. Interprete el significado físico del signo obtenido para ese redshift.
+
+\item \textbf{Rol de $\sigma_8$ en tensiones cosmológicas.} \\
+Explique por qué $\sigma_8$ (o $S_8$) es sensible al crecimiento de estructura y discuta dos posibles fuentes (una física y una sistemática) de discrepancias entre su inferencia temprana y tardía.
+
+\item \textbf{Pregunta abierta de síntesis.} \\
+Elabore una comparación crítica entre la visión lineal analítica y la visión numérica N-cuerpos. ¿Qué gana y qué pierde cada enfoque al interpretar datos cosmológicos de precisión?
+
+\end{enumerate}
