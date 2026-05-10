@@ -1,0 +1,335 @@
+% ============================================================
+% Capítulo 18: Detección e Inferencia en Astronomía GW
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Detección e Inferencia en Astronomía de Ondas Gravitacionales}
+\label{cap:deteccion_inferencia}
+
+Comprender fuentes no es suficiente: la señal medida está mediada por la respuesta instrumental, el ruido y la metodología estadística de extracción de parámetros. Este capítulo desarrolla la cadena completa desde la strain observada hasta la inferencia física de masas, espines, distancia y localización \cite{Creighton2011, Jaranowski2009, Allen2005, LIGO2015, Virgo2015}.
+
+Se estudiarán: geometría detector--fuente, función de respuesta, densidad espectral de potencia de ruido, relación señal-ruido (SNR), filtrado adaptado, estadística de detección, redes de detectores, inferencia bayesiana y sistemáticas experimentales.
+
+% ===========================================================
+\section{Interferometría láser y variable observable}
+\label{sec:interferometria_observable}
+% ===========================================================
+
+\begin{definicion}{Strain medida}{def:strain_measured}
+La salida calibrada de un detector interferométrico se modela como
+\begin{equation}
+d(t)=h(t;\theta)+n(t),
+\end{equation}
+donde $h$ es la respuesta gravitacional dependiente de parámetros de fuente $\theta$ y $n$ es ruido instrumental-ambiental.
+\end{definicion}
+
+Para longitudes de brazo $L$, la cantidad física central es la deformación fraccional
+\begin{equation}
+h(t)\sim\frac{\Delta L(t)}{L},
+\end{equation}
+que en detectores terrestres típicamente toma amplitudes del orden $10^{-22}$--$10^{-21}$ para eventos detectables.
+
+\begin{observacion}{Calibración}{obs:calibration}
+La calidad de la calibración (amplitud y fase) impacta directamente la precisión de inferencia de parámetros, especialmente distancia, inclinación y masa chirp.
+\end{observacion}
+
+% ===========================================================
+\section{Respuesta angular del detector}
+\label{sec:respuesta_angular}
+% ===========================================================
+
+Para una onda con polarizaciones $h_+(t)$ y $h_\times(t)$, la respuesta de un detector de brazos perpendiculares se escribe como
+\begin{equation}
+h(t)=F_+(\alpha,\delta,\psi,t)\,h_+(t)+F_\times(\alpha,\delta,\psi,t)\,h_\times(t),
+\label{eq:detector_response}
+\end{equation}
+donde $(\alpha,\delta)$ denotan posición celeste y $\psi$ el ángulo de polarización.
+
+\begin{definicion}{Funciones patrón de antena}{def:antenna}
+Las funciones $F_+,F_\times\in[-1,1]$ describen la sensibilidad direccional/polarizacional del detector.
+\end{definicion}
+
+\begin{importante}
+Un único detector no puede reconstruir de forma no degenerada todas las variables extrínsecas. La red de detectores rompe degeneraciones y mejora localización.
+\end{importante}
+
+\subsection{Modulación temporal}
+
+La rotación terrestre modula la respuesta para señales largas (por ejemplo, continuas), aportando información angular adicional.
+
+% ===========================================================
+\section{Ruido instrumental y densidad espectral de potencia}
+\label{sec:ruido_psd}
+% ===========================================================
+
+\begin{definicion}{PSD unilateral}{def:psd}
+La densidad espectral de potencia unilateral $S_n(f)$ caracteriza la varianza del ruido por unidad de frecuencia:
+\begin{equation}
+\langle \tilde n(f)\tilde n^\ast(f')\rangle=
+\frac{1}{2}S_n(f)\,\delta(f-f').
+\end{equation}
+\end{definicion}
+
+\subsection{Fuentes de ruido en interferómetros terrestres}
+
+\begin{itemize}[leftmargin=2em]
+  \item ruido sísmico y de suspensión (bajas frecuencias),
+  \item ruido térmico de recubrimientos/sustratos (intermedias),
+  \item ruido cuántico de disparo y presión de radiación (altas y muy bajas).
+\end{itemize}
+
+\begin{observacion}{No estacionariedad y líneas espectrales}{obs:nonstationary}
+El ruido real no es perfectamente gaussiano ni estacionario; glitches y líneas estrechas requieren veto, limpieza y modelado robusto para análisis confiable.
+\end{observacion}
+
+% ===========================================================
+\section{Producto interno y relación señal-ruido}
+\label{sec:snr_producto}
+% ===========================================================
+
+\begin{definicion}{Producto interno ponderado por ruido}{def:inner_product}
+Para dos series $a,b$ en frecuencia:
+\begin{equation}
+(a|b)=4\,\Re\int_{f_{\min}}^{f_{\max}}
+\frac{\tilde a^\ast(f)\tilde b(f)}{S_n(f)}\,df.
+\label{eq:inner_product}
+\end{equation}
+\end{definicion}
+
+La SNR óptima de una plantilla $h$ en datos $d$ se define como
+\begin{equation}
+\rho=\frac{(d|h)}{\sqrt{(h|h)}}.
+\label{eq:snr}
+\end{equation}
+
+\begin{proposicion}{Dependencia cualitativa de la SNR}{prop:snr_scaling}
+En primera aproximación, para forma de onda fija, $\rho\propto 1/d_L$ y crece al mejorar sensibilidad (menor $S_n$) en las bandas donde la señal concentra potencia.
+\end{proposicion}
+
+% ===========================================================
+\section{Filtrado adaptado y bancos de plantillas}
+\label{sec:matched_filtering}
+% ===========================================================
+
+\begin{definicion}{Filtrado adaptado}{def:matched_filter}
+El filtrado adaptado (\emph{matched filtering}) compara datos con una familia de plantillas parametrizadas y maximiza la SNR sobre tiempo de coalescencia y fase, extendiéndose luego a masas, espines y otros parámetros.
+\end{definicion}
+
+\subsection{Mismatch y cobertura}
+
+\begin{definicion}{Mismatch}{def:mismatch}
+El mismatch entre una señal y su plantilla más cercana cuantifica pérdida fraccional de SNR por discretización del banco.
+\end{definicion}
+
+Un diseño de banco adecuado equilibra costo computacional y pérdida máxima tolerada de SNR.
+
+\begin{observacion}{Señales no modeladas}{obs:model_unmodeled}
+Cuando la física es incierta, técnicas burst complementan al matched filtering al buscar excesos coherentes sin plantilla cerrada.
+\end{observacion}
+
+% ===========================================================
+\section{Estadística de detección: de candidatos a eventos}
+\label{sec:estadistica_deteccion}
+% ===========================================================
+
+La detección formal exige traducir ``picos de SNR'' en evidencia estadística robusta frente a ruido no gaussiano.
+
+\begin{definicion}{Tasa de falsa alarma (FAR)}{def:far}
+La FAR es la frecuencia esperada de candidatos de igual o mayor estadístico de ranking producidos por ruido.
+\end{definicion}
+
+\begin{definicion}{Significancia observacional}{def:significance}
+La significancia de un candidato se reporta típicamente mediante FAR, $p$-valor o probabilidad astrofísica estimada por modelos de población señal+ruido.
+\end{definicion}
+
+\subsection{Coincidencia y coherencia en red}
+
+Un candidato real debe mostrar:
+\begin{itemize}[leftmargin=2em]
+  \item consistencia temporal con tiempos de vuelo entre sitios,
+  \item coherencia de fase/amplitud entre detectores,
+  \item robustez frente a ventanas de ruido perturbadas.
+\end{itemize}
+
+\begin{importante}
+La robustez estadística depende tanto del estadístico elegido como de una caracterización honesta del fondo de ruido mediante técnicas de \emph{time-shift} y validación interna.
+\end{importante}
+
+% ===========================================================
+\section{Redes de detectores y localización celeste}
+\label{sec:redes_localizacion}
+% ===========================================================
+
+\subsection{Triangulación temporal}
+
+Diferencias de tiempo de llegada $\Delta t_{ij}$ entre detectores restringen anillos/arcos en el cielo. Con tres o más instrumentos, la intersección de restricciones mejora el área de localización.
+
+\begin{definicion}{Área de credibilidad en cielo}{def:sky_area}
+La localización se resume con regiones de credibilidad (por ejemplo, 90\%) en mapas HEALPix derivados de posterior bayesiano.
+\end{definicion}
+
+\subsection{Red global y multimensajero}
+
+Una red amplia (LIGO Hanford, LIGO Livingston, Virgo, KAGRA y futuros detectores) mejora:
+\begin{itemize}[leftmargin=2em]
+  \item precisión angular,
+  \item separación de polarizaciones,
+  \item eficiencia de seguimiento electromagnético.
+\end{itemize}
+
+\begin{observacion}{Impacto científico}{obs:network_impact}
+Reducir áreas de localización acelera identificación de contrapartes, crucial para física transitoria y cosmología con sirenas estándar.
+\end{observacion}
+
+% ===========================================================
+\section{Inferencia bayesiana de parámetros}
+\label{sec:bayes_inference}
+% ===========================================================
+
+\begin{definicion}{Posterior bayesiano}{def:posterior}
+La distribución posterior de parámetros $\theta$ dados los datos $d$ es
+\begin{equation}
+p(\theta|d)\propto p(d|\theta)\,\pi(\theta),
+\end{equation}
+donde $p(d|\theta)$ es la verosimilitud y $\pi(\theta)$ el prior.
+\end{definicion}
+
+Asumiendo ruido gaussiano estacionario:
+\begin{equation}
+\ln p(d|\theta)=
+-\frac{1}{2}(d-h(\theta)\,|\,d-h(\theta))+\text{cte}.
+\end{equation}
+
+\subsection{Parámetros intrínsecos y extrínsecos}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Intrínsecos:} masas, espines, deformabilidades.
+  \item \textbf{Extrínsecos:} distancia, inclinación, fase, polarización, posición celeste.
+\end{itemize}
+
+\begin{observacion}{Degeneración distancia--inclinación}{obs:distance_inclination}
+Una de las degeneraciones más conocidas en CBC es entre distancia luminosa e inclinación orbital; red de detectores y contrapartes EM ayudan a romperla.
+\end{observacion}
+
+\subsection{Evidencia y comparación de modelos}
+
+La evidencia bayesiana
+\begin{equation}
+Z=\int p(d|\theta)\pi(\theta)d\theta
+\end{equation}
+permite comparar hipótesis (señal vs ruido, modelos de onda alternativos, pruebas de relatividad general).
+
+% ===========================================================
+\section{Sistemáticas, validación y control de calidad}
+\label{sec:sistematicas}
+% ===========================================================
+
+Las conclusiones físicas requieren control explícito de errores sistemáticos:
+\begin{itemize}[leftmargin=2em]
+  \item incertidumbre de calibración,
+  \item inexactitud de modelos de forma de onda,
+  \item no gaussianidad/no estacionariedad residual del ruido,
+  \item dependencias de prior en inferencia.
+\end{itemize}
+
+\begin{definicion}{Inyección de señales simuladas}{def:injections}
+Las inyecciones (software/hardware) son señales conocidas añadidas a datos reales o de prueba para validar sensibilidad, recuperación de parámetros y robustez de pipelines.
+\end{definicion}
+
+\begin{importante}
+Reportar resultados sin cuantificar sistemáticas puede producir sobreconfianza estadística y sesgos en interpretación astrofísica o cosmológica.
+\end{importante}
+
+% ===========================================================
+\section{Ejemplo desarrollado: estimación simplificada de detectabilidad}
+\label{sec:ejemplo_detectabilidad}
+% ===========================================================
+
+\begin{ejemplo}{Cómo cambia la SNR al variar distancia y ruido}{ej:snr_scaling_example}
+Considere una plantilla fija con norma $(h|h)^{1/2}$ en un detector de referencia. Suponga:
+\begin{itemize}[leftmargin=2em]
+  \item Caso A: fuente a distancia $d$ y PSD $S_n(f)$.
+  \item Caso B: misma fuente a distancia $2d$.
+  \item Caso C: misma fuente a distancia $d$ pero con mejora de sensibilidad efectiva de amplitud por factor $1.5$ en la banda dominante.
+\end{itemize}
+
+\textbf{Paso 1: escalar con distancia.} \\
+Como $h\propto1/d$, entonces
+\begin{equation}
+\rho_B \approx \frac{\rho_A}{2}.
+\end{equation}
+
+\textbf{Paso 2: escalar con sensibilidad.} \\
+Si la mejora de amplitud es $1.5$, la SNR aumenta aproximadamente en el mismo factor:
+\begin{equation}
+\rho_C \approx 1.5\,\rho_A.
+\end{equation}
+
+\textbf{Paso 3: implicación para detección.} \\
+En umbrales cercanos, una mejora moderada de sensibilidad puede convertir candidatos marginales en detecciones significativas y expandir el volumen de búsqueda de forma cúbica.
+\end{ejemplo}
+
+% ===========================================================
+\section{Conexión con catálogos y ciencia de poblaciones}
+\label{sec:catalogos_poblaciones}
+% ===========================================================
+
+La repetición de detecciones transforma eventos individuales en estadística poblacional:
+\begin{itemize}[leftmargin=2em]
+  \item distribuciones de masas/espines,
+  \item tasas de fusión en función de redshift,
+  \item tests de relatividad general en conjunto,
+  \item inferencia cosmológica jerárquica.
+\end{itemize}
+
+\begin{observacion}{Era de precisión}{obs:precision_era}
+El progreso científico ya no depende solo de detectar, sino de caracterizar sesgos de selección, incertidumbres sistemáticas y consistencia entre pipelines para producir inferencia poblacional robusta.
+\end{observacion}
+
+% ===========================================================
+\section{Síntesis final}
+\label{sec:sintesis_cap18}
+% ===========================================================
+
+Conclusiones del capítulo:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La salida instrumental se modela como señal más ruido calibrado.
+  \item La respuesta detector--fuente depende de geometría y polarización vía funciones patrón.
+  \item La PSD de ruido define el peso óptimo en matched filtering y cálculo de SNR.
+  \item La detección robusta requiere estadística de fondo, coherencia en red y control de no gaussianidad.
+  \item La inferencia bayesiana convierte señal en distribuciones de parámetros y comparación de modelos.
+  \item Sistemáticas de calibración, modelos y ruido son tan importantes como la estadística formal.
+\end{enumerate}
+
+Con este capítulo se cierra el arco conceptual del libro: de fundamentos geométricos y cosmológicos a emisión, detección e interpretación astrofísica de ondas gravitacionales en la era observacional moderna.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Respuesta angular.} \\
+Explique por qué dos fuentes con igual amplitud intrínseca pueden producir SNR distintas en un mismo detector al cambiar $(\alpha,\delta,\psi)$.
+
+\item \textbf{Producto interno ponderado.} \\
+Usando \eqref{eq:inner_product}, discuta por qué regiones de frecuencia con menor $S_n(f)$ contribuyen más a la SNR.
+
+\item \textbf{Escalamiento con distancia.} \\
+Demuestre que, en primera aproximación, duplicar $d_L$ reduce la SNR a la mitad para una forma de onda fija.
+
+\item \textbf{FAR y significancia.} \\
+Distinga entre candidato de alta SNR y evento altamente significativo. ¿Por qué la SNR por sí sola no basta?
+
+\item \textbf{Degeneración distancia--inclinación.} \\
+Describa cualitativamente cómo la red de detectores y una contraparte electromagnética pueden reducir esta degeneración.
+
+\item \textbf{Sistemáticas.} \\
+Mencione tres fuentes de error sistemático en inferencia GW y proponga una estrategia breve para mitigarlas.
+
+\item \textbf{Comparación de modelos.} \\
+Interprete el papel de la evidencia bayesiana al comparar hipótesis ``señal+ruido'' frente a ``solo ruido''.
+
+\end{enumerate}

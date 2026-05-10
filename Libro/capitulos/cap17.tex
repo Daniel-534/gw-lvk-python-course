@@ -1,0 +1,298 @@
+% ============================================================
+% Capítulo 17: Fuentes Astrofísicas de Ondas Gravitacionales
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Fuentes Astrofísicas de Ondas Gravitacionales}
+\label{cap:fuentes_astro_og}
+
+La aproximación de cuadrupolo del capítulo anterior establece \emph{cómo} una fuente emite. El siguiente paso es identificar \emph{qué objetos astrofísicos} producen señales detectables, qué rasgos físicos caracterizan esas señales y qué información sobre población, evolución estelar y física fundamental puede extraerse de ellas \cite{Maggiore2007, Maggiore2018, Thorne1987, GWTC1, GWTC3}.
+
+En este capítulo se estudia la clasificación de fuentes en señales transitorias, continuas y estocásticas; la física de binarias compactas (BBH, BNS, NSBH); estallidos no modelados asociados a colapso estelar; emisiones continuas de estrellas de neutrones; fondos estocásticos cosmológicos y astrofísicos; y la conexión con catálogos observacionales y astronomía multimensajero.
+
+% ===========================================================
+\section{Panorama general de fuentes y regímenes observacionales}
+\label{sec:panorama_fuentes}
+% ===========================================================
+
+\begin{definicion}{Clasificación operacional de señales}{def:clasificacion_senales}
+En análisis de datos de ondas gravitacionales, las fuentes suelen clasificarse como:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Compact Binary Coalescences (CBC):} señales transitorias relativamente bien modeladas.
+  \item \textbf{Bursts:} transitorios de morfología incierta o parcialmente modelada.
+  \item \textbf{Ondas continuas (CW):} señales cuasi-monocromáticas de larga duración.
+  \item \textbf{Fondos estocásticos (SGWB):} superposición incoherente de muchas contribuciones.
+\end{itemize}
+\end{definicion}
+
+\begin{observacion}{Bandas de frecuencia y detectores}{obs:bandas}
+La instrumentación determina qué fuentes son accesibles: interferómetros terrestres operan típicamente en decenas--miles de Hz, detectores espaciales como LISA en miliHz, y PTA en nHz \cite{LIGO2015, Virgo2015, LISA2017, NANOGrav2023}.
+\end{observacion}
+
+Una misma clase física puede aparecer en bandas distintas durante etapas evolutivas diferentes. Por ejemplo, una binaria masiva de agujeros negros supermasivos es objetivo natural de LISA/PTA, mientras binarias de masa estelar coalescen en la banda terrestre.
+
+% ===========================================================
+\section{Binarias compactas: núcleo de la astronomía GW moderna}
+\label{sec:binarias_compactas}
+% ===========================================================
+
+Las coalescencias de binarias compactas (BBH, BNS, NSBH) son, hasta ahora, la clase de señales transitorias más robustamente observada en interferometría terrestre \cite{Abbott2016prl, Abbott2017BNS, GWTC1, GWTC3}.
+
+\subsection{Fases físicas de la señal}
+
+\begin{definicion}{Inspiral, merger y ringdown}{def:imr}
+La forma de onda de una coalescencia compacta se organiza en tres fases:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item \textbf{Inspiral:} evolución cuasiadiabática por pérdida de energía.
+  \item \textbf{Merger:} régimen fuertemente no lineal cercano a la unión.
+  \item \textbf{Ringdown:} relajación del remanente por modos cuasinormales.
+\end{enumerate}
+\end{definicion}
+
+\begin{importante}
+La inferencia de parámetros usa plantillas que combinan física post-newtoniana, calibración numérica y modelos fenomenológicos para describir coherentemente el ciclo IMR completo.
+\end{importante}
+
+\subsection{Escalas y dependencias principales}
+
+En aproximación líder, la amplitud observada escala como
+\begin{equation}
+h \propto \frac{\mathcal{M}^{5/3} f^{2/3}}{d_L},
+\end{equation}
+mientras la evolución de fase viene controlada por $\mathcal{M}$ y correcciones de razón de masas y espín.
+
+\begin{observacion}{Degeneraciones físicas}{obs:degeneraciones}
+Parámetros extrínsecos (distancia, inclinación, polarización, posición celeste) y ciertos parámetros intrínsecos (masas, espines) pueden presentar degeneraciones parciales, reducidas al combinar una red de detectores.
+\end{observacion}
+
+% ===========================================================
+\section{Subpoblaciones: BBH, BNS y NSBH}
+\label{sec:subpoblaciones_cbc}
+% ===========================================================
+
+\subsection{Binarias de agujeros negros (BBH)}
+
+Las BBH dominan numéricamente los catálogos tempranos. Presentan altas masas chirp y, por tanto, señales de gran amplitud en las últimas órbitas, aunque con menor duración en banda que las BNS para la misma frecuencia mínima de análisis \cite{GWTC1, GWTC3}.
+
+\begin{definicion}{Parámetro de espín efectivo}{def:chi_eff}
+Para una binaria con momento angular orbital $\hat{L}$, el espín efectivo se define como
+\begin{equation}
+\chi_{\mathrm{eff}}=
+\frac{m_1\vec\chi_1+m_2\vec\chi_2}{m_1+m_2}\cdot\hat{L},
+\end{equation}
+y controla de manera prominente la fase de inspiral.
+\end{definicion}
+
+\subsection{Binarias de estrellas de neutrones (BNS)}
+
+Las BNS permanecen más tiempo en banda y permiten estudiar:
+\begin{itemize}[leftmargin=2em]
+  \item efectos de marea y ecuación de estado de materia densa,
+  \item emisión electromagnética asociada (kilonova, GRB corto),
+  \item medidas cosmológicas de distancia con contraparte.
+\end{itemize}
+
+\begin{importante}
+GW170817 mostró que las ondas gravitacionales pueden integrar astrofísica compacta, nucleosíntesis y cosmología observacional en un único evento multimensajero \cite{Abbott2017BNS, Abbott2017multimessenger, Abbott2017H0}.
+\end{importante}
+
+\subsection{Sistemas mixtos NSBH}
+
+Las NSBH son particularmente informativas para estudiar umbrales de disrupción mareal de la estrella de neutrones, dependientes de masa/espín del agujero negro y compacticidad estelar.
+
+\begin{observacion}{Información complementaria}{obs:nsbh}
+Incluso sin contraparte electromagnética confirmada, la combinación de masa chirp, razón de masas y límites de deformabilidad mareal aporta restricciones sobre física de materia nuclear.
+\end{observacion}
+
+% ===========================================================
+\section{Eventos burst: colapso estelar y fenómenos transitorios complejos}
+\label{sec:bursts}
+% ===========================================================
+
+No toda señal astrofísica posee plantilla precisa. Procesos como supernovas de colapso de núcleo, inestabilidades hidrodinámicas o remanentes altamente asimétricos pueden generar emisiones breves y complejas.
+
+\begin{definicion}{Búsqueda burst}{def:burst}
+Una búsqueda burst busca excesos coherentes de potencia tiempo-frecuencia en múltiples detectores sin imponer un modelo detallado de forma de onda.
+\end{definicion}
+
+\begin{itemize}[leftmargin=2em]
+  \item Ventaja: sensibilidad a fenómenos inesperados.
+  \item Limitación: menor poder de inferencia física detallada frente a CBC modeladas.
+\end{itemize}
+
+\begin{ejemplo}{Escenario de supernova cercana}{ej:supernova}
+Una supernova galáctica asimétrica podría producir una señal burst en banda terrestre. La detección conjunta con neutrinos y observaciones ópticas/rayos X permitiría reconstruir la cronología interna del colapso, acotando mecanismos de explosión y transporte de momento angular.
+\end{ejemplo}
+
+% ===========================================================
+\section{Ondas continuas de estrellas de neutrones}
+\label{sec:ondas_continuas}
+% ===========================================================
+
+\begin{definicion}{Emisión continua cuasi-monocromática}{def:cw}
+Una estrella de neutrones rotante emite ondas continuas si presenta una asimetría no axisimétrica estable respecto al eje de rotación.
+\end{definicion}
+
+Para una elipticidad efectiva $\epsilon$, la amplitud característica escala como
+\begin{equation}
+h_0 \sim \frac{4\pi^2 G}{c^4}\frac{I\epsilon f_{\mathrm{rot}}^2}{d},
+\end{equation}
+donde $I$ es el momento de inercia estelar y $f_{\mathrm{rot}}$ la frecuencia de rotación.
+
+\subsection{Retos de análisis}
+
+Las búsquedas CW requieren integrar meses--años de datos corrigiendo:
+\begin{itemize}[leftmargin=2em]
+  \item modulación Doppler orbital/terrestre,
+  \item deriva intrínseca de frecuencia (\emph{spin-down}),
+  \item enormes espacios de parámetros (posición, frecuencia, derivadas).
+\end{itemize}
+
+\begin{observacion}{Resultado típico actual}{obs:cw_limits}
+Aunque no se han establecido detecciones inequívocas en población amplia, los límites superiores sobre $h_0$ y $\epsilon$ ya son astrofísicamente constrictivos para múltiples púlsares.
+\end{observacion}
+
+% ===========================================================
+\section{Fondos estocásticos de ondas gravitacionales}
+\label{sec:sgwb}
+% ===========================================================
+
+\begin{definicion}{Fondo estocástico}{def:sgwb}
+Un fondo estocástico es una superposición estadística de muchas contribuciones no resueltas, descrita mediante densidad fraccional de energía
+\begin{equation}
+\Omega_{\mathrm{GW}}(f)\equiv
+\frac{1}{\rho_c}\frac{d\rho_{\mathrm{GW}}}{d\ln f}.
+\end{equation}
+\end{definicion}
+
+\subsection{Origen astrofísico vs cosmológico}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Astrofísico:} suma de muchas binarias compactas no resueltas.
+  \item \textbf{Cosmológico:} posibles procesos del universo temprano (transiciones de fase, cuerdas cósmicas, escenarios inflacionarios específicos).
+\end{itemize}
+
+\begin{proposicion}{Necesidad de correlación entre detectores}{prop:correlation}
+Para instrumentos terrestres dominados por ruido local no correlacionado, la estrategia estándar para SGWB es la correlación cruzada entre detectores separados.
+\end{proposicion}
+
+\begin{observacion}{PTA y banda nanohertz}{obs:pta}
+Resultados recientes en PTA han mostrado evidencia de un fondo común de proceso rojo consistente con expectativas de fondo gravitacional en banda nHz, abriendo una nueva ventana de astrofísica de agujeros negros supermasivos \cite{NANOGrav2023}.
+\end{observacion}
+
+% ===========================================================
+\section{Tasas astrofísicas, selección instrumental y sesgos}
+\label{sec:tasas_seleccion}
+% ===========================================================
+
+La población observada no coincide directamente con la población intrínseca. La detectabilidad depende de amplitud, orientación, distancia, masa y sensibilidad instrumental.
+
+\begin{definicion}{Sesgo de selección}{def:selection_bias}
+Un sesgo de selección aparece cuando la probabilidad de detección depende de los parámetros de fuente, distorsionando distribuciones observadas respecto a las reales.
+\end{definicion}
+
+\begin{importante}
+Inferir formación de binarias y evolución estelar requiere modelos poblacionales jerárquicos que incorporen explícitamente eficiencia de detección y censura de eventos débiles.
+\end{importante}
+
+\subsection{Volumen sensible y horizonte}
+
+En primera aproximación, si $h\propto1/d$, aumentar sensibilidad en amplitud por un factor $\alpha$ incrementa distancia horizonte en $\alpha$ y volumen sondeado en $\alpha^3$, con impacto fuerte en tasa de detección.
+
+\begin{ejemplo}{Escalamiento de tasa con sensibilidad}{ej:rate_scaling}
+Si una mejora instrumental reduce el ruido efectivo de amplitud en un factor $2$, el volumen accesible para una subpoblación isotrópica crece aproximadamente por $2^3=8$. Incluso cambios modestos de sensibilidad modifican drásticamente el rendimiento observacional por campaña.
+\end{ejemplo}
+
+% ===========================================================
+\section{Multimensajero: valor físico añadido de las contrapartes}
+\label{sec:multimensajero}
+% ===========================================================
+
+Las ondas gravitacionales aportan distancia y dinámica orbital; las contrapartes electromagnéticas/neutrinos añaden localización, ambiente y procesos de eyección.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Distancia estándar siren:} de la forma de onda GW.
+  \item \textbf{Redshift y ambiente galáctico:} de observaciones EM.
+  \item \textbf{Física de materia densa y nucleosíntesis:} de kilonovas y espectros.
+\end{itemize}
+
+\begin{definicion}{Sirenas estándar}{def:standard_siren}
+Una \textbf{sirena estándar} es una fuente GW cuya amplitud codifica distancia luminosa absoluta sin requerir calibración de escalera de distancia tradicional.
+\end{definicion}
+
+\begin{observacion}{Sinergia cosmológica}{obs:cosmo_siren}
+La combinación de distancia GW con redshift EM permite estimar $H_0$ y, en muestras grandes, otros parámetros cosmológicos \cite{Abbott2017H0}.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado: lectura física de dos eventos tipo}
+\label{sec:ejemplo_eventos_tipo}
+% ===========================================================
+
+\begin{ejemplo}{Comparación cualitativa BBH vs BNS}{ej:bbh_bns_compare}
+Considere dos detecciones idealizadas:
+\begin{itemize}[leftmargin=2em]
+  \item Evento A: BBH de masa total alta.
+  \item Evento B: BNS de masas cercanas a $1.4\,M_\odot$.
+\end{itemize}
+
+\textbf{Paso 1: duración en banda.} \\
+El evento A barre frecuencia rápidamente y tiene señal más corta; el evento B permanece más ciclos en banda terrestre.
+
+\textbf{Paso 2: contenido de fase.} \\
+En BNS, la fase acumulada permite medir con gran precisión combinaciones de masa, y potencialmente parámetros mareales; en BBH masivas, la parte merger-ringdown contribuye proporcionalmente más.
+
+\textbf{Paso 3: probabilidad de contraparte EM.} \\
+En BBH se espera, en general, ausencia de contraparte brillante; en BNS existe posibilidad de GRB corto y kilonova, habilitando ciencia multimensajero.
+
+\textbf{Paso 4: inferencia astrofísica.} \\
+El evento A informa canales de formación de BH y distribución de espines; el evento B añade información sobre ecuación de estado estelar y nucleosíntesis de elementos pesados.
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis y transición}
+\label{sec:sintesis_cap17}
+% ===========================================================
+
+Resultados centrales:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item Las fuentes GW se organizan operacionalmente en CBC, bursts, continuas y fondo estocástico.
+  \item Las binarias compactas son la fuente transitoria dominante en catálogos terrestres actuales.
+  \item BNS y NSBH aportan física de marea y potencial multimensajero; BBH trazan formación de objetos compactos masivos.
+  \item Las ondas continuas y el SGWB requieren técnicas de integración/correlación de largo plazo.
+  \item Sesgos de selección son centrales para inferir poblaciones intrínsecas.
+  \item La astronomía multimensajero amplía drásticamente el alcance físico de una detección GW.
+\end{enumerate}
+
+En el siguiente capítulo se abordará la cadena observacional completa: respuesta de detectores, ruido, estadística de detección e inferencia bayesiana de parámetros.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Clasificación de fuentes.} \\
+Proponga un criterio para clasificar una señal candidata como CBC, burst o continua usando únicamente duración, estructura espectral y disponibilidad de plantillas.
+
+\item \textbf{Escalamiento de amplitud y distancia.} \\
+Si dos eventos tienen igual masa chirp y frecuencia instantánea, pero uno está al doble de distancia luminosa, compare sus amplitudes esperadas y discuta impacto sobre detectabilidad.
+
+\item \textbf{Volumen sensible.} \\
+Muestre que mejorar sensibilidad en amplitud por un factor $\alpha$ incrementa el volumen sensible por $\alpha^3$ en aproximación euclídea. Interprete para $\alpha=1.5$.
+
+\item \textbf{Rol de $\chi_{\mathrm{eff}}$.} \\
+Explique por qué el parámetro de espín efectivo es especialmente relevante en la fase de inspiral y qué tipo de información astrofísica codifica.
+
+\item \textbf{Continuas de púlsares.} \\
+A partir de la expresión de $h_0$, discuta cómo cambian los límites de elipticidad inferidos al mejorar distancia, frecuencia de rotación y sensibilidad instrumental.
+
+\item \textbf{Fondo estocástico.} \\
+Justifique por qué la correlación entre detectores es más robusta que un análisis de un solo detector para buscar SGWB en banda terrestre.
+
+\item \textbf{Multimensajero y cosmología.} \\
+Describa qué información adicional aporta una contraparte EM para convertir una detección GW en una medición de $H_0$.
+
+\end{enumerate}
