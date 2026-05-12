@@ -1,0 +1,247 @@
+% ============================================================
+% Capítulo 20: Astronomía Multi-Mensajero y Fronteras
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Astronomía Multi-Mensajero y Fronteras de la Investigación}
+\label{cap:multimensajero_fronteras}
+
+La detección de GW170817 junto con GRB 170817A y su kilonova asociada transformó la astronomía de ondas gravitacionales en una ciencia genuinamente multi-mensajero \cite{Abbott2017BNS, Abbott2017multimessenger, Abbott2017H0}. Desde entonces, las preguntas centrales no son solo ``¿hay señal?'', sino ``¿qué física nueva podemos restringir al combinar mensajeros?'', ``¿cómo escalar precisión con redes globales?'' y ``¿qué ventanas abrirán LISA y PTA?'' \cite{LISA2017, NANOGrav2023, Maggiore2018}.
+
+Este capítulo sintetiza el estado del arte y traza líneas de investigación para la próxima década en gravitación, astrofísica compacta y cosmología de precisión.
+
+% ===========================================================
+\section{De la detección a la astronomía integrada}
+\label{sec:deteccion_astronomia_integrada}
+% ===========================================================
+
+\begin{definicion}{Astronomía multi-mensajero}{def:multi_mensajero}
+Es la inferencia física conjunta a partir de señales gravitacionales, electromagnéticas, neutrinos y/o rayos cósmicos, explotando complementariedad observacional para romper degeneraciones.
+\end{definicion}
+
+\begin{observacion}{Ganancia epistemológica}{obs:ganancia_epistemologica}
+Cada mensajero mide subconjuntos distintos de parámetros; la combinación produce restricciones más robustas que cualquier canal por separado.
+\end{observacion}
+
+Ejemplos típicos de complementariedad:
+\begin{itemize}[leftmargin=2em]
+  \item GW: distancia luminosa y dinámica orbital,
+  \item EM: redshift, ambiente anfitrión, física radiativa,
+  \item neutrinos: cronología y microfísica de colapso.
+\end{itemize}
+
+% ===========================================================
+\section{GW170817 como punto de inflexión}
+\label{sec:gw170817_inflexion}
+% ===========================================================
+
+\begin{definicion}{Evento ancla}{def:evento_ancla}
+Un evento ancla es una detección con riqueza observacional suficiente para calibrar metodologías en múltiples dominios (detección, localización, inferencia, seguimiento EM, cosmología).
+\end{definicion}
+
+GW170817 cumple este rol por:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item detección GW robusta de una BNS,
+  \item contraparte gamma en segundos,
+  \item evolución kilonova en óptico/infrarrojo,
+  \item identificación de galaxia anfitriona y redshift.
+\end{enumerate}
+
+\begin{importante}
+La combinación GW+EM permitió medir distancia y redshift en un mismo evento sin usar la escalera de distancia tradicional, validando operacionalmente el método de sirenas estándar.
+\end{importante}
+
+% ===========================================================
+\section{Restricciones a propagación y velocidad de ondas gravitacionales}
+\label{sec:restricciones_propagacion}
+% ===========================================================
+
+\begin{definicion}{Retardo inter-mensajero}{def:retardo_intermensajero}
+Es la diferencia de tiempo de llegada entre señales de distintos mensajeros emitidos en un mismo fenómeno astrofísico, modelada como suma de retardo intrínseco de emisión y posible retardo de propagación.
+\end{definicion}
+
+Para distancia $D$ y velocidades $v_{\mathrm{GW}},c$:
+\begin{equation}
+\Delta t_{\mathrm{prop}} \approx D\left(\frac{1}{v_{\mathrm{GW}}}-\frac{1}{c}\right).
+\end{equation}
+
+El pequeño desfase observado en GW170817/GRB170817A impuso límites severos a desviaciones de $v_{\mathrm{GW}}$ respecto a $c$, restringiendo clases de teorías modificadas de gravedad.
+
+\begin{observacion}{Dependencia de modelado astrofísico}{obs:dependencia_modelado}
+La interpretación cuantitativa requiere separar cuidadosamente retardo de emisión en el jet y retardo de propagación fundamental.
+\end{observacion}
+
+% ===========================================================
+\section{Materia densa y ecuación de estado en estrellas de neutrones}
+\label{sec:eos_materia_densa}
+% ===========================================================
+
+\begin{definicion}{Deformabilidad mareal efectiva}{def:lambda_tidal}
+La deformabilidad mareal codifica cuánto se deforma una estrella de neutrones en el campo gravitacional de su compañera y deja huella en la fase de inspiral tardío.
+\end{definicion}
+
+Las restricciones combinadas GW+EM informan:
+\begin{itemize}[leftmargin=2em]
+  \item radios típicos de estrellas de neutrones,
+  \item rigidez de la ecuación de estado,
+  \item masa máxima estable frente a colapso.
+\end{itemize}
+
+\begin{proposicion}{Sinergia observacional}{prop:sinergia_eos}
+Datos GW acotan deformabilidad macroscópica; datos EM de kilonova y remanente aportan información sobre eyección y composición, reforzando inferencia sobre microfísica nuclear.
+\end{proposicion}
+
+% ===========================================================
+\section{Cosmología con sirenas estándar}
+\label{sec:cosmologia_sirenas_estandar}
+% ===========================================================
+
+\begin{definicion}{Sirena estándar brillante y oscura}{def:sirenas_brillante_oscura}
+\textbf{Brillante:} evento con contraparte y anfitriona identificada (redshift directo). \\
+\textbf{Oscura:} evento sin contraparte inequívoca; el redshift se infiere estadísticamente con catálogos de galaxias.
+\end{definicion}
+
+Para eventos de bajo redshift:
+\begin{equation}
+d_L \simeq \frac{c\,z}{H_0},
+\end{equation}
+por lo que la medida de $d_L$ (GW) y $z$ (EM/catálogo) permite inferir $H_0$.
+
+\begin{observacion}{Escalamiento de precisión}{obs:escalamiento_h0}
+La precisión en $H_0$ mejora aproximadamente como $1/\sqrt{N_{\mathrm{eff}}}$ cuando se combinan eventos independientes con sistemáticas controladas.
+\end{observacion}
+
+\subsection{Retos actuales}
+
+\begin{itemize}[leftmargin=2em]
+  \item degeneración distancia--inclinación en evento individual,
+  \item incompletitud y sesgo de catálogos de galaxias para sirenas oscuras,
+  \item peculiar velocities en régimen de bajo redshift.
+\end{itemize}
+
+% ===========================================================
+\section{Mapeando el cielo dinámico: localización y respuesta rápida}
+\label{sec:localizacion_respuesta_rapida}
+% ===========================================================
+
+La ciencia multi-mensajero exige tiempos de respuesta de minutos a horas:
+\begin{itemize}[leftmargin=2em]
+  \item alertas de baja latencia,
+  \item mapas probabilísticos de localización,
+  \item priorización de telescopios por área, profundidad y ventana temporal.
+\end{itemize}
+
+\begin{definicion}{Cadena de seguimiento}{def:cadena_seguimiento}
+Secuencia coordinada de publicación de alerta, refinamiento de localización, estrategia de apuntado y actualización de clasificación astrofísica en tiempo casi real.
+\end{definicion}
+
+\begin{importante}
+La calidad de la localización no depende solo de SNR, sino de geometría de red, disponibilidad de detectores y calibración en el momento del evento.
+\end{importante}
+
+% ===========================================================
+\section{Nuevas bandas: LISA y arreglos de púlsares (PTA)}
+\label{sec:lisa_pta}
+% ===========================================================
+
+\subsection{LISA y la banda milihertz}
+
+LISA observará binarias masivas de agujeros negros, sistemas galácticos compactos y potencialmente fondos cosmológicos en mHz \cite{LISA2017}.
+
+\begin{observacion}{Astronomía multibanda}{obs:multibanda}
+Algunas fuentes podrán seguirse desde mHz (LISA) hasta banda terrestre, permitiendo predicción previa de coalescencia y campañas EM planificadas.
+\end{observacion}
+
+\subsection{PTA y la banda nanohertz}
+
+PTA explota la estabilidad temporal de púlsares milisegundo para detectar correlaciones angulares inducidas por ondas gravitacionales de ultra baja frecuencia \cite{NANOGrav2023}.
+
+\begin{definicion}{Firma de Hellings--Downs}{def:hellings_downs}
+Patrón angular esperado de correlación temporal entre pares de púlsares en presencia de un fondo estocástico gravitacional isotrópico.
+\end{definicion}
+
+% ===========================================================
+\section{Fronteras teóricas y observacionales}
+\label{sec:fronteras_teoricas_observacionales}
+% ===========================================================
+
+Líneas activas de investigación:
+\begin{itemize}[leftmargin=2em]
+  \item tests de relatividad general en régimen dinámico fuerte,
+  \item búsqueda de polarizaciones extra y disipación anómala,
+  \item demografía de agujeros negros de masa intermedia y supermasiva,
+  \item fondos cosmológicos del universo temprano,
+  \item inferencia cosmológica conjunta con CMB/BAO/supernovas.
+\end{itemize}
+
+\begin{observacion}{Desafío metodológico transversal}{obs:desafio_metodologico}
+El límite actual suele ser inferencial, no detectivo: controlar sistemáticas, sesgos de selección y consistencia entre instrumentos es tan crítico como mejorar sensibilidad bruta.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado: estrategia multi-mensajero para una BNS cercana}
+\label{sec:ejemplo_estrategia_multimensajero}
+% ===========================================================
+
+\begin{ejemplo}{Plan científico en las primeras 48 horas}{ej:plan_48h}
+Considere una BNS detectada por una red de tres interferómetros con localización inicial de 120 deg$^2$ y distancia $d_L$ moderadamente bien medida.
+
+\textbf{Paso 1: priorización inicial (0--2 h).} \\
+Cruzar mapa GW con catálogos de galaxias y seleccionar campos de mayor probabilidad ponderando visibilidad y magnitud límite.
+
+\textbf{Paso 2: búsqueda transitoria (2--24 h).} \\
+Ejecutar barridos ópticos/IR para identificar fuentes nuevas con evolución compatible con kilonova.
+
+\textbf{Paso 3: confirmación y espectros (24--48 h).} \\
+Obtener espectros y fotometría multibanda para separar supernovas comunes de candidatos kilonova.
+
+\textbf{Paso 4: retorno a inferencia conjunta.} \\
+Incorporar redshift anfitrión y datos EM en análisis bayesiano para refinar inclinación, distancia y parámetros cosmológicos.
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis final}
+\label{sec:sintesis_cap20}
+% ===========================================================
+
+Conclusiones del capítulo:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item La astronomía multi-mensajero transforma detecciones GW en física integrada de alta precisión.
+  \item GW170817 estableció un estándar metodológico para pruebas de propagación, materia densa y cosmología.
+  \item Sirenas estándar, brillantes y oscuras, son un pilar emergente para medir parámetros cosmológicos.
+  \item LISA y PTA abrirán ventanas de frecuencia complementarias con fuerte potencial de descubrimiento.
+  \item El principal reto de la próxima década es controlar sistemáticas y coordinar redes observacionales globales.
+\end{enumerate}
+
+Con este capítulo concluye el recorrido del libro: de los fundamentos geométricos y relativistas hasta las fronteras experimentales y cosmológicas de la gravitación moderna.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Complementariedad de mensajeros.} \\
+Dé un ejemplo concreto de parámetro físico que sea débilmente constriñido por GW solo y mejore al combinar con EM.
+
+\item \textbf{Velocidad de ondas gravitacionales.} \\
+Explique cualitativamente cómo un retardo GW--gamma pequeño restringe teorías de gravedad modificada.
+
+\item \textbf{Sirenas estándar oscuras.} \\
+Discuta el papel de la completitud de catálogos galácticos en la inferencia de $H_0$ sin contraparte inequívoca.
+
+\item \textbf{Materia densa.} \\
+Relacione deformabilidad mareal con información sobre rigidez de la ecuación de estado.
+
+\item \textbf{Respuesta rápida.} \\
+Proponga tres criterios para priorizar campos de observación EM tras una alerta GW.
+
+\item \textbf{Multibanda LISA--terrestre.} \\
+Describa una ventaja científica de detectar una misma fuente en mHz y luego en decenas de Hz.
+
+\item \textbf{PTA y fondos estocásticos.} \\
+¿Por qué la correlación angular entre púlsares es central para distinguir señal común de ruido intrínseco?
+
+\end{enumerate}
