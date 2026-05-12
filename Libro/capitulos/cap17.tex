@@ -67,6 +67,162 @@ Parámetros extrínsecos (distancia, inclinación, polarización, posición cele
 \end{observacion}
 
 % ===========================================================
+\section{Evolución del inspiral: fase post-newtoniana y forma de onda}
+\label{sec:pn_waveform}
+% ===========================================================
+
+La descripción cualitativa del capítulo anterior (Cap.~\ref{cap:cuadrupolo}) muestra que la masa chirp gobierna el ritmo de inspiral en orden líder. Para el análisis de datos y la inferencia de parámetros se requiere la forma de onda cuantitativa, proporcionada por la \textbf{aproximación post-newtoniana} (PN): una expansión sistemática de la relatividad general en el parámetro $v/c \ll 1$.
+
+\subsection{El parámetro de velocidad post-newtoniana}
+
+\begin{definicion}{Parámetro de velocidad PN}{def:pn_param}
+Para una binaria con masa total $M$ que emite a frecuencia GW $f$, el parámetro de velocidad orbital adimensional es
+\begin{equation}
+  x \equiv \left(\frac{G M \pi f}{c^3}\right)^{2/3} = \left(\frac{v_{\rm orb}}{c}\right)^2,
+  \label{eq:pn_x}
+\end{equation}
+donde $v_{\rm orb}$ es la velocidad orbital. El orden $n$PN corresponde a términos de orden $x^n$ respecto al líder.
+\end{definicion}
+
+En la banda terrestre ($f \sim 20\text{--}2000\,\mathrm{Hz}$), $x \sim 0.03\text{--}0.4$ para sistemas de masa estelar; la expansión PN converge bien durante el inspiral, aunque colapsa al aproximarse a merger.
+
+\subsection{Fase en el dominio de frecuencia}
+
+Bajo la \textbf{aproximación estacionaria de fase} (SPA), la transformada de Fourier del inspiral adopta la forma
+\begin{equation}
+  \tilde{h}(f) \propto \mathcal{A}\,f^{-7/6}\,e^{i\Psi(f)},
+  \label{eq:h_spa}
+\end{equation}
+donde la fase acumulada $\Psi(f)$ tiene la expansión PN:
+\begin{align}
+  \Psi(f) &= 2\pi f t_c - \phi_c - \frac{\pi}{4} \nonumber\\
+  &\quad + \frac{3}{128}\left(\frac{G\mathcal{M}\pi f}{c^3}\right)^{-5/3}
+    \Bigl[1 + \alpha_2\,x + \alpha_3\,x^{3/2} + \alpha_4\,x^2 + \cdots\Bigr],
+  \label{eq:pn_phase}
+\end{align}
+con $t_c$ y $\phi_c$ el tiempo y la fase de coalescencia, y coeficientes $\alpha_k$ que dependen de la razón de masas $\eta = \mu/M$ y de los espines.
+
+\begin{observacion}{Sensibilidad de los parámetros a la fase}{obs:pn_params}
+El término líder de la fase depende solo de $\mathcal{M}$, que es así el parámetro mejor medido de la señal. Las correcciones $\alpha_2$, $\alpha_3$, \ldots codifican $\eta$, los espines individuales y efectos de marea, cuya extracción requiere alta SNR y muchos ciclos en banda.
+\end{observacion}
+
+\subsection{Amplitud espectral y distancia luminosa}
+
+El factor de amplitud en \eqref{eq:h_spa} tiene la forma
+\begin{equation}
+  \mathcal{A} = \frac{1}{d_L}\sqrt{\frac{5}{24}}\frac{G^2 \mathcal{M}^2}{c^5}
+    \left(\frac{G\mathcal{M}\pi}{c^3}\right)^{-1/6},
+  \label{eq:amplitude_spa}
+\end{equation}
+donde el factor de patrón angular $\mathcal{F}$ (funciones $F_+, F_\times$ y ángulo de inclinación $\iota$) modula la amplitud aparente. Dado que $\mathcal{A}\propto 1/d_L$, la distancia aparece degenerada con la inclinación a través de la amplitud.
+
+\begin{importante}
+El espectro de potencia $|\tilde{h}(f)|^2 \propto f^{-7/3}$ concentra más potencia de señal a bajas frecuencias. Por ello, la extensión de la banda sensible hacia frecuencias bajas (diseño de suspensiones, reducción de ruido sísmico) tiene un impacto desproporcionado en la medición de $\mathcal{M}$ y en el número de ciclos observados.
+\end{importante}
+
+\subsection{Correcciones de marea en BNS y deformabilidad}
+
+Para binarias de estrellas de neutrones, la deformación mareal de cada cuerpo contribuye a la fase gravitacional a alto orden PN. Se define la \textbf{deformabilidad mareal} cuadrupolar de cada estrella como
+
+\begin{definicion}{Deformabilidad mareal}{def:tidal_def}
+La deformabilidad mareal cuadrupolar de una estrella de neutrones de masa $m$ y radio $R$ es
+\begin{equation}
+  \lambda = \frac{2}{3}k_2\left(\frac{c^2 R}{G}\right)^5,
+\end{equation}
+donde $k_2$ es el número de Love gravitacional de cuarto orden. La deformabilidad adimensional es
+\begin{equation}
+  \Lambda = \frac{2k_2}{3}\left(\frac{c^2 R}{G m}\right)^5.
+\end{equation}
+\end{definicion}
+
+La combinación de deformabilidades ponderada por masa que aparece en la fase es
+\begin{equation}
+  \tilde\Lambda = \frac{16}{13}\frac{(m_1+12m_2)m_1^4\Lambda_1 + (m_2+12m_1)m_2^4\Lambda_2}{(m_1+m_2)^5}.
+\end{equation}
+
+Su contribución a la fase es a 5PN respecto al orden líder:
+\begin{equation}
+  \delta\Psi_{\rm tidal}(f) \simeq
+  -\frac{39\tilde\Lambda}{2}
+  \left(\frac{G\mathcal{M}\pi f}{c^3}\right)^{5/3}\,x^{5/2} + \cdots
+  \label{eq:tidal_phase}
+\end{equation}
+
+\begin{observacion}{Ecuación de estado de la materia densa}{obs:eos_sensitivity}
+La medición de $\tilde\Lambda$ en señales GW de BNS restringe directamente el radio de la estrella de neutrones y la ecuación de estado a densidades supranucleares. Estrellas más compactas (menor $R$ para la misma masa) tienen $\Lambda$ más pequeño y producen un efecto de marea más sutil en la señal.
+\end{observacion}
+
+% ===========================================================
+\section{GW170817: caso de estudio de astronomía multimensajero}
+\label{sec:gw170817}
+% ===========================================================
+
+El 17 de agosto de 2017, la red LIGO--Virgo detectó la coalescencia de una binaria de estrellas de neutrones (BNS) a $\sim 40\,\mathrm{Mpc}$. El evento GW170817 constituye el paradigma de la \textbf{astronomía multimensajero} con ondas gravitacionales, al ser asociado de manera inequívoca con el GRB 170817A y con la kilonova AT2017gfo en la galaxia NGC 4993 \cite{Abbott2017BNS, Abbott2017multimessenger, Abbott2017H0}.
+
+\subsection{Parámetros físicos inferidos de la señal GW}
+
+La señal gravitacional tuvo una duración de banda de aproximadamente $100\,\mathrm{s}$ desde $\sim 24\,\mathrm{Hz}$ hasta coalescencia, con una SNR en red de $\sim 32$.
+
+\begin{ejemplo}{Parámetros principales de GW170817}{ej:gw170817_params}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Masa chirp:} $\mathcal{M} = 1.186^{+0.001}_{-0.001}\,M_\odot$ (medición de alta precisión).
+  \item \textbf{Masa total:} $M \in [2.73,\,3.29]\,M_\odot$ (90\% credibilidad).
+  \item \textbf{Distancia luminosa:} $d_L = 40^{+8}_{-14}\,\mathrm{Mpc}$ (incertidumbre dominada por la degeneración inclinación--distancia).
+  \item \textbf{Deformabilidad mareal:} $\tilde\Lambda \lesssim 800$ (90\%), restringiendo el radio de la NS a $R_{\rm NS} \lesssim 13\,\mathrm{km}$.
+\end{itemize}
+
+\textbf{Nota interpretativa.} La precisión en $\mathcal{M}$ es extraordinaria ($\sim 0.1\%$) porque controla ciclos que se acumulan durante los $100\,\mathrm{s}$ de banda. La restricción de $\tilde\Lambda$ requiere modelado de forma de onda a orden 5PN.
+\end{ejemplo}
+
+\begin{importante}
+La combinación de parámetros de la señal descartó configuraciones con alta deformabilidad, lo que a su vez eliminó ciertas ecuaciones de estado de materia nuclear que predicen estrellas de neutrones muy grandes. Esto representa la primera restricción directa de la ecuación de estado por medio de ondas gravitacionales.
+\end{importante}
+
+\subsection{Secuencia de observaciones electromagnéticas}
+
+La secuencia temporal de descubrimientos ilustra la capacidad de la astronomía multimensajero:
+
+\begin{itemize}[leftmargin=2em]
+  \item $t=0\,\mathrm{s}$: coalescencia GW, detección en LIGO Hanford, LIGO Livingston y Virgo.
+  \item $t\approx +1.7\,\mathrm{s}$: GRB 170817A detectado por \textit{Fermi}-GBM e INTEGRAL; confirmación de la asociación BNS--GRB corto.
+  \item $t\approx +11\,\mathrm{h}$: identificación óptica de AT2017gfo en NGC 4993 por múltiples telescopios.
+  \item $t\approx +1\text{--}15\,\mathrm{días}$: evolución espectral de la kilonova evidenciando nucleosíntesis del proceso r.
+  \item $t\approx +9\,\mathrm{días}$: contraparte en rayos X; $t\approx +16\,\mathrm{días}$: radio.
+\end{itemize}
+
+\begin{observacion}{Retraso $\Delta t \approx 1.7\,\mathrm{s}$ y física fundamental}{obs:gw170817_delay}
+El retraso entre la señal GW y el GRB establece que la velocidad de la onda gravitacional es igual a la de la luz con una precisión de $\Delta v/c \sim 10^{-15}$, lo que descarta amplias clases de teorías escalar-tensor con velocidad GW modificada.
+\end{observacion}
+
+\subsection{Nucleosíntesis del proceso r y kilonovas}
+
+La kilonova AT2017gfo evolucionó rápidamente del óptico al infrarrojo, consistente con la opacidad de elementos de alta masa atómica (lantánidos y actínidos producidos por el proceso r):
+
+\begin{itemize}[leftmargin=2em]
+  \item Masa eyectada total: $M_{\rm ej} \sim 0.04\,M_\odot$.
+  \item Componente azul (dinámica, baja opacidad): $v \sim 0.3\,c$, rica en elementos del primer pico del proceso r.
+  \item Componente roja (viento de disco, alta opacidad lantánida): $v \sim 0.1\,c$, lantánidos y actínidos.
+\end{itemize}
+
+\begin{importante}
+Los modelos de síntesis nucleosintética ajustados a AT2017gfo son consistentes con que las fusiones BNS producen una fracción significativa ($\sim 50\text{--}100\%$) del oro, platino y elementos más pesados del Universo, cerrando un debate de décadas sobre el sitio dominante de la nucleosíntesis del proceso r.
+\end{importante}
+
+\subsection{Medición de $H_0$ mediante sirenas estándar}
+
+La combinación de $d_L$ (de la señal GW) con el redshift cosmológico de NGC 4993 ($z = 0.009$, de espectroscopía óptica) permite inferir la constante de Hubble sin escalera de distancias:
+
+\begin{equation}
+  H_0 = \frac{c\,z}{d_L}\bigl[1 + \mathcal{O}(z)\bigr]
+  \approx 70^{+12}_{-8}\,\mathrm{km\,s^{-1}\,Mpc^{-1}}\quad(68\%).
+  \label{eq:H0_gw170817}
+\end{equation}
+
+\begin{observacion}{Perspectiva futura con catálogos}{obs:h0_future}
+Con $\mathcal{O}(100)$ eventos BNS y NSBH con contrapartes identificadas en próximas corridas de observación (O4, O5), y con detectores de tercera generación (Einstein Telescope, Cosmic Explorer), la incertidumbre sobre $H_0$ podría reducirse al $1\text{--}2\%$, nivel suficiente para resolver de forma independiente la tensión de Hubble entre mediciones locales y cosmológicas.
+\end{observacion}
+
+% ===========================================================
 \section{Subpoblaciones: BBH, BNS y NSBH}
 \label{sec:subpoblaciones_cbc}
 % ===========================================================
@@ -140,6 +296,45 @@ h_0 \sim \frac{4\pi^2 G}{c^4}\frac{I\epsilon f_{\mathrm{rot}}^2}{d},
 \end{equation}
 donde $I$ es el momento de inercia estelar y $f_{\mathrm{rot}}$ la frecuencia de rotación.
 
+\subsection{Modelo de señal de onda continua}
+
+Para una estrella de neutrones con eje de asimetría formando un ángulo $\iota$ con la línea de visión, las dos polarizaciones de la onda gravitacional son
+\begin{align}
+  h_+(t) &= h_0\,\frac{1+\cos^2\iota}{2}\,\cos[\phi(t)], \\
+  h_\times(t) &= h_0\,\cos\iota\,\sin[\phi(t)],
+\end{align}
+donde la fase acumulada (incluyendo movimiento terrestre y espín-bajada) es
+\begin{equation}
+  \phi(t) = 2\pi\!\left[f_{\rm rot}(t-t_0)
+    + \frac{1}{2}\dot{f}_{\rm rot}(t-t_0)^2
+    + \frac{f_{\rm rot}}{c}\hat{n}\cdot\mathbf{r}_{\oplus}(t)
+    + \cdots\right] + \phi_0,
+  \label{eq:cw_phase}
+\end{equation}
+con $\hat{n}$ el vector unitario hacia la fuente y $\mathbf{r}_\oplus(t)$ la posición del detector respecto al baricentro solar.
+
+\begin{observacion}{Efecto Doppler orbital}{obs:cw_doppler}
+El movimiento de la Tierra alrededor del Sol produce una modulación de la frecuencia observada con amplitud $\delta f \sim f_{\rm rot}\,v_\oplus/c \approx 10^{-4}\,f_{\rm rot}$. Para $f_{\rm rot}=100\,\mathrm{Hz}$, esto corresponde a $\sim 10^{-2}\,\mathrm{Hz}$, mucho mayor que la resolución en frecuencia de integraciones largas ($\Delta f \sim 1/T_{\rm obs}$). La corrección de baricéntrico es esencial para cualquier búsqueda coherente.
+\end{observacion}
+
+\subsection{Estrategias de búsqueda: coherente y semicoherente}
+
+Las búsquedas CW se clasifican según la duración del segmento de coherencia $T_{\rm coh}$:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Completamente coherente:} integra todo $T_{\rm obs}$ manteniendo la fase continua. El estadístico $\mathcal{F}$ (función-$\mathcal{F}$ de Jaranowski y Królak) maximiza analíticamente sobre amplitud, polarización e inclinación. La sensibilidad escala como $h_{\rm min}\propto T_{\rm obs}^{-1/2}$, pero el costo computacional crece como $T_{\rm obs}^5$ para búsquedas de todo el cielo.
+  \item \textbf{Semicoherente:} subdivide los datos en $N$ segmentos de duración $T_{\rm coh}$ y suma incoherentemente las potencias. Métodos como el Hough Transform o PowerFlux operan en este régimen. La sensibilidad escala como $(N\,T_{\rm coh})^{1/4}T_{\rm coh}^{1/4}$, mientras el costo computacional es manejable incluso para todo el cielo.
+\end{itemize}
+
+\begin{ejemplo}{Compromiso costo-sensibilidad en búsquedas CW}{ej:cw_semicoherent}
+Para una búsqueda de todo el cielo en el rango $f\in[20,500]\,\mathrm{Hz}$ con $\dot f\in[-10^{-8},0]\,\mathrm{Hz/s}$ y $T_{\rm obs}=1$\,año:
+\begin{itemize}[leftmargin=2em]
+  \item Coherente puro: espacio de plantillas $\sim 10^{14}$; intractable con recursos convencionales.
+  \item Semicoherente con $T_{\rm coh}\sim 10\,\mathrm{h}$: manejable con cómputo distribuido (Einstein@Home).
+\end{itemize}
+El compromiso entre sensibilidad y costo computacional es una restricción práctica central en el diseño de pipelines para CW.
+\end{ejemplo}
+
 \subsection{Retos de análisis}
 
 Las búsquedas CW requieren integrar meses--años de datos corrigiendo:
@@ -150,7 +345,7 @@ Las búsquedas CW requieren integrar meses--años de datos corrigiendo:
 \end{itemize}
 
 \begin{observacion}{Resultado típico actual}{obs:cw_limits}
-Aunque no se han establecido detecciones inequívocas en población amplia, los límites superiores sobre $h_0$ y $\epsilon$ ya son astrofísicamente constrictivos para múltiples púlsares.
+Aunque no se han establecido detecciones inequívocas en población amplia, los límites superiores sobre $h_0$ y $\epsilon$ ya son astrofísicamente constrictivos para múltiples púlsares. En particular, para el Crab y Vela se han impuesto límites de elipticidad $\epsilon < 10^{-3}$, sugiriendo configuraciones internas razonablemente simétricas.
 \end{observacion}
 
 % ===========================================================
@@ -166,11 +361,47 @@ Un fondo estocástico es una superposición estadística de muchas contribucione
 \end{equation}
 \end{definicion}
 
+\subsection{Espectro del fondo astrofísico de CBCs}
+
+El fondo estocástico proveniente de la superposición de coalescencias compactas no resueltas puede estimarse a partir de la tasa de fusión cósmica y la energía emitida por evento:
+\begin{equation}
+  \Omega_{\rm GW}^{\rm CBC}(f) =
+  \frac{f}{\rho_c c^2}
+  \int_0^{z_{\rm max}}
+  \frac{R_m(z)}{1+z}\,
+  \frac{dE_{\rm GW}}{df_s}\bigg|_{f_s=(1+z)f}
+  \frac{dz}{H(z)},
+  \label{eq:omega_cbc}
+\end{equation}
+donde $R_m(z)$ es la tasa volumétrica de fusión, $\rho_c$ la densidad crítica actual y $H(z)$ el parámetro de Hubble.
+
+\begin{observacion}{Forma espectral característica}{obs:sgwb_spectrum}
+Durante el inspiral, $dE_{\rm GW}/df_s \propto \mathcal{M}^{5/3}f_s^{-1/3}$ (cuadrupolo líder), de modo que $\Omega_{\rm GW}^{\rm CBC} \propto f^{2/3}$ a frecuencias suficientemente bajas. Esta pendiente es característica del fondo de binarias compactas; fondos de origen cosmológico (transiciones de fase de primer orden, cuerdas cósmicas, inflación) tienen espectros cualitativamente distintos y pueden en principio separarse.
+\end{observacion}
+
+\subsection{Estadístico de correlación cruzada}
+
+Para instrumentos terrestres con ruido no correlacionado entre sitios, la estrategia estándar de búsqueda es la correlación cruzada entre pares de detectores:
+
+\begin{definicion}{Estimador de $\Omega_{\rm GW}$}{def:cc_sgwb}
+El estimador de la densidad de energía fraccional a partir de datos de dos detectores 1 y 2 es
+\begin{equation}
+  \hat\Omega(f) = \frac{2}{\pi}\,\frac{f^3}{H_0^2}\,
+  \frac{\Re\bigl[\tilde{d}_1^*(f)\tilde{d}_2(f)\bigr]}{T\,\gamma_{12}(f)\,S_{\rm ref}(f)},
+  \label{eq:omega_estimator}
+\end{equation}
+donde $\gamma_{12}(f)$ es la función de solapamiento (que codifica la geometría y separación de los detectores), $T$ el tiempo de integración y $S_{\rm ref}$ un espectro de referencia.
+\end{definicion}
+
+\begin{proposicion}{Mejora de sensibilidad con tiempo}{prop:sgwb_sensitivity}
+La varianza del estimador \eqref{eq:omega_estimator} decrece como $1/T$ para ruido gaussiano estacionario, de modo que la sensibilidad mejora como $T^{-1/2}$. Para $T\sim 1$\,año, la red LIGO--Virgo--KAGRA alcanza sensibilidades $\Omega_{\rm GW} \lesssim 10^{-9}$ en su banda óptima ($\sim 25\text{--}100\,\mathrm{Hz}$).
+\end{proposicion}
+
 \subsection{Origen astrofísico vs cosmológico}
 
 \begin{itemize}[leftmargin=2em]
-  \item \textbf{Astrofísico:} suma de muchas binarias compactas no resueltas.
-  \item \textbf{Cosmológico:} posibles procesos del universo temprano (transiciones de fase, cuerdas cósmicas, escenarios inflacionarios específicos).
+  \item \textbf{Astrofísico:} suma de muchas binarias compactas no resueltas. La amplitud depende de la tasa de fusión e historia de formación estelar.
+  \item \textbf{Cosmológico:} posibles procesos del universo temprano (transiciones de fase de primer orden, cuerdas cósmicas, escenarios inflacionarios específicos).
 \end{itemize}
 
 \begin{proposicion}{Necesidad de correlación entre detectores}{prop:correlation}
@@ -204,6 +435,26 @@ En primera aproximación, si $h\propto1/d$, aumentar sensibilidad en amplitud po
 Si una mejora instrumental reduce el ruido efectivo de amplitud en un factor $2$, el volumen accesible para una subpoblación isotrópica crece aproximadamente por $2^3=8$. Incluso cambios modestos de sensibilidad modifican drásticamente el rendimiento observacional por campaña.
 \end{ejemplo}
 
+\subsection{Inferencia jerárquica de poblaciones}
+
+El análisis estadístico riguroso de un catálogo de $N_{\rm det}$ detecciones usa la \textbf{inferencia bayesiana jerárquica} (HBI), que modela simultáneamente los parámetros individuales de cada evento y los hiperparámetros de la población subyacente:
+
+\begin{definicion}{Modelo de población y verosimilitud jerárquica}{def:hierarchical}
+Sea $\Lambda$ el vector de hiperparámetros que describe la distribución de la población (e.g., exponente de masas, tasa). La verosimilitud jerárquica es
+\begin{equation}
+  \mathcal{L}(\Lambda) \propto
+  e^{-\mu(\Lambda)}\,
+  \prod_{i=1}^{N_{\rm det}}
+  \int p(d_i|\theta_i)\,\pi(\theta_i|\Lambda)\,d\theta_i,
+  \label{eq:hierarchical_lik}
+\end{equation}
+donde $\mu(\Lambda)$ es el número esperado de detecciones dado $\Lambda$, que incorpora explícitamente el sesgo de selección mediante la eficiencia de detección integrada sobre el espacio de parámetros.
+\end{definicion}
+
+\begin{observacion}{Corrección por censura}{obs:vt_correction}
+El factor $e^{-\mu(\Lambda)}$ en \eqref{eq:hierarchical_lik} actúa como término de corrección por el número de eventos no detectados (``censura en amplitud''), esencial para obtener distribuciones intrínsecas no sesgadas de masas, espines y tasas.
+\end{observacion}
+
 % ===========================================================
 \section{Multimensajero: valor físico añadido de las contrapartes}
 \label{sec:multimensajero}
@@ -224,6 +475,28 @@ Una \textbf{sirena estándar} es una fuente GW cuya amplitud codifica distancia 
 \begin{observacion}{Sinergia cosmológica}{obs:cosmo_siren}
 La combinación de distancia GW con redshift EM permite estimar $H_0$ y, en muestras grandes, otros parámetros cosmológicos \cite{Abbott2017H0}.
 \end{observacion}
+
+\subsection{Sirenas oscuras: inferencia estadística sin contraparte}
+
+Cuando no se identifica una contraparte electromagnética (sirenas oscuras), la medición de $H_0$ se obtiene estadísticamente: se marginaliza sobre todas las posibles galaxias huésped en el volumen delimitado por la localización GW \cite{Schutz1986}:
+
+\begin{equation}
+  p(H_0|d_{\rm GW}) \propto
+  \int p(d_{\rm GW}|\theta)\,p(\theta|H_0)\,d\theta\,d\Omega\,dz,
+  \label{eq:dark_siren}
+\end{equation}
+donde la integral recorre el ángulo sólido de localización y los redshifts de galaxias candidatas. Este método se aplica a toda la población de eventos BBH (que típicamente no tienen contraparte detectable).
+
+\subsection{Ciencia con fondos gravitacionales y detectores de tercera generación}
+
+Los detectores de tercera generación (Einstein Telescope, Cosmic Explorer) cambiarán cualitativamente el panorama:
+
+\begin{itemize}[leftmargin=2em]
+  \item Detección de BBH hasta $z\sim 50$, rastreando formación de objetos compactos en todo el Universo.
+  \item Resolución individual de la mayoría de las binarias compactas; reducción del SGWB no resuelto por más de un orden de magnitud.
+  \item Localización de $\mathcal{O}(10^4)$ BNS con contraparte potencial por año.
+  \item Pruebas de RG con precisión sin precedentes en el régimen fuertemente no lineal.
+\end{itemize}
 
 % ===========================================================
 \section{Ejemplo desarrollado: lectura física de dos eventos tipo}
@@ -257,12 +530,14 @@ El evento A informa canales de formación de BH y distribución de espines; el e
 
 Resultados centrales:
 \begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
-  \item Las fuentes GW se organizan operacionalmente en CBC, bursts, continuas y fondo estocástico.
+  \item Las fuentes GW se organizan operacionalmente en CBC, bursts, continuas y fondo estocástico; distintas bandas de frecuencia son accesibles con distintos instrumentos.
+  \item La fase de inspiral sigue la aproximación post-newtoniana: la masa chirp controla el orden líder; masas individuales, espines y deformabilidades mareal contribuyen a órdenes superiores.
   \item Las binarias compactas son la fuente transitoria dominante en catálogos terrestres actuales.
-  \item BNS y NSBH aportan física de marea y potencial multimensajero; BBH trazan formación de objetos compactos masivos.
-  \item Las ondas continuas y el SGWB requieren técnicas de integración/correlación de largo plazo.
-  \item Sesgos de selección son centrales para inferir poblaciones intrínsecas.
-  \item La astronomía multimensajero amplía drásticamente el alcance físico de una detección GW.
+  \item GW170817 demostró la riqueza astrofísica de los eventos BNS: nucleosíntesis del proceso r, velocidad de la onda GW igual a $c$, y medición de $H_0$ mediante sirenas estándar.
+  \item BNS y NSBH aportan física de ecuación de estado vía deformabilidad mareal; BBH trazan formación de objetos compactos masivos.
+  \item Las ondas continuas requieren búsquedas semicoherentes por las limitaciones computacionales; el SGWB se busca mediante correlación cruzada entre detectores.
+  \item La inferencia jerárquica de poblaciones corrige sesgos de selección, siendo esencial para obtener distribuciones intrínsecas de masas y tasas.
+  \item La astronomía multimensajero, incluyendo sirenas oscuras para BBH, amplía el alcance cosmológico y astrofísico de toda detección GW.
 \end{enumerate}
 
 En el siguiente capítulo se abordará la cadena observacional completa: respuesta de detectores, ruido, estadística de detección e inferencia bayesiana de parámetros.
@@ -294,5 +569,20 @@ Justifique por qué la correlación entre detectores es más robusta que un aná
 
 \item \textbf{Multimensajero y cosmología.} \\
 Describa qué información adicional aporta una contraparte EM para convertir una detección GW en una medición de $H_0$.
+
+\item \textbf{Fase post-newtoniana y masa chirp.} \\
+A partir de \eqref{eq:pn_phase}, identifique qué parámetro de la fuente domina la fase en orden líder y cómo afecta el número de ciclos acumulados en banda la precisión con que se mide ese parámetro.
+
+\item \textbf{Deformabilidad mareal.} \\
+Explique cualitativamente por qué una estrella de neutrones más compacta (menor radio para la misma masa) produce un efecto de marea más pequeño en la señal GW. ¿Qué implicaciones tiene esto para la ecuación de estado?
+
+\item \textbf{Retraso temporal GW170817.} \\
+El intervalo entre la señal GW y el GRB 170817A fue $\Delta t \approx 1.7\,\mathrm{s}$ a $d_L \approx 40\,\mathrm{Mpc}$. Estime el límite superior en $|\Delta v_{\rm GW}/c|$ usando $|\Delta v|\leq c\,|\Delta t|/d_L$. Interprete el resultado en términos de teorías de gravedad alternativas.
+
+\item \textbf{Escalamiento del estimador SGWB.} \\
+Muestre que la incertidumbre en $\hat\Omega(f)$ escala como $T^{-1/2}$ para ruido gaussiano estacionario. ¿Cuánto tiempo de integración se necesita para reducir a la mitad la incertidumbre si se parte de un año de datos?
+
+\item \textbf{Inferencia jerárquica de masas.} \\
+Explique en palabras el papel del factor $e^{-\mu(\Lambda)}$ en la verosimilitud jerárquica \eqref{eq:hierarchical_lik}. ¿Por qué su omisión produce una inferencia sesgada de la distribución de masas?
 
 \end{enumerate}

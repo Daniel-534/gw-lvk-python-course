@@ -9,7 +9,7 @@
 
 Comprender fuentes no es suficiente: la señal medida está mediada por la respuesta instrumental, el ruido y la metodología estadística de extracción de parámetros. Este capítulo desarrolla la cadena completa desde la strain observada hasta la inferencia física de masas, espines, distancia y localización \cite{Creighton2011, Jaranowski2009, Allen2005, LIGO2015, Virgo2015}.
 
-Se estudiarán: geometría detector--fuente, función de respuesta, densidad espectral de potencia de ruido, relación señal-ruido (SNR), filtrado adaptado, estadística de detección, redes de detectores, inferencia bayesiana y sistemáticas experimentales.
+Se estudiarán: geometría detector--fuente, función de respuesta, cavidades ópticas, densidad espectral de potencia de ruido, relación señal-ruido (SNR), filtrado adaptado, estadística de detección, redes de detectores, inferencia bayesiana, muestreo de la posterior, sistemáticas experimentales y pruebas de relatividad general.
 
 % ===========================================================
 \section{Interferometría láser y variable observable}
@@ -32,6 +32,41 @@ que en detectores terrestres típicamente toma amplitudes del orden $10^{-22}$--
 
 \begin{observacion}{Calibración}{obs:calibration}
 La calidad de la calibración (amplitud y fase) impacta directamente la precisión de inferencia de parámetros, especialmente distancia, inclinación y masa chirp.
+\end{observacion}
+
+\subsection{Cavidades Fabry-Perot y almacenamiento de potencia}
+
+Los detectores modernos de segunda generación (Advanced LIGO, Advanced Virgo, KAGRA) no son simples interferómetros Michelson. Cada brazo contiene una \textbf{cavidad Fabry-Perot} formada por dos espejos de alta reflectividad:
+
+\begin{definicion}{Fineza de cavidad}{def:finesse}
+La fineza $\mathcal{F}$ de una cavidad Fabry-Perot es
+\begin{equation}
+  \mathcal{F} = \frac{\pi\sqrt{r_1 r_2}}{1-r_1 r_2},
+\end{equation}
+donde $r_1, r_2$ son las reflectividades de los espejos de entrada e interior. Para Advanced LIGO, $\mathcal{F}\approx 450$.
+\end{definicion}
+
+La cavidad aumenta la longitud efectiva del brazo por un factor $2\mathcal{F}/\pi$:
+\begin{equation}
+  L_{\rm eff} = \frac{2\mathcal{F}}{\pi}\,L \approx \frac{2\times 450}{\pi}\times 4\,\mathrm{km} \approx 1145\,\mathrm{km}.
+  \label{eq:leff}
+\end{equation}
+
+\begin{importante}
+La cavidad Fabry-Perot amplifica la respuesta a ondas gravitacionales en el factor $L_{\rm eff}/L = 2\mathcal{F}/\pi \approx 280$ frente a un Michelson simple, lo que eleva la SNR sin aumentar el tamaño físico del detector.
+\end{importante}
+
+\subsection{Reciclaje de potencia y de señal}
+
+Dos cavidades adicionales optimizan el rendimiento:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Reciclaje de potencia (\emph{power recycling}):} un espejo entre el láser y el divisor de haz forma una cavidad resonante que acumula potencia óptica en los brazos ($\sim 800\,\mathrm{kW}$ en Advanced LIGO frente a $\sim 2\,\mathrm{W}$ del láser), reduciendo el ruido cuántico de disparo.
+  \item \textbf{Reciclaje de señal (\emph{signal recycling}):} un espejo en el puerto de salida forma una cavidad que puede sintonizarse para amplificar la respuesta a señales en una banda de frecuencia elegida.
+\end{itemize}
+
+\begin{observacion}{Límite cuántico estándar}{obs:sql}
+La presión de radiación del haz láser impone fuerzas cuánticas sobre los espejos (ruido de presión de radiación), mientras que el ruido de disparo fotónico limita la sensibilidad en amplitud. El \textbf{límite cuántico estándar} (SQL) es el punto donde los dos contribuyen por igual a la incertidumbre total. Técnicas de \emph{squeezing} del estado del vacío permiten, en principio, superar el SQL en una cuadratura.
 \end{observacion}
 
 % ===========================================================
@@ -74,14 +109,29 @@ La densidad espectral de potencia unilateral $S_n(f)$ caracteriza la varianza de
 \subsection{Fuentes de ruido en interferómetros terrestres}
 
 \begin{itemize}[leftmargin=2em]
-  \item ruido sísmico y de suspensión (bajas frecuencias),
-  \item ruido térmico de recubrimientos/sustratos (intermedias),
-  \item ruido cuántico de disparo y presión de radiación (altas y muy bajas).
+  \item \textbf{Ruido sísmico y de suspensión} (bajas frecuencias, $f\lesssim 10\,\mathrm{Hz}$): vibración del suelo; mitigado con sistemas de suspensión multi-péndulo en cascada (\emph{Superattenuator} en Virgo, suspensiones cuádruples en Advanced LIGO).
+  \item \textbf{Ruido térmico de recubrimientos/sustratos} (frecuencias intermedias, $\sim 20\text{--}200\,\mathrm{Hz}$): fluctuaciones browniana de posición superficial de los espejos; reducido con recubrimientos de baja pérdida y operación a baja temperatura (KAGRA, futuros detectores criogénicos).
+  \item \textbf{Ruido cuántico} (altas frecuencias): ruido de disparo domina a $f\gtrsim 200\,\mathrm{Hz}$; ruido de presión de radiación domina a bajas frecuencias; técnicas de vacío comprimido (\emph{squeezing}) se aplican en Advanced LIGO desde O3.
+  \item \textbf{Gradiente de gravedad newtonianos} (Newtonian noise): fluctuaciones de densidad del suelo; fundamental en detectores de tercera generación.
 \end{itemize}
 
+\begin{definicion}{Sensibilidad de amplitud equivalente}{def:asd}
+La densidad espectral de amplitud (ASD) es $\sqrt{S_n(f)}$ con unidades $\mathrm{Hz^{-1/2}}$. Para Advanced LIGO en modo de diseño, $\sqrt{S_n}\sim 10^{-23}\,\mathrm{Hz^{-1/2}}$ alrededor de $100\,\mathrm{Hz}$.
+\end{definicion}
+
 \begin{observacion}{No estacionariedad y líneas espectrales}{obs:nonstationary}
-El ruido real no es perfectamente gaussiano ni estacionario; glitches y líneas estrechas requieren veto, limpieza y modelado robusto para análisis confiable.
+El ruido real no es perfectamente gaussiano ni estacionario; glitches (transitorios de ruido breve) y líneas espectrales estrechas (armónicos del sistema eléctrico, modos de violín de las suspensiones) requieren veto, limpieza espectral y modelado robusto para análisis confiable.
 \end{observacion}
+
+\subsection{Caracterización de detectores: \emph{detector characterization}}
+
+La operación segura y sensible de un detector exige:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Monitores de canal auxiliar:} miles de canales de sensores registran condiciones ambientales, mecánicas y ópticas del interferómetro.
+  \item \textbf{Análisis de coherencia:} identificación de acoplamiento entre canales auxiliares y strain; base para vetos automatizados de glitches.
+  \item \textbf{Clasificación de glitches:} herramientas de aprendizaje automático (Gravity Spy) clasifican morfologías de ruido transitorio para su interpretación y eliminación.
+\end{itemize}
 
 % ===========================================================
 \section{Producto interno y relación señal-ruido}
@@ -116,17 +166,86 @@ En primera aproximación, para forma de onda fija, $\rho\propto 1/d_L$ y crece a
 El filtrado adaptado (\emph{matched filtering}) compara datos con una familia de plantillas parametrizadas y maximiza la SNR sobre tiempo de coalescencia y fase, extendiéndose luego a masas, espines y otros parámetros.
 \end{definicion}
 
+La SNR compleja como función del tiempo de coalescencia se calcula eficientemente como la transformada de Fourier inversa:
+\begin{equation}
+  z(t_c) = 4\int_{f_{\rm min}}^{f_{\rm max}}
+  \frac{\tilde{d}(f)\,\tilde{h}^*(f)}{S_n(f)}\,e^{2\pi i f t_c}\,df,
+  \label{eq:snr_timeseries}
+\end{equation}
+y la SNR en tiempo real es $\rho(t_c) = |z(t_c)|/\sqrt{(h|h)}$.
+
 \subsection{Mismatch y cobertura}
 
 \begin{definicion}{Mismatch}{def:mismatch}
-El mismatch entre una señal y su plantilla más cercana cuantifica pérdida fraccional de SNR por discretización del banco.
+El mismatch entre una señal $h_s$ y su plantilla más cercana $h_t$ es
+\begin{equation}
+  \mathcal{M} = 1 - \frac{(h_s|h_t)}{\sqrt{(h_s|h_s)(h_t|h_t)}}.
+\end{equation}
+Un banco de plantillas se diseña para que el mismatch máximo no exceda un umbral tolerable, típicamente $\mathcal{M}_{\rm max} = 0.03$ (pérdida de SNR del $3\%$).
 \end{definicion}
 
 Un diseño de banco adecuado equilibra costo computacional y pérdida máxima tolerada de SNR.
 
+\subsection{Banco de plantillas: geometría del espacio de parámetros}
+
+La colocación eficiente de plantillas requiere una \textbf{métrica del espacio de parámetros} $g_{ij}(\theta)$ tal que el cuadrado del mismatch sea
+
+\begin{equation}
+  \mathcal{M}(\theta, \theta+d\theta) \approx g_{ij}(\theta)\,d\theta^i\,d\theta^j.
+  \label{eq:metric_mismatch}
+\end{equation}
+
+El número total de plantillas necesarias escala como el volumen del espacio de parámetros medido con esta métrica:
+\begin{equation}
+  N_{\rm templates} \propto \frac{1}{(1-\mathcal{M}_{\rm max})^{n_p/2}}
+  \int \sqrt{\det g_{ij}}\,d^{n_p}\theta,
+\end{equation}
+donde $n_p$ es la dimensión del espacio de búsqueda.
+
 \begin{observacion}{Señales no modeladas}{obs:model_unmodeled}
 Cuando la física es incierta, técnicas burst complementan al matched filtering al buscar excesos coherentes sin plantilla cerrada.
 \end{observacion}
+
+% ===========================================================
+\section{El estadístico de rango: prueba chi-cuadrado y SNR de red}
+\label{sec:estadistico_rango}
+% ===========================================================
+
+La SNR máxima $\rho$ no es, por sí sola, un estadístico robusto de detección porque el ruido no gaussiano puede producir valores elevados. Se necesitan pruebas adicionales de consistencia de la señal.
+
+\subsection{La prueba chi-cuadrado de Allen}
+
+\begin{definicion}{Chi-cuadrado de tiempo-frecuencia}{def:chi2_allen}
+La prueba chi-cuadrado de Allen subdivide la banda de frecuencia de la plantilla en $p$ sub-bandas con igual contribución esperada de SNR. El estadístico es
+\begin{equation}
+  \xi^2 = p\,\sum_{k=1}^{p}\left(\rho_k - \frac{\rho}{p}\right)^2,
+  \label{eq:chi2}
+\end{equation}
+donde $\rho_k$ es la SNR en la $k$-ésima sub-banda y $\rho$ la SNR total. Para señal genuina, $\xi^2\approx p-1$ en expectativa; para glitches de espectro no plano, $\xi^2\gg p$.
+\end{definicion}
+
+\begin{importante}
+El chi-cuadrado es especialmente efectivo para distinguir glitches breves con espectro plano (que acumulan SNR rápidamente) de señales CBC (cuyo espectro sigue la forma de la plantilla). Es uno de los vetoes más potentes en pipelines CBC.
+\end{importante}
+
+\subsection{SNR re-ponderada y estadístico combinado de red}
+
+En la práctica, se construye una \textbf{SNR re-ponderada} que penaliza candidatos con chi-cuadrado alto:
+\begin{equation}
+  \hat\rho =
+  \begin{cases}
+    \rho & \text{si } \xi^2 \leq 1,\\
+    \rho\left[\frac{1}{2}\left(1+(\xi^2)^3\right)\right]^{-1/6} & \text{si } \xi^2 > 1.
+  \end{cases}
+  \label{eq:reweighted_snr}
+\end{equation}
+
+Para una red de detectores, la SNR de red se forma coherentemente:
+\begin{equation}
+  \rho_{\rm red} = \sqrt{\sum_{\rm det}\hat\rho_{\rm det}^2},
+  \label{eq:network_snr}
+\end{equation}
+y los candidatos se ordenan por este estadístico o por una versión que incorpora adicionalmente la coherencia de fase entre detectores.
 
 % ===========================================================
 \section{Estadística de detección: de candidatos a eventos}
@@ -220,6 +339,92 @@ Z=\int p(d|\theta)\pi(\theta)d\theta
 \end{equation}
 permite comparar hipótesis (señal vs ruido, modelos de onda alternativos, pruebas de relatividad general).
 
+\subsection{Métodos de muestreo de la posterior}
+
+El espacio de parámetros GW tiene típicamente $d\sim 15$ dimensiones para una CBC. Los métodos analíticos son intratables; se usan dos clases principales de técnicas numéricas:
+
+\subsubsection{Cadenas de Markov Monte Carlo (MCMC)}
+
+\begin{definicion}{Cadena de Markov Monte Carlo}{def:mcmc}
+Un algoritmo MCMC construye una cadena de muestras $\{\theta_i\}$ cuya distribución estacionaria converge a $p(\theta|d)$. El algoritmo de Metropolis-Hastings acepta una propuesta $\theta'$ con probabilidad
+\begin{equation}
+  \alpha = \min\!\left(1,\,\frac{p(d|\theta')\pi(\theta')q(\theta|\theta')}{p(d|\theta)\pi(\theta)q(\theta'|\theta)}\right),
+  \label{eq:mh_accept}
+\end{equation}
+donde $q(\theta'|\theta)$ es la distribución propuesta.
+\end{definicion}
+
+En la práctica, se usan variantes avanzadas como \emph{parallel tempering} (múltiples cadenas a distintas ``temperaturas'' que intercambian estados para explorar la posterior multimodal), o \emph{ensemble samplers} (EMCEE).
+
+\subsubsection{Muestreo anidado (\emph{nested sampling})}
+
+\begin{definicion}{Muestreo anidado}{def:nested_sampling}
+El muestreo anidado (Skilling 2006) calcula simultáneamente la evidencia $Z$ y muestrea la posterior. Mantiene un conjunto de $N_{\rm live}$ puntos \emph{live} ordenados por verosimilitud, reemplazando iterativamente el de menor verosimilitud para comprimir el volumen de prior.
+\end{definicion}
+
+Este método calcula $Z$ con un error controlado y produce muestras de la posterior como subproducto. Implementaciones en \texttt{MultiNest}, \texttt{dynesty} y \texttt{LALInference\_nest} son estándar en análisis GW.
+
+\begin{observacion}{Códigos de inferencia GW}{obs:pe_codes}
+El ecosistema de análisis GW incluye: \texttt{LALInference} (LIGO Algorithm Library), \texttt{Bilby} (Bayesian Inference Library for Gravitational wave Observations) y \texttt{RIFT} (Rapid Inference on gravitational wave sources via iterative Fitting). Cada uno balancea precisión, velocidad y flexibilidad de modelos de forma de onda.
+\end{observacion}
+
+\begin{ejemplo}{Dimensionalidad del problema para una BBH}{ej:pe_dimensions}
+Para una binaria de agujeros negros con espines genéricos, los parámetros son:
+\begin{itemize}[leftmargin=2em]
+  \item Intrínsecos: $m_1, m_2$, $\vec\chi_1$ (3 componentes), $\vec\chi_2$ (3 componentes) $\to$ 8 parámetros.
+  \item Extrínsecos: $d_L$, $\iota$, $\psi$, $\phi_c$, $t_c$, $\alpha$, $\delta$ $\to$ 7 parámetros.
+  \item Total: 15 dimensiones.
+\end{itemize}
+Un muestreo anidado típico con $N_{\rm live}=1000\text{--}4000$ puntos requiere $\sim 10^6\text{--}10^7$ evaluaciones de verosimilitud y horas a días de cómputo en clústeres modernos, dependiendo de la duración y SNR de la señal.
+\end{ejemplo}
+
+% ===========================================================
+\section{Pruebas de relatividad general}
+\label{sec:tests_gr}
+% ===========================================================
+
+La detección directa de ondas gravitacionales abre una ventana sin precedentes para probar la relatividad general (RG) en el régimen fuertemente no lineal y de campos intensos, inaccesible a pruebas previas del sistema solar o pulsares binarios.
+
+\subsection{Consistencia inspiral-merger-ringdown (IMRCT)}
+
+\begin{definicion}{Prueba de consistencia IMR}{def:imrct}
+La prueba IMRCT compara los parámetros de masa chirp y masa reducida inferidos independientemente de las fases de inspiral y de merger-ringdown. En RG, ambas fases deben describir el mismo objeto.
+\end{definicion}
+
+Si los parámetros inferidos de inspiral ($\mathcal{M}_{\rm insp}, \eta_{\rm insp}$) y de post-inspiral ($\mathcal{M}_{\rm PI}, \eta_{\rm PI}$) son consistentes, se verifica la predicción de RG. Una discrepancia indicaría nueva física o efectos de materia en merger.
+
+\subsection{Coeficientes PN post-newtonianos libres}
+
+La fase de inspiral \eqref{eq:pn_phase} puede generalizarse dejando libres los coeficientes $\alpha_k$:
+\begin{equation}
+  \Psi_{\rm GR}(f) \to \Psi_{\rm GR}(f)\cdot\left(1 + \sum_k \delta\hat\phi_k\,x^{k/2}\right).
+\end{equation}
+
+Si RG es correcta, los parámetros de desviación $\delta\hat\phi_k$ deben ser consistentes con cero. Las detecciones del GWTC-3 han colocado los límites más precisos hasta la fecha sobre $\delta\hat\phi_k$ para $k=0,\ldots,7$.
+
+\subsection{Masa del gravitón}
+
+En RG, las ondas gravitacionales se propagan a la velocidad de la luz porque el gravitón no tiene masa. Una masa no nula $m_g$ modificaría la relación de dispersión:
+\begin{equation}
+  E^2 = p^2c^2 + m_g^2c^4
+  \implies v_{\rm GW}(f) = c\sqrt{1 - \frac{m_g^2c^4}{h^2f^2}}.
+  \label{eq:graviton_mass}
+\end{equation}
+
+Esta dispersión produce un desfase entre componentes de baja y alta frecuencia:
+\begin{equation}
+  \delta\Psi_{\rm mg}(f) = -\frac{\pi^2 d}{\lambda_g^2\,(1+z)\,f}\,\frac{f_{\rm low}}{f},
+\end{equation}
+donde $\lambda_g = h/(m_g c)$ es la longitud de Compton del gravitón y $d$ la distancia efectiva. Las detecciones de LIGO--Virgo limitan $m_g\lesssim 10^{-23}\,\mathrm{eV/c^2}$.
+
+\subsection{Polarizaciones gravitacionales}
+
+La RG predice exactamente dos polarizaciones tensorial ($+$ y $\times$). Teorías alternativas de la gravedad pueden tener hasta cuatro polarizaciones adicionales (escalar y vectoriales). Una red de cinco o más detectores no alineados permite separar componentes y testar el contenido polarizacional de una señal.
+
+\begin{importante}
+GW170817, observado por tres detectores (LIGO$\times$2 + Virgo), ya permite restricciones a polarizaciones alternativas. La plena separación requerirá KAGRA y futuros detectores con geometría óptima.
+\end{importante}
+
 % ===========================================================
 \section{Sistemáticas, validación y control de calidad}
 \label{sec:sistematicas}
@@ -294,12 +499,13 @@ El progreso científico ya no depende solo de detectar, sino de caracterizar ses
 
 Conclusiones del capítulo:
 \begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
-  \item La salida instrumental se modela como señal más ruido calibrado.
-  \item La respuesta detector--fuente depende de geometría y polarización vía funciones patrón.
-  \item La PSD de ruido define el peso óptimo en matched filtering y cálculo de SNR.
-  \item La detección robusta requiere estadística de fondo, coherencia en red y control de no gaussianidad.
-  \item La inferencia bayesiana convierte señal en distribuciones de parámetros y comparación de modelos.
-  \item Sistemáticas de calibración, modelos y ruido son tan importantes como la estadística formal.
+  \item La salida instrumental se modela como señal más ruido calibrado; cavidades Fabry-Perot y reciclaje de potencia amplifican la sensibilidad a señales GW.
+  \item La respuesta detector--fuente depende de geometría y polarización vía funciones patrón; una red de detectores rompe degeneraciones.
+  \item La PSD de ruido define el peso óptimo en matched filtering; el ruido real incluye contribuciones sísmicas, térmicas y cuánticas con espectro no estacionario.
+  \item La detección robusta requiere el estadístico chi-cuadrado para discriminar glitches, coherencia en red y estadística de fondo.
+  \item La inferencia bayesiana, implementada mediante MCMC o muestreo anidado, produce distribuciones posteriores completas de todos los parámetros de la fuente.
+  \item Las pruebas de relatividad general (IMRCT, coeficientes PN, masa del gravitón, polarizaciones) confirman la consistencia con RG en el régimen fuertemente no lineal.
+  \item Sistemáticas de calibración, modelos de forma de onda y ruido no gaussiano son tan importantes como la estadística formal para obtener inferencia robusta.
 \end{enumerate}
 
 Con este capítulo se cierra el arco conceptual del libro: de fundamentos geométricos y cosmológicos a emisión, detección e interpretación astrofísica de ondas gravitacionales en la era observacional moderna.
@@ -331,5 +537,23 @@ Mencione tres fuentes de error sistemático en inferencia GW y proponga una estr
 
 \item \textbf{Comparación de modelos.} \\
 Interprete el papel de la evidencia bayesiana al comparar hipótesis ``señal+ruido'' frente a ``solo ruido''.
+
+\item \textbf{Fineza de cavidad y amplificación.} \\
+Un interferómetro tiene brazos de $L=4\,\mathrm{km}$ y cavidades Fabry-Perot con fineza $\mathcal{F}=450$. Use \eqref{eq:leff} para calcular la longitud efectiva y el factor de amplificación respecto a un Michelson simple. Discuta su impacto en la detección.
+
+\item \textbf{Prueba chi-cuadrado.} \\
+Un candidato tiene $\rho=10$ y $\xi^2=40$ con $p=16$ sub-bandas. Calcule la SNR re-ponderada $\hat\rho$ usando \eqref{eq:reweighted_snr} y discuta si se puede confiar en este candidato como evento astrofísico.
+
+\item \textbf{Muestreo anidado y dimensionalidad.} \\
+Compare el costo esperado de muestreo MCMC y anidado para el problema de 15 dimensiones de una BBH. ¿Cuál calcula naturalmente la evidencia $Z$? ¿Por qué es $Z$ relevante para la comparación de hipótesis?
+
+\item \textbf{Masa del gravitón.} \\
+A partir de \eqref{eq:graviton_mass}, explique por qué fuentes a mayor distancia y con mayor amplitud espectral a bajas frecuencias son más sensibles a una masa no nula del gravitón. ¿Qué tipo de eventos proporciona mejores límites?
+
+\item \textbf{Prueba IMRCT.} \\
+Explique qué datos de la señal se usan en cada parte de la prueba de consistencia inspiral-merger-ringdown. ¿Qué implicación física tendría un desacuerdo estadísticamente significativo entre las dos estimaciones de $\mathcal{M}$?
+
+\item \textbf{Reciclaje de señal.} \\
+Describa cualitativamente cómo el reciclaje de señal (\emph{signal recycling}) puede sintonizarse para mejorar la sensibilidad en una banda de frecuencia específica. ¿Cuál es el compromiso que impone respecto a la sensibilidad en otras bandas?
 
 \end{enumerate}
