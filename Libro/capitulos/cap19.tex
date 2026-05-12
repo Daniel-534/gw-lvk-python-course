@@ -1,0 +1,283 @@
+% ============================================================
+% Capítulo 19: Análisis de Datos en Astronomía GW
+% Relatividad, Cosmología y Ondas Gravitacionales
+% Daniel Soto Villada — Universidad de Antioquia
+% ============================================================
+
+\chapter{Análisis de Datos en Astronomía de Ondas Gravitacionales}
+\label{cap:analisis_datos_gw}
+
+Tras comprender la física de emisión y la cadena de detección, el paso natural es formalizar el análisis de datos de extremo a extremo: ingestión de strain, control de calidad, construcción de estadísticos de detección, inferencia de parámetros y síntesis poblacional. Este capítulo organiza ese flujo en una perspectiva operativa moderna \cite{Creighton2011, Jaranowski2009, Allen2005, GWTC1, GWTC3, Maggiore2018}.
+
+Se enfatiza la conexión entre teoría estadística y decisiones prácticas de \emph{pipeline}: segmentación de datos, manejo de no estacionariedad, validación con inyecciones, combinación de catálogos y propagación de sistemáticas.
+
+% ===========================================================
+\section{Arquitectura general del problema inverso}
+\label{sec:arquitectura_problema_inverso}
+% ===========================================================
+
+\begin{definicion}{Problema inverso en datos GW}{def:problema_inverso_gw}
+Dado un conjunto de datos calibrados $d$ de una red de detectores, el análisis busca inferir:
+\begin{itemize}[leftmargin=2em]
+  \item existencia o ausencia de señal astrofísica,
+  \item parámetros de fuente $\theta$ condicionados a detección,
+  \item propiedades poblacionales hiperbólicas $\Lambda$ al combinar múltiples eventos.
+\end{itemize}
+\end{definicion}
+
+El flujo conceptual puede resumirse como
+\begin{equation}
+d \;\longrightarrow\; \text{detección} \;\longrightarrow\; p(\theta|d,\mathcal{H}_{\mathrm{sig}})
+\;\longrightarrow\; p(\Lambda|\{d_k\}),
+\end{equation}
+donde $\mathcal{H}_{\mathrm{sig}}$ denota la hipótesis de señal.
+
+\begin{observacion}{Dependencia del contexto instrumental}{obs:dependencia_contexto}
+Ninguna etapa es completamente independiente de la instrumentación: cambios en sensibilidad, calibración o calidad de datos se propagan a detección, inferencia y resultados poblacionales.
+\end{observacion}
+
+% ===========================================================
+\section{Adquisición, segmentación y control de calidad}
+\label{sec:adquisicion_calidad}
+% ===========================================================
+
+\subsection{Canales y ventanas de análisis}
+
+\begin{definicion}{Segmento analizable}{def:segmento_analizable}
+Un segmento analizable es un intervalo temporal con calibración válida, metadatos de estado instrumentales consistentes y ausencia de perturbaciones severas identificadas por monitores auxiliares.
+\end{definicion}
+
+La selección de segmentos determina el \emph{tiempo vivo} efectivo y, por tanto, la sensibilidad acumulada de la búsqueda.
+
+\subsection{Data Quality Flags}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Flags duros:} excluyen intervalos con saturación, pérdidas de control o fallas de calibración.
+  \item \textbf{Flags suaves:} penalizan o etiquetan regiones con mayor probabilidad de glitch.
+\end{itemize}
+
+\begin{importante}
+Una SNR alta en un segmento de mala calidad no debe interpretarse automáticamente como candidato astrofísico robusto.
+\end{importante}
+
+% ===========================================================
+\section{Caracterización de ruido y preprocesamiento}
+\label{sec:caracterizacion_preprocesamiento}
+% ===========================================================
+
+\begin{definicion}{Whitening operacional}{def:whitening_operacional}
+El \emph{whitening} transforma los datos para aproximar una varianza espectral uniforme, dividiendo por una estimación de $\sqrt{S_n(f)}$ y permitiendo inspección más estable en tiempo-frecuencia.
+\end{definicion}
+
+\subsection{No gaussianidad y transitorios}
+
+El ruido real incluye colas no gaussianas y glitches cortos. Por ello se aplican técnicas de:
+\begin{itemize}[leftmargin=2em]
+  \item veto por canales auxiliares,
+  \item \emph{gating} local de transitorios extremos,
+  \item segmentación adaptativa para PSD robusta.
+\end{itemize}
+
+\begin{observacion}{Compromiso sesgo-varianza}{obs:compromiso_psd}
+PSD demasiado reactiva puede ``seguir'' transitorios y sesgar estadísticos; PSD demasiado rígida degrada sensibilidad ante deriva instrumental lenta.
+\end{observacion}
+
+% ===========================================================
+\section{Búsquedas modeladas y no modeladas}
+\label{sec:busquedas_modeladas_nomodeladas}
+% ===========================================================
+
+\subsection{CBC con bancos de plantillas}
+
+Para señales compact binary coalescence (CBC), se usa matched filtering sobre bancos discretos en masas y espines efectivos.
+
+\begin{definicion}{Estadístico de ranking robusto}{def:ranking_robusto}
+Es una combinación de SNR, pruebas de consistencia de morfología y coherencia en red que aproxima la separación entre distribución de señal y distribución de fondo instrumental.
+\end{definicion}
+
+\subsection{Burst y morfologías inciertas}
+
+Cuando el modelo de onda es incierto, se recurre a búsquedas coherentes tiempo-frecuencia que maximizan sensibilidad a excesos de energía correlacionados entre detectores.
+
+\begin{proposicion}{Complementariedad de estrategias}{prop:complementariedad}
+Las búsquedas modeladas maximizan alcance para familias bien conocidas; las no modeladas preservan descubrimiento para fenómenos inesperados.
+\end{proposicion}
+
+% ===========================================================
+\section{Fondo de ruido, FAR y significancia observacional}
+\label{sec:fondo_far_significancia}
+% ===========================================================
+
+\begin{definicion}{Estimación empírica del fondo}{def:fondo_empirico}
+El fondo se estima desplazando temporalmente datos entre detectores (\emph{time-shifts}) para romper coincidencias astrofísicas reales y muestrear la distribución de falsos candidatos.
+\end{definicion}
+
+Sea $R(x)$ la tasa esperada de ruido con estadístico mayor que $x$. Entonces:
+\begin{equation}
+\mathrm{FAR}(x)=R(x), \qquad
+p(x)\approx 1-\exp[-R(x)\,T_{\mathrm{obs}}],
+\end{equation}
+donde $T_{\mathrm{obs}}$ es tiempo de observación efectivo.
+
+\begin{observacion}{SNR no equivale a significancia}{obs:snr_vs_significancia}
+Dos candidatos con SNR similar pueden tener significancia muy distinta según su consistencia en red y el comportamiento local del fondo.
+\end{observacion}
+
+% ===========================================================
+\section{Inferencia bayesiana de parámetros en la práctica}
+\label{sec:inferencia_practica}
+% ===========================================================
+
+\begin{definicion}{Modelo de inferencia por evento}{def:modelo_evento}
+Para cada evento candidato, la inferencia combina:
+\begin{itemize}[leftmargin=2em]
+  \item verosimilitud basada en residual $d-h(\theta)$,
+  \item prior físico/astrofísico $\pi(\theta)$,
+  \item muestreo numérico (MCMC, nested sampling) para aproximar posterior y evidencia.
+\end{itemize}
+\end{definicion}
+
+\subsection{Parámetros reportados}
+
+Los catálogos suelen reportar:
+\begin{itemize}[leftmargin=2em]
+  \item masa chirp y masas fuente/detector,
+  \item espines efectivos y de precesión,
+  \item distancia luminosa, inclinación y área de localización,
+  \item estimadores de probabilidad astrofísica.
+\end{itemize}
+
+\begin{importante}
+Toda inferencia debe acompañarse de supuestos explícitos de prior, modelo de onda y calibración; cambiar estos supuestos puede desplazar de forma apreciable los intervalos de credibilidad.
+\end{importante}
+
+% ===========================================================
+\section{Validación con inyecciones y estudios de cobertura}
+\label{sec:inyecciones_cobertura}
+% ===========================================================
+
+\begin{definicion}{Inyección software/hardware}{def:inyeccion_sw_hw}
+Una inyección es una señal sintética con parámetros conocidos incorporada a datos para medir eficiencia de recuperación y sesgos en detección e inferencia.
+\end{definicion}
+
+\subsection{Métricas operativas}
+
+\begin{itemize}[leftmargin=2em]
+  \item eficiencia de detección vs amplitud/distancia,
+  \item sesgo medio de parámetros recuperados,
+  \item cobertura de intervalos creíbles (calibración bayesiana).
+\end{itemize}
+
+\begin{observacion}{Cobertura y confianza}{obs:cobertura_confianza}
+Intervalos nominales al 90\% deben contener el valor verdadero aproximadamente el 90\% de las veces en experimentos controlados; desviaciones sistemáticas indican modelado incompleto.
+\end{observacion}
+
+% ===========================================================
+\section{De eventos individuales a catálogos}
+\label{sec:eventos_catalogos}
+% ===========================================================
+
+Con GWTC-1 y GWTC-3 se consolidó la transición de análisis de eventos aislados a inferencia estadística de poblaciones \cite{GWTC1, GWTC3}.
+
+\begin{definicion}{Incertidumbre jerárquica}{def:incertidumbre_jerarquica}
+La incertidumbre jerárquica es la combinación de:
+\begin{itemize}[leftmargin=2em]
+  \item incertidumbre por evento,
+  \item incertidumbre del proceso poblacional,
+  \item incertidumbre de selección instrumental.
+\end{itemize}
+\end{definicion}
+
+\subsection{Selección y completitud}
+
+La población observada está sesgada hacia eventos más detectables; por ello la inferencia de tasas y distribuciones de masas requiere funciones de selección explícitas.
+
+\begin{equation}
+p(\Lambda|\{d_k\}) \propto
+\left[\prod_{k=1}^{N}\int p(d_k|\theta_k)\,p(\theta_k|\Lambda)\,d\theta_k\right]
+\exp[-\mu(\Lambda)]\,\pi(\Lambda),
+\end{equation}
+donde $\mu(\Lambda)$ codifica el número esperado de detecciones bajo selección.
+
+% ===========================================================
+\section{Pruebas de física fundamental con datos GW}
+\label{sec:pruebas_fisica_fundamental_gw}
+% ===========================================================
+
+\begin{itemize}[leftmargin=2em]
+  \item consistencia inspiral--postfusión en relatividad general,
+  \item límites a dispersión/modificación de propagación,
+  \item test de polarizaciones no tensoriales con redes amplias.
+\end{itemize}
+
+\begin{observacion}{Poder estadístico acumulativo}{obs:poder_acumulativo}
+Muchas pruebas ganan poder al combinar múltiples eventos de moderada SNR, más que depender de un único evento extraordinario.
+\end{observacion}
+
+% ===========================================================
+\section{Ejemplo desarrollado: interpretación de dos candidatos}
+\label{sec:ejemplo_dos_candidatos}
+% ===========================================================
+
+\begin{ejemplo}{Mismo valor de SNR, distinta robustez}{ej:snr_igual_distinta_robustez}
+Considere dos candidatos A y B con SNR de red similar:
+\begin{itemize}[leftmargin=2em]
+  \item A aparece en un intervalo limpio y presenta alta coherencia de fase entre detectores.
+  \item B coincide con una ventana con glitches y falla parcialmente pruebas de consistencia.
+\end{itemize}
+
+\textbf{Paso 1: comparar ranking robusto.} \\
+Aunque $\rho_A\approx\rho_B$, el estadístico combinado favorece A por coherencia y calidad de datos.
+
+\textbf{Paso 2: consultar fondo empírico.} \\
+En \emph{time-shifts}, valores comparables a B aparecen con mayor frecuencia que valores comparables a A.
+
+\textbf{Paso 3: concluir significancia.} \\
+A puede alcanzar FAR mucho menor y por tanto mayor confianza astrofísica, ilustrando que detección no es solo amplitud, sino consistencia estadística global.
+\end{ejemplo}
+
+% ===========================================================
+\section{Síntesis final}
+\label{sec:sintesis_cap19}
+% ===========================================================
+
+Conclusiones del capítulo:
+\begin{enumerate}[leftmargin=2em, label=\textbf{\arabic*.}]
+  \item El análisis de datos GW es una cadena integrada: calidad instrumental, detección, inferencia y población.
+  \item El fondo empírico y la coherencia en red son esenciales para traducir candidatos en eventos confiables.
+  \item La inferencia bayesiana exige transparencia en priors, modelos de onda y calibración.
+  \item Inyecciones y estudios de cobertura son indispensables para validar desempeño real de pipelines.
+  \item Los catálogos modernos convierten eventos individuales en restricciones astrofísicas y de física fundamental.
+\end{enumerate}
+
+Este capítulo cierra la metodología de análisis; el siguiente amplía el alcance científico hacia astronomía multi-mensajero y fronteras observacionales.
+
+% ===========================================================
+\section*{Problemas propuestos}
+\addcontentsline{toc}{section}{Problemas propuestos}
+% ===========================================================
+
+\begin{enumerate}[leftmargin=2.2em, label=\textbf{P\arabic*.}]
+
+\item \textbf{Cadena analítica.} \\
+Describa por qué un error en control de calidad puede sesgar simultáneamente significancia y parámetros inferidos.
+
+\item \textbf{FAR y tiempo de observación.} \\
+Usando la relación de la sección \ref{sec:fondo_far_significancia}, discuta cómo cambia el $p$-valor al aumentar $T_{\mathrm{obs}}$ para FAR fija.
+
+\item \textbf{Whitening y PSD.} \\
+Explique el compromiso entre PSD demasiado reactiva y PSD demasiado rígida en datos no estacionarios.
+
+\item \textbf{Búsquedas complementarias.} \\
+Compare ventajas y limitaciones de búsquedas modeladas CBC frente a búsquedas burst.
+
+\item \textbf{Cobertura bayesiana.} \\
+¿Qué significa que un intervalo creíble al 90\% esté mal calibrado en cobertura empírica?
+
+\item \textbf{Selección instrumental.} \\
+Argumente por qué inferir tasas de fusión ignorando función de selección puede producir conclusiones engañosas.
+
+\item \textbf{Consistencia física.} \\
+Proponga una estrategia cualitativa para evaluar consistencia inspiral--postfusión en una población de eventos.
+
+\end{enumerate}
